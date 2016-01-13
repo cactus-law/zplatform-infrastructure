@@ -13,7 +13,6 @@ package com.zlebank.zplatform.member.service;
 import java.util.List;
 
 import com.zlebank.zplatform.acc.bean.AccEntry;
-import com.zlebank.zplatform.acc.bean.Account;
 import com.zlebank.zplatform.acc.bean.BusiAcct;
 import com.zlebank.zplatform.acc.bean.BusiAcctQuery;
 import com.zlebank.zplatform.acc.bean.QueryAccount;

@@ -13,7 +13,6 @@ package com.zlebank.zplatform.member.bean;
 import java.util.Date;
 
 import com.zlebank.zplatform.acc.bean.enums.AccEntryStatus;
-import com.zlebank.zplatform.acc.bean.enums.TradeType;
 
 /**
  * Class Description
