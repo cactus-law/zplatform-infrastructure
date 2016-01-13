@@ -16,8 +16,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.LockMode;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.type.StandardBasicTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -106,4 +108,16 @@ public class AccountDAOImpl extends HibernateBaseDAOImpl<PojoAccount> implements
         criteria.add(Restrictions.ne("p.status",AcctStatusType.LOGOUT));
         return (PojoAccount)criteria.uniqueResult();
     }
+
+    /**
+     * 得到指定序列
+     * @param sequences
+     * @return
+     */
+    public long getSequence(String sequences){
+        String sql = " SELECT "+sequences+".NEXTVAL nextvalue FROM DUAL";
+        SQLQuery query = this.getSession().createSQLQuery(sql);
+        long maxId = (long)(query.addScalar("nextvalue", StandardBasicTypes.LONG) ).uniqueResult();
+         return  maxId;
+       }
 }

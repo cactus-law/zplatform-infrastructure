@@ -28,8 +28,8 @@
 				<value>com.zlebank.zplatform.acc.pojo.PojoSubjectRuleConfigure
 				</value>
 				<value>com.zlebank.zplatform.acc.pojo.PojoAccEntry</value>
+				<value>com.zlebank.zplatform.acc.pojo.PojoTxnsSplitAccount</value>	
 				<value>com.zlebank.zplatform.commons.dao.pojo.PojoChannel</value>
-				<value>com.zlebank.zplatform.commons.dao.pojo.PojoTxnsSplitAccount</value>
 				
 			</list>
 		</property>

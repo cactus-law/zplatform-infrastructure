@@ -61,5 +61,11 @@ public interface AccountDAO extends BaseDAO<PojoAccount>{
      */
     public PojoAccount getByid(long acctid);
     
+    /**
+     * 得到指定序列
+     * @param sequences
+     * @return
+     */
+    public long getSequence(String sequences);
     
 }

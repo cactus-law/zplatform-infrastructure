@@ -28,9 +28,9 @@
 				<value>com.zlebank.zplatform.acc.pojo.PojoSubjectRuleConfigure
 				</value>
 				<value>com.zlebank.zplatform.acc.pojo.PojoAccEntry</value>
-				<value>com.zlebank.zplatform.commons.dao.pojo.PojoChannel</value>
 				<value>com.zlebank.zplatform.acc.pojo.PojoBusiness</value>		
-				<value>com.zlebank.zplatform.commons.dao.pojo.PojoTxnsSplitAccount</value>	
+				<value>com.zlebank.zplatform.acc.pojo.PojoTxnsSplitAccount</value>	
+				<value>com.zlebank.zplatform.commons.dao.pojo.PojoChannel</value>	
 				</list>
 		</property>
 		<property name="hibernateProperties">
@@ -48,8 +48,8 @@
 		destroy-method="close">
 		<property name="driverClass" value="oracle.jdbc.OracleDriver" />
 		<property name="jdbcUrl" value="jdbc:oracle:thin:@192.168.101.178:1521:oradb" />
-		<property name="user" value="payservicetest" />
-		<property name="password" value="payservicetest" />
+		<property name="user" value="payservice" />
+		<property name="password" value="payservice" />
 		<property name="maxPoolSize" value="40" />
 		<property name="minPoolSize" value="1" />
 		<property name="initialPoolSize" value="1" />
