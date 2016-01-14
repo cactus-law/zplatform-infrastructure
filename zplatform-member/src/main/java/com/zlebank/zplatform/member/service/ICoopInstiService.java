@@ -2,10 +2,10 @@ package com.zlebank.zplatform.member.service;
 
 import com.zlebank.zplatform.member.bean.enums.TerminalAccessType;
 import com.zlebank.zplatform.member.bean.CoopInstiMK;
-import com.zlebank.zplatform.member.exception.CoopInstiException;
+import com.zlebank.zplatform.member.exception.AbstractCoopInstiException;
 /**
  * 
- * coop service
+ * cooperative institution service
  *
  * @author yangying
  * @version
@@ -17,14 +17,17 @@ public interface ICoopInstiService {
      * 
      * @param instiCode
      * @param terminalAccessType
-     * @return
+     * @return null if not exist
      */
-    CoopInstiMK getCoopInstiMK(String instiCode,TerminalAccessType terminalAccessType);
+    CoopInstiMK getCoopInstiMK(String instiCode,
+            TerminalAccessType terminalAccessType);
     /**
-     * 
-     * @param instiCode
+     * create a new cooperative institution 
      * @param instiName
-     * @return
+     * @param userId
+     * @return a unique code represent this institution in platform
+     * @throws AbstractCoopInstiException if instiName exist,or generate cooperative institution mk error,or open insti account error
      */
-    String createCoopInsti(String instiName)throws CoopInstiException;
+    public String createCoopInsti(String instiName, long userId)
+            throws AbstractCoopInstiException;
 }

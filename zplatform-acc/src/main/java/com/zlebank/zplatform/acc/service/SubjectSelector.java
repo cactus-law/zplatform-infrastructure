@@ -25,6 +25,6 @@ import com.zlebank.zplatform.member.bean.BusinessActor;
  */
 public interface SubjectSelector {
     //通过 会员编号  会员类型  用途   业务账户号 得到科目
-    public Subject select(BusinessActor member,BusiAcct busiAcct)
+    public Subject select(BusinessActor busiActor,BusiAcct busiAcct)
             throws BusiAcctToSubjectMappingNullException;
 }

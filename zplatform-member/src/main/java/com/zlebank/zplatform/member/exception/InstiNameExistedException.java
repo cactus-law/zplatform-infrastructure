@@ -1,6 +1,6 @@
 package com.zlebank.zplatform.member.exception;
 
-public class InstiNameExistedException extends CoopInstiException{
+public class InstiNameExistedException extends AbstractCoopInstiException{
 
     /**
      * serialVersionUID
@@ -9,6 +9,6 @@ public class InstiNameExistedException extends CoopInstiException{
 
     @Override
     public String getCode() {
-        return "EMS020002";
+        return "EMS020001";
     }
 }

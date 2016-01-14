@@ -3,11 +3,15 @@ package com.zlebank.zplatform.member.pojo;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -21,12 +25,15 @@ import com.zlebank.zplatform.commons.dao.pojo.ProductModel;
  * @date 2016年1月12日 下午2:59:49
  * @since
  */
+@Entity
+@Table(name="T_COOP_INSTI")
 public class PojoCoopInsti {
 	private long id;
 	private String instiCode;
 	private String instiName;
 	private List<ProductModel> products;
 	private List<PojoInstiMK> instisMKs;
+	private String status;
 	
 	@GenericGenerator(name = "id_gen", strategy = "enhanced-table", parameters = {
             @Parameter(name = "table_name", value = "T_C_PRIMAY_KEY"),
@@ -60,8 +67,7 @@ public class PojoCoopInsti {
         this.instiName = instiName;
     }
     
-    @OneToMany
-    @JoinColumn(name="COOP_INSTI_ID",insertable=false,updatable=false)
+    @Transient
     public List<ProductModel> getProducts() {
         return products;
     }
@@ -69,12 +75,19 @@ public class PojoCoopInsti {
         this.products = products;
     }
     
-    @OneToMany
-    @JoinColumn(name="COOP_INSTI_ID",insertable=false,updatable=false)
+    @OneToMany(mappedBy="coopInsti")
+    @Cascade(value={CascadeType.SAVE_UPDATE})
     public List<PojoInstiMK> getInstisMKs() {
         return instisMKs;
     }
     public void setInstisMKs(List<PojoInstiMK> instisMKs) {
         this.instisMKs = instisMKs;
+    }
+    @Column(name="STATUS",length=2,nullable=false)
+    public String getStatus() {
+        return status;
+    }
+    public void setStatus(String status) {
+        this.status = status;
     } 
 }

@@ -4,32 +4,35 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.HibernateException;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.zlebank.zplatform.acc.service.BusiAcctService;
 import com.zlebank.zplatform.commons.utils.RSAUtils;
 import com.zlebank.zplatform.member.bean.CoopInstiMK;
 import com.zlebank.zplatform.member.bean.enums.EncryptAlgorithm;
 import com.zlebank.zplatform.member.bean.enums.TerminalAccessType;
 import com.zlebank.zplatform.member.dao.CoopInstiDAO;
-import com.zlebank.zplatform.member.exception.CoopInstiException;
+import com.zlebank.zplatform.member.exception.AbstractCoopInstiException;
+import com.zlebank.zplatform.member.exception.GenerateCoopInstiCodeException;
+import com.zlebank.zplatform.member.exception.GenerateCoopInstiMKException;
 import com.zlebank.zplatform.member.exception.InstiNameExistedException;
+import com.zlebank.zplatform.member.exception.OpenCoopInstiBusiAcctException;
 import com.zlebank.zplatform.member.exception.PrimaykeyGeneratedException;
 import com.zlebank.zplatform.member.pojo.PojoCoopInsti;
 import com.zlebank.zplatform.member.pojo.PojoInstiMK;
 import com.zlebank.zplatform.member.service.ICoopInstiService;
+import com.zlebank.zplatform.member.service.MemberService;
 import com.zlebank.zplatform.member.service.PrimayKeyService;
 
 @Service
 public class CoopInstiServiceImpl implements ICoopInstiService {
 
     @Autowired
-    private BusiAcctService busiAcctService;
+    private MemberService memberService;
     @Autowired
     private CoopInstiDAO coopInstiDAO;
     @Autowired
@@ -39,15 +42,23 @@ public class CoopInstiServiceImpl implements ICoopInstiService {
     private static final String COOPINST_CODE_SEQ = "SEQ_COOP_INSTI_CODE";
 
     @Override
+    @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
     public CoopInstiMK getCoopInstiMK(String instiCode,
             TerminalAccessType terminalAccessType) {
-        // TODO Auto-generated method stub
-        return null;
+        
+        PojoInstiMK pojoInstiMK = coopInstiDAO.getByInstiCode(instiCode,terminalAccessType);
+        if(pojoInstiMK == null){
+            return null;
+        }
+        CoopInstiMK coopInstiMK =  new CoopInstiMK(pojoInstiMK.getCoopInsti().getInstiCode());
+        BeanUtils.copyProperties(pojoInstiMK, coopInstiMK, new String[]{"id","coopInsti"});
+        return coopInstiMK;
     }
 
     @Override
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
-    public String createCoopInsti(String instiName) throws CoopInstiException {
+    public String createCoopInsti(String instiName, long userId)
+            throws AbstractCoopInstiException {
 
         /*
          * check if instiName is repeat
@@ -64,30 +75,29 @@ public class CoopInstiServiceImpl implements ICoopInstiService {
             coopInstiCode = primayKeyService.getNexId(COOPINST_PARA_TYPE,
                     COOPINST_CODE_SEQ);
         } catch (PrimaykeyGeneratedException pge) {
-            CoopInstiException cie = new CoopInstiException();
-            cie.initCause(pge);
-            throw cie;
-        } catch (HibernateException he) {
-            he.printStackTrace();
-            CoopInstiException cie = new CoopInstiException();
-            cie.initCause(he);
-            throw cie;
-        }
-
+            GenerateCoopInstiCodeException geice = new GenerateCoopInstiCodeException();
+            geice.initCause(pge);
+            throw geice;
+        }  
         /*
          * instance and init a pojos
          */
         PojoCoopInsti pojoCoopInsti = new PojoCoopInsti();
         pojoCoopInsti.setInstiCode(coopInstiCode);
         pojoCoopInsti.setInstiName(instiName);
+        pojoCoopInsti.setStatus("00");
         List<PojoInstiMK> instiMKs = new ArrayList<PojoInstiMK>();
 
         /*
          * generate institution key
          */
         try {
+
             for (TerminalAccessType terminalAccessType : TerminalAccessType
                     .values()) {
+                if (terminalAccessType == TerminalAccessType.UNKNOW) {
+                    continue;
+                }
                 Map<String, Object> coopInsti_keyMap = RSAUtils.genKeyPair();
                 Map<String, Object> plath_keyMap = RSAUtils.genKeyPair();
                 String coopInsti_publicKey = RSAUtils
@@ -96,11 +106,11 @@ public class CoopInstiServiceImpl implements ICoopInstiService {
                         .getPrivateKey(coopInsti_keyMap);
                 String plath_publicKey = RSAUtils.getPublicKey(plath_keyMap);
                 String plath_privateKey = RSAUtils.getPrivateKey(plath_keyMap);
-                
+
                 PojoInstiMK instiMK = new PojoInstiMK();
                 instiMK.setCoopInsti(pojoCoopInsti);
                 instiMK.setEncryptAlgorithm(EncryptAlgorithm.RSA);
-                instiMK.setTerminalAccessTyep(terminalAccessType);
+                instiMK.setTerminalAccessType(terminalAccessType);
                 instiMK.setInstiPriKey(coopInsti_privateKey);
                 instiMK.setInstiPubKey(coopInsti_publicKey);
                 instiMK.setZplatformPriKey(plath_privateKey);
@@ -109,14 +119,20 @@ public class CoopInstiServiceImpl implements ICoopInstiService {
             }
             pojoCoopInsti.setInstisMKs(instiMKs);
         } catch (Exception e) {
-            throw new CoopInstiException();
+            e.printStackTrace();
+            throw new GenerateCoopInstiMKException();
         }
-        
         // open institution account
+        try {
+            memberService.openBusiAcct(instiName, coopInstiCode, userId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            OpenCoopInstiBusiAcctException cie = new OpenCoopInstiBusiAcctException(e.getMessage());
+            throw cie;
+        }  
 
-        // persistent to db
-
-        return null;
+        // prestance to db
+        coopInstiDAO.saveA(pojoCoopInsti);
+        return pojoCoopInsti.getInstiCode();
     }
-
 }

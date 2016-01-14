@@ -8,15 +8,16 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.zlebank.zplatform.commons.dao.impl.HibernateBaseDAOImpl;
+import com.zlebank.zplatform.member.bean.enums.TerminalAccessType;
 import com.zlebank.zplatform.member.dao.CoopInstiDAO;
 import com.zlebank.zplatform.member.pojo.PojoCoopInsti;
+import com.zlebank.zplatform.member.pojo.PojoInstiMK;
 
 @Repository
 public class CoopInstiDAOImpl extends HibernateBaseDAOImpl<PojoCoopInsti>
         implements
             CoopInstiDAO {
 
-    
     @Override
     public boolean isNameExist(String instiName) {
         Session session = getSession();
@@ -24,10 +25,25 @@ public class CoopInstiDAOImpl extends HibernateBaseDAOImpl<PojoCoopInsti>
         criteria.add(Restrictions.eq("instiName", instiName.trim()));
         @SuppressWarnings("unchecked")
         List<PojoCoopInsti> result = criteria.list();
-        if(result==null||result.size()==0){
+        if (result == null || result.size() == 0) {
             return false;
         }
         return true;
     }
-
+    
+    @Override
+    public PojoInstiMK getByInstiCode(String instiCode,
+            TerminalAccessType terminalAccessType) {
+        Session session = getSession();
+        Criteria criteria = session.createCriteria(PojoInstiMK.class);
+        criteria.add(Restrictions.eq("terminalAccessType",terminalAccessType));
+        criteria.createCriteria("coopInsti").add(
+                Restrictions.eq("instiCode", instiCode.trim()));
+        @SuppressWarnings("unchecked")
+        List<PojoInstiMK> result = criteria.list();
+        if (result == null || result.size() == 0) {
+            return null;
+        }
+        return result.get(0);
+    }
 }

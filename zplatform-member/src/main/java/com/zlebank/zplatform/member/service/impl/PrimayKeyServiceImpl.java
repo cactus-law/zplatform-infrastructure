@@ -15,7 +15,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.zlebank.zplatform.member.dao.ParaDicDAO;
 import com.zlebank.zplatform.member.exception.MemberBussinessException;

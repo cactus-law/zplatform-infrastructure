@@ -22,6 +22,13 @@ public class CoopInstiMK {
     private String instiPriKey;
     private String instiPubKey;
 
+    public CoopInstiMK() {
+    }
+
+    public CoopInstiMK(String coopInstiCode) {
+        this.coopInstiCode = coopInstiCode;
+    }
+
     public String getCoopInstiCode() {
         return coopInstiCode;
     }
@@ -42,5 +49,29 @@ public class CoopInstiMK {
     }
     public String getInstiPubKey() {
         return instiPubKey;
+    }
+
+    public void setEncryptAlgorithm(EncryptAlgorithm encryptAlgorithm) {
+        this.encryptAlgorithm = encryptAlgorithm;
+    }
+
+    public void setTerminalAccessType(TerminalAccessType terminalAccessType) {
+        this.terminalAccessType = terminalAccessType;
+    }
+
+    public void setZplatformPriKey(String zplatformPriKey) {
+        this.zplatformPriKey = zplatformPriKey;
+    }
+
+    public void setZplatformPubKey(String zplatformPubKey) {
+        this.zplatformPubKey = zplatformPubKey;
+    }
+
+    public void setInstiPriKey(String instiPriKey) {
+        this.instiPriKey = instiPriKey;
+    }
+
+    public void setInstiPubKey(String instiPubKey) {
+        this.instiPubKey = instiPubKey;
     }
 }

@@ -1,9 +1,12 @@
 package com.zlebank.zplatform.member.pojo;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -20,10 +23,12 @@ import com.zlebank.zplatform.member.bean.enums.TerminalAccessType;
  * @date 2016年1月13日 上午10:13:45
  * @since
  */
+@Entity
+@Table(name="T_COOP_INSTI_MK")
 public class PojoInstiMK {
     private long id;
     private PojoCoopInsti coopInsti;
-    private TerminalAccessType terminalAccessTyep;
+    private TerminalAccessType terminalAccessType;
     private EncryptAlgorithm encryptAlgorithm;
     private String zplatformPriKey;
     private String zplatformPubKey;
@@ -47,7 +52,7 @@ public class PojoInstiMK {
     }
     
     @ManyToOne
-    @Column(name="COOP_INSTI_ID",length=15)
+    @JoinColumn(name="COOP_INSTI_ID")
     public PojoCoopInsti getCoopInsti() {
         return coopInsti;
     }
@@ -55,16 +60,16 @@ public class PojoInstiMK {
         this.coopInsti = coopInsti;
     }
     
-    @Type(type = "com.zlebank.zplatform.member.bean.enums.TerminalAccessType")
+    @Type(type = "com.zlebank.zplatform.member.pojo.usertype.TerminalAccessTypeSqlType")
     @Column(name = "TERMINAL_ACCESS_TYPE",length=2,nullable=false)
-    public TerminalAccessType getTerminalAccessTyep() {
-        return terminalAccessTyep;
+    public TerminalAccessType getTerminalAccessType() {
+        return terminalAccessType;
     }
-    public void setTerminalAccessTyep(TerminalAccessType terminalAccessTyep) {
-        this.terminalAccessTyep = terminalAccessTyep;
+    public void setTerminalAccessType(TerminalAccessType terminalAccessType) {
+        this.terminalAccessType = terminalAccessType;
     }
     
-    @Type(type = "com.zlebank.zplatform.member.bean.enums.EncryptAlgorithm")
+    @Type(type = "com.zlebank.zplatform.member.pojo.usertype.EncryptAlgorithmSqlType")
     @Column(name = "ENCRYPT_ALGORITHM",length=32)
     public EncryptAlgorithm getEncryptAlgorithm() {
         return encryptAlgorithm;
@@ -81,7 +86,7 @@ public class PojoInstiMK {
         this.zplatformPriKey = zplatformPriKey;
     }
     
-    @Column(name = "ZPLATFORM_PRIKEY",length=2048)
+    @Column(name = "ZPLATFORM_PUBKEY",length=2048)
     public String getZplatformPubKey() {
         return zplatformPubKey;
     }
