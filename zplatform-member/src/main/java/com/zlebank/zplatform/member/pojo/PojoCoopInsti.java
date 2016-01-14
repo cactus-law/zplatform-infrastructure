@@ -3,8 +3,13 @@ package com.zlebank.zplatform.member.pojo;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 import com.zlebank.zplatform.commons.dao.pojo.ProductModel;
 /**
@@ -23,7 +28,15 @@ public class PojoCoopInsti {
 	private List<ProductModel> products;
 	private List<PojoInstiMK> instisMKs;
 	
-	@Id
+	@GenericGenerator(name = "id_gen", strategy = "enhanced-table", parameters = {
+            @Parameter(name = "table_name", value = "T_C_PRIMAY_KEY"),
+            @Parameter(name = "value_column_name", value = "NEXT_ID"),
+            @Parameter(name = "segment_column_name", value = "KEY_NAME"),
+            @Parameter(name = "segment_value", value = "COOP_INSTI_ID"),
+            @Parameter(name = "increment_size", value = "1"),
+            @Parameter(name = "optimizer", value = "pooled-lo") })
+    @Id
+    @GeneratedValue(generator = "id_gen")
     public long getId() {
         return id;
     }
@@ -31,7 +44,7 @@ public class PojoCoopInsti {
         this.id = id;
     }
     
-    @Column(name="INSTI_CODE")
+    @Column(name="INSTI_CODE",length=15,nullable=false)
     public String getInstiCode() {
         return instiCode;
     }
@@ -39,7 +52,7 @@ public class PojoCoopInsti {
         this.instiCode = instiCode;
     }
     
-    @Column(name="INSTI_NAME")
+    @Column(name="INSTI_NAME",length=256,nullable=false)
     public String getInstiName() {
         return instiName;
     }
@@ -48,17 +61,20 @@ public class PojoCoopInsti {
     }
     
     @OneToMany
+    @JoinColumn(name="COOP_INSTI_ID",insertable=false,updatable=false)
     public List<ProductModel> getProducts() {
         return products;
     }
     public void setProducts(List<ProductModel> products) {
         this.products = products;
     }
+    
     @OneToMany
+    @JoinColumn(name="COOP_INSTI_ID",insertable=false,updatable=false)
     public List<PojoInstiMK> getInstisMKs() {
         return instisMKs;
     }
     public void setInstisMKs(List<PojoInstiMK> instisMKs) {
         this.instisMKs = instisMKs;
-    }
+    } 
 }

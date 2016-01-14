@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.zlebank.zplatform.member.dao.ParaDicDAO;
 import com.zlebank.zplatform.member.exception.MemberBussinessException;
+import com.zlebank.zplatform.member.exception.PrimaykeyGeneratedException;
 import com.zlebank.zplatform.member.pojo.PojoParaDic;
 import com.zlebank.zplatform.member.service.PrimayKeyService;
 import com.zlebank.zplatform.member.util.MemberUtil;
@@ -35,18 +36,19 @@ import com.zlebank.zplatform.member.util.MemberUtil;
 public class PrimayKeyServiceImpl implements PrimayKeyService {
     @Autowired
     private ParaDicDAO primayDao;
-    private final static String SEQUENCES="seq_t_merch_deta_memberid";
-    /**
-     * 得到序列
-     * 
-     * @param keyName
-     * @return
-     * @throws MemberBussinessException
-     */
+    private final static String SEQUENCES = "seq_t_merch_deta_memberid";
+
     @Override
-    @Transactional
     public String getNexId(String paraType) throws MemberBussinessException {
-        PojoParaDic para = primayDao.getPrimay(paraType);
+        PojoParaDic para;
+        try{
+            para = primayDao.getPrimay(paraType);
+        }catch(Exception e){
+            throw new MemberBussinessException("MemberBussinessException");
+        }
+        if(para==null){
+            throw new MemberBussinessException("MemberBussinessException");
+        }
         List<Map<String, Object>> li = primayDao.getSeq(SEQUENCES);
         String head = para.getParaCode();
         Map<String, Object> map = li.get(0);
@@ -55,4 +57,21 @@ public class PrimayKeyServiceImpl implements PrimayKeyService {
         return memberId;
     }
 
+    @Override
+    public String getNexId(String paraType, String seqName)
+            throws PrimaykeyGeneratedException {
+        PojoParaDic para;
+        try{
+            para = primayDao.getPrimay(paraType);
+        }catch(Exception e){
+            throw new PrimaykeyGeneratedException();
+        }
+        if(para==null){
+            throw new PrimaykeyGeneratedException();
+        }
+        String tail = primayDao.getSeqNextval(seqName);
+        String head = para.getParaCode();
+        String memberId = MemberUtil.getMemberID(head, tail);
+        return memberId;
+    }
 }

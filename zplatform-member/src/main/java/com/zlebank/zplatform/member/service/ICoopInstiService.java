@@ -1,11 +1,11 @@
 package com.zlebank.zplatform.member.service;
 
-import com.zlebank.zplatform.member.bean.CoopInstiMk;
 import com.zlebank.zplatform.member.bean.enums.TerminalAccessType;
-
+import com.zlebank.zplatform.member.bean.CoopInstiMK;
+import com.zlebank.zplatform.member.exception.CoopInstiException;
 /**
  * 
- * coop
+ * coop service
  *
  * @author yangying
  * @version
@@ -19,12 +19,12 @@ public interface ICoopInstiService {
      * @param terminalAccessType
      * @return
      */
-    CoopInstiMk getCoopInstiMK(String instiCode,TerminalAccessType terminalAccessType);
+    CoopInstiMK getCoopInstiMK(String instiCode,TerminalAccessType terminalAccessType);
     /**
      * 
      * @param instiCode
      * @param instiName
      * @return
      */
-    String createCoopInsti(String instiCode,String instiName);
+    String createCoopInsti(String instiName)throws CoopInstiException;
 }
