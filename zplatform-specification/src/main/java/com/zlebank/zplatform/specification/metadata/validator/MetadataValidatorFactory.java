@@ -19,7 +19,6 @@ import net.sf.json.JSONObject;
 
 import org.springframework.util.Assert;
 
-import com.zlebank.zplatform.commons.utils.StringUtil;
 import com.zlebank.zplatform.specification.exception.ValidateException;
 import com.zlebank.zplatform.specification.metadata.Field;
 import com.zlebank.zplatform.specification.metadata.FieldTagDefinition;

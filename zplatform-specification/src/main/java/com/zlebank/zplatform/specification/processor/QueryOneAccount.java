@@ -34,7 +34,6 @@ public class QueryOneAccount extends RawAbstractProcessor {
     private static final String SUCCESS_CODE = "00";
     private static final String SUCCESS_DES = "查询成功";
     private static final String FAIL_CODE = "30";
-    private static final String FAIL_DES = "查询失败：";
 
     @Autowired
     private MemberService memberService;
