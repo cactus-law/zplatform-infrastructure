@@ -86,7 +86,7 @@ public abstract class PojoAbstractSubject extends Pojo {
 
     private AcctElementType acctElement;
 
-    private String memberId;
+    private String businessActorId;
     
     private Money balance;
 
@@ -156,13 +156,13 @@ public abstract class PojoAbstractSubject extends Pojo {
         this.acctElement = acctElement;
     }
 
-    @Column(name = "MEMBERID")
-    public String getMemberId() {
-        return memberId;
+    @Column(name = "BUSINESS_ACTOR_ID")
+    public String getBusinessActorId() {
+        return businessActorId;
     }
 
-    public void setMemberId(String memberId) {
-        this.memberId = memberId;
+    public void setBusinessActorId(String businessActorId) {
+        this.businessActorId = businessActorId;
     }
     
     @Embedded

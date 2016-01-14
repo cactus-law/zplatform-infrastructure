@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SessionImplementor;
 import com.zlebank.zplatform.commons.dao.pojo.BaseEnumSqlType;
-import com.zlebank.zplatform.member.bean.enums.MemberType;
+import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 
 /**
  * Class Description
@@ -26,17 +26,17 @@ import com.zlebank.zplatform.member.bean.enums.MemberType;
  * @date 2015年9月9日 下午9:57:05
  * @since 
  */
-public class MemberSqlType  extends BaseEnumSqlType<MemberType>{
+public class MemberSqlType  extends BaseEnumSqlType<BusinessActorType>{
     @Override
     public Object nullSafeGet(ResultSet rs, String[] names, SessionImplementor arg2,Object owner)
             throws HibernateException, SQLException {
-        return MemberType.fromValue(rs.getString(names[0]));
+        return BusinessActorType.fromValue(rs.getString(names[0]));
     }
 
     @Override
     public void nullSafeSet(PreparedStatement st, Object value, int index,SessionImplementor arg2)
             throws HibernateException, SQLException {
-        MemberType status = value!=null?(MemberType)value:MemberType.UNKNOW;
+        BusinessActorType status = value!=null?(BusinessActorType)value:BusinessActorType.UNKNOW;
         st.setString(index, status.getCode());
     }
 }

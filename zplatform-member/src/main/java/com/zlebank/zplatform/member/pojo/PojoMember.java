@@ -26,7 +26,7 @@ import org.hibernate.annotations.Type;
 
 import com.zlebank.zplatform.member.bean.enums.LoginType;
 import com.zlebank.zplatform.member.bean.enums.MemberStatusType;
-import com.zlebank.zplatform.member.bean.enums.MemberType;
+import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 
 /**
  * Class Description
@@ -52,7 +52,7 @@ public  class PojoMember {
     /**邮箱**/
     private String email;
     /**会员类型,01-个人,02-商户,03-企业**/
-    private MemberType membertype;
+    private BusinessActorType membertype;
     /**01未激活，00正常，02系统锁定（冻结）**/
     private MemberStatusType memberstat;
     /**1线上手机，2线下手机，3线上邮箱**/
@@ -124,10 +124,10 @@ public  class PojoMember {
     }
     @Type(type = "com.zlebank.zplatform.member.pojo.usertype.MemberSqlType")
     @Column(name = "MEMBERTYPE")
-    public MemberType getMembertype() {
+    public BusinessActorType getMembertype() {
         return membertype;
     }
-    public void setMembertype(MemberType membertype) {
+    public void setMembertype(BusinessActorType membertype) {
         this.membertype = membertype;
     }
     @Column(name = "MEMBERSTAT")

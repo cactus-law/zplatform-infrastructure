@@ -22,7 +22,7 @@ import com.zlebank.zplatform.commons.utils.BeanCopyUtil;
 import com.zlebank.zplatform.commons.utils.StringUtil;
 import com.zlebank.zplatform.member.bean.MerchantBean;
 import com.zlebank.zplatform.member.bean.enums.MemberStatusType;
-import com.zlebank.zplatform.member.bean.enums.MemberType;
+import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 import com.zlebank.zplatform.member.bean.enums.MerchStatusType;
 import com.zlebank.zplatform.member.dao.MemberBaseDAO;
 import com.zlebank.zplatform.member.dao.MerchDAO;
@@ -90,7 +90,7 @@ public class MerchServiceImpl implements MerchService {
             merchPo.setmInuser(userId);
             merchPo.setMemberid(memberId);
             merchPo.setDateMemberid(memberId);
-           merchPo.setMembertype(MemberType.MERCHANT);
+           merchPo.setMembertype(BusinessActorType.ENTERPRISE);
             merchPo.setPhone(merchPo.getContphone());
             merchPo.setMembername(merchPo.getMerchname());
             merchPo.setStatus(MerchStatusType.NORMAL);
@@ -99,7 +99,7 @@ public class MerchServiceImpl implements MerchService {
             //开通会计账户
             memberservice.openBusiAcct(merchPo.getMerchname(), memberId, userId);
             PojoMemberBase memberbasePo=  BeanCopyUtil.copyBean(PojoMemberBase.class, merchPo);
-            memberbasePo.setMerchtype(MemberType.MERCHANT);
+            memberbasePo.setMerchtype(BusinessActorType.ENTERPRISE);
             memberBase.saveA(memberbasePo);
             return memberId;
     }

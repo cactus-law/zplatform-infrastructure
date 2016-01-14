@@ -17,7 +17,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
-import com.zlebank.zplatform.member.bean.enums.MemberType;
+import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 
 /**
  * Class Description
@@ -35,7 +35,7 @@ public class PojoMemberBase {
     /**会员名称**/
     private String merchname;
     /**会员类型**/
-    private MemberType merchtype;
+    private BusinessActorType merchtype;
     /**清算周期**/
     private Long setlcycle;
     /**产品版本**/
@@ -75,10 +75,10 @@ public class PojoMemberBase {
     }
     @Type(type = "com.zlebank.zplatform.member.pojo.usertype.MemberSqlType")
     @Column(name = "MERCHTYPE")
-    public MemberType getMerchtype() {
+    public BusinessActorType getMerchtype() {
         return merchtype;
     }
-    public void setMerchtype(MemberType merchtype) {
+    public void setMerchtype(BusinessActorType merchtype) {
         this.merchtype = merchtype;
     }
     @Column(name = "SETLCYCLE")

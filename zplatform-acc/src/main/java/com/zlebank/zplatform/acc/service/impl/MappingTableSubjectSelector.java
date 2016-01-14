@@ -23,7 +23,7 @@ import com.zlebank.zplatform.acc.pojo.PojoBusiAcctSubjectMapping;
 import com.zlebank.zplatform.acc.pojo.PojoSubject;
 import com.zlebank.zplatform.acc.service.SubjectSelector;
 import com.zlebank.zplatform.commons.utils.BeanCopyUtil;
-import com.zlebank.zplatform.member.bean.Member;
+import com.zlebank.zplatform.member.bean.BusinessActor;
 
 /**
  * Class Description
@@ -41,10 +41,10 @@ public class MappingTableSubjectSelector implements SubjectSelector {
     
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public Subject select(Member member, BusiAcct busiAcct)
+    public Subject select(BusinessActor member, BusiAcct busiAcct)
             throws BusiAcctToSubjectMappingNullException {
         PojoBusiAcctSubjectMapping mappingQueryCondition = new PojoBusiAcctSubjectMapping(); 
-        mappingQueryCondition.setMemberType(member.getMemberType());
+        mappingQueryCondition.setBusinessActorType(member.getBusinessActorType());
         mappingQueryCondition.setUsage(busiAcct.getUsage()); 
         PojoSubject pojoSubject = busiToAcctSubjectMappingDAO.queryByConditions(mappingQueryCondition);
         if(pojoSubject == null){

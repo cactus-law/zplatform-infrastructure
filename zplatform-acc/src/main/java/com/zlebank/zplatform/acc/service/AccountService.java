@@ -14,7 +14,7 @@ import com.zlebank.zplatform.acc.bean.Account;
 import com.zlebank.zplatform.acc.exception.AbstractAccException;
 import com.zlebank.zplatform.acc.exception.AccBussinessException;
 import com.zlebank.zplatform.acc.pojo.PojoAbstractSubject;
-import com.zlebank.zplatform.member.bean.Member;
+import com.zlebank.zplatform.member.bean.BusinessActor;
 
 /**
  * Class Description
@@ -27,7 +27,7 @@ import com.zlebank.zplatform.member.bean.Member;
 public interface AccountService { 
     public Account getByAcctCode(String acctCode) throws AbstractAccException;
     /**
-     * 
+     * 开通会计账户
      * @param account
      * @param member
      * @param userId
@@ -35,7 +35,7 @@ public interface AccountService {
      * @throws AbstractAccException
      *             if account created by given param is exist
      */
-    public Account openAcct(Account account, Member member, long userId)
+    public Account openAcct(Account account, BusinessActor member, long userId)
             throws AbstractAccException;
     /**
      * 

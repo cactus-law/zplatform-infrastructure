@@ -11,8 +11,8 @@
 package com.zlebank.zplatform.acc.bean;
 
 import java.util.Date;
+
 import com.zlebank.zplatform.acc.bean.enums.AccEntryStatus;
-import com.zlebank.zplatform.acc.bean.enums.TradeType;
 import com.zlebank.zplatform.commons.bean.Bean;
 
 /**

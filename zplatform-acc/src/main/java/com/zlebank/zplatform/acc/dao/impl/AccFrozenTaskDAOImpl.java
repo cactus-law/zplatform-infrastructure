@@ -20,7 +20,6 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import com.zlebank.zplatform.acc.bean.AccountAmount;
 import com.zlebank.zplatform.acc.bean.AccountAmountQuery;
 import com.zlebank.zplatform.acc.bean.enums.FrozenStatusType;
 import com.zlebank.zplatform.acc.bean.enums.LockStatusType;

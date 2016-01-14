@@ -13,7 +13,7 @@ package com.zlebank.zplatform.acc.service;
 import com.zlebank.zplatform.acc.bean.BusiAcct;
 import com.zlebank.zplatform.acc.bean.Subject;
 import com.zlebank.zplatform.acc.exception.BusiAcctToSubjectMappingNullException;
-import com.zlebank.zplatform.member.bean.Member;
+import com.zlebank.zplatform.member.bean.BusinessActor;
 
 /**
  * Class Description
@@ -25,6 +25,6 @@ import com.zlebank.zplatform.member.bean.Member;
  */
 public interface SubjectSelector {
     //通过 会员编号  会员类型  用途   业务账户号 得到科目
-    public Subject select(Member member,BusiAcct busiAcct)
+    public Subject select(BusinessActor member,BusiAcct busiAcct)
             throws BusiAcctToSubjectMappingNullException;
 }

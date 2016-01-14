@@ -10,17 +10,17 @@
  */
 package com.zlebank.zplatform.member.bean;
 
-import com.zlebank.zplatform.member.bean.enums.MemberType;
+import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 
 /**
- * Class Description
+ * 业务参与者（个人/企业 会员、合作机构）
  *
  * @author yangying
  * @version
  * @date 2015年8月20日 下午3:49:43
  * @since
  */
-public interface Member {
-    public String getMemberId();
-    public MemberType getMemberType();  
+public interface BusinessActor {
+    public String getBusinessActorId();
+    public BusinessActorType getBusinessActorType();  
 }

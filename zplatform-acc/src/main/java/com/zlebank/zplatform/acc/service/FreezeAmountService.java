@@ -14,7 +14,6 @@ import java.util.List;
 
 import com.zlebank.zplatform.acc.bean.AccountAmount;
 import com.zlebank.zplatform.acc.bean.AccountAmountQuery;
-import com.zlebank.zplatform.acc.bean.enums.Usage;
 import com.zlebank.zplatform.acc.exception.AccBussinessException;
 import com.zlebank.zplatform.commons.service.IBasePageService;
 

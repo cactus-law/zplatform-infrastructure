@@ -26,7 +26,6 @@ import com.zlebank.zplatform.acc.dao.SubjectRuleConfigureDAO;
 import com.zlebank.zplatform.acc.exception.AccBussinessException;
 import com.zlebank.zplatform.acc.pojo.PojoSubjectRuleConfigure;
 import com.zlebank.zplatform.acc.service.SubjectRuleService;
-import com.zlebank.zplatform.commons.service.impl.AbstractBasePageService;
 import com.zlebank.zplatform.commons.utils.BeanCopyUtil;
 
 /**

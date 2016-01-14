@@ -145,6 +145,7 @@ public class SubjectRuleConfigureDAOImpl
      * @param sar
      * @return
      */
+    @SuppressWarnings("unchecked")
     @Override
     public List<Map<String,Object>> getRuleBySar(SubjectAccountRule sar,Integer firset,Integer max)throws AccBussinessException {
        StringBuffer sb=new StringBuffer();

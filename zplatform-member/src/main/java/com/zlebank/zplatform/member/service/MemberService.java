@@ -13,14 +13,13 @@ package com.zlebank.zplatform.member.service;
 import java.util.List;
 
 import com.zlebank.zplatform.acc.bean.AccEntry;
-import com.zlebank.zplatform.acc.bean.Account;
 import com.zlebank.zplatform.acc.bean.BusiAcct;
 import com.zlebank.zplatform.acc.bean.BusiAcctQuery;
 import com.zlebank.zplatform.acc.bean.QueryAccount;
 import com.zlebank.zplatform.acc.exception.AbstractBusiAcctException;
 import com.zlebank.zplatform.commons.bean.PagedResult;
 import com.zlebank.zplatform.member.bean.MemberQuery;
-import com.zlebank.zplatform.member.bean.enums.MemberType;
+import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 import com.zlebank.zplatform.member.exception.MemberBussinessException;
 import com.zlebank.zplatform.member.pojo.PojoMember;
 
@@ -67,7 +66,7 @@ public interface MemberService {
      * @param type
      * @return
      */
-    public PojoMember getMbmberByMemberId(String memberId,MemberType type);
+    public PojoMember getMbmberByMemberId(String memberId,BusinessActorType type);
     
     /**
      * 通过邮箱得到会员信息 

@@ -18,7 +18,7 @@ import com.zlebank.zplatform.acc.bean.BusiAcct;
 import com.zlebank.zplatform.acc.bean.enums.Usage;
 import com.zlebank.zplatform.acc.exception.AbstractBusiAcctException;
 import com.zlebank.zplatform.acc.mock.MemberMock;
-import com.zlebank.zplatform.member.bean.Member;
+import com.zlebank.zplatform.member.bean.BusinessActor;
 
 /**
  * Class Description
@@ -39,7 +39,7 @@ public class BusiAcctServiceTest {
     }
      
     public void testMerchantOpenBusiAcct() {
-        Member member = new MemberMock();
+        BusinessActor member = new MemberMock();
         long userId = 45;
         BusiAcct busiAcct = new BusiAcct();
         busiAcct.setBusiAcctName("测试商户资金账户");

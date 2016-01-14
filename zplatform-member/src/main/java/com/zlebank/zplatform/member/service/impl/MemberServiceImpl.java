@@ -1,7 +1,7 @@
 /* 
  * MemberServiceImpl.java  
  * 
- * version TODO
+ * version v1.2.1
  *
  * 2015年9月10日 
  * 
@@ -32,10 +32,11 @@ import com.zlebank.zplatform.acc.service.AccountQueryService;
 import com.zlebank.zplatform.acc.service.BusiAcctService;
 import com.zlebank.zplatform.commons.bean.PagedResult;
 import com.zlebank.zplatform.commons.utils.BeanCopyUtil;
+import com.zlebank.zplatform.member.bean.CoopInstiBusi;
+import com.zlebank.zplatform.member.bean.EnterpriseBusi;
 import com.zlebank.zplatform.member.bean.MemberQuery;
-import com.zlebank.zplatform.member.bean.MerchBusi;
-import com.zlebank.zplatform.member.bean.personBusi;
-import com.zlebank.zplatform.member.bean.enums.MemberType;
+import com.zlebank.zplatform.member.bean.PersonBusi;
+import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 import com.zlebank.zplatform.member.dao.MemberDAO;
 import com.zlebank.zplatform.member.dao.MerchDAO;
 import com.zlebank.zplatform.member.exception.MemberBussinessException;
@@ -52,10 +53,10 @@ import com.zlebank.zplatform.member.service.MemberService;
  */
 @Service
 public class MemberServiceImpl implements MemberService {
-	private final static String PERSON = "1";
-	private final static String MERCH = "2";
-	private final static String CAPITALNAME = "资金账户";
-	private final static String SECURITYNAME = "保证金账户";
+	private final static String PERSON = "1";// 个人会员
+	private final static String ENTERPRISE = "2";// 企业会员
+	private final static String COOPINSTI = "3";// 合作机构
+	private final static String CAPITALNAME = "【默认资金账户】";
 
 	@Autowired
 	private MemberDAO memberDAOImpl;
@@ -132,60 +133,46 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	/**
+	 * 开通
+	 * - 个人会员或
+	 * - 企业会员
+	 * - 合作机构
+	 *  的【业务账户】和【会计账户】
 	 *
-	 * @param memberId
-	 * @return
+	 * @param name 会员名称
+	 * @param memberId 会员号
+	 * @param userId 操作人ID
+	 * @return  业务账户列表
 	 * @throws AbstractBusiAcctException
 	 * @throws MemberBussinessException
 	 */
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
-	public List<BusiAcct> openBusiAcct(String name, String memberId, long userId)
+	public List<BusiAcct> openBusiAcct(String name, String businessActorId, long userId)
 			throws AbstractBusiAcctException, MemberBussinessException {
-		List<BusiAcct> li = null;
-		// 判断开通个人还是商户
-		String str = memberId;
+		List<BusiAcct> busiAcctList = null;
+		// 判断开通个人还是商户还是合作机构
+		String str = businessActorId;
 		String mid = str.substring(0, 1);
-		// 商户账户开通
-		if (MERCH.equals(mid)) {
-			// MerchBusi mb=new MerchBusi();
-			// mb.setMemberId(memberId);
-			// mb.setMerchName(name+SECURITYNAME);
-			// BusiAcct bus=new BusiAcct();
-			// bus.setUsage(Usage.BAIL);
-			// bus.setBusiAcctName(name+SECURITYNAME);
-			// String code= busiacc.openBusiAcct(mb, bus, userId);
-			// bus.setBusiAcctCode(code);
-			// BusiAcct busi=new BusiAcct();
-			// mb.setMerchName(name+CAPITALNAME);
-			// busi.setUsage(Usage.BASICPAY);
-			// busi.setBusiAcctName(name+CAPITALNAME);
-			// String codes= busiacc.openBusiAcct(mb, busi, userId);
-			// busi.setBusiAcctCode(codes);
-			li = new ArrayList<BusiAcct>();
-			BusiAcct bus = openSecurity(name, memberId, userId);
-			li.add(bus);
-			BusiAcct busi = openCapital(name, memberId, userId);
-			li.add(busi);
-			// 个人会员开通账户
+		// 企业会员账户开通
+		if (ENTERPRISE.equals(mid)) {
+		    busiAcctList = new ArrayList<BusiAcct>();
+			BusiAcct bus = openSecurity(name, businessActorId, userId);
+			busiAcctList.add(bus);
+			// 个人会员账户开通
 		} else if (PERSON.equals(mid)) {
-			// personBusi pb=new personBusi();
-			// pb.setMemberId(memberId);
-			// BusiAcct bus=new BusiAcct();
-			// bus.setUsage(Usage.BAIL);
-			// bus.setBusiAcctName(name+CAPITALNAME);
-			// String code= busiacc.openBusiAcct(pb, bus, userId);
-			// bus.setBusiAcctCode(code);
-			BusiAcct bus = openPersonSecurity(name, memberId, userId);
-			li = new ArrayList<BusiAcct>();
-			li.add(bus);
-			// memberId不合法
+			BusiAcct bus = openPersonSecurity(name, businessActorId, userId);
+			busiAcctList = new ArrayList<BusiAcct>();
+			busiAcctList.add(bus);
+			// 合作机构账户开通
+		} else if (COOPINSTI.equals(mid)) {
+	        BusiAcct bus = openCoopInsti(name, businessActorId, userId);
+	        busiAcctList = new ArrayList<BusiAcct>();
+	        busiAcctList.add(bus);
 		} else {
 			throw new MemberBussinessException("M100004");
 		}
-		// 开通个人账户
-		// 开通商户账户
-		return li;
+		return busiAcctList;
 	}
 
 	/**
@@ -197,40 +184,18 @@ public class MemberServiceImpl implements MemberService {
 	 * @return
 	 * @throws AbstractBusiAcctException
 	 */
-	private BusiAcct openSecurity(String name, String memberId, long userId)
+	private BusiAcct openSecurity(String name, String businessActorId, long userId)
 			throws AbstractBusiAcctException {
 
-		MerchBusi mb = new MerchBusi();
-		mb.setMemberId(memberId);
-		mb.setMerchName(name + CAPITALNAME);
+	    EnterpriseBusi mb = new EnterpriseBusi();
+		mb.setBusinessActorId(businessActorId);
+		mb.setBusinessActorName(name + CAPITALNAME);
 		BusiAcct bus = new BusiAcct();
 		bus.setUsage(Usage.BASICPAY);
 		bus.setBusiAcctName(name + CAPITALNAME);
 		String code = busiacc.openBusiAcct(mb, bus, userId);
 		bus.setBusiAcctCode(code);
 		return bus;
-	}
-
-	/**
-	 * 商户开通保证金账户
-	 * 
-	 * @param name
-	 * @param memberId
-	 * @param userId
-	 * @return
-	 * @throws AbstractBusiAcctException
-	 */
-	private BusiAcct openCapital(String name, String memberId, long userId)
-			throws AbstractBusiAcctException {
-		MerchBusi mb = new MerchBusi();
-		BusiAcct busi = new BusiAcct();
-		mb.setMemberId(memberId);
-		mb.setMerchName(name + SECURITYNAME);
-		busi.setUsage(Usage.BAIL);
-		busi.setBusiAcctName(name + SECURITYNAME);
-		String codes = busiacc.openBusiAcct(mb, busi, userId);
-		busi.setBusiAcctCode(codes);
-		return busi;
 	}
 
 	/**
@@ -242,10 +207,10 @@ public class MemberServiceImpl implements MemberService {
 	 * @return
 	 * @throws AbstractBusiAcctException
 	 */
-	private BusiAcct openPersonSecurity(String name, String memberId,
+	private BusiAcct openPersonSecurity(String name, String businessActorId,
 			long userId) throws AbstractBusiAcctException {
-		personBusi pb = new personBusi();
-		pb.setMemberId(memberId);
+		PersonBusi pb = new PersonBusi();
+		pb.setBusinessActorId(businessActorId);
 		BusiAcct bus = new BusiAcct();
 		bus.setUsage(Usage.BASICPAY);
 		bus.setBusiAcctName(name + CAPITALNAME);
@@ -253,6 +218,27 @@ public class MemberServiceImpl implements MemberService {
 		bus.setBusiAcctCode(code);
 		return bus;
 	}
+	
+	   /**
+     * 合作机构资金账户开通
+     * 
+     * @param name
+     * @param memberId
+     * @param userId
+     * @return
+     * @throws AbstractBusiAcctException
+     */
+    private BusiAcct openCoopInsti(String name, String businessActorId,
+            long userId) throws AbstractBusiAcctException {
+        CoopInstiBusi pb = new CoopInstiBusi();
+        pb.setBusinessActorId(businessActorId);
+        BusiAcct bus = new BusiAcct();
+        bus.setUsage(Usage.BASICPAY);
+        bus.setBusiAcctName(name + CAPITALNAME);
+        String code = busiacc.openBusiAcct(pb, bus, userId);
+        bus.setBusiAcctCode(code);
+        return bus;
+    }
 
 	/**
 	 *
@@ -261,7 +247,7 @@ public class MemberServiceImpl implements MemberService {
 	 * @return
 	 */
 	@Override
-	public PojoMember getMbmberByMemberId(String memberId, MemberType type) {
+	public PojoMember getMbmberByMemberId(String memberId, BusinessActorType type) {
 		return memberDAOImpl.getMbmberByMemberId(memberId, type);
 	}
 
@@ -297,7 +283,7 @@ public class MemberServiceImpl implements MemberService {
 		PojoBusiAcct busiPojo = busiAcctDAO.getByBusiAcctCode(busiCode);
 		if (busiPojo == null)
 			return null;
-		memberId = busiPojo.getMemberId();
+		memberId = busiPojo.getBusinessActorId();
 		return memberId;
 	}
 

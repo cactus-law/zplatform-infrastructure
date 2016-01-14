@@ -38,7 +38,7 @@ import com.zlebank.zplatform.acc.service.BusiAcctService;
 import com.zlebank.zplatform.acc.service.SubjectRuleService;
 import com.zlebank.zplatform.acc.service.SubjectService;
 import com.zlebank.zplatform.commons.utils.StringUtil;
-import com.zlebank.zplatform.member.bean.enums.MemberType;
+import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 
 /**
  * Class Description
@@ -312,9 +312,9 @@ public class MainSubject {
        
         BusiAcct busiAcct = new BusiAcct();
         TestMemberBean member=new TestMemberBean();
-        member.setMemberId(str[0]);
-        member.setMemberType(MemberType.fromValue("0"+str[1]));
-        member.setMerchName(str[4]);
+        member.setBusinessActorId(str[0]);
+        member.setMemberType(BusinessActorType.fromValue("0"+str[1]));
+        member.setBusinessActorName(str[4]);
         busiAcct.setBusiAcctName(str[5]);
      
         busiAcct.setUsage(Usage.fromValue(str[2]));

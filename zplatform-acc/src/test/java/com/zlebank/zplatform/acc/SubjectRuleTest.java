@@ -10,7 +10,7 @@
  */
 package com.zlebank.zplatform.acc;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+
 import org.junit.Test;
 
 import com.zlebank.zplatform.acc.bean.SubjectRule;

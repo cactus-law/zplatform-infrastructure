@@ -1,5 +1,5 @@
 /* 
- * Individual.java  
+ * Merchant.java  
  * 
  * version 1.0
  *
@@ -13,16 +13,18 @@ package com.zlebank.zplatform.member.bean;
 import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 
 /**
- * 个人会员
+ * 企业会员
  *
  * @author yangying
  * @version
- * @date 2015年8月20日 下午3:48:29
+ * @date 2015年8月20日 下午3:46:56
  * @since 
  */
-public abstract class Individual implements BusinessActor{
-    @Override
+public abstract class Enterprise implements BusinessActor{ 
+	public abstract String getBusinessActorName();
+	public abstract String getBusinessActorNo();
+	@Override
     public BusinessActorType getBusinessActorType(){
-        return BusinessActorType.INDIVIDUAL;
+        return BusinessActorType.ENTERPRISE;
     }
 }

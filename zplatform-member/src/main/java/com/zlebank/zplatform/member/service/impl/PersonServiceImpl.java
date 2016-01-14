@@ -12,7 +12,7 @@ import com.zlebank.zplatform.commons.utils.BeanCopyUtil;
 import com.zlebank.zplatform.member.bean.Person;
 import com.zlebank.zplatform.member.bean.PersonManager;
 import com.zlebank.zplatform.member.bean.enums.MemberStatusType;
-import com.zlebank.zplatform.member.bean.enums.MemberType;
+import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 import com.zlebank.zplatform.member.bean.enums.SexType;
 import com.zlebank.zplatform.member.dao.MemberBaseDAO;
 import com.zlebank.zplatform.member.dao.PersonDAO;
@@ -81,7 +81,7 @@ public class PersonServiceImpl implements PersonService {
         PojoPersonDeta person=BeanCopyUtil.copyBean(PojoPersonDeta.class,pers);
         person.setMemberid(memberId);
         person.setpMemberid(memberId);
-        person.setMembertype(MemberType.Individual);
+        person.setMembertype(BusinessActorType.INDIVIDUAL);
         person.setBindPhone(pers.getPhone());
        Date date=new Date();
         person.setIntime(date);
@@ -97,7 +97,7 @@ public class PersonServiceImpl implements PersonService {
        PojoMemberBase memberBasepo=new PojoMemberBase();
        memberBasepo.setMemberid(memberId);
        memberBasepo.setMerchname(pers.getMembername());
-       memberBasepo.setMerchtype(MemberType.Individual);
+       memberBasepo.setMerchtype(BusinessActorType.INDIVIDUAL);
        memberBase.saveA(memberBasepo);
        return memberId;
     

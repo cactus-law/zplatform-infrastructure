@@ -34,8 +34,8 @@ import com.zlebank.zplatform.acc.service.AccountService;
 import com.zlebank.zplatform.acc.service.BusiAcctService;
 import com.zlebank.zplatform.acc.service.SubjectSelector;
 import com.zlebank.zplatform.commons.utils.BeanCopyUtil;
-import com.zlebank.zplatform.member.bean.Member;
-import com.zlebank.zplatform.member.bean.enums.MemberType;
+import com.zlebank.zplatform.member.bean.BusinessActor;
+import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 
 /**
  * Class Description
@@ -59,44 +59,48 @@ public class BusiAcctServiceImpl implements BusiAcctService {
     private AccountDAO accountDAO;
  
 
+    /**
+     * 开通业务账户和会计账户
+     *
+     * @param businessActor
+     * @param busiAcct
+     * @param userId
+     * @return
+     * @throws AbstractBusiAcctException
+     */
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
     @Override
-    public String openBusiAcct(Member member, BusiAcct busiAcct, long userId)
+    public String openBusiAcct(BusinessActor businessActor, BusiAcct busiAcct, long userId)
             throws AbstractBusiAcctException {
-        /*
-         * 选取父级科目
-         */
-        Subject parentSubject = mappingTableSubjectSelector.select(member,
-                busiAcct);
-        String busiAcctCode = gengrateBusiAcctCode(member, busiAcct,
+        // 选取父级科目
+        Subject parentSubject = mappingTableSubjectSelector.select(businessActor, busiAcct);
+        // 生成业务代码
+        String busiAcctCode = gengrateBusiAcctCode(businessActor, busiAcct,
                 parentSubject.getAcctCode(), "");
         busiAcct.setBusiAcctCode(busiAcctCode);
 
-        /*
-         * 添加会计科目
-         */
+        // 新建业务账户
         PojoBusiAcct pojoBusiAcct = busiAcctDAO.getByBusiAcctCode(busiAcctCode);
         if (pojoBusiAcct != null) {
+            // 已经存在的话抛出异常
             throw new BusiAcctRepeatException();
         }
+        // 新建父级会计账户
         Account account = new Account();
         account.setParentSubject(parentSubject);
         account.setAcctCodeName(busiAcct.getBusiAcctName());
         try {
-            account = accountServiceImpl.openAcct(account, member, userId);
+            // 开通会计账户
+            account = accountServiceImpl.openAcct(account, businessActor, userId);
         } catch (AbstractAccException e) {
             log.warn("Add account failed.Caused By: " + e.getMessage());
             throw new BusiAcctRepeatException(e);
         }
 
-        /*
-         * 添加账户科目
-         */
-        pojoBusiAcct = saveBusiAcct(busiAcct, member);
+        // 保存业务账户
+        pojoBusiAcct = saveBusiAcct(busiAcct, businessActor);
 
-        /*
-         * 绑定会计科目到账户科目
-         */
+        // 绑定会计科目到账户科目
         pojoBusiAcct.setAccountId(account.getId());
 
         return pojoBusiAcct.getBusiAcctCode();
@@ -123,17 +127,19 @@ public class BusiAcctServiceImpl implements BusiAcctService {
         return account.getAcctCode();
     }
 
-    private String gengrateBusiAcctCode(Member member,
+    private String gengrateBusiAcctCode(BusinessActor member,
             BusiAcct busiAcct,
             String parentSubjectCode,
             String productNo) {
         StringBuilder sb = new StringBuilder();
-        if(MemberType.Individual == member.getMemberType()){
-            sb.append(BuisAcctCodePrefix.PRIVATE.getCode());
-        }else if(MemberType.MERCHANT == member.getMemberType()){
-            sb.append(BuisAcctCodePrefix.PUBLIC.getCode());
+        if(BusinessActorType.INDIVIDUAL == member.getBusinessActorType()){
+            sb.append(BuisAcctCodePrefix.INDIVIDUAL.getCode());
+        }else if(BusinessActorType.ENTERPRISE == member.getBusinessActorType()){
+            sb.append(BuisAcctCodePrefix.ENTERPRISE.getCode());
+        }else if(BusinessActorType.COOPINSTI == member.getBusinessActorType()){
+            sb.append(BuisAcctCodePrefix.COOPINSTI.getCode());
         }else{
-            sb.append(BuisAcctCodePrefix.PUBLIC.getCode());
+            sb.append(BuisAcctCodePrefix.ENTERPRISE.getCode());
         }
         switch (busiAcct.getUsage().getPrimaryUsage()) {
             case FUND :
@@ -158,17 +164,17 @@ public class BusiAcctServiceImpl implements BusiAcctService {
                 break;
         } 
         sb.append(busiAcct.getUsage().getCode());
-        sb.append(member.getMemberType().getCode());
-        sb.append(member.getMemberId());
+        sb.append(member.getBusinessActorType().getCode());
+        sb.append(member.getBusinessActorId());
 
         return sb.toString();
     }
-    private PojoBusiAcct saveBusiAcct(BusiAcct busiAcct, Member member) {
+    private PojoBusiAcct saveBusiAcct(BusiAcct busiAcct, BusinessActor member) {
         PojoBusiAcct pojoBusiAcct = new PojoBusiAcct();
         pojoBusiAcct.setUsage(busiAcct.getUsage());
         pojoBusiAcct.setBusiAcctCode(busiAcct.getBusiAcctCode());
         pojoBusiAcct.setBusiAcctName(busiAcct.getBusiAcctName());
-        pojoBusiAcct.setMemberId(member.getMemberId());
+        pojoBusiAcct.setBusinessActorId(member.getBusinessActorId());
         pojoBusiAcct.setUsage(busiAcct.getUsage());
         return busiAcctDAO.merge(pojoBusiAcct);
     }

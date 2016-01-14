@@ -10,7 +10,7 @@
  */
 package com.zlebank.zplatform.acc.mock;
 
-import com.zlebank.zplatform.member.bean.Merchant;
+import com.zlebank.zplatform.member.bean.Enterprise;
 
 /**
  * Class Description
@@ -20,21 +20,21 @@ import com.zlebank.zplatform.member.bean.Merchant;
  * @date 2015年9月1日 上午9:17:07
  * @since 
  */
-public class MemberMock extends Merchant{
+public class MemberMock extends Enterprise{
 
     
     @Override
-    public String getMemberId() { 
+    public String getBusinessActorId() { 
         return "12345678901";
     }
     @Override
-    public String getMerchName() { 
+    public String getBusinessActorName() { 
         return "开户测试商户";
     }
 
     
     @Override
-    public String getMerchNo() { 
+    public String getBusinessActorNo() { 
         return "254121547415214";
     }
 

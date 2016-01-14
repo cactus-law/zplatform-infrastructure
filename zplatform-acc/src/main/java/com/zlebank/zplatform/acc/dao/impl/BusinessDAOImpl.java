@@ -18,6 +18,8 @@ import java.util.List;
 
 
 
+
+
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -39,6 +41,7 @@ import com.zlebank.zplatform.commons.dao.impl.HibernateBaseDAOImpl;
 public class BusinessDAOImpl extends HibernateBaseDAOImpl<PojoBusiness> implements BusinessDAO {
     
     
+    @SuppressWarnings("unchecked")
     public List<PojoBusiness> getAllBussiness(){
       Criteria crite=  this.getSession().createCriteria(PojoBusiness.class);
       crite.add(Restrictions.eq("status", BusinessEntryStatus.NORMAL));
@@ -50,6 +53,7 @@ public class BusinessDAOImpl extends HibernateBaseDAOImpl<PojoBusiness> implemen
      * @param busiType
      * @return
      */
+    @SuppressWarnings("unchecked")
     @Override
     public List<PojoBusiness> getBusinessByType(String busiType) {
         Criteria crite=  this.getSession().createCriteria(PojoBusiness.class);

@@ -9,8 +9,8 @@
  * 
  */
 package com.zlebank.zplatform.acc;
-import com.zlebank.zplatform.member.bean.Member;
-import com.zlebank.zplatform.member.bean.enums.MemberType;
+import com.zlebank.zplatform.member.bean.BusinessActor;
+import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 
 /**
  * Class Description
@@ -20,42 +20,42 @@ import com.zlebank.zplatform.member.bean.enums.MemberType;
  * @date 2015年9月2日 下午5:44:30
  * @since 
  */
-public class TestMemberBean implements Member {
+public class TestMemberBean implements BusinessActor {
         
-    private String memberId;
-    private String merchName;
-    private MemberType memberType;
+    private String businessActorId;
+    private String businessActorName;
+    private BusinessActorType memberType;
     /**
      *
      * @return
      */
     @Override
-    public String getMemberId() {
+    public String getBusinessActorId() {
         
-        return memberId;
+        return businessActorId;
     }
     /**
      *
      * @return
      */
     @Override
-    public MemberType getMemberType() {
+    public BusinessActorType getBusinessActorType() {
         return memberType;
     }
-    public String getMerchName() {
-        return merchName;
-    }
-    public void setMerchName(String merchName) {
-        this.merchName = merchName;
-    }
-    public void setMemberId(String memberId) {
-        this.memberId = memberId;
-    }
-    public void setMemberType(MemberType memberType) {
+
+    public void setMemberType(BusinessActorType memberType) {
         this.memberType = memberType;
     }
-  
-
-
-
+    public String getBusinessActorName() {
+        return businessActorName;
+    }
+    public void setBusinessActorName(String businessActorName) {
+        this.businessActorName = businessActorName;
+    }
+    public BusinessActorType getMemberType() {
+        return memberType;
+    }
+    public void setBusinessActorId(String businessActorId) {
+        this.businessActorId = businessActorId;
+    }
 }

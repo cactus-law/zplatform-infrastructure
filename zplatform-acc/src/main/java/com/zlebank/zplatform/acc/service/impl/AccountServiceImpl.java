@@ -10,6 +10,8 @@
  */
 package com.zlebank.zplatform.acc.service.impl;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -32,10 +34,10 @@ import com.zlebank.zplatform.acc.pojo.PojoSubject;
 import com.zlebank.zplatform.acc.service.AccountService;
 import com.zlebank.zplatform.acc.service.GetDACService;
 import com.zlebank.zplatform.commons.utils.BeanCopyUtil;
-import com.zlebank.zplatform.member.bean.Member;
+import com.zlebank.zplatform.member.bean.BusinessActor;
 
 /**
- * Class Description
+ * 会计账户服务
  *
  * @author yangying
  * @version
@@ -75,20 +77,33 @@ public class AccountServiceImpl implements AccountService {
         return BeanCopyUtil.copyBean(Account.class, account);
     }
 
+    /**
+     * 开通会计账户
+     *
+     * @param account
+     * @param member
+     * @param userId
+     * @return
+     * @throws AccountCreateRepeatException
+     * @throws AccBussinessException
+     */
     @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Throwable.class)
-    public Account openAcct(Account account, Member member, long userId)throws AccountCreateRepeatException, AccBussinessException {
+    public Account openAcct(Account account, BusinessActor member, long userId)throws AccountCreateRepeatException, AccBussinessException {
         PojoSubject pojoParentSubject = subjectDAO.get(account
                 .getParentSubject().getId());
+        // 生成会计账户代码
         String acctCode = gengrateAcctCode(member, account,
                 pojoParentSubject.getAcctCode());
         
-        
+        // 检查会计账户代码是否存在
         PojoAccount pojoAccount = accountDAO.getByAcctCode(acctCode);
         if(pojoAccount!=null){
             throw new AccountCreateRepeatException();
         }
+        // 生成会计账户
         pojoAccount = initNewAccount(acctCode, pojoParentSubject,
-                member.getMemberId(), userId, account.getAcctCodeName());
+                member.getBusinessActorId(), userId, account.getAcctCodeName());
+        // 保存会计账户
         pojoAccount = saveAcct(pojoAccount);
         return BeanCopyUtil.copyBean(Account.class, pojoAccount);
     }
@@ -135,7 +150,7 @@ public class AccountServiceImpl implements AccountService {
         account.setAcctType(AcctType.ACCOUNT);
         account.setCrdr(parentSubject.getCrdr());
         account.setAcctElement(parentSubject.getAcctElement());
-        account.setMemberId(memberId);
+        account.setBusinessActorId(memberId);
         account.setBalance(Money.ZERO);
         account.setFrozenBalance(Money.ZERO);
         account.setTotalBanance(Money.ZERO);
@@ -149,16 +164,21 @@ public class AccountServiceImpl implements AccountService {
         account.setStatus(AcctStatusType.NORMAL);
         account.setUpUser(userId);
         account.setAcctCodeName(acctName);
+        Date current = new Date();
+        account.setInTime(current);
+        account.setUpTime(current);
+        account.setInUser(userId);
+        account.setUpUser(userId);
         return account;
     }
 
-    private String gengrateAcctCode(Member member,
+    private String gengrateAcctCode(BusinessActor member,
             Account account,
             String parentSubjectCode) {
         StringBuilder sb = new StringBuilder();
         sb.append(parentSubjectCode);
-        sb.append(member.getMemberType().getCode());
-        sb.append(member.getMemberId());
+        sb.append(member.getBusinessActorType().getCode());
+        sb.append(member.getBusinessActorId());
         return sb.toString();
     }
 }

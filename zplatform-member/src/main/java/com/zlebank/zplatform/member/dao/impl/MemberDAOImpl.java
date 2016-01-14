@@ -16,7 +16,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.zlebank.zplatform.commons.dao.impl.HibernateBaseDAOImpl;
-import com.zlebank.zplatform.member.bean.enums.MemberType;
+import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 import com.zlebank.zplatform.member.dao.MemberDAO;
 import com.zlebank.zplatform.member.pojo.PojoMember;
 
@@ -61,7 +61,7 @@ public class MemberDAOImpl extends HibernateBaseDAOImpl<PojoMember>
      * @return
      */
     @Override 
-    public PojoMember getMbmberByMemberId(String memberId,MemberType type) {
+    public PojoMember getMbmberByMemberId(String memberId,BusinessActorType type) {
         Criteria crite=   this.getSession().createCriteria(PojoMember.class);
             crite .add(Restrictions.eq("memberid", memberId));
         if (type != null) {

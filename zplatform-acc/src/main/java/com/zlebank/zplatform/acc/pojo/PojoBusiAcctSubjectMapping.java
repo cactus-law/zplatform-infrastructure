@@ -21,7 +21,7 @@ import org.hibernate.annotations.Type;
 
 import com.zlebank.zplatform.acc.bean.enums.Usage;
 import com.zlebank.zplatform.commons.dao.pojo.Pojo;
-import com.zlebank.zplatform.member.bean.enums.MemberType;
+import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 
 /**
  * Class Description
@@ -35,9 +35,9 @@ import com.zlebank.zplatform.member.bean.enums.MemberType;
 @Table(name = "T_ACC_SUBJECT_MAPPING")
 public class PojoBusiAcctSubjectMapping extends Pojo {
     //会员类型,01-个人,02-商户,03-企业
-    private MemberType memberType;
+    private BusinessActorType businessActorType;
    //会员编号
-    private String memberId;
+    private String businessActorId;
    //主要产品号
     private String mainProductNo;
    //次要产品号
@@ -54,21 +54,21 @@ public class PojoBusiAcctSubjectMapping extends Pojo {
         return id;
     }
 
-    @Type(type = "com.zlebank.zplatform.acc.pojo.usertype.MemberTypeSqlType")
-    @Column(name = "MEMBER_TYPE")
-    public MemberType getMemberType() {
-        return memberType;
+    @Type(type = "com.zlebank.zplatform.acc.pojo.usertype.BusinessActorTypeSqlType")
+    @Column(name = "BUSINESS_ACTOR_TYPE")
+    public BusinessActorType getBusinessActorType() {
+        return businessActorType;
     }
-    public void setMemberType(MemberType memberType) {
-        this.memberType = memberType;
+    public void setBusinessActorType(BusinessActorType businessActorType) {
+        this.businessActorType = businessActorType;
     }
 
-    @Column(name = "MEMBER_ID",nullable=true)
-    public String getMemberId() {
-        return memberId;
+    @Column(name = "BUSINESS_ACTOR_ID",nullable=true)
+    public String getBusinessActorId() {
+        return businessActorId;
     }
-    public void setMemberId(String memberId) {
-        this.memberId = memberId;
+    public void setBusinessActorId(String businessActorId) {
+        this.businessActorId = businessActorId;
     }
 
     @Column(name = "MAIN_PRODUCT_NO")

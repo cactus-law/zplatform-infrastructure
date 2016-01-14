@@ -11,30 +11,26 @@
 package com.zlebank.zplatform.member.bean.enums;
 
 /**
- * Member type
+ * 业务参与者（个人/企业 会员、合作机构）类型
  *
  * @author yangying
  * @version
  * @date 2015年8月21日 下午5:46:08
  * @since 
  */
-public enum MemberType {
-    /**
-     *  商户
-     */
-	MERCHANT("02"),
-	/**
-	 * 个人
-	 */
-	Individual("01"),
-	/**
-	 * 企业
-	 */
-	BUSINESS("03"),UNKNOW("99");
+public enum BusinessActorType {
+    /** 个人 */
+    INDIVIDUAL("01"),
+    /** 企业 */
+    ENTERPRISE("02"),
+    /** 合作机构 */
+    COOPINSTI("03"),
+
+	UNKNOW("99");
 	private String code; 
 
-    public static MemberType fromValue(String value) {
-        for (MemberType status : values()) {
+    public static BusinessActorType fromValue(String value) {
+        for (BusinessActorType status : values()) {
             if (status.code.equals(value)) {
                 return status;
             }
@@ -45,7 +41,7 @@ public enum MemberType {
         return code;
     }
 	
-	private MemberType(String code){
+	private BusinessActorType(String code){
 		this.code = code;
 	}
 }

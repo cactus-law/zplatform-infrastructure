@@ -21,8 +21,7 @@ package com.zlebank.zplatform.acc.bean.enums;
 public enum Usage {
     /**普通资金账户*/
     BASICPAY(PrimaryUsage.FUND, PrimaryUsage.FUND.getCode()+"01"),
-    /**保证金账户*/
-    BAIL(PrimaryUsage.FUND, PrimaryUsage.FUND.getCode()+"02"), 
+//    BAIL(PrimaryUsage.FUND, PrimaryUsage.FUND.getCode()+"02"), 
     /**未知账户*/
     UNKNOW(null, "FFF");
     private PrimaryUsage primaryUsage;

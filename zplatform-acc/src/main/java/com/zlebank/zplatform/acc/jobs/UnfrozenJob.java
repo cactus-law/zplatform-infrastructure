@@ -13,8 +13,6 @@ package com.zlebank.zplatform.acc.jobs;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -29,7 +27,6 @@ import com.zlebank.zplatform.acc.service.FreezeAmountService;
  * @since
  */
 public class UnfrozenJob {
-    private static final Log logger = LogFactory.getLog(UnfrozenJob.class);
     @Autowired
     FreezeAmountService service;
     /**

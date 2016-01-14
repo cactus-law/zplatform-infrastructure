@@ -130,6 +130,7 @@ public class AccEntryDAOImpl  extends AbstractPagedQueryDAOImpl<PojoAccEntry,Acc
      * @param busiCode
      * @return
      */
+    @SuppressWarnings("unchecked")
     @Override
     public List<PojoAccEntry> getByTxnNo(String txnseqno, String busiCode) {
         Criteria criteria = getSession().createCriteria(PojoAccEntry.class);

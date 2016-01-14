@@ -9,8 +9,8 @@
  * 
  */
 package com.zlebank.zplatform.acc.mock;
-import com.zlebank.zplatform.member.bean.Member;
-import com.zlebank.zplatform.member.bean.enums.MemberType;
+import com.zlebank.zplatform.member.bean.BusinessActor;
+import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 
 /**
  * Class Description
@@ -20,17 +20,17 @@ import com.zlebank.zplatform.member.bean.enums.MemberType;
  * @date 2015年9月2日 下午5:44:30
  * @since 
  */
-public class TestMemberBean implements Member {
+public class TestMemberBean implements BusinessActor {
         
     private String memberId;
     private String merchName;
-    private MemberType memberType;
+    private BusinessActorType memberType;
     /**
      *
      * @return
      */
     @Override
-    public String getMemberId() {
+    public String getBusinessActorId() {
         
         return memberId;
     }
@@ -39,7 +39,7 @@ public class TestMemberBean implements Member {
      * @return
      */
     @Override
-    public MemberType getMemberType() {
+    public BusinessActorType getBusinessActorType() {
         return memberType;
     }
     public String getMerchName() {
@@ -51,7 +51,7 @@ public class TestMemberBean implements Member {
     public void setMemberId(String memberId) {
         this.memberId = memberId;
     }
-    public void setMemberType(MemberType memberType) {
+    public void setMemberType(BusinessActorType memberType) {
         this.memberType = memberType;
     }
   

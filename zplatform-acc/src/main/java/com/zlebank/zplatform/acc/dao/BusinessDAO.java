@@ -12,7 +12,6 @@ package com.zlebank.zplatform.acc.dao;
 
 import java.util.List;
 
-import com.zlebank.zplatform.acc.bean.enums.BusiType;
 import com.zlebank.zplatform.acc.pojo.PojoBusiness;
 import com.zlebank.zplatform.commons.dao.BaseDAO;
 

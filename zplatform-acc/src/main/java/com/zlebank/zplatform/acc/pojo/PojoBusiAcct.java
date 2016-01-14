@@ -36,7 +36,7 @@ import com.zlebank.zplatform.commons.dao.pojo.Pojo;
 public class PojoBusiAcct extends Pojo {
 
     private Usage usage;
-    private String memberId;
+    private String businessActorId;
     private long accountId;
     private String busiAcctCode;
     private String busiAcctName;
@@ -63,12 +63,12 @@ public class PojoBusiAcct extends Pojo {
     public void setUsage(Usage usage) {
         this.usage = usage;
     }
-    @Column(name = "MEMBER_ID", precision = 11)
-    public String getMemberId() {
-        return memberId;
+    @Column(name = "BUSINESS_ACTOR_ID", precision = 11)
+    public String getBusinessActorId() {
+        return businessActorId;
     }
-    public void setMemberId(String memberId) {
-        this.memberId = memberId;
+    public void setBusinessActorId(String businessActorId) {
+        this.businessActorId = businessActorId;
     }
  
     @Column(name = "ACCT_ID") 
