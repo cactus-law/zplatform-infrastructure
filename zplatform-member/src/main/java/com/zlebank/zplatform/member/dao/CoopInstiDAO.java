@@ -1,5 +1,7 @@
 package com.zlebank.zplatform.member.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.zlebank.zplatform.commons.dao.BaseDAO;
@@ -22,5 +24,16 @@ public interface CoopInstiDAO extends BaseDAO<PojoCoopInsti>{
      * @param terminalAccessType
      * @return
      */
-    PojoInstiMK getByInstiCode(String instiCode,TerminalAccessType terminalAccessType);
+    PojoInstiMK getMKByInstiCode(String instiCode,TerminalAccessType terminalAccessType);
+    /**
+     * get by institution id
+     * @param coopInstiID
+     * @return
+     */
+    PojoCoopInsti get(long id);
+    /**
+     * get cooperative institution
+     * @return
+     */
+    List<PojoCoopInsti> getCoopInstiList();
 }

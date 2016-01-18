@@ -1,7 +1,10 @@
 package com.zlebank.zplatform.member.service;
 
-import com.zlebank.zplatform.member.bean.enums.TerminalAccessType;
+import java.util.List;
+
+import com.zlebank.zplatform.member.bean.CoopInsti;
 import com.zlebank.zplatform.member.bean.CoopInstiMK;
+import com.zlebank.zplatform.member.bean.enums.TerminalAccessType;
 import com.zlebank.zplatform.member.exception.AbstractCoopInstiException;
 /**
  * 
@@ -12,7 +15,7 @@ import com.zlebank.zplatform.member.exception.AbstractCoopInstiException;
  * @date 2016年1月13日 下午1:53:19
  * @since
  */
-public interface ICoopInstiService {
+public interface CoopInstiService {
     /**
      * 
      * @param instiCode
@@ -30,4 +33,10 @@ public interface ICoopInstiService {
      */
     public String createCoopInsti(String instiName, long userId)
             throws AbstractCoopInstiException;
+   
+    /**
+     * get all cooperative institution 
+     * @return a cooperative institution list,if has no institution,the return list will be a list with zero element
+     */
+    public List<CoopInsti> getAllCoopInsti();
 }

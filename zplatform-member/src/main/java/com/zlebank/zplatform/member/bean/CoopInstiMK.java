@@ -5,7 +5,7 @@ import com.zlebank.zplatform.member.bean.enums.TerminalAccessType;
 
 /**
  * 
- * Class Description
+ * CoopInstiMK
  *
  * @author yangying
  * @version

@@ -22,7 +22,7 @@ public class CoopInstiDAOImpl extends HibernateBaseDAOImpl<PojoCoopInsti>
     public boolean isNameExist(String instiName) {
         Session session = getSession();
         Criteria criteria = session.createCriteria(PojoCoopInsti.class);
-        criteria.add(Restrictions.eq("instiName", instiName.trim()));
+        criteria.add(Restrictions.eq("instiName", instiName));
         @SuppressWarnings("unchecked")
         List<PojoCoopInsti> result = criteria.list();
         if (result == null || result.size() == 0) {
@@ -32,7 +32,7 @@ public class CoopInstiDAOImpl extends HibernateBaseDAOImpl<PojoCoopInsti>
     }
     
     @Override
-    public PojoInstiMK getByInstiCode(String instiCode,
+    public PojoInstiMK getMKByInstiCode(String instiCode,
             TerminalAccessType terminalAccessType) {
         Session session = getSession();
         Criteria criteria = session.createCriteria(PojoInstiMK.class);
@@ -45,5 +45,19 @@ public class CoopInstiDAOImpl extends HibernateBaseDAOImpl<PojoCoopInsti>
             return null;
         }
         return result.get(0);
+    }
+    
+    @Override
+    public PojoCoopInsti get(long id){
+        Session session = getSession();
+        return (PojoCoopInsti)session.get(PojoCoopInsti.class, id);
+    }
+    
+    @SuppressWarnings("unchecked")
+	@Override
+    public List<PojoCoopInsti> getCoopInstiList(){
+    	 Session session = getSession();
+         Criteria criteria = session.createCriteria(PojoCoopInsti.class);
+         return (List<PojoCoopInsti>)criteria.list();
     }
 }
