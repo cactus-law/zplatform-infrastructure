@@ -11,9 +11,9 @@ import com.zlebank.zplatform.acc.exception.AbstractBusiAcctException;
 import com.zlebank.zplatform.commons.utils.BeanCopyUtil;
 import com.zlebank.zplatform.member.bean.Person;
 import com.zlebank.zplatform.member.bean.PersonManager;
-import com.zlebank.zplatform.member.bean.enums.MemberStatusType;
 import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
-import com.zlebank.zplatform.member.bean.enums.SexType;
+import com.zlebank.zplatform.member.bean.enums.MemberStatusType;
+import com.zlebank.zplatform.member.bean.enums.MemberType;
 import com.zlebank.zplatform.member.dao.MemberBaseDAO;
 import com.zlebank.zplatform.member.dao.PersonDAO;
 import com.zlebank.zplatform.member.exception.MemberBussinessException;
@@ -64,7 +64,7 @@ public class PersonServiceImpl implements PersonService {
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
     public String save(Person pers,long userId) throws AbstractBusiAcctException, MemberBussinessException {
-     //验证手机号是否存在
+        //验证手机号是否存在
         if(persondao.getPersonByPhone(pers.getPhone())!=null){
            throw new MemberBussinessException("M100001");
         }
@@ -76,27 +76,21 @@ public class PersonServiceImpl implements PersonService {
        //得到序列
         String memberId=primayService.getNexId(PERSONPARATYPE);
         //开通会计账户
-        memberservice.openBusiAcct(pers.getMembername(), memberId, userId);
+        memberservice.openBusiAcct(pers.getMemberName(), memberId, userId);
         //开通会计账户
         PojoPersonDeta person=BeanCopyUtil.copyBean(PojoPersonDeta.class,pers);
-        person.setMemberid(memberId);
-        person.setpMemberid(memberId);
-        person.setMembertype(BusinessActorType.INDIVIDUAL);
-        person.setBindPhone(pers.getPhone());
+        person.setMemberId(memberId);
+        person.setParentMemberId(memberId);
+        person.setMemberType(MemberType.INDIVIDUAL);
        Date date=new Date();
         person.setIntime(date);
-        person.setInuser(userId);
-        person.setPIntime(date);
-        person.setPInuser(userId);
-        person.setBindEmail(person.getEmail());
-        person.setMemberstat(MemberStatusType.NORMAL);
-        person.setSex(SexType.fromValue(Integer.valueOf(pers.getSex())));
         person.setStatus(MemberStatusType.NORMAL);
+        person.setSex(pers.getSex());
         persondao.merge(person);
         //将信息插入到memberBase
        PojoMemberBase memberBasepo=new PojoMemberBase();
        memberBasepo.setMemberid(memberId);
-       memberBasepo.setMerchname(pers.getMembername());
+       memberBasepo.setMerchname(pers.getMemberName());
        memberBasepo.setMerchtype(BusinessActorType.INDIVIDUAL);
        memberBase.saveA(memberBasepo);
        return memberId;

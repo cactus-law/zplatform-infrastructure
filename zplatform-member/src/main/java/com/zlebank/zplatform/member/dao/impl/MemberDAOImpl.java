@@ -83,4 +83,35 @@ public class MemberDAOImpl extends HibernateBaseDAOImpl<PojoMember>
         return (PojoMember) this.getSession().createCriteria(PojoMember.class)
                 .add(Restrictions.eq("loginame", loginName)).uniqueResult();
     }
+
+    /**
+     *
+     * @param loginName
+     * @param instiCode
+     * @return
+     */
+    @Override
+    public PojoMember getMemberByLoginNameAndCoopInsti(String loginName, String instiCode) {
+        Criteria crite=   this.getSession().createCriteria(PojoMember.class);
+        crite .add(Restrictions.eq("loginName", loginName));
+        crite .add(Restrictions.eq("instiCode", instiCode));
+        PojoMember member = (PojoMember) crite.uniqueResult();
+        return member;
+    }
+
+    /**
+     *
+     * @param phone
+     * @param instiCode
+     * @return
+     */
+    @Override
+    public PojoMember getMemberByPhoneAndCoopInsti(String phone,
+            String instiCode) {
+        Criteria crite=   this.getSession().createCriteria(PojoMember.class);
+        crite .add(Restrictions.eq("phone", phone));
+        crite .add(Restrictions.eq("instiCode", instiCode));
+        PojoMember member = (PojoMember) crite.uniqueResult();
+        return member;
+    }
 }

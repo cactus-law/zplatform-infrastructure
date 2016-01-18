@@ -130,7 +130,7 @@ public class PojoMerchDeta extends PojoMember{
     /**组织机构文件目录**/
     private String orgcodefile;
     /**状态**/
-    private MerchStatusType status;
+    private MerchStatusType merchStatus;
     /**初次业务时间**/
     private Date firsttime;
     /**写入人**/
@@ -360,8 +360,8 @@ public class PojoMerchDeta extends PojoMember{
     }
     @Type(type = "com.zlebank.zplatform.member.pojo.usertype.MerchStatusSqlType")
     @Column(name = "STATUS")
-    public MerchStatusType getStatus() {
-        return status;
+    public MerchStatusType getMerchStatus() {
+        return merchStatus;
     }
     @Column(name = "FIRSTTIME")
     public Date getFirsttime() {
@@ -575,8 +575,8 @@ public class PojoMerchDeta extends PojoMember{
     public void setOrgcodefile(String orgcodefile) {
         this.orgcodefile = orgcodefile;
     }
-    public void setStatus(MerchStatusType status) {
-        this.status = status;
+    public void setMerchStatus(MerchStatusType merchStatus) {
+        this.merchStatus = merchStatus;
     }
     public void setFirsttime(Date firsttime) {
         this.firsttime = firsttime;

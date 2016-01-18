@@ -24,9 +24,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
-import com.zlebank.zplatform.member.bean.enums.LoginType;
 import com.zlebank.zplatform.member.bean.enums.MemberStatusType;
-import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
+import com.zlebank.zplatform.member.bean.enums.MemberType;
 
 /**
  * Class Description
@@ -41,72 +40,96 @@ import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 @Table(name="T_MEMBER")
     
 public  class PojoMember {
-    /**主键标识**/
-    private long memId;
-    /**会员Id**/
-    private String memberid;
-    /**会员姓名**/
-    private String membername;
+    /**"主键，标示**/
+    private long memid;
+    /**会员ID**/
+    private String memberId;
+    /**合作机构**/
+    private String instiCode;
+    /**会员昵称**/
+    private String memberName;
+    /**登录名**/
+    private String loginName;
+    /**登录密码**/
+    private String pwd;
+    /**支付密码**/
+    private String payPwd;
+    /**实名等级，01-未实名，02-姓名+身份证,03-银行卡校验,04-证件审核**/
+    private String realnameLv;
     /**手机**/
     private String phone;
     /**邮箱**/
     private String email;
-    /**会员类型,01-个人,02-商户,03-企业**/
-    private BusinessActorType membertype;
-    /**01未激活，00正常，02系统锁定（冻结）**/
-    private MemberStatusType memberstat;
-    /**1线上手机，2线下手机，3线上邮箱**/
-    private LoginType logintype;
-    /**是否验证邮箱**/
-    private String emailpass;
-    /**是否验证手机**/
-    private String phonepass;
-    /**商户号(暂定=memberid)**/
-    private String merchno;
-    /**个人会员登录用户名**/
-    private String loginame;
-    /**锁定状态**/
-    private String lockstat;
+    /**会员类型，01-个人，02-企业**/
+    private MemberType memberType;
+    /**会员状态，00-正常，02-冻结，99-注销**/
+    private MemberStatusType status;
+    /**注册认证，01-手机认证，02-邮箱认证，03-Both**/
+    private String registerIdent;
     /**锁定时间**/
-    private Date lockdate;
-    /**创建人**/
-    private Long inuser;
-    /**创建时间**/
+    private Date lockTime;
+    /**会员注册时间**/
     private Date intime;
-    /**修改人**/
-    private Long upuser;
     /**修改时间**/
     private Date uptime;
-    /**备注**/
-    private String notes;
-    /**备注**/
-    private String remarks;
-    
     @SequenceGenerator(name="gen",sequenceName="SEQ_T_MERCH_DETA_MERCHID",initialValue=1,allocationSize=1)
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE,generator="gen")
     @Column(name="MEMID" ,nullable=false,unique=true)
-    public long getMemId() {
-        return memId;
+    public long getMemid() {
+        return memid;
     }
-
-    public void setMemId(long memId) {
-        this.memId = memId;
+    public void setMemid(long memid) {
+        this.memid = memid;
     }
-
-    @Column(name = "MEMBERID")
-    public String getMemberid() {
-        return memberid;
+    @Column(name = "MEMBER_ID")
+    public String getMemberId() {
+        return memberId;
     }
-    public void setMemberid(String memberid) {
-        this.memberid = memberid;
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
     }
-    @Column(name = "MEMBERNAME")
-    public String getMembername() {
-        return membername;
+    @Column(name = "INSTI_CODE")
+    public String getInstiCode() {
+        return instiCode;
     }
-    public void setMembername(String membername) {
-        this.membername = membername;
+    public void setInstiCode(String instiCode) {
+        this.instiCode = instiCode;
+    }
+    @Column(name = "MEMBER_NAME")
+    public String getMemberName() {
+        return memberName;
+    }
+    public void setMemberName(String memberName) {
+        this.memberName = memberName;
+    }
+    @Column(name = "LOGIN_NAME")
+    public String getLoginName() {
+        return loginName;
+    }
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
+    }
+    @Column(name = "PWD")
+    public String getPwd() {
+        return pwd;
+    }
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
+    @Column(name = "PAY_PWD")
+    public String getPayPwd() {
+        return payPwd;
+    }
+    public void setPayPwd(String payPwd) {
+        this.payPwd = payPwd;
+    }
+    @Column(name = "REALNAME_LV")
+    public String getRealnameLv() {
+        return realnameLv;
+    }
+    public void setRealnameLv(String realnameLv) {
+        this.realnameLv = realnameLv;
     }
     @Column(name = "PHONE")
     public String getPhone() {
@@ -123,77 +146,34 @@ public  class PojoMember {
         this.email = email;
     }
     @Type(type = "com.zlebank.zplatform.member.pojo.usertype.MemberSqlType")
-    @Column(name = "MEMBERTYPE")
-    public BusinessActorType getMembertype() {
-        return membertype;
+    @Column(name = "MEMBER_TYPE")
+    public MemberType getMemberType() {
+        return memberType;
     }
-    public void setMembertype(BusinessActorType membertype) {
-        this.membertype = membertype;
+    public void setMemberType(MemberType memberType) {
+        this.memberType = memberType;
     }
-    @Column(name = "MEMBERSTAT")
     @Type(type = "com.zlebank.zplatform.member.pojo.usertype.MemberStatusSqlType")
-    public MemberStatusType getMemberstat() {
-        return memberstat;
+    @Column(name = "STATUS")
+    public MemberStatusType getStatus() {
+        return status;
     }
-    public void setMemberstat(MemberStatusType memberstat) {
-        this.memberstat = memberstat;
+    public void setStatus(MemberStatusType status) {
+        this.status = status;
     }
-    @Column(name = "LOGINTYPE")
-    @Type(type = "com.zlebank.zplatform.member.pojo.usertype.LoginSqlType")
-    public LoginType getLogintype() {
-        return logintype;
+    @Column(name = "REGISTER_IDENT")
+    public String getRegisterIdent() {
+        return registerIdent;
     }
-    public void setLogintype(LoginType logintype) {
-        this.logintype = logintype;
+    public void setRegisterIdent(String registerIdent) {
+        this.registerIdent = registerIdent;
     }
-    @Column(name = "EMAILPASS")
-    public String getEmailpass() {
-        return emailpass;
+    @Column(name = "LOCK_TIME")
+    public Date getLockTime() {
+        return lockTime;
     }
-    public void setEmailpass(String emailpass) {
-        this.emailpass = emailpass;
-    }
-    @Column(name = "PHONEPASS")
-    public String getPhonepass() {
-        return phonepass;
-    }
-    public void setPhonepass(String phonepass) {
-        this.phonepass = phonepass;
-    }
-    @Column(name = "MERCHNO")
-    public String getMerchno() {
-        return merchno;
-    }
-    public void setMerchno(String merchno) {
-        this.merchno = merchno;
-    }
-    @Column(name = "LOGINAME")
-    public String getLoginame() {
-        return loginame;
-    }
-    public void setLoginame(String loginame) {
-        this.loginame = loginame;
-    }
-    @Column(name = "LOCKSTAT")
-    public String getLockstat() {
-        return lockstat;
-    }
-    public void setLockstat(String lockstat) {
-        this.lockstat = lockstat;
-    }
-    @Column(name = "LOCKDATE")
-    public Date getLockdate() {
-        return lockdate;
-    }
-    public void setLockdate(Date lockdate) {
-        this.lockdate = lockdate;
-    }
-    @Column(name = "INUSER")
-    public Long getInuser() {
-        return inuser;
-    }
-    public void setInuser(Long inuser) {
-        this.inuser = inuser;
+    public void setLockTime(Date lockTime) {
+        this.lockTime = lockTime;
     }
     @Column(name = "INTIME")
     public Date getIntime() {
@@ -202,13 +182,6 @@ public  class PojoMember {
     public void setIntime(Date intime) {
         this.intime = intime;
     }
-    @Column(name = "UPUSER")
-    public Long getUpuser() {
-        return upuser;
-    }
-    public void setUpuser(Long upuser) {
-        this.upuser = upuser;
-    }
     @Column(name = "UPTIME")
     public Date getUptime() {
         return uptime;
@@ -216,18 +189,5 @@ public  class PojoMember {
     public void setUptime(Date uptime) {
         this.uptime = uptime;
     }
-    @Column(name = "NOTES")
-    public String getNotes() {
-        return notes;
-    }
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-    @Column(name = "REMARKS")
-    public String getRemarks() {
-        return remarks;
-    }
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
-    }
+
 }

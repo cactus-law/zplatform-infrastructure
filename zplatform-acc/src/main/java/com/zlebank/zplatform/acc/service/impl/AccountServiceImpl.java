@@ -47,8 +47,6 @@ import com.zlebank.zplatform.member.bean.BusinessActor;
 @Service
 public class AccountServiceImpl implements AccountService {
 
-
-
     @Autowired
     private AccountDAO accountDAO;
 
@@ -181,4 +179,14 @@ public class AccountServiceImpl implements AccountService {
         sb.append(member.getBusinessActorId());
         return sb.toString();
     }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public Account getAccountBalanceById(long accountId) {
+        Account rtn = new Account();
+        PojoAccount pojoAccount = accountDAO.get(accountId);
+        rtn.setBalance(pojoAccount.getBalance());
+        return rtn;
+    }
+    
+    
 }

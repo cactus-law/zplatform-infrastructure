@@ -106,7 +106,7 @@ public class QueryMerchant extends RawAbstractProcessor {
             return res;
         } else {
 
-            rtnMemberId = merch.getMemberid();
+            rtnMemberId = merch.getMemberId();
 
             // 返回报文【应答码】
             res.setResCode(SUCCESS_CODE);
@@ -114,7 +114,7 @@ public class QueryMerchant extends RawAbstractProcessor {
             res.setResDes(SUCCESS_DES);
             // 返回报文【二级商户号】
             res.setObject("minorMerchNo", rtnMemberId);
-            res.setObject("status", merch.getMemberstat().getCode());
+            res.setObject("status", merch.getMerchStatus().getCode());
         }
         return res;
     }

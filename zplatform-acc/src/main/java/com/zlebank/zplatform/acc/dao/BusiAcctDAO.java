@@ -43,4 +43,12 @@ public interface BusiAcctDAO extends BaseDAO<PojoBusiAcct>{
     
     public List<PojoBusiAcct> getAllbusiByMid(String memberId);
     
+    /**
+     *  通过会员ID 和 用途 得到业务账户
+     * @param usage
+     * @param memberId
+     * @return
+     * @throws BusiAcctNotExistException 
+     */
+    public String getBusiCode(Usage usage, String memberId) throws BusiAcctNotExistException;
     }

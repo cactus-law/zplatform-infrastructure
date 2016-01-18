@@ -195,4 +195,11 @@ public class BusiAcctServiceImpl implements BusiAcctService {
         long accountId = busiAcctDAO.getAccount(usage, memberId);
         return accountId;
     }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public String getBusiCodeByMemberId(Usage usage, String memberId)
+            throws AbstractBusiAcctException {
+        return busiAcctDAO.getBusiCode(usage, memberId);
+    }
 }

@@ -10,6 +10,7 @@
  */
 package com.zlebank.zplatform.member.pojo;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -17,7 +18,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
-import com.zlebank.zplatform.member.bean.enums.MemberStatusType;
 import com.zlebank.zplatform.member.bean.enums.SexType;
 
 /**
@@ -33,93 +33,54 @@ import com.zlebank.zplatform.member.bean.enums.SexType;
 @Table(name="T_PERSON_DETA")
 public class PojoPersonDeta extends PojoMember{
     /**会员ID**/
-    private String pMemberid;
-    /**支付密码**/
-    private String payPwd;
-    /**登录密码**/
-    private String loginPwd;
+    private String parentMemberId;
     /**性别**/
     private SexType sex;
-    /**QQ号**/
-    private String qq;
-    /**省**/
-    private Long province;
-    /**城市**/
-    private Long city;
-    /**街道**/
-    private Long street;
-    /**详细地址**/
-    private String adress;
-    /**邮编**/
-    private String postcode;
-    /**生日**/
-    private Date birthday;
-    /**证件类型**/
-    private String cardtype;
-    /**证件号码**/
-    private String cardno;
     /**固定电话**/
     private String telno;
     /**传真号码**/
     private String faxno;
+    /**等级Id**/
+    private String gradeId;
     /**微信**/
     private String wechat;
+    /**QQ号**/
+    private String qq;
     /**微博**/
-    private String microblog;
-    /**最后登录**/
-    private Date lastLoginTime;
-    /**最后登出**/
-    private Date lastLogoutTime;
-    /**最后登录ip**/
-    private String lastRemoteHost;
-    /**最后登录地址**/
-    private String lastRemoteAddress;
-    /**最后登录代理**/
-    private String lastRemoteAgent;
-    /**安全问题**/
-    private String securityQues;
-    /**安全问题答案**/
-    private String securityAnswer;
-    /**问候**/
-    private String greeting;
-    /**等级Id**/
-    private Long gradeId;
-    /**状态99停用，**/
-    private MemberStatusType status;
-    /**绑定电话**/
-    private String bindPhone;
-    /**绑定邮箱**/
-    private String bindEmail;
-    /**写入人**/
-    private Long pInuser;
+    private String weibo;
+    /**省**/
+    private String province;
+    /**城市**/
+    private String city;
+    /**街道**/
+    private String street;
+    /**详细地址**/
+    private String address;
+    /**生日**/
+    private String birthday;
+    /**安全问题1**/
+    private String question1;
+    /**安全问题答案1**/
+    private String answer1;
+    /**安全问题2**/
+    private String question2;
+    /**安全问题答案2**/
+    private String answer2;
+    /**安全问题3**/
+    private String question3;
+    /**安全问题答案3**/
+    private String answer3;
     /**写入时间**/
-    private Date pIntime;
-    /**更新人**/
-    private Long upuser;
+    private Date intime;
     /**更新时间**/
     private Date uptime;
-    /**是否vip**/
-    private Long vipflag;
-    /**备注**/
-    private String notes;
-    /**备注**/
-    private String remarks;
- 
    
-
-    @Column(name = "PAY_PWD")
-    public String getPayPwd() {
-        return payPwd;
+    @Column(name = "MEMBER_ID")
+    public String getParentMemberId() {
+        return parentMemberId;
     }
-    public void setPayPwd(String payPwd) {
-        this.payPwd = payPwd;
-    }
-    @Column(name = "LOGIN_PWD")
-    public String getLoginPwd() {
-        return loginPwd;
-    }
-    public void setLoginPwd(String loginPwd) {
-        this.loginPwd = loginPwd;
+    public void setParentMemberId(String parentMemberId) {
+        this.parentMemberId = parentMemberId;
     }
     @Type(type = "com.zlebank.zplatform.member.pojo.usertype.SexSqlType")
     @Column(name = "SEX")
@@ -128,69 +89,6 @@ public class PojoPersonDeta extends PojoMember{
     }
     public void setSex(SexType sex) {
         this.sex = sex;
-    }
-    @Column(name = "QQ")
-    public String getQq() {
-        return qq;
-    }
-    public void setQq(String qq) {
-        this.qq = qq;
-    }
-    @Column(name = "PROVINCE")
-    public Long getProvince() {
-        return province;
-    }
-    public void setProvince(Long province) {
-        this.province = province;
-    }
-    @Column(name = "CITY")
-    public Long getCity() {
-        return city;
-    }
-    public void setCity(Long city) {
-        this.city = city;
-    }
-    @Column(name = "STREET")
-    public Long getStreet() {
-        return street;
-    }
-    public void setStreet(Long street) {
-        this.street = street;
-    }
-    @Column(name = "ADRESS")
-    public String getAdress() {
-        return adress;
-    }
-    public void setAdress(String adress) {
-        this.adress = adress;
-    }
-    @Column(name = "POSTCODE")
-    public String getPostcode() {
-        return postcode;
-    }
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
-    }
-    @Column(name = "BIRTHDAY")
-    public Date getBirthday() {
-        return birthday;
-    }
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-    @Column(name = "CARDTYPE")
-    public String getCardtype() {
-        return cardtype;
-    }
-    public void setCardtype(String cardtype) {
-        this.cardtype = cardtype;
-    }
-    @Column(name = "CARDNO")
-    public String getCardno() {
-        return cardno;
-    }
-    public void setCardno(String cardno) {
-        this.cardno = cardno;
     }
     @Column(name = "TELNO")
     public String getTelno() {
@@ -206,6 +104,13 @@ public class PojoPersonDeta extends PojoMember{
     public void setFaxno(String faxno) {
         this.faxno = faxno;
     }
+    @Column(name = "GRADE_ID")
+    public String getGradeId() {
+        return gradeId;
+    }
+    public void setGradeId(String gradeId) {
+        this.gradeId = gradeId;
+    }
     @Column(name = "WECHAT")
     public String getWechat() {
         return wechat;
@@ -213,118 +118,103 @@ public class PojoPersonDeta extends PojoMember{
     public void setWechat(String wechat) {
         this.wechat = wechat;
     }
-    @Column(name = "MICROBLOG")
-    public String getMicroblog() {
-        return microblog;
+    @Column(name = "QQ")
+    public String getQq() {
+        return qq;
     }
-    public void setMicroblog(String microblog) {
-        this.microblog = microblog;
+    public void setQq(String qq) {
+        this.qq = qq;
     }
-    @Column(name = "LAST_LOGIN_TIME")
-    public Date getLastLoginTime() {
-        return lastLoginTime;
+    @Column(name = "WEIBO")
+    public String getWeibo() {
+        return weibo;
     }
-    public void setLastLoginTime(Date lastLoginTime) {
-        this.lastLoginTime = lastLoginTime;
+    public void setWeibo(String weibo) {
+        this.weibo = weibo;
     }
-    @Column(name = "LAST_LOGOUT_TIME")
-    public Date getLastLogoutTime() {
-        return lastLogoutTime;
+    @Column(name = "PROVINCE")
+    public String getProvince() {
+        return province;
     }
-    public void setLastLogoutTime(Date lastLogoutTime) {
-        this.lastLogoutTime = lastLogoutTime;
+    public void setProvince(String province) {
+        this.province = province;
     }
-    @Column(name = "LAST_REMOTE_HOST")
-    public String getLastRemoteHost() {
-        return lastRemoteHost;
+    @Column(name = "CITY")
+    public String getCity() {
+        return city;
     }
-    public void setLastRemoteHost(String lastRemoteHost) {
-        this.lastRemoteHost = lastRemoteHost;
+    public void setCity(String city) {
+        this.city = city;
     }
-    @Column(name = "LAST_REMOTE_ADDRESS")
-    public String getLastRemoteAddress() {
-        return lastRemoteAddress;
+    @Column(name = "STREET")
+    public String getStreet() {
+        return street;
     }
-    public void setLastRemoteAddress(String lastRemoteAddress) {
-        this.lastRemoteAddress = lastRemoteAddress;
+    public void setStreet(String street) {
+        this.street = street;
     }
-    @Column(name = "LAST_REMOTE_AGENT")
-    public String getLastRemoteAgent() {
-        return lastRemoteAgent;
+    @Column(name = "ADDRESS")
+    public String getAddress() {
+        return address;
     }
-    public void setLastRemoteAgent(String lastRemoteAgent) {
-        this.lastRemoteAgent = lastRemoteAgent;
+    public void setAddress(String address) {
+        this.address = address;
     }
-    @Column(name = "SECURITY_QUES")
-    public String getSecurityQues() {
-        return securityQues;
+    @Column(name = "BIRTHDAY")
+    public String getBirthday() {
+        return birthday;
     }
-    public void setSecurityQues(String securityQues) {
-        this.securityQues = securityQues;
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
-    @Column(name = "SECURITY_ANSWER")
-    public String getSecurityAnswer() {
-        return securityAnswer;
+    @Column(name = "QUESTION1")
+    public String getQuestion1() {
+        return question1;
     }
-    public void setSecurityAnswer(String securityAnswer) {
-        this.securityAnswer = securityAnswer;
+    public void setQuestion1(String question1) {
+        this.question1 = question1;
     }
-    @Column(name = "GREETING")
-    public String getGreeting() {
-        return greeting;
+    @Column(name = "ANSWER1")
+    public String getAnswer1() {
+        return answer1;
     }
-    public void setGreeting(String greeting) {
-        this.greeting = greeting;
+    public void setAnswer1(String answer1) {
+        this.answer1 = answer1;
     }
-    @Column(name = "GRADE_ID")
-    public Long getGradeId() {
-        return gradeId;
+    @Column(name = "QUESTION2")
+    public String getQuestion2() {
+        return question2;
     }
-    public void setGradeId(Long gradeId) {
-        this.gradeId = gradeId;
+    public void setQuestion2(String question2) {
+        this.question2 = question2;
     }
-    @Column(name = "STATUS")
-    @Type(type = "com.zlebank.zplatform.member.pojo.usertype.MemberStatusSqlType")
-    public MemberStatusType getStatus() {
-        return status;
+    @Column(name = "ANSWER2")
+    public String getAnswer2() {
+        return answer2;
     }
-    public void setStatus(MemberStatusType status) {
-        this.status = status;
+    public void setAnswer2(String answer2) {
+        this.answer2 = answer2;
     }
-    @Column(name = "BIND_PHONE")
-    public String getBindPhone() {
-        return bindPhone;
+    @Column(name = "QUESTION3")
+    public String getQuestion3() {
+        return question3;
     }
-    public void setBindPhone(String bindPhone) {
-        this.bindPhone = bindPhone;
+    public void setQuestion3(String question3) {
+        this.question3 = question3;
     }
-    @Column(name = "BIND_EMAIL")
-    public String getBindEmail() {
-        return bindEmail;
+    @Column(name = "ANSWER3")
+    public String getAnswer3() {
+        return answer3;
     }
-    public void setBindEmail(String bindEmail) {
-        this.bindEmail = bindEmail;
-    }
-    @Column(name = "INUSER")
-    public Long getPInuser() {
-        return pInuser;
-    }
-    public void setPInuser(Long inuser) {
-        this.pInuser = inuser;
+    public void setAnswer3(String answer3) {
+        this.answer3 = answer3;
     }
     @Column(name = "INTIME")
-    public Date getPIntime() {
-        return pIntime;
+    public Date getIntime() {
+        return intime;
     }
-    public void setPIntime(Date intime) {
-        this.pIntime = intime;
-    }
-    @Column(name = "UPUSER")
-    public Long getUpuser() {
-        return upuser;
-    }
-    public void setUpuser(Long upuser) {
-        this.upuser = upuser;
+    public void setIntime(Date intime) {
+        this.intime = intime;
     }
     @Column(name = "UPTIME")
     public Date getUptime() {
@@ -333,34 +223,5 @@ public class PojoPersonDeta extends PojoMember{
     public void setUptime(Date uptime) {
         this.uptime = uptime;
     }
-    @Column(name = "VIPFLAG")
-    public Long getVipflag() {
-        return vipflag;
-    }
-    public void setVipflag(Long vipflag) {
-        this.vipflag = vipflag;
-    }
-    @Column(name = "NOTES")
-    public String getNotes() {
-        return notes;
-    }
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-    @Column(name = "REMARKS")
-    public String getRemarks() {
-        return remarks;
-    }
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
-    }
-    @Column(name = "MEMBERID")
-    public String getpMemberid() {
-        return pMemberid;
-    }
-    public void setpMemberid(String pMemberid) {
-        this.pMemberid = pMemberid;
-    }
- 
 
 }

@@ -49,9 +49,9 @@ public class personserviceTest {
     public void test() throws AbstractBusiAcctException, MemberBussinessException {
         Person p=new Person();
         p.setEmail("316237459@qq.com");
-        p.setLoginame("yangyongpeng");
-        p.setLoginPwd("asdfasdf1");
-        p.setMembername("杨鹏");
+        p.setLoginName("yangyongpeng");
+        p.setPwd("asdfasdf1");
+        p.setMemberName("杨鹏");
         p.setPhone("13718738633");
       personservice.save(p,22L);
         }

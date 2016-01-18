@@ -105,11 +105,11 @@ public class Sign extends RawAbstractProcessor {
                 return res;
             }
     
-            PojoMemberEntranceInfo entInfo = memberEntranceInfoDAO.getByMemberId(member.getMemberid());
+            PojoMemberEntranceInfo entInfo = memberEntranceInfoDAO.getByMemberId(member.getMemberId());
             // 如果已经签到则更新信息，如果没有签到则插入一条记录。
             if (entInfo == null) {
               PojoMemberEntranceInfo memberEntInfo = new PojoMemberEntranceInfo();
-              memberEntInfo.setMemberId(member.getMemberid());// 会员号
+              memberEntInfo.setMemberId(member.getMemberId());// 会员号
               memberEntInfo.setEntranceStatus(EntranceStatus.SIGNED);// 接入状态
               memberEntInfo.setLastSignTime(new Date());// 最后签到时间
               memberEntInfo.setSignCount(1L);// 签到次数

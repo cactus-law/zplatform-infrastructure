@@ -21,6 +21,7 @@ import com.zlebank.zplatform.commons.utils.RegExpValidatorUtil;
 import com.zlebank.zplatform.commons.utils.StringUtil;
 import com.zlebank.zplatform.member.bean.MerchMK;
 import com.zlebank.zplatform.member.bean.Person;
+import com.zlebank.zplatform.member.bean.enums.SexType;
 import com.zlebank.zplatform.member.dao.MemberDAO;
 import com.zlebank.zplatform.member.exception.MemberBussinessException;
 import com.zlebank.zplatform.member.service.MerchMKService;
@@ -118,16 +119,16 @@ public class OpenPerson   extends RawAbstractProcessor{
         }
 
         p.setEmail(email);
-        p.setLoginame(loginName);
+        p.setLoginName(loginName);
         p.setPhone(phone);
-        p.setMembername(name);
+        p.setMemberName(name);
         // 得到密钥信息
         MerchMK mk = mkService.get(merchNo);
         try {
             // 平台私钥解密
             String merchPwd = new String(RSAUtils.decryptByPrivateKey(Base64Utils.decode(loginPwd), mk.getLocalPriKey()));
             // MD5保存
-            p.setLoginPwd(Md5.getInstance().md5s(merchPwd));
+            p.setPwd(Md5.getInstance().md5s(merchPwd));
         } catch (Exception e1) {
             e1.printStackTrace();
             // 返回报文【应答码】
@@ -137,9 +138,9 @@ public class OpenPerson   extends RawAbstractProcessor{
             return res;
         }
         if ("M".equals(gendel))
-            p.setSex("1");
+            p.setSex(SexType.MALE);
         if ("F".equals(gendel))
-            p.setSex("0");
+            p.setSex(SexType.FEMALE);
         try {
             // 开通会员
             rtnMemberId = person.save(p, 0L);

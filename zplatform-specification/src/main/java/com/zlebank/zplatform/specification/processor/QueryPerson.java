@@ -109,7 +109,7 @@ public class QueryPerson   extends RawAbstractProcessor{
       // 返回报文【应答码描述】
       res.setResDes(SUCCESS_DES);
       // 返回报文【个人会员号】
-      res.setObject("memberId", person.getMemberid());
+      res.setObject("memberId", person.getMemberId());
       // 返回报文【个人会员状态】
       res.setObject("status", person.getStatus() == null ? "" : person.getStatus().getCode());
       

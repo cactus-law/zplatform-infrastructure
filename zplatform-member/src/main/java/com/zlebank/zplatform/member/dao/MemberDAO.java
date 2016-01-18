@@ -51,4 +51,18 @@ public interface MemberDAO extends BaseDAO<PojoMember> {
          * @return PojoMember
          */
         public PojoMember getMemberByLoginName(String loginName);
+        /**
+         * 通过登陆名和合作机构得到会员信息
+         * @param loginName
+         * @param phone
+         * @return 
+         */
+        public PojoMember getMemberByLoginNameAndCoopInsti(String loginName, String instiCode);
+        /**
+         * 通过手机号和合作机构得到会员信息
+         * @param loginName
+         * @param phone
+         * @return 
+         */
+        public PojoMember getMemberByPhoneAndCoopInsti(String phone, String instiCode);
 }

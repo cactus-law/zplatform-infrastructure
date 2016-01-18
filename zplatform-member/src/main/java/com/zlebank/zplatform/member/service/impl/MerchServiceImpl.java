@@ -85,16 +85,14 @@ public class MerchServiceImpl implements MerchService {
             String memberId=primayService.getNexId(MERCHPARATYPE);
            Date date=new Date();
             merchPo.setIntime(date);
-            merchPo.setInuser(userId);
             merchPo.setmIntime(date);
             merchPo.setmInuser(userId);
-            merchPo.setMemberid(memberId);
+            merchPo.setMemberId(memberId);
             merchPo.setDateMemberid(memberId);
-           merchPo.setMembertype(BusinessActorType.ENTERPRISE);
             merchPo.setPhone(merchPo.getContphone());
-            merchPo.setMembername(merchPo.getMerchname());
-            merchPo.setStatus(MerchStatusType.NORMAL);
-            merchPo.setMemberstat(MemberStatusType.NORMAL);
+            merchPo.setMemberName(merchPo.getMerchname());
+            merchPo.setMerchStatus(MerchStatusType.NORMAL);
+            merchPo.setStatus(MemberStatusType.NORMAL);
             merchDao.saveA(merchPo);
             //开通会计账户
             memberservice.openBusiAcct(merchPo.getMerchname(), memberId, userId);

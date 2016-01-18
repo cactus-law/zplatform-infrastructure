@@ -62,6 +62,15 @@ public interface BusiAcctService {
      * @throws AbstractBusiAcctException
      *             If business account is not exist 
      */
-    long getAccountId(Usage usage, String memberId)
-            throws AbstractBusiAcctException;
+    long getAccountId(Usage usage, String memberId) throws AbstractBusiAcctException;
+    
+    /**
+     * 通过 会员ID 和 用途 得到 业务账户
+     * @param usage
+     * @param memberId
+     * @return account code
+     * @throws AbstractBusiAcctException
+     *             If business account is not exist 
+     */
+    String getBusiCodeByMemberId(Usage usage, String memberId) throws AbstractBusiAcctException;
 }
