@@ -6,6 +6,7 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.zlebank.zplatform.commons.dao.impl.HibernateBaseDAOImpl;
 import com.zlebank.zplatform.member.dao.ParaDicDAO;
@@ -42,16 +43,11 @@ public class ParaDicDAOImpl extends HibernateBaseDAOImpl<PojoParaDic>
      * @throws MemberBussinessException
      */
     @Override
-    public PojoParaDic getPrimay(String paraType)
-            throws MemberBussinessException {
+    public PojoParaDic getPrimay(String paraType)  {
         Criteria crite = getSession().createCriteria(PojoParaDic.class);
-        try {
             PojoParaDic primay = (PojoParaDic) crite.add(
                     Restrictions.eq("paraType", paraType)).uniqueResult();
             return primay;
-        } catch (Exception e) {
-            throw new MemberBussinessException("M100003");
-        }
     }
     /**
      * 得到序列
@@ -63,4 +59,15 @@ public class ParaDicDAOImpl extends HibernateBaseDAOImpl<PojoParaDic>
          return  this.getSession().createSQLQuery(" SELECT "+sequences+".NEXTVAL FROM DUAL")
            .setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP).list();
        }
+     /**
+      * 获取一个序列的下一个值
+      *
+      * @param sequences
+      * @return
+      */
+     @Transactional
+     public String getSeqNextval(String sequences){
+         return  this.getSession().createSQLQuery("SELECT "+sequences+".NEXTVAL FROM DUAL")
+                 .uniqueResult().toString();
+     }
 }

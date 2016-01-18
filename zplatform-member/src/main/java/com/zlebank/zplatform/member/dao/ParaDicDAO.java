@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.zlebank.zplatform.commons.dao.BaseDAO;
-import com.zlebank.zplatform.member.exception.MemberBussinessException;
 import com.zlebank.zplatform.member.pojo.PojoParaDic;
 
 /**
@@ -26,6 +25,7 @@ import com.zlebank.zplatform.member.pojo.PojoParaDic;
  * @since 
  */
 public interface ParaDicDAO extends BaseDAO<PojoParaDic>{
-        public PojoParaDic getPrimay(String paraType)throws MemberBussinessException;
+        public PojoParaDic getPrimay(String paraType);
         public List<Map<String, Object>> getSeq(String sequences);
+        public String getSeqNextval(String sequences);
 }

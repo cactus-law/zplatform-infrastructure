@@ -41,10 +41,10 @@ public class MappingTableSubjectSelector implements SubjectSelector {
     
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public Subject select(BusinessActor member, BusiAcct busiAcct)
+    public Subject select(BusinessActor busiActor, BusiAcct busiAcct)
             throws BusiAcctToSubjectMappingNullException {
         PojoBusiAcctSubjectMapping mappingQueryCondition = new PojoBusiAcctSubjectMapping(); 
-        mappingQueryCondition.setBusinessActorType(member.getBusinessActorType());
+        mappingQueryCondition.setBusinessActorType(busiActor.getBusinessActorType());
         mappingQueryCondition.setUsage(busiAcct.getUsage()); 
         PojoSubject pojoSubject = busiToAcctSubjectMappingDAO.queryByConditions(mappingQueryCondition);
         if(pojoSubject == null){

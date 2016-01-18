@@ -34,7 +34,9 @@
 				<value>com.zlebank.zplatform.member.pojo.PojoParaDic</value>
 				<value>com.zlebank.zplatform.member.pojo.PojoAutonymIdenti</value>
 				<value>com.zlebank.zplatform.member.pojo.PojoQuickpayCust</value>
-
+				<value>com.zlebank.zplatform.member.pojo.PojoCoopInsti</value>
+				<value>com.zlebank.zplatform.member.pojo.PojoInstiMK</value>
+				<value>com.zlebank.zplatform.commons.dao.pojo.ProductModel</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

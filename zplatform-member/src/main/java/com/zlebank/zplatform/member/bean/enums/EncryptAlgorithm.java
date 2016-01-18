@@ -12,8 +12,11 @@ public enum EncryptAlgorithm {
     }
 
     public static EncryptAlgorithm fromValue(String algName) {
+        if(algName==null){
+            return UNKNOW;
+        }
         for (EncryptAlgorithm encryptAlgorithm : EncryptAlgorithm.values()) {
-            if (encryptAlgorithm.getAlgName() == algName) {
+            if (encryptAlgorithm.getAlgName().equals(algName)) {
                 return encryptAlgorithm;
             }
         }

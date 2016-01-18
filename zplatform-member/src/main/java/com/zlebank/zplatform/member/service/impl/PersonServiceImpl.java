@@ -46,7 +46,7 @@ import com.zlebank.zplatform.member.service.PrimayKeyService;
 @Service
 public class PersonServiceImpl implements PersonService {
    /**个人生成memberID规则**/
-    private final static String PERSONPARATYPE="PERSONBIN";
+    private final static String INDIPARATYPE="INDIBIN";
     @Autowired
     private PersonDAO persondao;
     @Autowired
@@ -74,7 +74,7 @@ public class PersonServiceImpl implements PersonService {
          }
 
        //得到序列
-        String memberId=primayService.getNexId(PERSONPARATYPE);
+        String memberId=primayService.getNexId(INDIPARATYPE);
         //开通会计账户
         memberservice.openBusiAcct(pers.getMemberName(), memberId, userId);
         //开通会计账户
