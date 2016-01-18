@@ -37,6 +37,7 @@ import com.zlebank.zplatform.member.exception.DataCheckFailedException;
 import com.zlebank.zplatform.member.exception.InvalidMemberDataException;
 import com.zlebank.zplatform.member.exception.LoginFailedException;
 import com.zlebank.zplatform.member.exception.MemberBussinessException;
+import com.zlebank.zplatform.member.exception.PrimaykeyGeneratedException;
 import com.zlebank.zplatform.member.pojo.PojoMember;
 import com.zlebank.zplatform.member.pojo.PojoPersonDeta;
 import com.zlebank.zplatform.member.service.MemberOperationService;
@@ -53,11 +54,13 @@ import com.zlebank.zplatform.member.service.PrimayKeyService;
  */
 @Service
 public class MemberOperationServiceImpl implements MemberOperationService {
-
+    
     private Log log = LogFactory.getLog(MemberOperationServiceImpl.class);
 
     private final static String PERSONPARATYPE="INDIBIN";// 个人会员
     private final static String MERCHPARATYPE="MERCHBIN";// 企业会员
+    
+    private final static String MEMBER_IDSEQUENCES = "seq_t_merch_deta_memberid";// 会员号生成用序列
 
     @Autowired
     private MemberService memberService;
@@ -151,8 +154,8 @@ public class MemberOperationServiceImpl implements MemberOperationService {
         // 个人会员开通
         if (MemberType.INDIVIDUAL == memberType && bean instanceof Person) {
             try {
-                memberId = primayService.getNexId(PERSONPARATYPE);
-            } catch (MemberBussinessException e) {
+                memberId = primayService.getNexId(PERSONPARATYPE, MEMBER_IDSEQUENCES);
+            } catch (PrimaykeyGeneratedException e) {
                 log.error(e.getMessage(), e);
             }
             if (StringUtil.isEmpty(memberId)) {
@@ -191,8 +194,8 @@ public class MemberOperationServiceImpl implements MemberOperationService {
         // 企业会员
         if (MemberType.ENTERPRISE == memberType) {
             try {
-                memberId = primayService.getNexId(MERCHPARATYPE);
-            } catch (MemberBussinessException e) {
+                memberId = primayService.getNexId(MERCHPARATYPE, MEMBER_IDSEQUENCES);
+            } catch (PrimaykeyGeneratedException e) {
                 log.error(e.getMessage(), e);
             }
             if (StringUtil.isEmpty(memberId)) {

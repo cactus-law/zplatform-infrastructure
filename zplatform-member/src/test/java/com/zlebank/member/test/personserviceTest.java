@@ -56,6 +56,7 @@ public class personserviceTest {
       personservice.save(p,22L);
         }
     
+    @SuppressWarnings("deprecation")
     @Test
     @Ignore
      public void tests() throws MemberBussinessException{

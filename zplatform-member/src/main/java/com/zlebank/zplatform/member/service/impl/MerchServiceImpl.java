@@ -82,6 +82,7 @@ public class MerchServiceImpl implements MerchService {
             merchPo.setRoutver(merch.getRoutver());
             merchPo.setCashver(merch.getCashver());
             //得到序列
+            @SuppressWarnings("deprecation")
             String memberId=primayService.getNexId(MERCHPARATYPE);
            Date date=new Date();
             merchPo.setIntime(date);

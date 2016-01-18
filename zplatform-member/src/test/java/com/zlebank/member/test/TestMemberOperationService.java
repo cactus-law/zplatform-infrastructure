@@ -41,11 +41,11 @@ public class TestMemberOperationService {
         ac = ApplicationContextUtil.get();
         memberOperationService =  (MemberOperationService) ac.getBean("memberOperationServiceImpl");
     }
-//    @Test
+    @Test
     public void registMemberTest() {
         MemberBean member = new Person();
-        member.setLoginName("luxiaoshuai");
-        member.setPhone("13426342943");
+        member.setLoginName("luxiaoshuai2");
+        member.setPhone("13426342944");
         member.setPwd("abc123");
         member.setInstiCode("300000000000027");
         try {
@@ -73,7 +73,7 @@ public class TestMemberOperationService {
     /**
      * 设置支付密码
      */
-    @Test
+//    @Test
     public void verifyPayPwdTest() {
         MemberBean member = new Person();
         member.setLoginName("luxiaoshuai");

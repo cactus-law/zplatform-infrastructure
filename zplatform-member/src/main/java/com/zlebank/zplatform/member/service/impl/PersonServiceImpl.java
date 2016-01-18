@@ -74,6 +74,7 @@ public class PersonServiceImpl implements PersonService {
          }
 
        //得到序列
+        @SuppressWarnings("deprecation")
         String memberId=primayService.getNexId(INDIPARATYPE);
         //开通会计账户
         memberservice.openBusiAcct(pers.getMemberName(), memberId, userId);

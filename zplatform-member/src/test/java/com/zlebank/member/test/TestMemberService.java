@@ -45,6 +45,7 @@ public class TestMemberService {
     /**
      * 开通【个人会员】会员账户（业务账户和会计账户）
      */
+    @SuppressWarnings("deprecation")
     public void openBusiAcctTest() {
         long userId=99;
         String memberId="";
@@ -68,6 +69,7 @@ public class TestMemberService {
     /**
      * 开通【企业会员】会员账户（业务账户和会计账户）
      */
+    @SuppressWarnings("deprecation")
     public void openEnterpriseAcctTest() {
         long userId=99;
         String memberId="";
@@ -90,6 +92,7 @@ public class TestMemberService {
     /**
      * 开通【合作机构】账户（业务账户和会计账户）
      */
+    @SuppressWarnings("deprecation")
     @Test
     public void openCoopInstiTest() {
         long userId=99;
