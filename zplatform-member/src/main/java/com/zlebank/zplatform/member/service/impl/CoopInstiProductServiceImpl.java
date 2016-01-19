@@ -1,7 +1,9 @@
 package com.zlebank.zplatform.member.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -28,6 +30,13 @@ public class CoopInstiProductServiceImpl implements CoopInstiProductService {
 		if (coopInsti == null) {
 			throw new CoopInstiNotExistException(coopInstiId);
 		}
-		return coopInsti.getProducts();
+		List<ProductModel> productSourceList = coopInsti.getProducts();
+		List<ProductModel> productTargetList = new ArrayList<ProductModel>();
+		for(ProductModel copyFrom:productSourceList){
+			ProductModel copyTo = new ProductModel();
+			BeanUtils.copyProperties(copyFrom, copyTo);
+			productTargetList.add(copyTo);
+		}
+		return productTargetList;
 	}
 }

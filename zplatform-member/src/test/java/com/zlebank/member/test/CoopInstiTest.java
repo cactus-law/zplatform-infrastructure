@@ -63,7 +63,6 @@ public class CoopInstiTest {
 	}
 
 	@Test
-	@Ignore
 	public void testGetCoopProduct() {
 		CoopInstiProductService coopInstiService = (CoopInstiProductService) context
 				.getBean("coopInstiProductServiceImpl");
