@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import com.zlebank.zplatform.acc.bean.AccEntry;
 import com.zlebank.zplatform.acc.bean.Account;
+import com.zlebank.zplatform.acc.bean.QueryBusiCodeInfo;
 import com.zlebank.zplatform.acc.bean.enums.CRDRType;
 import com.zlebank.zplatform.acc.bean.enums.Usage;
 import com.zlebank.zplatform.acc.exception.AbstractBusiAcctException;
@@ -81,14 +82,15 @@ public class MemberAccountServiceImpl implements MemberAccountService {
             throw new DataCheckFailedException("会员号不可为空");
         }
         try {
-            long acctId = busiAcctService.getAccountId(usage, member.getMemberId());
-            String acctCode = busiAcctService.getBusiCodeByMemberId(usage, member.getMemberId());
-
-            Account accountBalanceById = accountService.getAccountBalanceById(acctId);
+            // 取相关的业务信息
+            QueryBusiCodeInfo busiInfo = busiAcctService.getBusiCodeByMemberId(usage, member.getMemberId());
+            // 取会计账户信息
+            Account accountBalanceById = accountService.getAccountBalanceById(busiInfo.getAcctId());
+            // 准备返回结果
             MemberAccountBean mbb = new MemberAccountBean();
             mbb.setBalance(accountBalanceById.getBalance().getAmount());
             mbb.setStatus(accountBalanceById.getStatus());
-            mbb.setBusiCode(acctCode);
+            mbb.setBusiCode(busiInfo.getBusiCode());
             mbb.setUsage(usage);
             return mbb;
         } catch (AbstractBusiAcctException e) {
@@ -111,19 +113,25 @@ public class MemberAccountServiceImpl implements MemberAccountService {
             MemberBean member,
             int page,
             int pageSize) throws GetAccountFailedException {
+        if(log.isDebugEnabled()){
+            log.debug("参数1："+JSONObject.fromObject(memberType));
+            log.debug("参数2："+JSONObject.fromObject(member));
+            log.debug("参数3："+page);
+            log.debug("参数4："+pageSize);
+        }
         // 返回值准备
         List<MemberBalanceDetailBean> rtnList;
         long rtnCount;
         MemberQuery queryCondition = new MemberQuery();
         // 取业务账户
-        String busiCode;
+        QueryBusiCodeInfo busiCode;
         try {
             busiCode = busiAcctService.getBusiCodeByMemberId(Usage.BASICPAY, member.getMemberId());
         } catch (AbstractBusiAcctException e) {
             log.error(e.getMessage(), e);
             throw new GetAccountFailedException(e.getMessage());
         }
-        queryCondition.setAcctCode(busiCode);
+        queryCondition.setAcctCode(busiCode!=null ? busiCode.getBusiCode() : "");
         try {
             PagedResult<AccEntry> details =  memberService.getAccEntryByQuery(page, pageSize, queryCondition);
             List<AccEntry> pagedResult = details.getPagedResult();

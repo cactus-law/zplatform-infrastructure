@@ -12,6 +12,8 @@ package com.zlebank.member.test;
 
 import java.util.List;
 
+import net.sf.json.JSONObject;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,7 +49,7 @@ public class TestMemberAccountService {
     /**
      * 账户余额
      */
-//    @Test
+    @Test
     public void queryBalanceTest() {
         MemberBean member = new Person();
         member.setMemberId("100000000000494");
@@ -58,13 +60,13 @@ public class TestMemberAccountService {
             e.printStackTrace();
         }
         Assert.assertNotNull(queryBalance);
-        System.out.println(queryBalance.getBalance());
+        System.out.println(JSONObject.fromObject(queryBalance).toString(1));
     }
     
     /**
      * 账户收支明细
      */
-    @Test
+//    @Test
     public void queryBalanceDetailTest() {
         MemberBean member = new Person();
         member.setMemberId("100000000000435");

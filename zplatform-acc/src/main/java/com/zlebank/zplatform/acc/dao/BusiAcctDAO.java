@@ -50,5 +50,5 @@ public interface BusiAcctDAO extends BaseDAO<PojoBusiAcct>{
      * @return
      * @throws BusiAcctNotExistException 
      */
-    public String getBusiCode(Usage usage, String memberId) throws BusiAcctNotExistException;
+    public PojoBusiAcct getBusiCode(Usage usage, String memberId) throws BusiAcctNotExistException;
     }

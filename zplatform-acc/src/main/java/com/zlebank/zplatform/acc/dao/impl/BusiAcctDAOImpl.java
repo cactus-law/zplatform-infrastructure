@@ -65,13 +65,13 @@ public class BusiAcctDAOImpl extends HibernateBaseDAOImpl<PojoBusiAcct>
     }
     
     @Override
-    public String getBusiCode(Usage usage,String memberId) throws BusiAcctNotExistException{
+    public PojoBusiAcct getBusiCode(Usage usage,String memberId) throws BusiAcctNotExistException{
         Criteria criteria = getSession().createCriteria(PojoBusiAcct.class);
         criteria.add(Restrictions.eq("usage", usage)).add(Restrictions.eq("businessActorId", memberId));
         PojoBusiAcct pojoBusiAcct = (PojoBusiAcct)criteria.uniqueResult();
         if(pojoBusiAcct == null){
             throw new BusiAcctNotExistException();
         }
-        return pojoBusiAcct.getBusiAcctCode();
+        return pojoBusiAcct;
     }
 }

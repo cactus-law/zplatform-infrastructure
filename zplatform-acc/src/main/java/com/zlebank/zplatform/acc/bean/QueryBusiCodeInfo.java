@@ -11,14 +11,14 @@ package com.zlebank.zplatform.acc.bean;
  */
 public class QueryBusiCodeInfo {
     /**会计账户Id**/
-    private String acctId;
+    private long acctId;
     /**科目号**/
     private String busiCode;
 
-    public String getAcctId() {
+    public long getAcctId() {
         return acctId;
     }
-    public void setAcctId(String acctId) {
+    public void setAcctId(long acctId) {
         this.acctId = acctId;
     }
     public String getBusiCode() {

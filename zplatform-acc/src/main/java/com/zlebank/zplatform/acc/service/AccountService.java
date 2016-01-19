@@ -59,7 +59,7 @@ public interface AccountService {
     public void checkDAC(PojoAbstractSubject account) throws AccBussinessException; 
     
     /**
-     * 通过ID得到账户余额
+     * 通过ID得到账户信息
      * @return
      */
     public Account getAccountBalanceById(long accountId) ; 

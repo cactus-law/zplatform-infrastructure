@@ -11,6 +11,7 @@
 package com.zlebank.zplatform.acc.service;
 
 import com.zlebank.zplatform.acc.bean.BusiAcct;
+import com.zlebank.zplatform.acc.bean.QueryBusiCodeInfo;
 import com.zlebank.zplatform.acc.bean.enums.Usage;
 import com.zlebank.zplatform.acc.exception.AbstractBusiAcctException;
 import com.zlebank.zplatform.member.bean.BusinessActor;
@@ -72,5 +73,5 @@ public interface BusiAcctService {
      * @throws AbstractBusiAcctException
      *             If business account is not exist 
      */
-    String getBusiCodeByMemberId(Usage usage, String memberId) throws AbstractBusiAcctException;
+    QueryBusiCodeInfo getBusiCodeByMemberId(Usage usage, String memberId) throws AbstractBusiAcctException;
 }

@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.zlebank.zplatform.acc.bean.Account;
 import com.zlebank.zplatform.acc.bean.BusiAcct;
+import com.zlebank.zplatform.acc.bean.QueryBusiCodeInfo;
 import com.zlebank.zplatform.acc.bean.Subject;
 import com.zlebank.zplatform.acc.bean.enums.BuisAcctCodePrefix;
 import com.zlebank.zplatform.acc.bean.enums.Usage;
@@ -198,8 +199,14 @@ public class BusiAcctServiceImpl implements BusiAcctService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public String getBusiCodeByMemberId(Usage usage, String memberId)
+    public QueryBusiCodeInfo getBusiCodeByMemberId(Usage usage, String memberId)
             throws AbstractBusiAcctException {
-        return busiAcctDAO.getBusiCode(usage, memberId);
+        // 取业务账户信息
+        PojoBusiAcct pojoBusiAcct = busiAcctDAO.getBusiCode(usage, memberId);
+        // 组成返回结果bean
+        QueryBusiCodeInfo info = new QueryBusiCodeInfo();
+        info.setAcctId(pojoBusiAcct.getAccountId());
+        info.setBusiCode(pojoBusiAcct.getBusiAcctCode());
+        return info;
     }
 }
