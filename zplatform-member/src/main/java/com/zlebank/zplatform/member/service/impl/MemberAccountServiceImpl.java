@@ -31,7 +31,7 @@ import com.zlebank.zplatform.commons.bean.DefaultPageResult;
 import com.zlebank.zplatform.commons.bean.PagedResult;
 import com.zlebank.zplatform.commons.utils.DateUtil;
 import com.zlebank.zplatform.commons.utils.StringUtil;
-import com.zlebank.zplatform.member.bean.MemberBalanceBean;
+import com.zlebank.zplatform.member.bean.MemberAccountBean;
 import com.zlebank.zplatform.member.bean.MemberBalanceDetailBean;
 import com.zlebank.zplatform.member.bean.MemberBean;
 import com.zlebank.zplatform.member.bean.MemberQuery;
@@ -72,7 +72,7 @@ public class MemberAccountServiceImpl implements MemberAccountService {
      * @throws GetAccountFailedException 
      */
     @Override
-    public MemberBalanceBean queryBalance(MemberType memberType, MemberBean member) throws DataCheckFailedException, GetAccountFailedException {
+    public MemberAccountBean queryBalance(MemberType memberType, MemberBean member, Usage usage) throws DataCheckFailedException, GetAccountFailedException {
         if(log.isDebugEnabled()){
             log.debug("参数1："+JSONObject.fromObject(memberType));
             log.debug("参数2："+JSONObject.fromObject(member));
@@ -81,10 +81,15 @@ public class MemberAccountServiceImpl implements MemberAccountService {
             throw new DataCheckFailedException("会员号不可为空");
         }
         try {
-            long acctId = busiAcctService.getAccountId(Usage.BASICPAY, member.getMemberId());
+            long acctId = busiAcctService.getAccountId(usage, member.getMemberId());
+            String acctCode = busiAcctService.getBusiCodeByMemberId(usage, member.getMemberId());
+
             Account accountBalanceById = accountService.getAccountBalanceById(acctId);
-            MemberBalanceBean mbb = new MemberBalanceBean();
+            MemberAccountBean mbb = new MemberAccountBean();
             mbb.setBalance(accountBalanceById.getBalance().getAmount());
+            mbb.setStatus(accountBalanceById.getStatus());
+            mbb.setBusiCode(acctCode);
+            mbb.setUsage(usage);
             return mbb;
         } catch (AbstractBusiAcctException e) {
             log.error(e.getMessage(), e);

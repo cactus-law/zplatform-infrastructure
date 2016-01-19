@@ -17,8 +17,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 
+import com.zlebank.zplatform.acc.bean.enums.Usage;
 import com.zlebank.zplatform.commons.bean.PagedResult;
-import com.zlebank.zplatform.member.bean.MemberBalanceBean;
+import com.zlebank.zplatform.member.bean.MemberAccountBean;
 import com.zlebank.zplatform.member.bean.MemberBalanceDetailBean;
 import com.zlebank.zplatform.member.bean.MemberBean;
 import com.zlebank.zplatform.member.bean.Person;
@@ -50,9 +51,9 @@ public class TestMemberAccountService {
     public void queryBalanceTest() {
         MemberBean member = new Person();
         member.setMemberId("100000000000494");
-        MemberBalanceBean queryBalance = null;
+        MemberAccountBean queryBalance = null;
         try {
-            queryBalance = memberAccountService.queryBalance(MemberType.INDIVIDUAL, member);
+            queryBalance = memberAccountService.queryBalance(MemberType.INDIVIDUAL, member, Usage.BASICPAY);
         } catch (DataCheckFailedException | GetAccountFailedException e) {
             e.printStackTrace();
         }

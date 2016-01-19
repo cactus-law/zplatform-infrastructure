@@ -10,8 +10,9 @@
  */
 package com.zlebank.zplatform.member.service;
 
+import com.zlebank.zplatform.acc.bean.enums.Usage;
 import com.zlebank.zplatform.commons.bean.PagedResult;
-import com.zlebank.zplatform.member.bean.MemberBalanceBean;
+import com.zlebank.zplatform.member.bean.MemberAccountBean;
 import com.zlebank.zplatform.member.bean.MemberBalanceDetailBean;
 import com.zlebank.zplatform.member.bean.MemberBean;
 import com.zlebank.zplatform.member.bean.enums.MemberType;
@@ -35,7 +36,7 @@ public interface MemberAccountService {
      * @throws DataCheckFailedException 
      * @throws GetAccountFailedException 
      */
-    public MemberBalanceBean queryBalance (MemberType memberType, MemberBean member) throws DataCheckFailedException, GetAccountFailedException ;
+    public MemberAccountBean queryBalance (MemberType memberType, MemberBean member, Usage usage) throws DataCheckFailedException, GetAccountFailedException ;
     /**
      * 查询收支明细
      * @param memberType
