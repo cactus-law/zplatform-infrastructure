@@ -14,8 +14,6 @@ public class CoopInstiNotExistException extends AbstractCoopInstiException{
     
     @Override
     public String getCode() {
-        // TODO Auto-generated method stub
         return "EMS020005";
     }
-
 }
