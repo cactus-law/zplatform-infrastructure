@@ -10,7 +10,9 @@
  */
 package com.zlebank.zplatform.member.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import net.sf.json.JSONObject;
 
@@ -21,8 +23,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zlebank.zplatform.commons.bean.DefaultPageResult;
+import com.zlebank.zplatform.commons.bean.PagedResult;
 import com.zlebank.zplatform.commons.utils.BeanCopyUtil;
-import com.zlebank.zplatform.commons.utils.StringUtil;
 import com.zlebank.zplatform.member.bean.QuickpayCustBean;
 import com.zlebank.zplatform.member.bean.RealNameBean;
 import com.zlebank.zplatform.member.bean.enums.RealNameLvType;
@@ -45,7 +48,7 @@ import com.zlebank.zplatform.member.service.MemberBankCardService;
  * @since 
  */
 @Service
-public class MemberBankCardServiceImpl implements MemberBankCardService {
+public class MemberBankCardServiceImpl  implements MemberBankCardService {
 
     private Log log = LogFactory.getLog(MemberBankCardServiceImpl.class);
     
@@ -110,13 +113,15 @@ public class MemberBankCardServiceImpl implements MemberBankCardService {
     /**
      * 保存银行卡绑卡信息
      * @param bean
+     * @ Return long 绑卡ID
      */
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
-    public void saveQuickPayCust(QuickpayCustBean bean) {
+    public long saveQuickPayCust(QuickpayCustBean bean) {
         PojoQuickpayCust pojo = BeanCopyUtil.copyBean(PojoQuickpayCust.class, bean);
         pojo.setStatus("00");
-        quickpayCustDAO.merge(pojo);
+        pojo = quickpayCustDAO.merge(pojo);
+        return pojo.getId();
     }
 
     /**
@@ -128,19 +133,54 @@ public class MemberBankCardServiceImpl implements MemberBankCardService {
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
     public void unbindQuickPayCust(QuickpayCustBean bean) throws DataCheckFailedException, UnbindBankFailedException {
-        if (StringUtil.isEmpty(bean.getRelatememberno())) {
-            throw new DataCheckFailedException("会员号不可为空");
-        }
-        if (StringUtil.isEmpty(bean.getCardno())) {
-            throw new DataCheckFailedException("卡号不可为空");
-        }
         try {
-            PojoQuickpayCust card = quickpayCustDAO.getQuickPayCard(bean.getRelatememberno(), bean.getCardno());
+            PojoQuickpayCust card = quickpayCustDAO.getById(bean.getId());
+            if (card == null) {
+                throw new DataCheckFailedException("会员不存在");
+            }
             card.setStatus("02");
             quickpayCustDAO.update(card);
+        } catch(DataCheckFailedException e) {
+            throw e;
         } catch(Exception e) {
             log.error(e.getMessage(), e);
             throw new UnbindBankFailedException();
         }
     }
+
+    /**
+     * 查询签约银行卡信息（会员）
+     * @param memberId 会员号
+     * @param cardType 卡类型 
+     *          0：借记卡+贷记卡
+     *          1：借记卡
+     *          2：贷记卡
+     * @return
+     */
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
+    public PagedResult<QuickpayCustBean> queryMemberBankCard(String memberId, String cardType,int page,  int pageSize) {
+        QuickpayCustBean queryBean = new QuickpayCustBean();
+        queryBean.setCardtype(cardType);
+        queryBean.setRelatememberno(memberId);
+        int offset = (page) * pageSize;
+        List<PojoQuickpayCust> pojoList = quickpayCustDAO.getListByQuery(offset, pageSize, queryBean);
+        List<QuickpayCustBean> beanList = pojoToBean(pojoList);
+        long count = quickpayCustDAO.count(queryBean);
+        PagedResult<QuickpayCustBean> rtnBean = new DefaultPageResult<QuickpayCustBean>(beanList, count);
+        return rtnBean;
+    }
+
+    /**
+     * @param pojoList
+     * @return
+     */
+    private List<QuickpayCustBean> pojoToBean(List<PojoQuickpayCust> pojoList) {
+        List<QuickpayCustBean> rtnList = new ArrayList<QuickpayCustBean>();
+        for (PojoQuickpayCust pojo : pojoList) {
+            rtnList.add(BeanCopyUtil.copyBean(QuickpayCustBean.class, pojo));
+        }
+        return rtnList;
+    }
+
 }

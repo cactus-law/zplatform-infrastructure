@@ -10,6 +10,8 @@
  */
 package com.zlebank.zplatform.member.bean;
 
+import com.zlebank.zplatform.commons.bean.Bean;
+
 /**
  * Class Description
  *
@@ -18,7 +20,7 @@ package com.zlebank.zplatform.member.bean;
  * @date 2016年1月18日 下午7:02:27
  * @since 
  */
-public class QuickpayCustBean {
+public class QuickpayCustBean implements Bean{
     /**标识**/
     private Long id;
     /**绑卡标示**/

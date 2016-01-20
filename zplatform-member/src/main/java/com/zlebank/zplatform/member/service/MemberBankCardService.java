@@ -10,6 +10,7 @@
  */
 package com.zlebank.zplatform.member.service;
 
+import com.zlebank.zplatform.commons.bean.PagedResult;
 import com.zlebank.zplatform.member.bean.QuickpayCustBean;
 import com.zlebank.zplatform.member.bean.RealNameBean;
 import com.zlebank.zplatform.member.exception.DataCheckFailedException;
@@ -39,8 +40,9 @@ public interface MemberBankCardService {
     /**
      * 保存银行卡绑卡信息
      * @param bean
+     * @ Return long 绑卡ID
      */
-    public void saveQuickPayCust(QuickpayCustBean bean);
+    public long saveQuickPayCust(QuickpayCustBean bean);
     
     /**
      * 银行卡解绑
@@ -49,4 +51,15 @@ public interface MemberBankCardService {
      * @throws UnbindBankFailedException 
      */
     public void unbindQuickPayCust(QuickpayCustBean bean) throws DataCheckFailedException, UnbindBankFailedException;
+    
+    /**
+     * 查询签约银行卡信息（会员）
+     * @param memberId 会员号
+     * @param cardType 卡类型 
+     *          0：借记卡+贷记卡
+     *          1：借记卡
+     *          2：贷记卡
+     * @return
+     */
+    public PagedResult<QuickpayCustBean> queryMemberBankCard(String memberId, String cardType, int offset,  int pageSize);
 }

@@ -10,7 +10,8 @@
  */
 package com.zlebank.zplatform.member.dao;
 
-import com.zlebank.zplatform.commons.dao.BaseDAO;
+import com.zlebank.zplatform.commons.dao.BasePagedQueryDAO;
+import com.zlebank.zplatform.member.bean.QuickpayCustBean;
 import com.zlebank.zplatform.member.pojo.PojoQuickpayCust;
 
 /**
@@ -21,7 +22,7 @@ import com.zlebank.zplatform.member.pojo.PojoQuickpayCust;
  * @date 2016年1月18日 下午7:15:43
  * @since 
  */
-public interface QuickpayCustDAO  extends BaseDAO<PojoQuickpayCust> {
+public interface QuickpayCustDAO  extends BasePagedQueryDAO<PojoQuickpayCust,QuickpayCustBean> {
     
     /**
      * 通过会员ID和卡号得到绑卡对象
@@ -30,4 +31,11 @@ public interface QuickpayCustDAO  extends BaseDAO<PojoQuickpayCust> {
      * @return
      */
     public PojoQuickpayCust getQuickPayCard(String memberId, String cardNo);
+
+    /**
+     * 通过ID (主键) 得到绑卡对象
+     * @param id
+     * @return
+     */
+    public PojoQuickpayCust getById(long id);
 }

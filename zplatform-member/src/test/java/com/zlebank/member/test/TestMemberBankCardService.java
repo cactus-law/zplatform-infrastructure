@@ -10,6 +10,8 @@
  */
 package com.zlebank.member.test;
 
+import java.util.List;
+
 import net.sf.json.JSONObject;
 
 import org.junit.Assert;
@@ -17,6 +19,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 
+import com.zlebank.zplatform.commons.bean.PagedResult;
 import com.zlebank.zplatform.member.bean.QuickpayCustBean;
 import com.zlebank.zplatform.member.bean.RealNameBean;
 import com.zlebank.zplatform.member.service.MemberBankCardService;
@@ -100,17 +103,18 @@ public class TestMemberBankCardService {
     /**
      * 解绑银行卡
      */
-    @Test
+//    @Test
     public void unbindQuickPayCust() {
         boolean ok=true;
         try {
             QuickpayCustBean bean = new QuickpayCustBean();
+            bean.setId(96L);
 //            bean.setAccname("鲁晓帅-测试");
-            bean.setCardno("6225102415463254");
+//            bean.setCardno("6225102415463254");
 //            bean.setIdtype("01");
 //            bean.setIdnum("131122198701021456");
 //            bean.setCvv2("801");
-            bean.setRelatememberno("100000000000564");
+//            bean.setRelatememberno("100000000000564");
             memberBankCardService.unbindQuickPayCust(bean);
         } catch (Exception e) {
             ok = false;
@@ -119,4 +123,32 @@ public class TestMemberBankCardService {
         Assert.assertTrue(ok);
     }
     
+    
+    /**
+     * 签约银行卡查询
+     */
+    @Test
+    public void querySign() {
+        boolean ok=true;
+        try {
+            QuickpayCustBean bean = new QuickpayCustBean();
+//            bean.setId(96L);
+//            bean.setAccname("鲁晓帅-测试");
+//            bean.setCardno("6225102415463254");
+//            bean.setIdtype("01");
+//            bean.setIdnum("131122198701021456");
+//            bean.setCvv2("801");
+            bean.setRelatememberno("100000000000564");
+            PagedResult<QuickpayCustBean> rtn = memberBankCardService.queryMemberBankCard("100000000000564","0",2,5);
+            System.out.println(rtn.getTotal());
+            List<QuickpayCustBean> rtnList = rtn.getPagedResult();
+            for (QuickpayCustBean str : rtnList) {
+                System.out.println(String.format("id:%s，卡号:%s，卡类型:%s", str.getId(),str.getCardno(),str.getCardtype()));
+            }
+        } catch (Exception e) {
+            ok = false;
+            e.printStackTrace();
+        }
+        Assert.assertTrue(ok);
+    }
 }
