@@ -248,7 +248,7 @@ public class MemberServiceImpl implements MemberService {
 	 */
 	@Override
 	public PojoMember getMbmberByMemberId(String memberId, BusinessActorType type) {
-		return memberDAOImpl.getMbmberByMemberId(memberId, type);
+		return memberDAOImpl.getMemberByMemberId(memberId, type);
 	}
 
 	/**

@@ -97,7 +97,7 @@ public class Sign extends RawAbstractProcessor {
                 res.setResDes(FAIL_MEMBER_NOTFOUND_DES);
                 return res;
             }
-            PojoMember member = memberDAO.getMbmberByMemberId(merchNo, null);
+            PojoMember member = memberDAO.getMemberByMemberId(merchNo, null);
             // 如果会员不存在
             if (member == null) {
                 res.setResCode(FAIL_CODE);

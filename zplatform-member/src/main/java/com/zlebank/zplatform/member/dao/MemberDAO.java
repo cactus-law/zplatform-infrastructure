@@ -43,7 +43,7 @@ public interface MemberDAO extends BaseDAO<PojoMember> {
          * @param type
          * @return
          */
-        public PojoMember getMbmberByMemberId(String memberId,BusinessActorType type);
+        public PojoMember getMemberByMemberId(String memberId,BusinessActorType type);
     
         /**
          * 通过登陆名得到会员信息

@@ -25,11 +25,14 @@ import com.zlebank.zplatform.commons.utils.BeanCopyUtil;
 import com.zlebank.zplatform.commons.utils.StringUtil;
 import com.zlebank.zplatform.member.bean.QuickpayCustBean;
 import com.zlebank.zplatform.member.bean.RealNameBean;
+import com.zlebank.zplatform.member.bean.enums.RealNameLvType;
 import com.zlebank.zplatform.member.dao.AutonymIdentiDAO;
+import com.zlebank.zplatform.member.dao.MemberDAO;
 import com.zlebank.zplatform.member.dao.QuickpayCustDAO;
 import com.zlebank.zplatform.member.exception.DataCheckFailedException;
 import com.zlebank.zplatform.member.exception.UnbindBankFailedException;
 import com.zlebank.zplatform.member.pojo.PojoAutonymIdenti;
+import com.zlebank.zplatform.member.pojo.PojoMember;
 import com.zlebank.zplatform.member.pojo.PojoQuickpayCust;
 import com.zlebank.zplatform.member.service.MemberBankCardService;
 
@@ -50,6 +53,8 @@ public class MemberBankCardServiceImpl implements MemberBankCardService {
     QuickpayCustDAO quickpayCustDAO;
     @Autowired
     AutonymIdentiDAO autonymIdentiDAO;
+    @Autowired
+    private MemberDAO memberDAO;
     
     /**
      * 保存会员实名认证
@@ -61,6 +66,7 @@ public class MemberBankCardServiceImpl implements MemberBankCardService {
         if(log.isDebugEnabled()) {
             log.debug("参数1："+JSONObject.fromObject(bean));
         }
+        // 更新实名认证表
         PojoAutonymIdenti pojo = new PojoAutonymIdenti();
         pojo.setMemberId(bean.getMemberId());// 会员号
         pojo.setRealname(bean.getRealname());// 真实姓名
@@ -73,6 +79,11 @@ public class MemberBankCardServiceImpl implements MemberBankCardService {
         pojo.setUpuser(bean.getUpuser());// 更新人
         pojo.setUptime(currentDate);// 更新时间
         autonymIdentiDAO.merge(pojo);
+        
+        // 更新会员表
+        PojoMember member = memberDAO.getMemberByMemberId(bean.getMemberId(), null);
+        member.setRealnameLv(RealNameLvType.LV3);
+        memberDAO.update(member);
     }
 
     /**

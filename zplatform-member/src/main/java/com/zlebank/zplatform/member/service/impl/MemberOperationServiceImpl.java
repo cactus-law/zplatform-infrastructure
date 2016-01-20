@@ -29,6 +29,7 @@ import com.zlebank.zplatform.member.bean.MemberBean;
 import com.zlebank.zplatform.member.bean.Person;
 import com.zlebank.zplatform.member.bean.enums.MemberStatusType;
 import com.zlebank.zplatform.member.bean.enums.MemberType;
+import com.zlebank.zplatform.member.bean.enums.RealNameLvType;
 import com.zlebank.zplatform.member.dao.MemberDAO;
 import com.zlebank.zplatform.member.dao.PersonDAO;
 import com.zlebank.zplatform.member.exception.CreateBusiAcctFailedException;
@@ -164,7 +165,8 @@ public class MemberOperationServiceImpl implements MemberOperationService {
             PojoPersonDeta pojo = new PojoPersonDeta();
             pojo.setMemberId(memberId);// 会员ID
             pojo.setParentMemberId(memberId);// 会员ID
-            setMemberComm(pojo, bean); // T_member 属性设定
+            
+            setMemberComm(pojo, bean, memberType); // T_member 属性设定
             Person personBean = (Person)bean;
             pojo.setSex(personBean.getSex());// 性别
             pojo.setTelno(personBean.getTelno());// 固定电话
@@ -210,16 +212,17 @@ public class MemberOperationServiceImpl implements MemberOperationService {
      * 设置会员共通属性
      * @param pojo
      * @param bean
+     * @param memberType 
      */
-    private void setMemberComm(PojoMember pojo, MemberBean bean) {
+    private void setMemberComm(PojoMember pojo, MemberBean bean, MemberType memberType) {
         pojo.setInstiCode(bean.getInstiCode());// 合作机构
         pojo.setMemberName(bean.getMemberName());// 会员昵称
         pojo.setLoginName(bean.getLoginName());// 登录名
         pojo.setPwd(Md5.getInstance().md5s(bean.getPwd()));// 登录密码
-        pojo.setRealnameLv(bean.getRealnameLv());// 实名等级，01-未实名，02-姓名+身份证,03-银行卡校验,04-证件审核
+        pojo.setRealnameLv(RealNameLvType.LV1);// 实名等级，01-未实名，02-姓名+身份证,03-银行卡校验,04-证件审核
         pojo.setPhone(bean.getPhone());// 手机
         pojo.setEmail(bean.getEmail());// 邮箱
-        pojo.setMemberType(MemberType.fromValue(bean.getMemberType()));// 会员类型，01-个人，02-企业
+        pojo.setMemberType(memberType);// 会员类型，01-个人，02-企业
         pojo.setStatus(MemberStatusType.NORMAL);// 会员状态，00-正常，02-冻结，99-注销
         pojo.setRegisterIdent("01");// 注册认证，01-手机认证，02-邮箱认证，03-Both
         Date current = new Date();

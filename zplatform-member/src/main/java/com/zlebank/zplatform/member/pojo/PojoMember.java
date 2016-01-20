@@ -26,6 +26,7 @@ import org.hibernate.annotations.Type;
 
 import com.zlebank.zplatform.member.bean.enums.MemberStatusType;
 import com.zlebank.zplatform.member.bean.enums.MemberType;
+import com.zlebank.zplatform.member.bean.enums.RealNameLvType;
 
 /**
  * Class Description
@@ -55,7 +56,7 @@ public  class PojoMember {
     /**支付密码**/
     private String payPwd;
     /**实名等级，01-未实名，02-姓名+身份证,03-银行卡校验,04-证件审核**/
-    private String realnameLv;
+    private RealNameLvType realnameLv;
     /**手机**/
     private String phone;
     /**邮箱**/
@@ -124,11 +125,12 @@ public  class PojoMember {
     public void setPayPwd(String payPwd) {
         this.payPwd = payPwd;
     }
+    @Type(type = "com.zlebank.zplatform.member.pojo.usertype.RealNameLvSqlType")
     @Column(name = "REALNAME_LV")
-    public String getRealnameLv() {
+    public RealNameLvType getRealnameLv() {
         return realnameLv;
     }
-    public void setRealnameLv(String realnameLv) {
+    public void setRealnameLv(RealNameLvType realnameLv) {
         this.realnameLv = realnameLv;
     }
     @Column(name = "PHONE")

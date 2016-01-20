@@ -44,8 +44,9 @@ public class TestMemberOperationService {
     @Test
     public void registMemberTest() {
         MemberBean member = new Person();
-        member.setLoginName("luxiaoshuai2");
-        member.setPhone("13426342944");
+        member.setMemberName("银魂");
+        member.setLoginName("gintama");
+        member.setPhone("13000000001");
         member.setPwd("abc123");
         member.setInstiCode("300000000000027");
         try {
