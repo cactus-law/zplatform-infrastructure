@@ -10,6 +10,8 @@
  */
 package com.zlebank.zplatform.acc.exception;
 
+import java.util.ResourceBundle;
+
 import com.zlebank.zplatform.commons.exception.AbstractDescribeException;
 
 /**
@@ -23,19 +25,28 @@ import com.zlebank.zplatform.commons.exception.AbstractDescribeException;
  * @since
  * @see AbstractDescribeException
  */
-public abstract class AbstractBusiAcctException
-        extends
-            AbstractDescribeException {
+public abstract class AbstractBusiAcctException extends
+		AbstractDescribeException {
 
-    /**
-     * serialVersionUID
-     */
-    private static final long serialVersionUID = 8599951385672960149L; 
-    public AbstractBusiAcctException() {
-        super();
-    }
-    
-    public AbstractBusiAcctException(Throwable cause) {
-        super(cause);
-    }    
+	/**
+	 * serialVersionUID
+	 */
+
+	private static final long serialVersionUID = 8599951385672960149L;
+
+	public AbstractBusiAcctException() {
+		super();
+	}
+
+	public AbstractBusiAcctException(Throwable cause) {
+		super(cause);
+	}
+
+	private static final ResourceBundle RESOURCE = ResourceBundle
+			.getBundle("exception_des");
+
+	@Override
+	public ResourceBundle getResourceBundle() {
+		return RESOURCE;
+	}
 }

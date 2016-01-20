@@ -10,6 +10,8 @@
  */
 package com.zlebank.zplatform.acc.exception;
 
+import java.util.ResourceBundle;
+
 /**
  * Class Description
  *
@@ -24,6 +26,7 @@ public class AccBussinessException extends AbstractAccException{
      * serialVersionUID
      */
     private static final long serialVersionUID = -8982263131254694025L;
+    private static final  ResourceBundle RESOURCE = ResourceBundle.getBundle("exception_des");
     private String code;
     public AccBussinessException(String code,Object ...param) {
         this.code=code;
@@ -40,5 +43,9 @@ public class AccBussinessException extends AbstractAccException{
     public String getCode() {
         return code;
     }
+	@Override
+	public ResourceBundle getResourceBundle() {
+		return RESOURCE;
+	}
 
 }

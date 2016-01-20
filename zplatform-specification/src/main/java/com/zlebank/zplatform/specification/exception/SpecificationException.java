@@ -10,6 +10,8 @@
  */
 package com.zlebank.zplatform.specification.exception;
 
+import java.util.ResourceBundle;
+
 import com.zlebank.zplatform.commons.exception.AbstractDescribeException;
 
 /**
@@ -29,5 +31,9 @@ public abstract class SpecificationException extends AbstractDescribeException{
      * serialVersionUID
      */
     private static final long serialVersionUID = 7682492108188678390L;
-
+    private static final  ResourceBundle RESOURCE = ResourceBundle.getBundle("exception_des");
+   	@Override
+   	public ResourceBundle getResourceBundle() {
+   		return RESOURCE;
+   	}
 }
