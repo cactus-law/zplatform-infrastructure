@@ -63,9 +63,9 @@ public class MemberDAOImpl extends HibernateBaseDAOImpl<PojoMember>
     @Override 
     public PojoMember getMemberByMemberId(String memberId,BusinessActorType type) {
         Criteria crite=   this.getSession().createCriteria(PojoMember.class);
-            crite .add(Restrictions.eq("memberid", memberId));
+            crite .add(Restrictions.eq("memberId", memberId));
         if (type != null) {
-           crite .add(Restrictions.eq("membertype", type)); 
+           crite .add(Restrictions.eq("memberType", type)); 
        }
         PojoMember member = (PojoMember) crite.uniqueResult();
         if (member != null)
