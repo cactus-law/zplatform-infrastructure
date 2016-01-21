@@ -36,7 +36,7 @@ import com.zlebank.zplatform.member.bean.CoopInstiBusi;
 import com.zlebank.zplatform.member.bean.EnterpriseBusi;
 import com.zlebank.zplatform.member.bean.MemberQuery;
 import com.zlebank.zplatform.member.bean.PersonBusi;
-import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
+import com.zlebank.zplatform.member.bean.enums.MemberType;
 import com.zlebank.zplatform.member.dao.MemberDAO;
 import com.zlebank.zplatform.member.dao.MerchDAO;
 import com.zlebank.zplatform.member.exception.MemberBussinessException;
@@ -247,7 +247,7 @@ public class MemberServiceImpl implements MemberService {
 	 * @return
 	 */
 	@Override
-	public PojoMember getMbmberByMemberId(String memberId, BusinessActorType type) {
+	public PojoMember getMbmberByMemberId(String memberId, MemberType type) {
 		return memberDAOImpl.getMemberByMemberId(memberId, type);
 	}
 

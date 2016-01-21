@@ -11,7 +11,7 @@
 package com.zlebank.zplatform.member.dao;
 
 import com.zlebank.zplatform.commons.dao.BaseDAO;
-import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
+import com.zlebank.zplatform.member.bean.enums.MemberType;
 import com.zlebank.zplatform.member.pojo.PojoMember;
 
 /**
@@ -43,7 +43,7 @@ public interface MemberDAO extends BaseDAO<PojoMember> {
          * @param type
          * @return
          */
-        public PojoMember getMemberByMemberId(String memberId,BusinessActorType type);
+        public PojoMember getMemberByMemberId(String memberId,MemberType type);
     
         /**
          * 通过登陆名得到会员信息

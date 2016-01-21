@@ -16,7 +16,6 @@ import net.sf.json.JSONObject;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 
 import com.zlebank.zplatform.commons.bean.PagedResult;
@@ -127,7 +126,7 @@ public class TestMemberBankCardService {
     /**
      * 签约银行卡查询
      */
-    @Test
+//    @Test
     public void querySign() {
         boolean ok=true;
         try {

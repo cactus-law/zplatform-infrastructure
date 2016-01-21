@@ -73,12 +73,12 @@ public class AccountQueryDAOImpl extends HibernateBaseDAOImpl<PojoAccount>
     public List<Map<String, Object>> getAllAccountByMId(String memberId,
             String busiAcctCode) {
         StringBuffer sb = new StringBuffer();
-        sb.append(" select acc.status, acc.acct_type ,acc.MEMBERID  ");
+        sb.append(" select acc.status, acc.acct_type ,acc.BUSINESS_ACTOR_ID  ");
         sb.append(" ,acc.balance,acc.frozen_balance,acc.total_balance  ");
         sb.append(",bus.acct_id,bus.busiacct_code,bus.busiacct_name  ");
         sb.append("  from t_acc_busiacct bus inner join  t_acc_acct acc  on bus.acct_id=acc.id  where   acc.status <>'99'   ");
         if (memberId != null) {
-            sb.append(" and bus.member_id=:memeberId ");
+            sb.append(" and bus.business_actor_id=:memeberId ");
         }
         if (StringUtil.isNotEmpty(busiAcctCode)) {
             sb.append(" and bus.BUSIACCT_CODE=:busiAcctCode");
@@ -106,14 +106,14 @@ public class AccountQueryDAOImpl extends HibernateBaseDAOImpl<PojoAccount>
 
     private SQLQuery getSQLquery(QueryAccount qa) {
         StringBuffer sb = new StringBuffer();
-        sb.append(" select acc.status, acc.acct_type ,acc.ACCT_CODE ,acc.MEMBERID ");
+        sb.append(" select acc.status, acc.acct_type ,acc.ACCT_CODE ,acc.BUSINESS_ACTOR_ID ");
         sb.append(" ,acc.balance,acc.frozen_balance,acc.total_balance  ");
         sb.append(",bus.acct_id,bus.busiacct_code,bus.busiacct_name ,bus.USAGE  ");
         sb.append("  from t_acc_busiacct bus inner join  t_acc_acct acc  on bus.acct_id=acc.id  where   acc.status <>'99'   ");
         if (qa != null) {
             // 会员号
             if (StringUtil.isNotEmpty(qa.getMemberId())) {
-                sb.append(" and bus.member_id=:memeberId ");
+                sb.append(" and bus.business_actor_id=:memeberId ");
             }
             // 业务账户号
             if (StringUtil.isNotEmpty(qa.getBusiCode())) {
@@ -183,7 +183,7 @@ public class AccountQueryDAOImpl extends HibernateBaseDAOImpl<PojoAccount>
         if (qa != null) {
             // 会员号
             if (StringUtil.isNotEmpty(qa.getMemberId())) {
-                sb.append(" and bus.member_id=:memeberId ");
+                sb.append(" and bus.business_actor_id=:memeberId ");
             }
             // 业务账户号
             if (StringUtil.isNotEmpty(qa.getBusiCode())) {

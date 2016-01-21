@@ -187,7 +187,7 @@ public class AccountQueryServiceImpl extends AbstractBasePageService<QueryAccoun
          mq.setBusiAcctCode(map.get("BUSIACCT_CODE")+"");
          mq.setBusiAcctName(map.get("BUSIACCT_NAME")+"");
          mq.setUsage(Usage.fromValue(map.get("USAGE")+""));
-         mq.setMemberID(map.get("MEMBERID")+"");
+         mq.setMemberID(map.get("BUSINESS_ACTOR_ID")+"");
          listMem.add(mq);
       }
     return listMem;
@@ -217,7 +217,7 @@ public class AccountQueryServiceImpl extends AbstractBasePageService<QueryAccoun
               mq.setBusiAcctCode(map.get("BUSIACCT_CODE")+"");
               mq.setBusiAcctName(map.get("BUSIACCT_NAME")+"");
               mq.setUsage(Usage.fromValue((map.get("USAGE")+"")));
-              mq.setMemberID(map.get("MEMBERID")+"");
+              mq.setMemberID(map.get("BUSINESS_ACTOR_ID")+"");
     }
         return mq;
  
@@ -263,7 +263,7 @@ public class AccountQueryServiceImpl extends AbstractBasePageService<QueryAccoun
                 mq.setBusiAcctCode(map.get("BUSIACCT_CODE")+"");
                 mq.setBusiAcctName(map.get("BUSIACCT_NAME")+"");
                 mq.setUsage(Usage.fromValue(map.get("USAGE")+""));
-                mq.setMemberID(map.get("MEMBERID")+"");
+                mq.setMemberID(map.get("BUSINESS_ACTOR_ID")+"");
                 listMem.add(mq);
             }  } catch (AccBussinessException e) {
            
