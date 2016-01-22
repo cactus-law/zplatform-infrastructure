@@ -18,7 +18,7 @@ package com.zlebank.zplatform.member.exception;
  * @date 2016年1月15日 下午7:15:57
  * @since 
  */
-public class DataCheckFailedException extends AbstractMemberException  {
+public class DataCheckFailedException extends AbstractMemberDescException  {
     /**
      * serialVersionUID
      */

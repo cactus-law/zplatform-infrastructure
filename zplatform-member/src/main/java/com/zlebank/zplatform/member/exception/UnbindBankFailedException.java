@@ -18,7 +18,7 @@ package com.zlebank.zplatform.member.exception;
  * @date 2016年1月18日 下午7:31:50
  * @since 
  */
-public class UnbindBankFailedException  extends AbstractMemberException  {
+public class UnbindBankFailedException  extends AbstractMemberDescException  {
     /**
      * serialVersionUID
      */
