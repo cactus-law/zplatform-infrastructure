@@ -354,7 +354,8 @@ public class MemberOperationServiceImpl implements MemberOperationService {
         if(log.isDebugEnabled()){
             log.debug("参数1："+memberType);
             log.debug("参数2："+JSONObject.fromObject(member));
-            log.debug("参数3："+JSONObject.fromObject(newPwd));
+            log.debug("参数3："+newPwd);
+            log.debug("参数4："+isCheckOldPassword);
         }
         if (StringUtil.isEmpty(member.getLoginName()) && StringUtil.isEmpty(member.getPhone())) {
             throw new DataCheckFailedException("手机号和登陆名不可同时为空");
@@ -398,7 +399,7 @@ public class MemberOperationServiceImpl implements MemberOperationService {
         if(log.isDebugEnabled()){
             log.debug("参数1："+memberType);
             log.debug("参数2："+JSONObject.fromObject(member));
-            log.debug("参数3："+JSONObject.fromObject(newPayPwd));
+            log.debug("参数3："+newPayPwd);
         }
         if (StringUtil.isEmpty(member.getLoginName()) && StringUtil.isEmpty(member.getPhone())) {
             throw new DataCheckFailedException("手机号和登陆名不可同时为空");

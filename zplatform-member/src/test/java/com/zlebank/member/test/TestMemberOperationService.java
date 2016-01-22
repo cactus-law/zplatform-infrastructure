@@ -41,7 +41,7 @@ public class TestMemberOperationService {
         ac = ApplicationContextUtil.get();
         memberOperationService =  (MemberOperationService) ac.getBean("memberOperationServiceImpl");
     }
-    @Test
+//    @Test
     public void registMemberTest() {
         MemberBean member = new Person();
         member.setMemberName("银魂");
@@ -74,13 +74,13 @@ public class TestMemberOperationService {
     /**
      * 设置支付密码
      */
-//    @Test
+    @Test
     public void verifyPayPwdTest() {
         MemberBean member = new Person();
         member.setLoginName("luxiaoshuai");
         member.setPhone("13426342943");
 //        member.setPaypwd("123456");
-        member.setPwd("123456");
+        member.setPwd("abc1234");
         member.setInstiCode("300000000000027");
 
         // 重置支付密码
@@ -115,7 +115,7 @@ public class TestMemberOperationService {
      */
     private void resetPwd(MemberBean member) {
         try {
-            boolean memberId = memberOperationService.resetLoginPwd(MemberType.INDIVIDUAL, member, "123456",false);
+            boolean memberId = memberOperationService.resetLoginPwd(MemberType.INDIVIDUAL, member, "abc123",true);
             Assert.assertTrue(memberId);
         } catch ( DataCheckFailedException e) {
             e.printStackTrace();
