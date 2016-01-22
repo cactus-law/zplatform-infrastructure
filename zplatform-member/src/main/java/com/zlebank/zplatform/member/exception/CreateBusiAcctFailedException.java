@@ -18,7 +18,7 @@ package com.zlebank.zplatform.member.exception;
  * @date 2016年1月15日 下午5:32:19
  * @since 
  */
-public class CreateBusiAcctFailedException extends AbstractMemberException  {
+public class CreateBusiAcctFailedException extends AbstractMemberDescException  {
     /**
      * serialVersionUID
      */
