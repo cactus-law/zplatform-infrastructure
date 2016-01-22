@@ -60,4 +60,11 @@ public class CoopInstiDAOImpl extends HibernateBaseDAOImpl<PojoCoopInsti>
          Criteria criteria = session.createCriteria(PojoCoopInsti.class);
          return (List<PojoCoopInsti>)criteria.list();
     }
+    @Override
+    public PojoCoopInsti getByInstiCode(String instiCode){
+    	Session session = getSession();
+        Criteria criteria = session.createCriteria(PojoCoopInsti.class);
+        criteria.add(Restrictions.eq("instiCode", instiCode));
+        return (PojoCoopInsti)criteria.uniqueResult();
+    }
 }

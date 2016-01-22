@@ -75,7 +75,7 @@ public class AccountQueryDAOImpl extends HibernateBaseDAOImpl<PojoAccount>
         StringBuffer sb = new StringBuffer();
         sb.append(" select acc.status, acc.acct_type ,acc.BUSINESS_ACTOR_ID  ");
         sb.append(" ,acc.balance,acc.frozen_balance,acc.total_balance  ");
-        sb.append(",bus.acct_id,bus.busiacct_code,bus.busiacct_name  ");
+        sb.append(",bus.acct_id,bus.busiacct_code,bus.busiacct_name,bus.usage  ");
         sb.append("  from t_acc_busiacct bus inner join  t_acc_acct acc  on bus.acct_id=acc.id  where   acc.status <>'99'   ");
         if (memberId != null) {
             sb.append(" and bus.business_actor_id=:memeberId ");

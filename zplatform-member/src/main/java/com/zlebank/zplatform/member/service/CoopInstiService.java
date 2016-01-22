@@ -39,4 +39,11 @@ public interface CoopInstiService {
      * @return a cooperative institution list,if has no institution,the return list will be a list with zero element
      */
     public List<CoopInsti> getAllCoopInsti();
+    
+    /**
+     * 
+     * @param instiCode
+     * @return
+     */
+    CoopInsti getInstiByInstiCode(String instiCode);
 }

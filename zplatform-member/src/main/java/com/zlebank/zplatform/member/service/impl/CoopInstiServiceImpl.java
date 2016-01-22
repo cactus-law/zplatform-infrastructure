@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.HibernateException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -145,7 +146,7 @@ public class CoopInstiServiceImpl implements CoopInstiService {
 		coopInstiDAO.saveA(pojoCoopInsti);
 		return pojoCoopInsti.getInstiCode();
 	}
-	
+
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	public List<CoopInsti> getAllCoopInsti() {
 		List<PojoCoopInsti> pojoCoopInstis = coopInstiDAO.getCoopInstiList();
@@ -157,5 +158,23 @@ public class CoopInstiServiceImpl implements CoopInstiService {
 			coopInstis.add(copyTo);
 		}
 		return coopInstis;
+	}
+
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
+	public CoopInsti getInstiByInstiCode(String instiCode) {
+		PojoCoopInsti pojoCoopInsit = null;
+		try {
+			pojoCoopInsit = coopInstiDAO.getByInstiCode(instiCode);
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return null;
+		}
+		if (pojoCoopInsit == null) {
+			return null;
+		}
+		CoopInsti copyTo = new CoopInsti();
+		String[] ignoreProperties = new String[] { "instisMKs" };
+		BeanUtils.copyProperties(pojoCoopInsit, copyTo, ignoreProperties);
+		return copyTo;
 	}
 }

@@ -36,4 +36,10 @@ public interface CoopInstiDAO extends BaseDAO<PojoCoopInsti>{
      * @return
      */
     List<PojoCoopInsti> getCoopInstiList();
+    /**
+     * get cooperative institution by insti code
+     * @param instiCode
+     * @return
+     */
+    PojoCoopInsti getByInstiCode(String instiCode);
 }

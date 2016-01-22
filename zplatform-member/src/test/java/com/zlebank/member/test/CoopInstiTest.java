@@ -63,6 +63,7 @@ public class CoopInstiTest {
 	}
 
 	@Test
+	@Ignore
 	public void testGetCoopProduct() {
 		CoopInstiProductService coopInstiService = (CoopInstiProductService) context
 				.getBean("coopInstiProductServiceImpl");
@@ -78,10 +79,19 @@ public class CoopInstiTest {
 	}
 
 	@Test
+	@Ignore
 	public void testGetAllCoopInsti() {
 		CoopInstiService coopInstiService = (CoopInstiService) context
 				.getBean("coopInstiServiceImpl");
 		List<CoopInsti> coopInstis = coopInstiService.getAllCoopInsti();
 		Assert.assertTrue(coopInstis != null && coopInstis.size() != 0);
+	}
+	
+	@Test
+	public void testGetCoopInstiByInstiCode() {
+		CoopInstiService coopInstiService = (CoopInstiService) context
+				.getBean("coopInstiServiceImpl");
+		CoopInsti coopInstis = coopInstiService.getInstiByInstiCode("300000000000014");
+		Assert.assertTrue(coopInstis != null && coopInstis.getInstiCode().equals("300000000000014"));
 	}
 }
