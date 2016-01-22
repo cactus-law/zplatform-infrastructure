@@ -75,7 +75,7 @@ public class MemberAccountServiceImpl implements MemberAccountService {
     @Override
     public MemberAccountBean queryBalance(MemberType memberType, MemberBean member, Usage usage) throws DataCheckFailedException, GetAccountFailedException {
         if(log.isDebugEnabled()){
-            log.debug("参数1："+JSONObject.fromObject(memberType));
+            log.debug("参数1："+memberType);
             log.debug("参数2："+JSONObject.fromObject(member));
         }
         if (StringUtil.isEmpty(member.getMemberId())) {
@@ -114,7 +114,7 @@ public class MemberAccountServiceImpl implements MemberAccountService {
             int page,
             int pageSize) throws GetAccountFailedException {
         if(log.isDebugEnabled()){
-            log.debug("参数1："+JSONObject.fromObject(memberType));
+            log.debug("参数1："+memberType);
             log.debug("参数2："+JSONObject.fromObject(member));
             log.debug("参数3："+page);
             log.debug("参数4："+pageSize);

@@ -137,6 +137,10 @@ public class MemberBankCardServiceImpl  implements MemberBankCardService {
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
     public void unbindQuickPayCust(QuickpayCustBean bean) throws DataCheckFailedException, UnbindBankFailedException {
+        if (log.isDebugEnabled()) {
+            log.debug("解绑银行卡");
+            log.debug(JSONObject.fromObject(bean));
+        }
         try {
             PojoQuickpayCust card = quickpayCustDAO.getById(bean.getId());
             if (card == null) {
@@ -164,6 +168,13 @@ public class MemberBankCardServiceImpl  implements MemberBankCardService {
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
     public PagedResult<QuickpayCustBean> queryMemberBankCard(String memberId, String cardType,int page,  int pageSize) {
+        if (log.isDebugEnabled()) {
+            log.debug("查询签约银行卡信息（会员）");
+            log.debug(memberId);
+            log.debug(cardType);
+            log.debug(page);
+            log.debug(pageSize);
+        }
         QuickpayCustBean queryBean = new QuickpayCustBean();
         queryBean.setCardtype(cardType);
         queryBean.setRelatememberno(memberId);

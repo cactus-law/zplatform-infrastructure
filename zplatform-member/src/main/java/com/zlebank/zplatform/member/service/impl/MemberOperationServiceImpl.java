@@ -85,7 +85,7 @@ public class MemberOperationServiceImpl implements MemberOperationService {
     @Transactional(propagation=Propagation.REQUIRED,rollbackFor=Throwable.class)
     public String registMember(MemberType memberType, MemberBean member) throws InvalidMemberDataException, CreateMemberFailedException, CreateBusiAcctFailedException {
         if(log.isDebugEnabled()){
-            log.debug("参数1："+JSONObject.fromObject(memberType));
+            log.debug("参数1："+memberType);
             log.debug("参数2："+JSONObject.fromObject(member));
         }
         // 数据校验
@@ -274,7 +274,7 @@ public class MemberOperationServiceImpl implements MemberOperationService {
     @Transactional(propagation=Propagation.REQUIRED,rollbackFor=Throwable.class)
     public String login(MemberType memberType, MemberBean member) throws DataCheckFailedException, LoginFailedException {
         if(log.isDebugEnabled()){
-            log.debug("参数1："+JSONObject.fromObject(memberType));
+            log.debug("参数1："+memberType);
             log.debug("参数2："+JSONObject.fromObject(member));
         }
         if (StringUtil.isEmpty(member.getLoginName()) && StringUtil.isEmpty(member.getPhone())) {
@@ -311,7 +311,7 @@ public class MemberOperationServiceImpl implements MemberOperationService {
     @Transactional(propagation=Propagation.REQUIRED,rollbackFor=Throwable.class)
     public boolean verifyPayPwd(MemberType memberType, MemberBean member) throws DataCheckFailedException {
         if(log.isDebugEnabled()){
-            log.debug("参数1："+JSONObject.fromObject(memberType));
+            log.debug("参数1："+memberType);
             log.debug("参数2："+JSONObject.fromObject(member));
         }
         if (StringUtil.isEmpty(member.getLoginName()) && StringUtil.isEmpty(member.getPhone())) {
@@ -352,7 +352,7 @@ public class MemberOperationServiceImpl implements MemberOperationService {
     @Transactional(propagation=Propagation.REQUIRED,rollbackFor=Throwable.class)
     public boolean resetLoginPwd(MemberType memberType, MemberBean member, String newPwd, boolean isCheckOldPassword) throws DataCheckFailedException {
         if(log.isDebugEnabled()){
-            log.debug("参数1："+JSONObject.fromObject(memberType));
+            log.debug("参数1："+memberType);
             log.debug("参数2："+JSONObject.fromObject(member));
             log.debug("参数3："+JSONObject.fromObject(newPwd));
         }
@@ -396,7 +396,7 @@ public class MemberOperationServiceImpl implements MemberOperationService {
     @Transactional(propagation=Propagation.REQUIRED,rollbackFor=Throwable.class)
     public boolean resetPayPwd(MemberType memberType, MemberBean member, String newPayPwd, boolean isCheckOldPassword) throws DataCheckFailedException {
         if(log.isDebugEnabled()){
-            log.debug("参数1："+JSONObject.fromObject(memberType));
+            log.debug("参数1："+memberType);
             log.debug("参数2："+JSONObject.fromObject(member));
             log.debug("参数3："+JSONObject.fromObject(newPayPwd));
         }
