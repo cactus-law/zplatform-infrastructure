@@ -61,7 +61,7 @@ public class PersonDAOImpl extends HibernateBaseDAOImpl<PojoPersonDeta> implemen
     public PojoPersonDeta getPersonByMemberId(String memberId) {
         return (PojoPersonDeta) this.getSession()
                 .createCriteria(PojoPersonDeta.class)
-                .add(Restrictions.eq("pMemberid", memberId)).uniqueResult();
+                .add(Restrictions.eq("parentMemberId", memberId)).uniqueResult();
     }
         
     /**
@@ -73,7 +73,7 @@ public class PersonDAOImpl extends HibernateBaseDAOImpl<PojoPersonDeta> implemen
    @Override
    public PojoPersonDeta personLoninByMid(String memberId, String pwd) {
        Criteria crite=    this.getSession().createCriteria(PojoPersonDeta.class);
-       crite.add(Restrictions.eq("pMemberid", memberId));
+       crite.add(Restrictions.eq("parentMemberId", memberId));
        crite.add(Restrictions.eq("loginPwd", pwd));
        return (PojoPersonDeta)crite.uniqueResult();
    }

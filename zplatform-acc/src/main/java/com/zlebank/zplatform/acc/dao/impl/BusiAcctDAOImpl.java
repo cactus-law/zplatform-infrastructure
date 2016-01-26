@@ -60,7 +60,7 @@ public class BusiAcctDAOImpl extends HibernateBaseDAOImpl<PojoBusiAcct>
     @Override
     public List<PojoBusiAcct> getAllbusiByMid(String memberId) {
         Criteria criteria = getSession().createCriteria(PojoBusiAcct.class);
-        return  criteria.add(Restrictions.eq("memberId", memberId)).list();
+        return  criteria.add(Restrictions.eq("businessActorId", memberId)).list();
         
     }
     

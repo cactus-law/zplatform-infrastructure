@@ -101,6 +101,9 @@ public class MemberBankCardServiceImpl  implements MemberBankCardService {
             log.debug("参数1："+JSONObject.fromObject(bean));
         }
         PojoAutonymIdenti pojo = autonymIdentiDAO.getByMemberId(bean.getMemberId());
+        // 如果不存在实名认证信息就返回NULL
+        if (pojo == null) return null;
+        // 如果存在实名认证信息则返回相应的信息
         RealNameBean rtnBean = new RealNameBean();
         rtnBean.setMemberId(pojo.getMemberId());
         rtnBean.setIdentiType(pojo.getIdentiType());
