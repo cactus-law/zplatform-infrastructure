@@ -1,6 +1,6 @@
 /* 
- * MerchDAOImpl.java  
  * 
+ * MerchDAOImpl.java  
  * version TODO
  *
  * 2015年9月11日 
@@ -125,8 +125,8 @@ public class MerchDAOImpl  extends HibernateBaseDAOImpl<PojoMerchDeta> implement
     public PojoMerchDeta getMerchBymemberId(String memberId) {
         PojoMerchDeta pojoMerchDeta = (PojoMerchDeta) getSession()
                 .createCriteria(PojoMerchDeta.class)
-                .add(Restrictions.eq("dateMemberid", memberId))
-                .add(Restrictions.eq("status", MerchStatusType.NORMAL))
+                .add(Restrictions.eq("dateMemberid", memberId)) 
+                .add(Restrictions.eq("merchStatus", MerchStatusType.NORMAL))
                 .uniqueResult();
         if (pojoMerchDeta != null)
             getSession().evict(pojoMerchDeta);

@@ -31,14 +31,13 @@ public class CoopInstiTest {
 	}
 
 	@Test
-	@Ignore
 	public void testCreate() {
 		CoopInstiService coopInstiService = (CoopInstiService) context
 				.getBean("coopInstiServiceImpl");
 		String instiCode;
 		try {
 			// test add a new Coop Insti
-			instiCode = coopInstiService.createCoopInsti(instiName, 2);
+			instiCode = coopInstiService.createCoopInsti("证联金融", 2);
 			Assert.assertTrue(instiCode.startsWith("3"));
 			CoopInstiMK coopInstiMK = coopInstiService.getCoopInstiMK(
 					instiCode, TerminalAccessType.WIRELESS);
@@ -88,6 +87,7 @@ public class CoopInstiTest {
 	}
 	
 	@Test
+	@Ignore
 	public void testGetCoopInstiByInstiCode() {
 		CoopInstiService coopInstiService = (CoopInstiService) context
 				.getBean("coopInstiServiceImpl");
