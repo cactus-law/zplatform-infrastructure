@@ -71,7 +71,7 @@ public class MerchMKServiceImpl implements MerchMKService {
         }
         boolean isOK = false;
 
-        try {
+        try { 
             isOK = RSAUtils.verify(originData.getBytes("UTF-8"), merchMK.getMemberPubKey().trim(), signedData);
         } catch (Exception e) {
             e.printStackTrace();
