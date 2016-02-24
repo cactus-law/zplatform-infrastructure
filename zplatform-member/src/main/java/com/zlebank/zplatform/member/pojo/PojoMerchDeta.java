@@ -17,16 +17,16 @@ import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 
 import com.zlebank.zplatform.acc.pojo.Money;
-import com.zlebank.zplatform.member.bean.enums.CardType;
-import com.zlebank.zplatform.member.bean.enums.IndustryType;
 import com.zlebank.zplatform.member.bean.enums.MerchStatusType;
-import com.zlebank.zplatform.member.bean.enums.MerchType;
 
 /**
  * Class Description
@@ -37,64 +37,21 @@ import com.zlebank.zplatform.member.bean.enums.MerchType;
  * @since 
  */
 @Entity
-@PrimaryKeyJoinColumn(name="MERCHID") 
 @Table(name="T_MERCH_DETA")
-public class PojoMerchDeta extends PojoMember{
+public class PojoMerchDeta {
   
+    /**主键**/
+    private Long merchId;
+    /**会员外键**/
+    private Long memId;
     /**会员号**/
-    private String dateMemberid;
-    /**商户名称**/
-    private String merchname;
-    /**商户简称**/
-    private String alias;
-    /**商户英文名称**/
-    private String engname;
-    /**商户所属机构**/
-    private Long merchinsti;
-    /**商户所属省**/
-    private Long province;
-    /**商户所属市**/
-    private Long city;
-    /**商户所属县**/
-    private Long street;
-    /**商户地址**/
-    private String address;
-    /**税务登记证号**/
-    private String taxno;
-    /**营业执照号**/
-    private String licenceno;
-    /**组织机构代码证**/
-    private String orgcode;
-    /**商户网址**/
-    private String website;
-    /**商户类型:0代理商1普通商户**/
-    private MerchType merchtype;
-    /**所属行业:0餐饮1酒店连锁2其他3大型商场连锁4娱乐5金融6物流**/
-    private IndustryType trade;
-    /**法人**/
-    private String corporation;
-    /**法人身份证号码**/
-    private String corpno;
-    /**联系人**/
-    private String contact;
-    /**联系人电话**/
-    private String contphone;
-    /**联系人职位**/
-    private String conttitle;
-    /**联系人邮箱**/
-    private String contemail;
-    /**客户来源**/
-    private String custfrom;
-    /**客户经理**/
-    private String custmgr;
-    /**客户经理部门**/
-    private String custmgrdept;
-    /**签约人**/
-    private String signatory;
-    /**签约人电话**/
-    private String signphone;
+    private String memberId;
+    /**上级商户**/
+    private String parent;
     /**清算周期**/
     private Long setlcycle;
+    /**清算类型**/
+    private String  setltype;
     /**结算行号**/
     private String bankcode;
     /**开户行号**/
@@ -111,28 +68,18 @@ public class PojoMerchDeta extends PojoMember{
     private Date agreemtStart;
     /**合约终止日期**/
     private Date agreemtEnd;
-    /**开户行所属省**/
-    private Long bnkProvince;
-    /**开户行所属市**/
-    private Long bnkCity;
-    /**开户行所属县**/
-    private Long bnkStreet;
-    /**邮编**/
-    private String postcode;
-    /**邮箱**/
-    private String email;
-    /**身份证文件目录**/
-    private String corpfile;
-    /**税务登记证文件目录**/
-    private String taxfile;
-    /**营业执照文件目录**/
-    private String licencefile;
-    /**组织机构文件目录**/
-    private String orgcodefile;
+    /**产品代码**/
+    private String prdtver;
+    /**扣率版本**/
+    private String feever;
+    /**分润版本**/
+    private String spiltver;
+    /**风控版本**/
+    private String riskver;
+    /**路由版本**/
+    private String routver;
     /**状态**/
     private MerchStatusType merchStatus;
-    /**初次业务时间**/
-    private Date firsttime;
     /**写入人**/
     private Long mInuser;
     /**写入时间**/
@@ -149,141 +96,44 @@ public class PojoMerchDeta extends PojoMember{
     private Date cvlexatime;
     /**复核意见**/
     private String cvlexaopt;
-    /**商户秘钥**/
-    private String secretKey;
-    /**行政地区代码（由商户所属县得到）**/
-    private String zonecode;
-    /**产品代码**/
-    private String prdtver;
-    /**扣率版本**/
-    private String feever;
-    /**分润版本**/
-    private String spiltver;
-    /**风控版本**/
-    private String riskver;
-    /**路由版本**/
-    private String routver;
-    /**收银台版本**/
-    private String cashver;
-    /**上级商户**/
-    private String parent;
     /**备注**/
     private String notes;
     /**备注**/
     private String remarks;
-    /**证件类型**/
-    private CardType cardtype;
-    /**联系人地址**/
-    private String contaddress;
-    /**联系人邮编**/
-    private String contpost;
  
-    @Column(name = "MEMBERID")
-    public String getDateMemberid() {
-        return dateMemberid;
+    @GenericGenerator(name = "id_gen", strategy = "enhanced-table", parameters = {
+            @Parameter(name = "table_name", value = "T_C_PRIMAY_KEY"),
+            @Parameter(name = "value_column_name", value = "NEXT_ID"),
+            @Parameter(name = "segment_column_name", value = "KEY_NAME"),
+            @Parameter(name = "segment_value", value = "MERCH_DETA_ID"),
+            @Parameter(name = "increment_size", value = "1"),
+            @Parameter(name = "optimizer", value = "pooled-lo") })
+    @Id
+    @GeneratedValue(generator = "id_gen")
+    @Column(name = "MERCH_ID")
+    public Long getMerchId() {
+        return merchId;
     }
-    @Column(name = "MERCHNAME")
-    public String getMerchname() {
-        return merchname;
+    public void setMerchId(Long merchId) {
+        this.merchId = merchId;
     }
-    @Column(name = "ALIAS")
-    public String getAlias() {
-        return alias;
+    @Column(name = "MEM_ID")
+    public Long getMemId() {
+        return memId;
     }
-    @Column(name = "ENGNAME")
-    public String getEngname() {
-        return engname;
-    }   
-    @Column(name = "MERCHINSTI")
-    public Long getMerchinsti() {
-        return merchinsti;
+    public void setMemId(Long memId) {
+        this.memId = memId;
     }
-    @Column(name = "PROVINCE")
-    public Long getProvince() {
-        return province;
+    
+    @Column(name = "MEMBER_ID")
+    public String getMemberId() {
+        return memberId;
     }
-    @Column(name = "CITY")
-    public Long getCity() {
-        return city;
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
     }
-    @Column(name = "STREET")
-    public Long getStreet() {
-        return street;
-    }
-    @Column(name = "ADDRESS")
-    public String getAddress() {
-        return address;
-    }
-    @Column(name = "TAXNO")
-    public String getTaxno() {
-        return taxno;
-    }
-    @Column(name = "LICENCENO")
-    public String getLicenceno() {
-        return licenceno;
-    }
-    @Column(name = "ORGCODE")
-    public String getOrgcode() {
-        return orgcode;
-    }
-    @Column(name = "WEBSITE")
-    public String getWebsite() {
-        return website;
-    }
-    @Type(type = "com.zlebank.zplatform.member.pojo.usertype.MerchSqlType")
-    @Column(name = "MERCHTYPE")
-    public MerchType getMerchtype() {
-        return merchtype;
-    }
-    @Type(type = "com.zlebank.zplatform.member.pojo.usertype.IndustrySqlType")
-    @Column(name = "TRADE")
-    public IndustryType getTrade() {
-        return trade;
-    }
-    @Column(name = "CORPORATION")
-    public String getCorporation() {
-        return corporation;
-    }
-    @Column(name = "CORPNO")
-    public String getCorpno() {
-        return corpno;
-    }
-    @Column(name = "CONTACT")
-    public String getContact() {
-        return contact;
-    }
-    @Column(name = "CONTPHONE")
-    public String getContphone() {
-        return contphone;
-    }
-    @Column(name = "CONTTITLE")
-    public String getConttitle() {
-        return conttitle;
-    }
-    @Column(name = "CONTEMAIL")
-    public String getContemail() {
-        return contemail;
-    }
-    @Column(name = "CUSTFROM")
-    public String getCustfrom() {
-        return custfrom;
-    }
-    @Column(name = "CUSTMGR")
-    public String getCustmgr() {
-        return custmgr;
-    }
-    @Column(name = "CUSTMGRDEPT")
-    public String getCustmgrdept() {
-        return custmgrdept;
-    }
-    @Column(name = "SIGNATORY")
-    public String getSignatory() {
-        return signatory;
-    }
-    @Column(name = "SIGNPHONE")
-    public String getSignphone() {
-        return signphone;
-    }
+
+
     @Column(name = "SETLCYCLE")
     public Long getSetlcycle() {
         return setlcycle;
@@ -322,50 +172,10 @@ public class PojoMerchDeta extends PojoMember{
     public Date getAgreemtEnd() {
         return agreemtEnd;
     }
-    @Column(name = "BNK_PROVINCE")
-    public Long getBnkProvince() {
-        return bnkProvince;
-    }
-    @Column(name = "BNK_CITY")
-    public Long getBnkCity() {
-        return bnkCity;
-    }
-    @Column(name = "BNK_STREET")
-    public Long getBnkStreet() {
-        return bnkStreet;
-    }
-    @Column(name = "POSTCODE")
-    public String getPostcode() {
-        return postcode;
-    }
-    @Column(name = "EMAIL")
-    public String getEmail() {
-        return email;
-    }
-    @Column(name = "CORPFILE")
-    public String getCorpfile() {
-        return corpfile;
-    }
-    @Column(name = "TAXFILE")
-    public String getTaxfile() {
-        return taxfile;
-    }
-    @Column(name = "LICENCEFILE")
-    public String getLicencefile() {
-        return licencefile;
-    }
-    @Column(name = "ORGCODEFILE")
-    public String getOrgcodefile() {
-        return orgcodefile;
-    }
     @Type(type = "com.zlebank.zplatform.member.pojo.usertype.MerchStatusSqlType")
     @Column(name = "STATUS")
     public MerchStatusType getMerchStatus() {
         return merchStatus;
-    }
-    @Column(name = "FIRSTTIME")
-    public Date getFirsttime() {
-        return firsttime;
     }
     @Column(name = "INUSER")
     public Long getmInuser() {
@@ -399,14 +209,6 @@ public class PojoMerchDeta extends PojoMember{
     public String getCvlexaopt() {
         return cvlexaopt;
     }
-    @Column(name = "SECRET_KEY")
-    public String getSecretKey() {
-        return secretKey;
-    }
-    @Column(name = "ZONECODE")
-    public String getZonecode() {
-        return zonecode;
-    }
     @Column(name = "PRDTVER")
     public String getPrdtver() {
         return prdtver;
@@ -427,10 +229,6 @@ public class PojoMerchDeta extends PojoMember{
     public String getRoutver() {
         return routver;
     }
-    @Column(name = "CASHVER")
-    public String getCashver() {
-        return cashver;
-    }
     @Column(name = "PARENT")
     public String getParent() {
         return parent;
@@ -443,84 +241,7 @@ public class PojoMerchDeta extends PojoMember{
     public String getRemarks() {
         return remarks;
     }
-    public void setDateMemberid(String dateMemberid) {
-        this.dateMemberid = dateMemberid;
-    }
-    public void setMerchname(String merchname) {
-        this.merchname = merchname;
-    }
-    public void setAlias(String alias) {
-        this.alias = alias;
-    }
-    public void setEngname(String engname) {
-        this.engname = engname;
-    }
-    public void setMerchinsti(Long merchinsti) {
-        this.merchinsti = merchinsti;
-    }
-    public void setProvince(Long province) {
-        this.province = province;
-    }
-    public void setCity(Long city) {
-        this.city = city;
-    }
-    public void setStreet(Long street) {
-        this.street = street;
-    }
-    public void setAddress(String address) {
-        this.address = address;
-    }
-    public void setTaxno(String taxno) {
-        this.taxno = taxno;
-    }
-    public void setLicenceno(String licenceno) {
-        this.licenceno = licenceno;
-    }
-    public void setOrgcode(String orgcode) {
-        this.orgcode = orgcode;
-    }
-    public void setWebsite(String website) {
-        this.website = website;
-    }
-    public void setMerchtype(MerchType merchtype) {
-        this.merchtype = merchtype;
-    }
-    public void setTrade(IndustryType trade) {
-        this.trade = trade;
-    }
-    public void setCorporation(String corporation) {
-        this.corporation = corporation;
-    }
-    public void setCorpno(String corpno) {
-        this.corpno = corpno;
-    }
-    public void setContact(String contact) {
-        this.contact = contact;
-    }
-    public void setContphone(String contphone) {
-        this.contphone = contphone;
-    }
-    public void setConttitle(String conttitle) {
-        this.conttitle = conttitle;
-    }
-    public void setContemail(String contemail) {
-        this.contemail = contemail;
-    }
-    public void setCustfrom(String custfrom) {
-        this.custfrom = custfrom;
-    }
-    public void setCustmgr(String custmgr) {
-        this.custmgr = custmgr;
-    }
-    public void setCustmgrdept(String custmgrdept) {
-        this.custmgrdept = custmgrdept;
-    }
-    public void setSignatory(String signatory) {
-        this.signatory = signatory;
-    }
-    public void setSignphone(String signphone) {
-        this.signphone = signphone;
-    }
+
     public void setSetlcycle(Long setlcycle) {
         this.setlcycle = setlcycle;
     }
@@ -548,38 +269,8 @@ public class PojoMerchDeta extends PojoMember{
     public void setAgreemtEnd(Date agreemtEnd) {
         this.agreemtEnd = agreemtEnd;
     }
-    public void setBnkProvince(Long bnkProvince) {
-        this.bnkProvince = bnkProvince;
-    }
-    public void setBnkCity(Long bnkCity) {
-        this.bnkCity = bnkCity;
-    }
-    public void setBnkStreet(Long bnkStreet) {
-        this.bnkStreet = bnkStreet;
-    }
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public void setCorpfile(String corpfile) {
-        this.corpfile = corpfile;
-    }
-    public void setTaxfile(String taxfile) {
-        this.taxfile = taxfile;
-    }
-    public void setLicencefile(String licencefile) {
-        this.licencefile = licencefile;
-    }
-    public void setOrgcodefile(String orgcodefile) {
-        this.orgcodefile = orgcodefile;
-    }
     public void setMerchStatus(MerchStatusType merchStatus) {
         this.merchStatus = merchStatus;
-    }
-    public void setFirsttime(Date firsttime) {
-        this.firsttime = firsttime;
     }
     public void setmInuser(Long mInuser) {
         this.mInuser = mInuser;
@@ -605,12 +296,6 @@ public class PojoMerchDeta extends PojoMember{
     public void setCvlexaopt(String cvlexaopt) {
         this.cvlexaopt = cvlexaopt;
     }
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
-    }
-    public void setZonecode(String zonecode) {
-        this.zonecode = zonecode;
-    }
     public void setPrdtver(String prdtver) {
         this.prdtver = prdtver;
     }
@@ -626,9 +311,6 @@ public class PojoMerchDeta extends PojoMember{
     public void setRoutver(String routver) {
         this.routver = routver;
     }
-    public void setCashver(String cashver) {
-        this.cashver = cashver;
-    }
     public void setParent(String parent) {
         this.parent = parent;
     }
@@ -638,26 +320,12 @@ public class PojoMerchDeta extends PojoMember{
     public void setRemarks(String remarks) {
         this.remarks = remarks;
     }
-    @Column(name = "CARDTYPE")
-    @Type(type = "com.zlebank.zplatform.member.pojo.usertype.CardSqlType")
-    public CardType getCardtype() {
-        return cardtype;
+    @Column(name = "SETLTYPE")
+    public String getSetltype() {
+        return setltype;
     }
-    public void setCardtype(CardType cardtype) {
-        this.cardtype = cardtype;
+    public void setSetltype(String setltype) {
+        this.setltype = setltype;
     }
-    @Column(name = "CONTADDRESS")
-    public String getContaddress() {
-        return contaddress;
-    }
-    public void setContaddress(String contaddress) {
-        this.contaddress = contaddress;
-    }
-    @Column(name = "CONTPOST")
-    public String getContpost() {
-        return contpost;
-    }
-    public void setContpost(String contpost) {
-        this.contpost = contpost;
-    }
+
 }
