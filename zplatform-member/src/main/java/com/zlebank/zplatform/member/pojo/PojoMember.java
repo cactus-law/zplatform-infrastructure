@@ -14,14 +14,13 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 
 import com.zlebank.zplatform.member.bean.enums.MemberStatusType;
@@ -73,9 +72,14 @@ public  class PojoMember {
     private Date intime;
     /**修改时间**/
     private Date uptime;
-    @SequenceGenerator(name="gen",sequenceName="SEQ_T_MERCH_DETA_MERCHID",initialValue=1,allocationSize=1)
+    @GenericGenerator(name = "id_gen", strategy = "enhanced-table", parameters = {
+            @Parameter(name = "table_name", value = "T_C_PRIMAY_KEY"),
+            @Parameter(name = "value_column_name", value = "NEXT_ID"),
+            @Parameter(name = "segment_column_name", value = "KEY_NAME"),
+            @Parameter(name = "segment_value", value = "MEMBER_ID"),
+            @Parameter(name = "increment_size", value = "1"),
+            @Parameter(name = "optimizer", value = "pooled-lo")})
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE,generator="gen")
     @Column(name="MEMID" ,nullable=false,unique=true)
     public long getMemid() {
         return memid;
