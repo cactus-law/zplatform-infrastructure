@@ -45,7 +45,7 @@ public  class PojoMember {
     /**会员ID**/
     private String memberId;
     /**合作机构**/
-    private String instiCode;
+    private Long instiId;
     /**会员昵称**/
     private String memberName;
     /**登录名**/
@@ -95,11 +95,11 @@ public  class PojoMember {
         this.memberId = memberId;
     }
     @Column(name = "INSTI_CODE")
-    public String getInstiCode() {
-        return instiCode;
+    public Long getInstiId() {
+        return instiId;
     }
-    public void setInstiCode(String instiCode) {
-        this.instiCode = instiCode;
+    public void setInstiId(Long instiId) {
+        this.instiId = instiId;
     }
     @Column(name = "MEMBER_NAME")
     public String getMemberName() {

@@ -16,6 +16,7 @@ import net.sf.json.JSONObject;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -30,6 +31,7 @@ import com.zlebank.zplatform.member.bean.Person;
 import com.zlebank.zplatform.member.bean.enums.MemberStatusType;
 import com.zlebank.zplatform.member.bean.enums.MemberType;
 import com.zlebank.zplatform.member.bean.enums.RealNameLvType;
+import com.zlebank.zplatform.member.dao.CoopInstiDAO;
 import com.zlebank.zplatform.member.dao.MemberDAO;
 import com.zlebank.zplatform.member.dao.PersonDAO;
 import com.zlebank.zplatform.member.exception.CreateBusiAcctFailedException;
@@ -39,6 +41,7 @@ import com.zlebank.zplatform.member.exception.InvalidMemberDataException;
 import com.zlebank.zplatform.member.exception.LoginFailedException;
 import com.zlebank.zplatform.member.exception.MemberBussinessException;
 import com.zlebank.zplatform.member.exception.PrimaykeyGeneratedException;
+import com.zlebank.zplatform.member.pojo.PojoCoopInsti;
 import com.zlebank.zplatform.member.pojo.PojoMember;
 import com.zlebank.zplatform.member.pojo.PojoPersonDeta;
 import com.zlebank.zplatform.member.service.MemberOperationService;
@@ -71,6 +74,8 @@ public class MemberOperationServiceImpl implements MemberOperationService {
     private PersonDAO personDAO;
     @Autowired
     private MemberDAO memberDAO;
+    @Autowired
+    private CoopInstiDAO coopInstiDAO;
     
     /**
      * 注册会员
@@ -215,7 +220,8 @@ public class MemberOperationServiceImpl implements MemberOperationService {
      * @param memberType 
      */
     private void setMemberComm(PojoMember pojo, MemberBean bean, MemberType memberType) {
-        pojo.setInstiCode(bean.getInstiCode());// 合作机构
+        PojoCoopInsti pojoCoopInsit  = coopInstiDAO.getByInstiCode(bean.getInstiCode());
+        pojo.setInstiId(pojoCoopInsit.getId());// 合作机构
         pojo.setMemberName(bean.getMemberName());// 会员昵称
         pojo.setLoginName(bean.getLoginName());// 登录名
         pojo.setPwd(Md5.getInstance().md5s(bean.getPwd()));// 登录密码
