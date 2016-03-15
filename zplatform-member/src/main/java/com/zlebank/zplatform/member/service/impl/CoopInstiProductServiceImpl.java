@@ -26,7 +26,7 @@ public class CoopInstiProductServiceImpl implements CoopInstiProductService {
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	public List<ProductModel> getProducts(long coopInstiId)
 			throws AbstractCoopInstiException {
-		PojoCoopInsti coopInsti = coopInstiDAO.get(coopInstiId);
+		PojoCoopInsti coopInsti = coopInstiDAO.getEager(coopInstiId);
 		if (coopInsti == null) {
 			throw new CoopInstiNotExistException(coopInstiId);
 		}

@@ -42,4 +42,10 @@ public interface CoopInstiDAO extends BaseDAO<PojoCoopInsti>{
      * @return
      */
     PojoCoopInsti getByInstiCode(String instiCode);
+    /**
+     * get by institution id and fetch eager
+     * @param coopInstiID
+     * @return
+     */
+    PojoCoopInsti getEager(long id);
 }
