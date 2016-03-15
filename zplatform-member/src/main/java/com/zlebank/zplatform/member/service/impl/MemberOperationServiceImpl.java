@@ -226,8 +226,8 @@ public class MemberOperationServiceImpl implements MemberOperationService {
         pojo.setStatus(MemberStatusType.NORMAL);// 会员状态，00-正常，02-冻结，99-注销
         pojo.setRegisterIdent("01");// 注册认证，01-手机认证，02-邮箱认证，03-Both
         Date current = new Date();
-        pojo.setIntime(current);// 会员注册时间
-        pojo.setUptime(current);// 修改时间
+        pojo.setInTime(current);// 会员注册时间
+        pojo.setUpTime(current);// 修改时间
     }
     /**
      * 数据校验
@@ -377,7 +377,7 @@ public class MemberOperationServiceImpl implements MemberOperationService {
             // 设置新的登陆密码
             String setPwd = Md5.getInstance().md5s(newPwd);
             pm.setPwd(setPwd);
-            pm.setUptime(new Date());
+            pm.setUpTime(new Date());
             memberDAO.update(pm);
             return true;
         } else {
@@ -421,7 +421,7 @@ public class MemberOperationServiceImpl implements MemberOperationService {
             // 设置新的支付密码
             String setPwd = Md5.getInstance().md5s(newPayPwd);
             pm.setPayPwd(setPwd);
-            pm.setUptime(new Date());
+            pm.setUpTime(new Date());
             memberDAO.update(pm);
             return true;
         } else {

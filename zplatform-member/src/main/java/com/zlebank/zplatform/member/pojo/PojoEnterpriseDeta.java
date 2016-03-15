@@ -1,7 +1,7 @@
 /* 
  * PojoEnterpriseDeta.java  
  * 
- * version TODO
+ * version v1.3
  *
  * 2016年2月24日 
  * 
@@ -35,14 +35,16 @@ import com.zlebank.zplatform.member.bean.enums.CardType;
 public class PojoEnterpriseDeta extends PojoMember{
     /**会员号**/
     private String enterpriseMemberId;
+    /** 企业名称 **/
+    private String merchName;
     /**合作机构id**/
     private Long coopInstiId;
     /**所属行业**/
     private String mcc;
     /**所属行业子类别**/
-    private String mcclist;
+    private String mccList;
     /**企业所属机构**/
-    private Long merchinsti;
+    private Long enterpriseInsti;
     /**企业所属省**/
     private Long province;
     /**企业所属市**/
@@ -50,9 +52,9 @@ public class PojoEnterpriseDeta extends PojoMember{
     /**企业所属县**/
     private Long street;
     /**企业行政地区代码（由商户所属县得到）**/
-    private String zonecode;
+    private String zoneCode;
     /**企业邮编**/
-    private String postcode;
+    private String postCode;
     /**企业地址**/
     private String address;
     /**企业邮箱**/
@@ -60,75 +62,75 @@ public class PojoEnterpriseDeta extends PojoMember{
     /**企业网址**/
     private String website;
     /**企业证件类型**/
-    private CardType cardtype;
+    private CardType cardType;
     /**税务登记证号**/
     private String taxno;
     /**营业执照号**/
-    private String licenceno;
+    private String licenceNo;
     /**组织机构代码证**/
-    private String orgcode;
+    private String orgCode;
     /**法人**/
     private String corporation;
     /**法人证件号码**/
-    private String corpno;
+    private String corpNo;
     /**法人身份证正面路径**/
-    private String corpfile;
+    private String corpFile;
     /**法人身份证背面路径**/
-    private String corpfileopp;
+    private String corpFileOpp;
     /**税务登记证文件路径**/
-    private String taxfile;
+    private String taxFile;
     /**营业执照文件路径**/
-    private String licencefile;
+    private String licenceFile;
     /**组织机构文件路径**/
-    private String orgcodefile;
+    private String orgCodeFile;
     /**联系人**/
     private String contact;
     /**联系人电话**/
-    private String contphone;
+    private String contPhone;
     /**联系人职位**/
-    private String conttitle;
+    private String contTitle;
     /**联系人邮箱**/
-    private String contemail;
+    private String contEmail;
     /**联系人地址**/
-    private String contaddress;
+    private String contAddress;
     /**联系人邮编**/
-    private String contpost;
+    private String contPost;
     /**客户来源**/
-    private String custfrom;
+    private String custFrom;
     /**客户经理**/
-    private String custmgr;
+    private String custMgr;
     /**客户经理部门**/
-    private String custmgrdept;
+    private String custMgrDept;
     /**是否授权人办理1-是0-否**/
-    private Long isdelegation;
+    private Long isDelegation;
     /**委托人**/
     private String signatory;
     /**委托人身份证**/
-    private String signcertno;
+    private String signCertNo;
     /**委托人证件照正面路径**/
-    private String signcertfile;
+    private String signCertFile;
     /**委托人证件照背面路径**/
-    private String signcertfileopp;
+    private String signCertFileOpp;
     /**状态**/
     private String enterpriseStatus;
     /**初次业务时间**/
-    private Date firsttime;
+    private Date firstTime;
     /**写入人**/
-    private Long inuser;
+    private Long inUser;
     /**写入时间**/
-    private Date intime;
+    private Date enterInTime;
     /**初审人**/
-    private Long stexauser;
+    private Long stexaUser;
     /**初审时间**/
-    private Date stexatime;
+    private Date stexaTime;
     /**初审意见**/
-    private String stexaopt;
+    private String stexaOpt;
     /**复核人**/
-    private Long cvlexauser;
+    private Long cvlexaUser;
     /**复核时间**/
-    private Date cvlexatime;
+    private Date cvlexaTime;
     /**复核意见**/
-    private String cvlexaopt;
+    private String cvlexaOpt;
     /**备注**/
     private String notes;
     /**备注**/
@@ -156,20 +158,21 @@ public class PojoEnterpriseDeta extends PojoMember{
     public void setMcc(String mcc) {
         this.mcc = mcc;
     }
-    @Column(name = "MCCLIST")
-    public String getMcclist() {
-        return mcclist;
+    @Column(name = "MCC_LIST")
+    public String getMccList() {
+        return mccList;
     }
-    public void setMcclist(String mcclist) {
-        this.mcclist = mcclist;
+    public void setMccList(String mccList) {
+        this.mccList = mccList;
     }
-    @Column(name = "MERCHINSTI")
-    public Long getMerchinsti() {
-        return merchinsti;
+    @Column(name = "ENTERPRISE_INSTI")
+    public Long getEnterpriseInsti() {
+        return enterpriseInsti;
     }
-    public void setMerchinsti(Long merchinsti) {
-        this.merchinsti = merchinsti;
+    public void setEnterpriseInsti(Long enterpriseInsti) {
+        this.enterpriseInsti = enterpriseInsti;
     }
+    
     @Column(name = "PROVINCE")
     public Long getProvince() {
         return province;
@@ -191,20 +194,21 @@ public class PojoEnterpriseDeta extends PojoMember{
     public void setStreet(Long street) {
         this.street = street;
     }
-    @Column(name = "ZONECODE")
-    public String getZonecode() {
-        return zonecode;
+    @Column(name = "ZONE_CODE")
+    public String getZoneCode() {
+        return zoneCode;
     }
-    public void setZonecode(String zonecode) {
-        this.zonecode = zonecode;
+    public void setZoneCode(String zoneCode) {
+        this.zoneCode = zoneCode;
     }
-    @Column(name = "POSTCODE")
-    public String getPostcode() {
-        return postcode;
+    @Column(name = "POST_CODE")
+    public String getPostCode() {
+        return postCode;
     }
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
+    public void setPostCode(String postCode) {
+        this.postCode = postCode;
     }
+
     @Column(name = "ADDRESS")
     public String getAddress() {
         return address;
@@ -226,14 +230,15 @@ public class PojoEnterpriseDeta extends PojoMember{
     public void setWebsite(String website) {
         this.website = website;
     }
-    @Column(name = "CARDTYPE")
+    @Column(name = "CARD_TYPE")
     @Type(type = "com.zlebank.zplatform.member.pojo.usertype.CardSqlType")
-    public CardType getCardtype() {
-        return cardtype;
+    public CardType getCardType() {
+        return cardType;
     }
-    public void setCardtype(CardType cardtype) {
-        this.cardtype = cardtype;
+    public void setCardType(CardType cardType) {
+        this.cardType = cardType;
     }
+
     @Column(name = "TAXNO")
     public String getTaxno() {
         return taxno;
@@ -241,20 +246,21 @@ public class PojoEnterpriseDeta extends PojoMember{
     public void setTaxno(String taxno) {
         this.taxno = taxno;
     }
-    @Column(name = "LICENCENO")
-    public String getLicenceno() {
-        return licenceno;
+    @Column(name = "LICENCE_NO")
+    public String getLicenceNo() {
+        return licenceNo;
     }
-    public void setLicenceno(String licenceno) {
-        this.licenceno = licenceno;
+    public void setLicenceNo(String licenceNo) {
+        this.licenceNo = licenceNo;
     }
-    @Column(name = "ORGCODE")
-    public String getOrgcode() {
-        return orgcode;
+    @Column(name = "ORG_CODE")
+    public String getOrgCode() {
+        return orgCode;
     }
-    public void setOrgcode(String orgcode) {
-        this.orgcode = orgcode;
+    public void setOrgCode(String orgCode) {
+        this.orgCode = orgCode;
     }
+
     @Column(name = "CORPORATION")
     public String getCorporation() {
         return corporation;
@@ -262,47 +268,47 @@ public class PojoEnterpriseDeta extends PojoMember{
     public void setCorporation(String corporation) {
         this.corporation = corporation;
     }
-    @Column(name = "CORPNO")
-    public String getCorpno() {
-        return corpno;
+    @Column(name = "CORP_NO")
+    public String getCorpNo() {
+        return corpNo;
     }
-    public void setCorpno(String corpno) {
-        this.corpno = corpno;
+    public void setCorpNo(String corpNo) {
+        this.corpNo = corpNo;
     }
-    @Column(name = "CORPFILE")
-    public String getCorpfile() {
-        return corpfile;
+    @Column(name = "CORP_FILE")
+    public String getCorpFile() {
+        return corpFile;
     }
-    public void setCorpfile(String corpfile) {
-        this.corpfile = corpfile;
+    public void setCorpFile(String corpFile) {
+        this.corpFile = corpFile;
     }
-    @Column(name = "CORPFILEOPP")
-    public String getCorpfileopp() {
-        return corpfileopp;
+    @Column(name = "CORP_FILE_OPP")
+    public String getCorpFileOpp() {
+        return corpFileOpp;
     }
-    public void setCorpfileopp(String corpfileopp) {
-        this.corpfileopp = corpfileopp;
+    public void setCorpFileOpp(String corpFileOpp) {
+        this.corpFileOpp = corpFileOpp;
     }
-    @Column(name = "TAXFILE")
-    public String getTaxfile() {
-        return taxfile;
+    @Column(name = "TAX_FILE")
+    public String getTaxFile() {
+        return taxFile;
     }
-    public void setTaxfile(String taxfile) {
-        this.taxfile = taxfile;
+    public void setTaxFile(String taxFile) {
+        this.taxFile = taxFile;
     }
-    @Column(name = "LICENCEFILE")
-    public String getLicencefile() {
-        return licencefile;
+    @Column(name = "LICENCE_FILE")
+    public String getLicenceFile() {
+        return licenceFile;
     }
-    public void setLicencefile(String licencefile) {
-        this.licencefile = licencefile;
+    public void setLicenceFile(String licenceFile) {
+        this.licenceFile = licenceFile;
     }
-    @Column(name = "ORGCODEFILE")
-    public String getOrgcodefile() {
-        return orgcodefile;
+    @Column(name = "ORG_CODE_FILE")
+    public String getOrgCodeFile() {
+        return orgCodeFile;
     }
-    public void setOrgcodefile(String orgcodefile) {
-        this.orgcodefile = orgcodefile;
+    public void setOrgCodeFile(String orgCodeFile) {
+        this.orgCodeFile = orgCodeFile;
     }
     @Column(name = "CONTACT")
     public String getContact() {
@@ -311,68 +317,68 @@ public class PojoEnterpriseDeta extends PojoMember{
     public void setContact(String contact) {
         this.contact = contact;
     }
-    @Column(name = "CONTPHONE")
-    public String getContphone() {
-        return contphone;
+    @Column(name = "CONT_PHONE")
+    public String getContPhone() {
+        return contPhone;
     }
-    public void setContphone(String contphone) {
-        this.contphone = contphone;
+    public void setContPhone(String contPhone) {
+        this.contPhone = contPhone;
     }
-    @Column(name = "CONTTITLE")
-    public String getConttitle() {
-        return conttitle;
+    @Column(name = "CONT_TITLE")
+    public String getContTitle() {
+        return contTitle;
     }
-    public void setConttitle(String conttitle) {
-        this.conttitle = conttitle;
+    public void setContTitle(String contTitle) {
+        this.contTitle = contTitle;
     }
-    @Column(name = "CONTEMAIL")
-    public String getContemail() {
-        return contemail;
+    @Column(name = "CONT_EMAIL")
+    public String getContEmail() {
+        return contEmail;
     }
-    public void setContemail(String contemail) {
-        this.contemail = contemail;
+    public void setContEmail(String contEmail) {
+        this.contEmail = contEmail;
     }
-    @Column(name = "CONTADDRESS")
-    public String getContaddress() {
-        return contaddress;
+    @Column(name = "CONT_ADDRESS")
+    public String getContAddress() {
+        return contAddress;
     }
-    public void setContaddress(String contaddress) {
-        this.contaddress = contaddress;
+    public void setContAddress(String contAddress) {
+        this.contAddress = contAddress;
     }
-    @Column(name = "CONTPOST")
-    public String getContpost() {
-        return contpost;
+    @Column(name = "CONT_POST")
+    public String getContPost() {
+        return contPost;
     }
-    public void setContpost(String contpost) {
-        this.contpost = contpost;
+    public void setContPost(String contPost) {
+        this.contPost = contPost;
     }
-    @Column(name = "CUSTFROM")
-    public String getCustfrom() {
-        return custfrom;
+    @Column(name = "CUST_FROM")
+    public String getCustFrom() {
+        return custFrom;
     }
-    public void setCustfrom(String custfrom) {
-        this.custfrom = custfrom;
+    public void setCustFrom(String custFrom) {
+        this.custFrom = custFrom;
     }
-    @Column(name = "CUSTMGR")
-    public String getCustmgr() {
-        return custmgr;
+    @Column(name = "CUST_MGR")
+    public String getCustMgr() {
+        return custMgr;
     }
-    public void setCustmgr(String custmgr) {
-        this.custmgr = custmgr;
+    public void setCustMgr(String custMgr) {
+        this.custMgr = custMgr;
     }
-    @Column(name = "CUSTMGRDEPT")
-    public String getCustmgrdept() {
-        return custmgrdept;
+    @Column(name = "CUST_MGR_DEPT")
+    public String getCustMgrDept() {
+        return custMgrDept;
     }
-    public void setCustmgrdept(String custmgrdept) {
-        this.custmgrdept = custmgrdept;
+    public void setCustMgrDept(String custMgrDept) {
+        this.custMgrDept = custMgrDept;
     }
-    @Column(name = "ISDELEGATION")
-    public Long getIsdelegation() {
-        return isdelegation;
+    @Column(name = "IS_DELEGATION")
+    public Long getIsDelegation() {
+        return isDelegation;
     }
-    public void setIsdelegation(Long isdelegation) {
-        this.isdelegation = isdelegation;
+    public void setIsDelegation(Long isDelegation) {
+        this.isDelegation = isDelegation;
     }
     @Column(name = "SIGNATORY")
     public String getSignatory() {
@@ -381,26 +387,26 @@ public class PojoEnterpriseDeta extends PojoMember{
     public void setSignatory(String signatory) {
         this.signatory = signatory;
     }
-    @Column(name = "SIGNCERTNO")
-    public String getSigncertno() {
-        return signcertno;
+    @Column(name = "SIGN_CERT_NO")
+    public String getSignCertNo() {
+        return signCertNo;
     }
-    public void setSigncertno(String signcertno) {
-        this.signcertno = signcertno;
+    public void setSignCertNo(String signCertNo) {
+        this.signCertNo = signCertNo;
     }
-    @Column(name = "SIGNCERTFILE")
-    public String getSigncertfile() {
-        return signcertfile;
+    @Column(name = "SIGN_CERT_FILE")
+    public String getSignCertFile() {
+        return signCertFile;
     }
-    public void setSigncertfile(String signcertfile) {
-        this.signcertfile = signcertfile;
+    public void setSignCertFile(String signCertFile) {
+        this.signCertFile = signCertFile;
     }
-    @Column(name = "SIGNCERTFILEOPP")
-    public String getSigncertfileopp() {
-        return signcertfileopp;
+    @Column(name = "SIGN_CERT_FILE_OPP")
+    public String getSignCertFileOpp() {
+        return signCertFileOpp;
     }
-    public void setSigncertfileopp(String signcertfileopp) {
-        this.signcertfileopp = signcertfileopp;
+    public void setSignCertFileOpp(String signCertFileOpp) {
+        this.signCertFileOpp = signCertFileOpp;
     }
     @Column(name = "STATUS")
     public String getEnterpriseStatus() {
@@ -409,68 +415,68 @@ public class PojoEnterpriseDeta extends PojoMember{
     public void setEnterpriseStatus(String enterpriseStatus) {
         this.enterpriseStatus = enterpriseStatus;
     }
-    @Column(name = "FIRSTTIME")
-    public Date getFirsttime() {
-        return firsttime;
+    @Column(name = "FIRST_TIME")
+    public Date getFirstTime() {
+        return firstTime;
     }
-    public void setFirsttime(Date firsttime) {
-        this.firsttime = firsttime;
+    public void setFirstTime(Date firstTime) {
+        this.firstTime = firstTime;
     }
-    @Column(name = "INUSER")
-    public Long getInuser() {
-        return inuser;
+    @Column(name = "IN_USER")
+    public Long getInUser() {
+        return inUser;
     }
-    public void setInuser(Long inuser) {
-        this.inuser = inuser;
+    public void setInUser(Long inUser) {
+        this.inUser = inUser;
     }
-    @Column(name = "INTIME")
-    public Date getIntime() {
-        return intime;
+    @Column(name = "IN_TIME")
+    public Date getEnterInTime() {
+        return enterInTime;
     }
-    public void setIntime(Date intime) {
-        this.intime = intime;
+    public void setEnterInTime(Date enterInTime) {
+        this.enterInTime = enterInTime;
     }
-    @Column(name = "STEXAUSER")
-    public Long getStexauser() {
-        return stexauser;
+    @Column(name = "STEXA_USER")
+    public Long getStexaUser() {
+        return stexaUser;
     }
-    public void setStexauser(Long stexauser) {
-        this.stexauser = stexauser;
+    public void setStexaUser(Long stexaUser) {
+        this.stexaUser = stexaUser;
     }
-    @Column(name = "STEXATIME")
-    public Date getStexatime() {
-        return stexatime;
+    @Column(name = "STEXA_TIME")
+    public Date getStexaTime() {
+        return stexaTime;
     }
-    public void setStexatime(Date stexatime) {
-        this.stexatime = stexatime;
+    public void setStexaTime(Date stexaTime) {
+        this.stexaTime = stexaTime;
     }
-    @Column(name = "STEXAOPT")
-    public String getStexaopt() {
-        return stexaopt;
+    @Column(name = "STEXA_OPT")
+    public String getStexaOpt() {
+        return stexaOpt;
     }
-    public void setStexaopt(String stexaopt) {
-        this.stexaopt = stexaopt;
+    public void setStexaOpt(String stexaOpt) {
+        this.stexaOpt = stexaOpt;
     }
-    @Column(name = "CVLEXAUSER")
-    public Long getCvlexauser() {
-        return cvlexauser;
+    @Column(name = "CVLEXA_USER")
+    public Long getCvlexaUser() {
+        return cvlexaUser;
     }
-    public void setCvlexauser(Long cvlexauser) {
-        this.cvlexauser = cvlexauser;
+    public void setCvlexaUser(Long cvlexaUser) {
+        this.cvlexaUser = cvlexaUser;
     }
-    @Column(name = "CVLEXATIME")
-    public Date getCvlexatime() {
-        return cvlexatime;
+    @Column(name = "CVLEXA_TIME")
+    public Date getCvlexaTime() {
+        return cvlexaTime;
     }
-    public void setCvlexatime(Date cvlexatime) {
-        this.cvlexatime = cvlexatime;
+    public void setCvlexaTime(Date cvlexaTime) {
+        this.cvlexaTime = cvlexaTime;
     }
-    @Column(name = "CVLEXAOPT")
-    public String getCvlexaopt() {
-        return cvlexaopt;
+    @Column(name = "CVLEXA_OPT")
+    public String getCvlexaOpt() {
+        return cvlexaOpt;
     }
-    public void setCvlexaopt(String cvlexaopt) {
-        this.cvlexaopt = cvlexaopt;
+    public void setCvlexaOpt(String cvlexaOpt) {
+        this.cvlexaOpt = cvlexaOpt;
     }
     @Column(name = "NOTES")
     public String getNotes() {
@@ -485,6 +491,13 @@ public class PojoEnterpriseDeta extends PojoMember{
     }
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+    @Column(name = "ENTERPRISE_NAME")
+    public String getMerchName() {
+        return merchName;
+    }
+    public void setMerchName(String merchName) {
+        this.merchName = merchName;
     }
  /*   
   * 设值时Copy用
@@ -540,6 +553,5 @@ public class PojoEnterpriseDeta extends PojoMember{
     pojo.setNotes(bean.getNotes());// 备注
     pojo.setRemarks(bean.getRemarks());// 备注
     */
-
 
 }

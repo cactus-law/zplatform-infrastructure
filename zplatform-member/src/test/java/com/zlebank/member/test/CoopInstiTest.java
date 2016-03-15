@@ -31,13 +31,14 @@ public class CoopInstiTest {
 	}
 
 	@Test
+	@Ignore
 	public void testCreate() {
 		CoopInstiService coopInstiService = (CoopInstiService) context
 				.getBean("coopInstiServiceImpl");
 		String instiCode;
 		try {
 			// test add a new Coop Insti
-			instiCode = coopInstiService.createCoopInsti("证联金融", 2);
+			instiCode = coopInstiService.createCoopInsti(instiName, 2);
 			Assert.assertTrue(instiCode.startsWith("3"));
 			CoopInstiMK coopInstiMK = coopInstiService.getCoopInstiMK(
 					instiCode, TerminalAccessType.WIRELESS);
@@ -62,14 +63,19 @@ public class CoopInstiTest {
 	}
 
 	@Test
-	@Ignore
 	public void testGetCoopProduct() {
 		CoopInstiProductService coopInstiService = (CoopInstiProductService) context
 				.getBean("coopInstiProductServiceImpl");
-		instiId = 24;
+
 		try {
-			List<ProductModel> products = coopInstiService
-					.getProducts(instiId);
+			// test there is no product related to coop insti
+			instiId = 27;
+			List<ProductModel> products = coopInstiService.getProducts(instiId);
+			Assert.assertTrue(products != null && products.size() == 0);
+
+			// test there are products related to coop insti
+			instiId = 25;
+			products = coopInstiService.getProducts(instiId);
 			Assert.assertTrue(products != null && products.size() != 0);
 		} catch (AbstractCoopInstiException e) {
 			e.printStackTrace();
@@ -78,20 +84,20 @@ public class CoopInstiTest {
 	}
 
 	@Test
-	@Ignore
 	public void testGetAllCoopInsti() {
 		CoopInstiService coopInstiService = (CoopInstiService) context
 				.getBean("coopInstiServiceImpl");
 		List<CoopInsti> coopInstis = coopInstiService.getAllCoopInsti();
 		Assert.assertTrue(coopInstis != null && coopInstis.size() != 0);
 	}
-	
+
 	@Test
-	@Ignore
 	public void testGetCoopInstiByInstiCode() {
 		CoopInstiService coopInstiService = (CoopInstiService) context
 				.getBean("coopInstiServiceImpl");
-		CoopInsti coopInstis = coopInstiService.getInstiByInstiCode("300000000000014");
-		Assert.assertTrue(coopInstis != null && coopInstis.getInstiCode().equals("300000000000014"));
+		CoopInsti coopInstis = coopInstiService
+				.getInstiByInstiCode("300000000000014");
+		Assert.assertTrue(coopInstis != null
+				&& coopInstis.getInstiCode().equals("300000000000014"));
 	}
 }
