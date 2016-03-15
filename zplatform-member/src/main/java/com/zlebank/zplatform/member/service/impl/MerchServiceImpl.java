@@ -74,18 +74,18 @@ public class MerchServiceImpl implements MerchService {
               throw new MemberBussinessException("M100005");
           }
             PojoMerchDeta merchPo=  BeanCopyUtil.copyBean(PojoMerchDeta.class, mb);
-            merchPo.setPrdtver(merch.getPrdtver());
-            merchPo.setFeever(merch.getFeever());
-            merchPo.setSpiltver(merch.getSpiltver());
-            merchPo.setRiskver(merch.getRiskver());
-            merchPo.setRoutver(merch.getRoutver());
+            merchPo.setPrdtVer(merch.getPrdtVer());
+            merchPo.setFeeVer(merch.getFeeVer());
+            merchPo.setSpiltVer(merch.getSpiltVer());
+            merchPo.setRiskVer(merch.getRiskVer());
+            merchPo.setRoutVer(merch.getRoutVer());
             //得到序列
             @SuppressWarnings("deprecation")
             String memberId=primayService.getNexId(MERCHPARATYPE);
            Date date=new Date();
-            merchPo.setmIntime(date);
-            merchPo.setmIntime(date);
-            merchPo.setmInuser(userId);
+            merchPo.setInTime(date);
+            merchPo.setInTime(date);
+            merchPo.setInUser(userId);
             merchPo.setMemberId(memberId);
             merchPo.setMerchStatus(MerchStatusType.NORMAL);
             merchDao.saveA(merchPo);
