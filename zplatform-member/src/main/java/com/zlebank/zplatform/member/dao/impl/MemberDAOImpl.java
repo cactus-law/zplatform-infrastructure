@@ -91,10 +91,10 @@ public class MemberDAOImpl extends HibernateBaseDAOImpl<PojoMember>
      * @return
      */
     @Override
-    public PojoMember getMemberByLoginNameAndCoopInsti(String loginName, String instiCode) {
+    public PojoMember getMemberByLoginNameAndCoopInsti(String loginName, long instiId) {
         Criteria crite=   this.getSession().createCriteria(PojoMember.class);
         crite .add(Restrictions.eq("loginName", loginName));
-        crite .add(Restrictions.eq("instiCode", instiCode));
+        crite .add(Restrictions.eq("instiId", instiId));
         PojoMember member = (PojoMember) crite.uniqueResult();
         return member;
     }
@@ -107,7 +107,7 @@ public class MemberDAOImpl extends HibernateBaseDAOImpl<PojoMember>
      */
     @Override
     public PojoMember getMemberByPhoneAndCoopInsti(String phone,
-            String instiCode) {
+            long instiCode) {
         Criteria crite=   this.getSession().createCriteria(PojoMember.class);
         crite .add(Restrictions.eq("phone", phone));
         crite .add(Restrictions.eq("instiCode", instiCode));

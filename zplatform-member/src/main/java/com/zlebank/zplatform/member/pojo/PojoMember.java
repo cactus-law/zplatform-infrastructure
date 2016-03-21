@@ -14,6 +14,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -80,6 +81,7 @@ public  class PojoMember {
             @Parameter(name = "increment_size", value = "1"),
             @Parameter(name = "optimizer", value = "pooled-lo")})
     @Id
+    @GeneratedValue(generator = "id_gen")
     @Column(name="MEM_ID" ,nullable=false,unique=true)
     public long getMemId() {
         return memId;

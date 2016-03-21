@@ -2,12 +2,8 @@ package com.zlebank.zplatform.member.dao.impl;
 
 import java.util.List;
 
-import javax.persistence.FlushModeType;
-
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
-import org.hibernate.FlushMode;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;

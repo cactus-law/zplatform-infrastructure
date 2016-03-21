@@ -16,7 +16,6 @@ import net.sf.json.JSONObject;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -41,7 +40,6 @@ import com.zlebank.zplatform.member.exception.InvalidMemberDataException;
 import com.zlebank.zplatform.member.exception.LoginFailedException;
 import com.zlebank.zplatform.member.exception.MemberBussinessException;
 import com.zlebank.zplatform.member.exception.PrimaykeyGeneratedException;
-import com.zlebank.zplatform.member.pojo.PojoCoopInsti;
 import com.zlebank.zplatform.member.pojo.PojoMember;
 import com.zlebank.zplatform.member.pojo.PojoPersonDeta;
 import com.zlebank.zplatform.member.service.MemberOperationService;
@@ -220,8 +218,7 @@ public class MemberOperationServiceImpl implements MemberOperationService {
      * @param memberType 
      */
     private void setMemberComm(PojoMember pojo, MemberBean bean, MemberType memberType) {
-        PojoCoopInsti pojoCoopInsit  = coopInstiDAO.getByInstiCode(bean.getInstiCode());
-        pojo.setInstiId(pojoCoopInsit.getId());// 合作机构
+        pojo.setInstiId(bean.getInstiId());// 合作机构
         pojo.setMemberName(bean.getMemberName());// 会员昵称
         pojo.setLoginName(bean.getLoginName());// 登录名
         pojo.setPwd(Md5.getInstance().md5s(bean.getPwd()));// 登录密码
@@ -263,7 +260,7 @@ public class MemberOperationServiceImpl implements MemberOperationService {
         if (!RegExpValidatorUtil.IsPassword(member.getPwd())) {
             throw new InvalidMemberDataException("登陆密码不符合要求（要求长度6-18位且字符与数字同时出现）");
         }
-        if (StringUtil.isEmpty(member.getInstiCode())) {
+        if (member.getInstiId() == 0) {
             throw new InvalidMemberDataException("合作机构不可为空");
         }
     }
@@ -286,14 +283,14 @@ public class MemberOperationServiceImpl implements MemberOperationService {
         if (StringUtil.isEmpty(member.getLoginName()) && StringUtil.isEmpty(member.getPhone())) {
             throw new DataCheckFailedException("手机号和登陆名不可同时为空");
         }
-        if (StringUtil.isEmpty(member.getInstiCode())) {
+        if (member.getInstiId() == 0) {
             throw new DataCheckFailedException("机构号不可为空");
         }
         PojoMember pm=null;
         if (StringUtil.isNotEmpty(member.getLoginName())) {
-            pm = memberDAO.getMemberByLoginNameAndCoopInsti(member.getLoginName(), member.getInstiCode());
+            pm = memberDAO.getMemberByLoginNameAndCoopInsti(member.getLoginName(), member.getInstiId());
         } else if (StringUtil.isNotEmpty(member.getPhone())) {
-            pm = memberDAO.getMemberByPhoneAndCoopInsti(member.getPhone(), member.getInstiCode());
+            pm = memberDAO.getMemberByPhoneAndCoopInsti(member.getPhone(), member.getInstiId());
         }
         if (pm == null) {
             throw new LoginFailedException("用户名不存在");
@@ -323,7 +320,7 @@ public class MemberOperationServiceImpl implements MemberOperationService {
         if (StringUtil.isEmpty(member.getLoginName()) && StringUtil.isEmpty(member.getPhone())) {
             throw new DataCheckFailedException("手机号和登陆名不可同时为空");
         }
-        if (StringUtil.isEmpty(member.getInstiCode())) {
+        if (member.getInstiId() == 0) {
             throw new DataCheckFailedException("机构号不可为空");
         }
         if (StringUtil.isEmpty(member.getPaypwd())) {
@@ -331,9 +328,9 @@ public class MemberOperationServiceImpl implements MemberOperationService {
         }
         PojoMember pm=null;
         if (StringUtil.isNotEmpty(member.getLoginName())) {
-            pm = memberDAO.getMemberByLoginNameAndCoopInsti(member.getLoginName(), member.getInstiCode());
+            pm = memberDAO.getMemberByLoginNameAndCoopInsti(member.getLoginName(), member.getInstiId());
         } else if (StringUtil.isNotEmpty(member.getPhone())) {
-            pm = memberDAO.getMemberByPhoneAndCoopInsti(member.getPhone(), member.getInstiCode());
+            pm = memberDAO.getMemberByPhoneAndCoopInsti(member.getPhone(), member.getInstiId());
         }
         if (pm == null) {
             return false;
@@ -366,14 +363,14 @@ public class MemberOperationServiceImpl implements MemberOperationService {
         if (StringUtil.isEmpty(member.getLoginName()) && StringUtil.isEmpty(member.getPhone())) {
             throw new DataCheckFailedException("手机号和登陆名不可同时为空");
         }
-        if (StringUtil.isEmpty(member.getInstiCode())) {
+        if (member.getInstiId() == 0) {
             throw new DataCheckFailedException("机构号不可为空");
         }
         PojoMember pm=null;
         if (StringUtil.isNotEmpty(member.getLoginName())) {
-            pm = memberDAO.getMemberByLoginNameAndCoopInsti(member.getLoginName(), member.getInstiCode());
+            pm = memberDAO.getMemberByLoginNameAndCoopInsti(member.getLoginName(), member.getInstiId());
         } else if (StringUtil.isNotEmpty(member.getPhone())) {
-            pm = memberDAO.getMemberByPhoneAndCoopInsti(member.getPhone(), member.getInstiCode());
+            pm = memberDAO.getMemberByPhoneAndCoopInsti(member.getPhone(), member.getInstiId());
         }
         if (pm == null) {
             return false;
@@ -410,14 +407,14 @@ public class MemberOperationServiceImpl implements MemberOperationService {
         if (StringUtil.isEmpty(member.getLoginName()) && StringUtil.isEmpty(member.getPhone())) {
             throw new DataCheckFailedException("手机号和登陆名不可同时为空");
         }
-        if (StringUtil.isEmpty(member.getInstiCode())) {
+        if (member.getInstiId() == 0) {
             throw new DataCheckFailedException("机构号不可为空");
         }
         PojoMember pm=null;
         if (StringUtil.isNotEmpty(member.getLoginName())) {
-            pm = memberDAO.getMemberByLoginNameAndCoopInsti(member.getLoginName(), member.getInstiCode());
+            pm = memberDAO.getMemberByLoginNameAndCoopInsti(member.getLoginName(), member.getInstiId());
         } else if (StringUtil.isNotEmpty(member.getPhone())) {
-            pm = memberDAO.getMemberByPhoneAndCoopInsti(member.getPhone(), member.getInstiCode());
+            pm = memberDAO.getMemberByPhoneAndCoopInsti(member.getPhone(), member.getInstiId());
         }
         if (pm == null) {
             return false;

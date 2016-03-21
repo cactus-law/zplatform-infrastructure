@@ -25,7 +25,7 @@ public class MemberBean {
     /**会员ID**/
     private String memberId;
     /** 合作机构 */
-    private String instiCode;
+    private long instiId;
     /**"会员名称**/
     private String memberName;
     /**"登陆会员名称**/
@@ -61,12 +61,7 @@ public class MemberBean {
     public void setMemberId(String memberId) {
         this.memberId = memberId;
     }
-    public String getInstiCode() {
-        return instiCode;
-    }
-    public void setInstiCode(String instiCode) {
-        this.instiCode = instiCode;
-    }
+
     public String getMemberName() {
         return memberName;
     }
@@ -132,6 +127,12 @@ public class MemberBean {
     }
     public void setOperUserId(long operUserId) {
         this.operUserId = operUserId;
+    }
+    public long getInstiId() {
+        return instiId;
+    }
+    public void setInstiId(long instiId) {
+        this.instiId = instiId;
     }
 
     

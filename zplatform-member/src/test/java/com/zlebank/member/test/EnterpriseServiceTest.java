@@ -13,7 +13,6 @@ package com.zlebank.member.test;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.util.Assert;
 
 import com.zlebank.zplatform.member.bean.EnterpriseBean;
