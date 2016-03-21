@@ -36,7 +36,7 @@ public class PojoEnterpriseDeta extends PojoMember{
     /**会员号**/
     private String enterpriseMemberId;
     /** 企业名称 **/
-    private String merchName;
+    private String enterpriseName;
     /**合作机构id**/
     private Long coopInstiId;
     /**所属行业**/
@@ -64,7 +64,7 @@ public class PojoEnterpriseDeta extends PojoMember{
     /**企业证件类型**/
     private CardType cardType;
     /**税务登记证号**/
-    private String taxno;
+    private String taxNo;
     /**营业执照号**/
     private String licenceNo;
     /**组织机构代码证**/
@@ -239,12 +239,12 @@ public class PojoEnterpriseDeta extends PojoMember{
         this.cardType = cardType;
     }
 
-    @Column(name = "TAXNO")
-    public String getTaxno() {
-        return taxno;
+    @Column(name = "TAX_NO")
+    public String getTaxNo() {
+        return taxNo;
     }
-    public void setTaxno(String taxno) {
-        this.taxno = taxno;
+    public void setTaxNo(String taxNo) {
+        this.taxNo = taxNo;
     }
     @Column(name = "LICENCE_NO")
     public String getLicenceNo() {
@@ -493,11 +493,11 @@ public class PojoEnterpriseDeta extends PojoMember{
         this.remarks = remarks;
     }
     @Column(name = "ENTERPRISE_NAME")
-    public String getMerchName() {
-        return merchName;
+    public String getEnterpriseName() {
+        return enterpriseName;
     }
-    public void setMerchName(String merchName) {
-        this.merchName = merchName;
+    public void setEnterpriseName(String enterpriseName) {
+        this.enterpriseName = enterpriseName;
     }
  /*   
   * 设值时Copy用
@@ -553,5 +553,6 @@ public class PojoEnterpriseDeta extends PojoMember{
     pojo.setNotes(bean.getNotes());// 备注
     pojo.setRemarks(bean.getRemarks());// 备注
     */
+
 
 }

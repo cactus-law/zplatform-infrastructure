@@ -16,29 +16,39 @@
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="accDataSource" />
-		<property name="annotatedClasses">
+		<property name="packagesToScan">
 			<list>
-				<value>com.zlebank.zplatform.acc.pojo.PojoAbstractSubject</value>
-				<value>com.zlebank.zplatform.acc.pojo.PojoSubject</value>
-				<value>com.zlebank.zplatform.acc.pojo.PojoAccount</value>
-				<value>com.zlebank.zplatform.acc.pojo.PojoAccFrozenTask</value>
-				<value>com.zlebank.zplatform.acc.pojo.PojoBusiAcct</value>
-				<value>com.zlebank.zplatform.acc.pojo.PojoBusiAcctSubjectMapping
-				</value>
-				<value>com.zlebank.zplatform.acc.pojo.PojoSubjectRuleConfigure
-				</value>
-				<value>com.zlebank.zplatform.acc.pojo.PojoAccEntry</value>
-				<value>com.zlebank.zplatform.member.pojo.PojoMemberBase</value>
-				<value> com.zlebank.zplatform.member.pojo.PojoMerchDeta</value>
-				<value>com.zlebank.zplatform.member.pojo.PojoPersonDeta</value>
-				<value>com.zlebank.zplatform.member.pojo.PojoParaDic</value>
-				<value>com.zlebank.zplatform.member.pojo.PojoAutonymIdenti</value>
-				<value>com.zlebank.zplatform.member.pojo.PojoQuickpayCust</value>
-				<value>com.zlebank.zplatform.member.pojo.PojoCoopInsti</value>
-				<value>com.zlebank.zplatform.member.pojo.PojoInstiMK</value>
-				<value>com.zlebank.zplatform.commons.dao.pojo.ProductModel</value>
+				<value>com.zlebank.zplatform.trade.model</value>
+				<value>com.zlebank.zplatform.acc.pojo</value>
+				<value>com.zlebank.zplatform.sms.pojo</value>
+				<value>com.zlebank.zplatform.commons.dao.pojo</value>
+				<value>com.zlebank.zplatform.member.pojo</value>
+				<value>com.zlebank.zplatform.specification.pojo</value>
 			</list>
 		</property>
+<!-- 		<property name="annotatedClasses"> -->
+<!-- 			<list> -->
+<!-- 				<value>com.zlebank.zplatform.acc.pojo.PojoAbstractSubject</value> -->
+<!-- 				<value>com.zlebank.zplatform.acc.pojo.PojoSubject</value> -->
+<!-- 				<value>com.zlebank.zplatform.acc.pojo.PojoAccount</value> -->
+<!-- 				<value>com.zlebank.zplatform.acc.pojo.PojoAccFrozenTask</value> -->
+<!-- 				<value>com.zlebank.zplatform.acc.pojo.PojoBusiAcct</value> -->
+<!-- 				<value>com.zlebank.zplatform.acc.pojo.PojoBusiAcctSubjectMapping -->
+<!-- 				</value> -->
+<!-- 				<value>com.zlebank.zplatform.acc.pojo.PojoSubjectRuleConfigure -->
+<!-- 				</value> -->
+<!-- 				<value>com.zlebank.zplatform.acc.pojo.PojoAccEntry</value> -->
+<!-- 				<value>com.zlebank.zplatform.member.pojo.PojoMemberBase</value> -->
+<!-- 				<value> com.zlebank.zplatform.member.pojo.PojoMerchDeta</value> -->
+<!-- 				<value>com.zlebank.zplatform.member.pojo.PojoPersonDeta</value> -->
+<!-- 				<value>com.zlebank.zplatform.member.pojo.PojoParaDic</value> -->
+<!-- 				<value>com.zlebank.zplatform.member.pojo.PojoAutonymIdenti</value> -->
+<!-- 				<value>com.zlebank.zplatform.member.pojo.PojoQuickpayCust</value> -->
+<!-- 				<value>com.zlebank.zplatform.member.pojo.PojoCoopInsti</value> -->
+<!-- 				<value>com.zlebank.zplatform.member.pojo.PojoInstiMK</value> -->
+<!-- 				<value>com.zlebank.zplatform.commons.dao.pojo.ProductModel</value> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
 		<property name="hibernateProperties">
 			<props>
 				<prop key="dialect">org.hibernate.dialect.Oracle9Dialect</prop>
