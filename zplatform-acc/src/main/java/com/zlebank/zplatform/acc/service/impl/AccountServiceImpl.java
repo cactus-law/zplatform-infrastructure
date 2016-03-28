@@ -184,7 +184,9 @@ public class AccountServiceImpl implements AccountService {
     public Account getAccountBalanceById(long accountId) {
         Account rtn = new Account();
         PojoAccount pojoAccount = accountDAO.get(accountId);
+        rtn.setFronzenBalance(pojoAccount.getFrozenBalance());
         rtn.setBalance(pojoAccount.getBalance());
+        rtn.setTotalBalance(pojoAccount.getTotalBanance());
         rtn.setStatus(pojoAccount.getStatus().getCode());
         return rtn;
     }

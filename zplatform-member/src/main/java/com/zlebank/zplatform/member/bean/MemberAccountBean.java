@@ -27,6 +27,10 @@ public class MemberAccountBean {
     private String busiCode;
     /** 余额 **/
     private BigDecimal balance;
+    /** 冻结余额 **/
+    private BigDecimal frozenBalance;
+    /** 总余额 **/
+    private BigDecimal totalBalance;
     /** 状态 */
     private String status;
     /** 用途 */
@@ -62,6 +66,22 @@ public class MemberAccountBean {
 
     public void setUsage(Usage usage) {
         this.usage = usage;
+    }
+
+    public BigDecimal getFrozenBalance() {
+        return frozenBalance;
+    }
+
+    public void setFrozenBalance(BigDecimal frozenBalance) {
+        this.frozenBalance = frozenBalance;
+    }
+
+    public BigDecimal getTotalBalance() {
+        return totalBalance;
+    }
+
+    public void setTotalBalance(BigDecimal totalBalance) {
+        this.totalBalance = totalBalance;
     }
     
 }
