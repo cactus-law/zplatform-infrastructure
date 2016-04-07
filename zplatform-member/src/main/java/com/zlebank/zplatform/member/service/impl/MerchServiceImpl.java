@@ -159,4 +159,11 @@ public class MerchServiceImpl implements MerchService {
       return merchDao.getMerchBymemberId(memberId);
     }
 
+    @Override
+    @Transactional(propagation=Propagation.REQUIRED,rollbackFor=Throwable.class)
+    public void update(PojoMerchDeta pojoMerchDeta) {
+         merchDao.update(pojoMerchDeta);
+        
+    }
+
 }
