@@ -73,7 +73,7 @@ public class PojoCoopInsti {
         this.instiName = instiName;
     }
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "TL_COOPINSTI_PRODUCT", joinColumns = {@JoinColumn(name = "COOP_INSTI_ID")}, inverseJoinColumns = {@JoinColumn(name = "PROUCT_ID")})
     public List<ProductModel> getProducts() {
         return products;

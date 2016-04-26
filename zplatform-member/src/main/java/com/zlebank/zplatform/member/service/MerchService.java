@@ -68,4 +68,5 @@ public interface MerchService {
      * @return
      */
    public  PojoMerchDeta  getMerchBymemberId(String memberId);
+   public  void  update(PojoMerchDeta pojoMerchDeta);
 }

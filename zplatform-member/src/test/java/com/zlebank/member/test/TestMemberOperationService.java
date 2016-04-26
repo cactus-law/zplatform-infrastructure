@@ -41,14 +41,14 @@ public class TestMemberOperationService {
         ac = ApplicationContextUtil.get();
         memberOperationService =  (MemberOperationService) ac.getBean("memberOperationServiceImpl");
     }
-//    @Test
+    @Test
     public void registMemberTest() {
         MemberBean member = new Person();
-        member.setMemberName("银魂");
-        member.setLoginName("gintama");
-        member.setPhone("13000000001");
+        member.setMemberName("银魂2");
+        member.setLoginName("gintama2");
+        member.setPhone("13000000002");
         member.setPwd("abc123");
-        member.setInstiCode("300000000000027");
+        member.setInstiId(25L);
         try {
             memberOperationService.registMember(MemberType.INDIVIDUAL, member);
         } catch (InvalidMemberDataException | CreateMemberFailedException
@@ -62,7 +62,7 @@ public class TestMemberOperationService {
 //        member.setLoginName("luxiaoshuai");
         member.setPhone("13426342943");
         member.setPwd("abc123");
-        member.setInstiCode("300000000000027");
+        member.setInstiId(25L);
         try {
             String memberId = memberOperationService.login(MemberType.INDIVIDUAL, member);
             System.out.println("登陆成功：会员号为："+memberId);
@@ -74,14 +74,14 @@ public class TestMemberOperationService {
     /**
      * 设置支付密码
      */
-    @Test
+//    @Test
     public void verifyPayPwdTest() {
         MemberBean member = new Person();
         member.setLoginName("luxiaoshuai");
         member.setPhone("13426342943");
 //        member.setPaypwd("123456");
         member.setPwd("abc1234");
-        member.setInstiCode("300000000000027");
+        member.setInstiId(25L);
 
         // 重置支付密码
         resetPayPwd(member);

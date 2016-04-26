@@ -15,13 +15,13 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 
 import com.zlebank.zplatform.member.bean.enums.MemberStatusType;
@@ -42,11 +42,11 @@ import com.zlebank.zplatform.member.bean.enums.RealNameLvType;
     
 public  class PojoMember {
     /**"主键，标示**/
-    private long memid;
+    private long memId;
     /**会员ID**/
     private String memberId;
     /**合作机构**/
-    private String instiCode;
+    private Long instiId;
     /**会员昵称**/
     private String memberName;
     /**登录名**/
@@ -70,18 +70,24 @@ public  class PojoMember {
     /**锁定时间**/
     private Date lockTime;
     /**会员注册时间**/
-    private Date intime;
+    private Date inTime;
     /**修改时间**/
-    private Date uptime;
-    @SequenceGenerator(name="gen",sequenceName="SEQ_T_MERCH_DETA_MERCHID",initialValue=1,allocationSize=1)
+    private Date upTime;
+    @GenericGenerator(name = "id_gen", strategy = "enhanced-table", parameters = {
+            @Parameter(name = "table_name", value = "T_C_PRIMAY_KEY"),
+            @Parameter(name = "value_column_name", value = "NEXT_ID"),
+            @Parameter(name = "segment_column_name", value = "KEY_NAME"),
+            @Parameter(name = "segment_value", value = "MEMBER_ID"),
+            @Parameter(name = "increment_size", value = "1"),
+            @Parameter(name = "optimizer", value = "pooled-lo")})
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE,generator="gen")
-    @Column(name="MEMID" ,nullable=false,unique=true)
-    public long getMemid() {
-        return memid;
+    @GeneratedValue(generator = "id_gen")
+    @Column(name="MEM_ID" ,nullable=false,unique=true)
+    public long getMemId() {
+        return memId;
     }
-    public void setMemid(long memid) {
-        this.memid = memid;
+    public void setMemId(long memId) {
+        this.memId = memId;
     }
     @Column(name = "MEMBER_ID")
     public String getMemberId() {
@@ -91,11 +97,11 @@ public  class PojoMember {
         this.memberId = memberId;
     }
     @Column(name = "INSTI_CODE")
-    public String getInstiCode() {
-        return instiCode;
+    public Long getInstiId() {
+        return instiId;
     }
-    public void setInstiCode(String instiCode) {
-        this.instiCode = instiCode;
+    public void setInstiId(Long instiId) {
+        this.instiId = instiId;
     }
     @Column(name = "MEMBER_NAME")
     public String getMemberName() {
@@ -177,19 +183,19 @@ public  class PojoMember {
     public void setLockTime(Date lockTime) {
         this.lockTime = lockTime;
     }
-    @Column(name = "INTIME")
-    public Date getIntime() {
-        return intime;
+    @Column(name = "IN_TIME")
+    public Date getInTime() {
+        return inTime;
     }
-    public void setIntime(Date intime) {
-        this.intime = intime;
+    public void setInTime(Date inTime) {
+        this.inTime = inTime;
     }
-    @Column(name = "UPTIME")
-    public Date getUptime() {
-        return uptime;
+    @Column(name = "UP_TIME")
+    public Date getUpTime() {
+        return upTime;
     }
-    public void setUptime(Date uptime) {
-        this.uptime = uptime;
+    public void setUpTime(Date upTime) {
+        this.upTime = upTime;
     }
 
 }

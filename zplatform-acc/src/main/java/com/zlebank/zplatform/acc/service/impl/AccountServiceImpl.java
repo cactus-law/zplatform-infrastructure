@@ -169,7 +169,14 @@ public class AccountServiceImpl implements AccountService {
         account.setUpUser(userId);
         return account;
     }
-
+    
+    /**
+     * Leaf account code rule:parentSubjectCode+businessActorType(2)+memberId(15)
+     * @param member
+     * @param account
+     * @param parentSubjectCode
+     * @return
+     */
     private String gengrateAcctCode(BusinessActor member,
             Account account,
             String parentSubjectCode) {
@@ -184,7 +191,9 @@ public class AccountServiceImpl implements AccountService {
     public Account getAccountBalanceById(long accountId) {
         Account rtn = new Account();
         PojoAccount pojoAccount = accountDAO.get(accountId);
+        rtn.setFronzenBalance(pojoAccount.getFrozenBalance());
         rtn.setBalance(pojoAccount.getBalance());
+        rtn.setTotalBalance(pojoAccount.getTotalBanance());
         rtn.setStatus(pojoAccount.getStatus().getCode());
         return rtn;
     }

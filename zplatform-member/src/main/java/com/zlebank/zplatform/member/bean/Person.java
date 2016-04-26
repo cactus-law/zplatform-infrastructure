@@ -15,7 +15,7 @@ import java.util.Date;
 import com.zlebank.zplatform.member.bean.enums.SexType;
 
 /**
- * Class Description
+ * 个人会员
  *
  * @author yangpeng
  * @version

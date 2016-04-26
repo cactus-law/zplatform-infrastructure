@@ -89,6 +89,8 @@ public class MemberAccountServiceImpl implements MemberAccountService {
             // 准备返回结果
             MemberAccountBean mbb = new MemberAccountBean();
             mbb.setBalance(accountBalanceById.getBalance().getAmount());
+            mbb.setFrozenBalance(accountBalanceById.getFronzenBalance().getAmount());
+            mbb.setTotalBalance(accountBalanceById.getTotalBalance().getAmount());
             mbb.setStatus(accountBalanceById.getStatus());
             mbb.setBusiCode(busiInfo.getBusiCode());
             mbb.setUsage(usage);

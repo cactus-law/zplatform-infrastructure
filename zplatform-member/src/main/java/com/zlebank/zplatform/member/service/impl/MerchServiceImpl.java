@@ -21,7 +21,6 @@ import com.zlebank.zplatform.acc.exception.AbstractBusiAcctException;
 import com.zlebank.zplatform.commons.utils.BeanCopyUtil;
 import com.zlebank.zplatform.commons.utils.StringUtil;
 import com.zlebank.zplatform.member.bean.MerchantBean;
-import com.zlebank.zplatform.member.bean.enums.MemberStatusType;
 import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 import com.zlebank.zplatform.member.bean.enums.MerchStatusType;
 import com.zlebank.zplatform.member.dao.MemberBaseDAO;
@@ -75,28 +74,23 @@ public class MerchServiceImpl implements MerchService {
               throw new MemberBussinessException("M100005");
           }
             PojoMerchDeta merchPo=  BeanCopyUtil.copyBean(PojoMerchDeta.class, mb);
-            merchPo.setPrdtver(merch.getPrdtver());
-            merchPo.setFeever(merch.getFeever());
-            merchPo.setSpiltver(merch.getSpiltver());
-            merchPo.setRiskver(merch.getRiskver());
-            merchPo.setRoutver(merch.getRoutver());
-            merchPo.setCashver(merch.getCashver());
+            merchPo.setPrdtVer(merch.getPrdtVer());
+            merchPo.setFeeVer(merch.getFeeVer());
+            merchPo.setSpiltVer(merch.getSpiltVer());
+            merchPo.setRiskVer(merch.getRiskVer());
+            merchPo.setRoutVer(merch.getRoutVer());
             //得到序列
             @SuppressWarnings("deprecation")
             String memberId=primayService.getNexId(MERCHPARATYPE);
            Date date=new Date();
-            merchPo.setIntime(date);
-            merchPo.setmIntime(date);
-            merchPo.setmInuser(userId);
+            merchPo.setInTime(date);
+            merchPo.setInTime(date);
+            merchPo.setInUser(userId);
             merchPo.setMemberId(memberId);
-            merchPo.setDateMemberid(memberId);
-            merchPo.setPhone(merchPo.getContphone());
-            merchPo.setMemberName(merchPo.getMerchname());
             merchPo.setMerchStatus(MerchStatusType.NORMAL);
-            merchPo.setStatus(MemberStatusType.NORMAL);
             merchDao.saveA(merchPo);
             //开通会计账户
-            memberservice.openBusiAcct(merchPo.getMerchname(), memberId, userId);
+            memberservice.openBusiAcct("", memberId, userId);// TODO: 传入商户的名称
             PojoMemberBase memberbasePo=  BeanCopyUtil.copyBean(PojoMemberBase.class, merchPo);
             memberbasePo.setMerchtype(BusinessActorType.ENTERPRISE);
             memberBase.saveA(memberbasePo);
@@ -163,6 +157,13 @@ public class MerchServiceImpl implements MerchService {
     @Transactional(propagation=Propagation.REQUIRED)
     public PojoMerchDeta getMerchBymemberId(String memberId) {
       return merchDao.getMerchBymemberId(memberId);
+    }
+
+    @Override
+    @Transactional(propagation=Propagation.REQUIRED,rollbackFor=Throwable.class)
+    public void update(PojoMerchDeta pojoMerchDeta) {
+         merchDao.update(pojoMerchDeta);
+        
     }
 
 }

@@ -3,6 +3,7 @@ package com.zlebank.zplatform.member.dao.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -66,5 +67,12 @@ public class CoopInstiDAOImpl extends HibernateBaseDAOImpl<PojoCoopInsti>
         Criteria criteria = session.createCriteria(PojoCoopInsti.class);
         criteria.add(Restrictions.eq("instiCode", instiCode));
         return (PojoCoopInsti)criteria.uniqueResult();
+    }
+    @Override
+    public PojoCoopInsti getEager(long id){
+    	 Session session = getSession();
+    	 Criteria criteria =  session.createCriteria(PojoCoopInsti.class).setFetchMode("products", FetchMode.JOIN);
+    	 criteria.add(Restrictions.eq("id", id));
+         return (PojoCoopInsti)criteria.uniqueResult();
     }
 }

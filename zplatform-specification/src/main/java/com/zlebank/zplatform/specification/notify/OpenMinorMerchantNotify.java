@@ -82,7 +82,7 @@ public class OpenMinorMerchantNotify implements Notify{
          request.setObject("merchNo", response.getString("merchNo"));
          request.setObject("srcSessionId", response.getString("sessionId"));
          request.setObject("minorMerchNo", minorMerchMemberId);
-         request.setObject("status", merchDeta.getStatus().getCode());
+         request.setObject("status", merchDeta.getMerchStatus().getCode());
          request.setObject("mac", "");
          request.setHead(head); 
          String data = specificationParser.parse(request).toString();

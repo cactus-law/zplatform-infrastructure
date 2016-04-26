@@ -256,11 +256,16 @@ public class AccEntryServiceImpl extends AbstractBasePageService<AccEntryQuery,A
             return BigDecimal.ZERO;
         }
         JEP jep = new JEP();
-        jep.addVariable("A", tradeInfo.getAmount().doubleValue());// 本金
-        jep.addVariable("B", tradeInfo.getCommission().doubleValue());// 佣金
-        jep.addVariable("C", tradeInfo.getCharge().doubleValue());// 手续费
-        jep.addVariable("D", tradeInfo.getCharge().doubleValue());// 金额D
-        jep.addVariable("E", tradeInfo.getCharge().doubleValue());// 金额E
+        if (ordform.contains("A")) 
+            jep.addVariable("A", tradeInfo.getAmount().doubleValue());// 本金
+        if (ordform.contains("B")) 
+            jep.addVariable("B", tradeInfo.getCommission().doubleValue());// 佣金
+        if (ordform.contains("C")) 
+            jep.addVariable("C", tradeInfo.getCharge().doubleValue());// 手续费
+        if (ordform.contains("D")) 
+            jep.addVariable("D", tradeInfo.getCharge().doubleValue());// 金额D
+        if (ordform.contains("E")) 
+            jep.addVariable("E", tradeInfo.getCharge().doubleValue());// 金额E
         jep.parseExpression(ordform);
         DoubleStack stack = new DoubleStack();
         try {
