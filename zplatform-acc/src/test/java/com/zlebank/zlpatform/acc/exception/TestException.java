@@ -22,7 +22,7 @@ import com.zlebank.zplatform.acc.exception.AbstractAccException;
  * @date 2015年8月24日 上午11:04:06
  * @since 
  */
-public class TestException extends AbstractAccException{
+class TestException extends AbstractAccException{
 
 	/**
 	 * serialVersionUID

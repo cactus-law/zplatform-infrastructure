@@ -42,5 +42,4 @@ public class BusiAcct {
     public void setBusiAcctName(String busiAcctName) {
         this.busiAcctName = busiAcctName;
     }
-
 }

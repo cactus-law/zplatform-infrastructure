@@ -29,18 +29,20 @@ import com.zlebank.zplatform.member.pojo.PojoMember;
  * @author yangpeng
  * @version
  * @date 2015年9月10日 上午11:11:20
- * @since 
+ * @since
  */
 public interface MemberService {
-    
+
     /**
      * 根据业务账户号得到账户信息
+     * 
      * @param busiAcctCode
      * @return List<BusiAcctQuery>
      */
     public BusiAcctQuery getBusiQueryBybCode(String busiAcctCode);
     /**
      * 根据会员号得到所有账户信息
+     * 
      * @param memberId
      * 
      * @return List<BusiAcctQuery>
@@ -48,66 +50,78 @@ public interface MemberService {
     public List<BusiAcctQuery> getAllBusiByMId(String memberId);
     /**
      * 接口调用根据条件得到分录流水
+     * 
      * @param accountId
      * @return List<AccEntry>
-     * @throws MemberBussinessException 
+     * @throws MemberBussinessException
      */
-    public  PagedResult<AccEntry>  getAccEntryByQuery(int page,int pageSize, MemberQuery mQuery) throws MemberBussinessException;
-        /**
-         * 开通账户
-         * @param memberId
-         * @param userId
-         * @return
-         */
-    public List<BusiAcct> openBusiAcct(String name,String memberId,long userId) throws AbstractBusiAcctException, MemberBussinessException;
+    public PagedResult<AccEntry> getAccEntryByQuery(int page,
+            int pageSize,
+            MemberQuery mQuery) throws MemberBussinessException;
+    /**
+     * 开通账户
+     * 
+     * @param memberId
+     * @param userId
+     * @return
+     */
+    public List<BusiAcct> openBusiAcct(String name, String memberId, long userId)
+            throws AbstractBusiAcctException, MemberBussinessException;
     /**
      * 通过 会员ID、状态得到会员
+     * 
      * @param memberId
      * @param type
      * @return
      */
-    public PojoMember getMbmberByMemberId(String memberId,MemberType type);
-    
+    public PojoMember getMbmberByMemberId(String memberId, MemberType type);
+
     /**
-     * 通过邮箱得到会员信息 
+     * 通过邮箱得到会员信息
+     * 
      * @param email
      * @return PojoMember
      */
-     public PojoMember getMemberByEmail(String email);
-         /**
-          * 通过电话得到会员信息
-          * @param phone
-          * @return PojoMember
-          */
-     public PojoMember getMemberByphone(String phone);
+    public PojoMember getMemberByEmail(String email);
+    /**
+     * 通过电话得到会员信息
+     * 
+     * @param phone
+     * @return PojoMember
+     */
+    public PojoMember getMemberByphone(String phone);
 
     /**
-     *  判断是否是该一级商户的业务账户
-     * @param merchNo 一级商户的memberId
-     * @param account 业务账户
+     * 判断是否是该一级商户的业务账户
+     * 
+     * @param merchNo
+     *            一级商户的memberId
+     * @param account
+     *            业务账户
      * @return
      */
-     public String  getMemberIdByBusiCode(String busiCode);
-     /**
-      * 内部调用分录流水查询
-      * @param page
-      * @param pageSize
-      * @param mQuery
-      * @return
-      */
-     public PagedResult<AccEntry> getAccEntryByQueryN(int page,
-             int pageSize,
-             MemberQuery mQuery);
-     
-     /**
-      * 账户查询
-      * @param qa 用户账户查询Bean
-      * @return
-      */
-     public PagedResult<BusiAcctQuery> getBusiAccount(QueryAccount qa,Integer page,Integer pageSize);
-    
+    public String getMemberIdByBusiCode(String busiCode);
+    /**
+     * 内部调用分录流水查询
+     * 
+     * @param page
+     * @param pageSize
+     * @param mQuery
+     * @return
+     */
+    public PagedResult<AccEntry> getAccEntryByQueryN(int page,
+            int pageSize,
+            MemberQuery mQuery);
 
-     
-    }
-     
+    /**
+     * 账户查询
+     * 
+     * @param qa
+     *            用户账户查询Bean
+     * @return
+     */
+    public PagedResult<BusiAcctQuery> getBusiAccount(QueryAccount qa,
+            Integer page,
+            Integer pageSize);
 
+}

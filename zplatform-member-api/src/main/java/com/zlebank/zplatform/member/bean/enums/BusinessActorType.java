@@ -25,7 +25,9 @@ public enum BusinessActorType {
     ENTERPRISE("02"),
     /** 合作机构 */
     COOPINSTI("03"),
-
+    /**通道*/
+    CHANNEL("04"),
+    /**未知*/
 	UNKNOW("99");
 	private String code; 
 

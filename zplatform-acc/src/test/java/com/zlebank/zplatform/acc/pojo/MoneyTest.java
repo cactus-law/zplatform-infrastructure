@@ -10,9 +10,11 @@
  */
 package com.zlebank.zplatform.acc.pojo;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -68,5 +70,15 @@ public class MoneyTest {
         }
         Money money_z = Money.yuanValueOf(0);
         System.out.println(money_z.equalsZero());
+        
+        Money money_m = Money.valueOf(200);
+        Money money_n = Money.valueOf(-0);
+        Money money_o = Money.valueOf(new BigDecimal(-1));
+        System.out.println(money_o.toString());
+        Money money_p = Money.valueOf(-200);
+        Assert.assertTrue(money_m.compareTo(Money.ZERO)>0);
+        Assert.assertTrue(money_n.compareTo(Money.ZERO)==0);
+        Assert.assertTrue(money_o.compareTo(Money.ZERO)<0);
+        Assert.assertTrue(money_p.compareTo(Money.ZERO)<0);
     }
 }

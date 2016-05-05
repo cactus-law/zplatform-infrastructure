@@ -13,7 +13,7 @@ package com.zlebank.zplatform.member.bean;
 import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 
 /**
- * 业务参与者（个人/企业 会员、合作机构）
+ * 业务参与者（个人/企业 会员、合作机构、通道）
  *
  * @author yangying
  * @version

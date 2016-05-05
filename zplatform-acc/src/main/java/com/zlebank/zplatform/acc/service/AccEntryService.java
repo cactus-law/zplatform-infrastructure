@@ -37,9 +37,9 @@ public interface AccEntryService  extends IBasePageService<AccEntryQuery,AccEntr
      */
     public void accEntryProcess(TradeInfo tradeInfo) throws AccBussinessException, AbstractBusiAcctException, NumberFormatException, AccBussinessException ;
     /**
-     * 批处理记账【预处理】
-     * @从分录流水中取出需待记账的记录【02-待记账】
-     * @ 注意：如果预计处理成功而执行失败的话，数据库（T_ACC_ENTRY）的的数据将会被锁定，此时需要人工去解锁。
+     * 批处理记账【预处理】<br/>
+     * 从分录流水中取出需待记账的记录【02-待记账】<br/>
+     * 注意：如果预计处理成功而执行失败的话，数据库（T_ACC_ENTRY）的的数据将会被锁定，此时需要人工去解锁。<br/>
      * @param fetchSize 每次批处理从数据库里取的条数
      * @return
      */

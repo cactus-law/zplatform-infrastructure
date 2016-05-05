@@ -43,6 +43,11 @@
 			<version>2.4</version>
 			<classifier>jdk15</classifier>
 		</dependency>
+		<dependency>
+			<groupId>com.zlebank.zplatform</groupId>
+			<artifactId>zplatform-commons-test</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

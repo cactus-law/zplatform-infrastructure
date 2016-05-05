@@ -5,7 +5,7 @@ import org.junit.Test;
 import com.zlebank.zplatform.acc.exception.AccountNotExistException;
 import com.zlebank.zplatform.member.exception.CoopInstiNotExistException;
 
-public class ExceptionTest {
+class ExceptionTest {
 	@Test
 	public void test(){
 		Exception exception = new AccountNotExistException();

@@ -38,7 +38,7 @@ import com.zlebank.zplatform.member.service.MemberAccountService;
  * @date 2016年1月18日 下午3:29:03
  * @since 
  */
-public class TestMemberAccountService {
+class TestMemberAccountService {
     private ApplicationContext ac;
     private MemberAccountService memberAccountService;
     @Before

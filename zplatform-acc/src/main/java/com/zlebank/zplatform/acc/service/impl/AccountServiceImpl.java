@@ -86,11 +86,11 @@ public class AccountServiceImpl implements AccountService {
      * @throws AccBussinessException
      */
     @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Throwable.class)
-    public Account openAcct(Account account, BusinessActor member, long userId)throws AccountCreateRepeatException, AccBussinessException {
+    public Account openAcct(Account account, BusinessActor businessActor, long userId)throws AccountCreateRepeatException, AccBussinessException {
         PojoSubject pojoParentSubject = subjectDAO.get(account
                 .getParentSubject().getId());
         // 生成会计账户代码
-        String acctCode = gengrateAcctCode(member, account,
+        String acctCode = gengrateAcctCode(businessActor, account,
                 pojoParentSubject.getAcctCode());
         
         // 检查会计账户代码是否存在
@@ -100,7 +100,7 @@ public class AccountServiceImpl implements AccountService {
         }
         // 生成会计账户
         pojoAccount = initNewAccount(acctCode, pojoParentSubject,
-                member.getBusinessActorId(), userId, account.getAcctCodeName());
+                businessActor.getBusinessActorId(), userId, account.getAcctCodeName());
         // 保存会计账户
         pojoAccount = saveAcct(pojoAccount);
         return BeanCopyUtil.copyBean(Account.class, pojoAccount);
@@ -140,7 +140,7 @@ public class AccountServiceImpl implements AccountService {
 
     private PojoAccount initNewAccount(String acctCode,
             PojoSubject parentSubject,
-            String memberId,
+            String businessActorId,
             long userId,
             String acctName) {
         PojoAccount account = new PojoAccount();
@@ -148,7 +148,7 @@ public class AccountServiceImpl implements AccountService {
         account.setAcctType(AcctType.ACCOUNT);
         account.setCrdr(parentSubject.getCrdr());
         account.setAcctElement(parentSubject.getAcctElement());
-        account.setBusinessActorId(memberId);
+        account.setBusinessActorId(businessActorId);
         account.setBalance(Money.ZERO);
         account.setFrozenBalance(Money.ZERO);
         account.setTotalBanance(Money.ZERO);
@@ -177,13 +177,13 @@ public class AccountServiceImpl implements AccountService {
      * @param parentSubjectCode
      * @return
      */
-    private String gengrateAcctCode(BusinessActor member,
+    private String gengrateAcctCode(BusinessActor businessActor,
             Account account,
             String parentSubjectCode) {
         StringBuilder sb = new StringBuilder();
         sb.append(parentSubjectCode);
-        sb.append(member.getBusinessActorType().getCode());
-        sb.append(member.getBusinessActorId());
+        sb.append(businessActor.getBusinessActorType().getCode());
+        sb.append(businessActor.getBusinessActorId());
         return sb.toString();
     }
 

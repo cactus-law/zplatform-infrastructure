@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationContext;
 import com.zlebank.member.test.ApplicationContextUtil;
 import com.zlebank.zplatform.member.dao.ParaDicDAO;
 
-public class ParaDicTest {
+class ParaDicTest {
     
     @Test
     public void test(){

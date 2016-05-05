@@ -19,12 +19,10 @@ package com.zlebank.zplatform.acc.bean.enums;
  * @since 
  */
 public enum BuisAcctCodePrefix {
-    /** 合作机构 */
-    COOPINSTI("30"),
     /** 个人会员 */
-    INDIVIDUAL("60"),
+    PRIVATE("60"),
     /** 企业会员 */
-    ENTERPRISE("90");
+    PUBLIC("90");
     private String code;
     private BuisAcctCodePrefix(String code){
         this.code = code;

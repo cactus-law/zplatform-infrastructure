@@ -31,7 +31,6 @@ public class CoopInstiTest {
 	}
 
 	@Test
-	@Ignore
 	public void testCreate() {
 		CoopInstiService coopInstiService = (CoopInstiService) context
 				.getBean("coopInstiServiceImpl");
@@ -63,10 +62,10 @@ public class CoopInstiTest {
 	}
 
 	@Test
+	@Ignore
 	public void testGetCoopProduct() {
 		CoopInstiProductService coopInstiService = (CoopInstiProductService) context
 				.getBean("coopInstiProductServiceImpl");
-
 		try {
 			// test there is no product related to coop insti
 			instiId = 27;
@@ -84,6 +83,7 @@ public class CoopInstiTest {
 	}
 
 	@Test
+	@Ignore
 	public void testGetAllCoopInsti() {
 		CoopInstiService coopInstiService = (CoopInstiService) context
 				.getBean("coopInstiServiceImpl");
@@ -92,6 +92,7 @@ public class CoopInstiTest {
 	}
 
 	@Test
+	@Ignore
 	public void testGetCoopInstiByInstiCode() {
 		CoopInstiService coopInstiService = (CoopInstiService) context
 				.getBean("coopInstiServiceImpl");
