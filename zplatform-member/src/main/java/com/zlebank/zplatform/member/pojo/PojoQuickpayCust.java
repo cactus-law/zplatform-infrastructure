@@ -52,6 +52,8 @@ public class PojoQuickpayCust implements java.io.Serializable {
     private String bankcode;
     /**银行名称**/
     private String bankname;
+    /**设备标示**/
+    private String devId;
 
     @GenericGenerator(name = "id_gen", strategy = "enhanced-table", parameters = {
             @Parameter(name = "table_name", value = "T_C_PRIMAY_KEY"),
@@ -188,4 +190,18 @@ public class PojoQuickpayCust implements java.io.Serializable {
     public void setBankname(String bankname) {
         this.bankname = bankname;
     }
+	/**
+	 * @return the devId
+	 */
+    @Column(name = "DEVID")
+	public String getDevId() {
+		return devId;
+	}
+	/**
+	 * @param devId the devId to set
+	 */
+	public void setDevId(String devId) {
+		this.devId = devId;
+	}
+    
 }

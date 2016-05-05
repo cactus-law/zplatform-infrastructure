@@ -55,7 +55,7 @@ public class PojoBusiAcct extends Pojo {
         return id;
     }
 
-    @Column(name = "usage",nullable=false)
+    @Column(name = "USAGE",nullable=false)
     @Type(type = "com.zlebank.zplatform.acc.pojo.usertype.UsageSqlType")
     public Usage getUsage() {
         return usage;

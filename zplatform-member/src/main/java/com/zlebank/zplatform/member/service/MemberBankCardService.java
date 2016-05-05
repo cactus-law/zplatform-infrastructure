@@ -61,5 +61,5 @@ public interface MemberBankCardService {
      *          2：贷记卡
      * @return
      */
-    public PagedResult<QuickpayCustBean> queryMemberBankCard(String memberId, String cardType, int offset,  int pageSize);
+    public PagedResult<QuickpayCustBean> queryMemberBankCard(String memberId, String cardType, String devId,int offset,  int pageSize);
 }

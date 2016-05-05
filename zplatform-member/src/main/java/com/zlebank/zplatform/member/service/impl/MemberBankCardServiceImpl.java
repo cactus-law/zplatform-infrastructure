@@ -26,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.zlebank.zplatform.commons.bean.DefaultPageResult;
 import com.zlebank.zplatform.commons.bean.PagedResult;
 import com.zlebank.zplatform.commons.utils.BeanCopyUtil;
+import com.zlebank.zplatform.commons.utils.StringUtil;
 import com.zlebank.zplatform.member.bean.QuickpayCustBean;
 import com.zlebank.zplatform.member.bean.RealNameBean;
 import com.zlebank.zplatform.member.bean.enums.RealNameLvType;
@@ -128,6 +129,7 @@ public class MemberBankCardServiceImpl  implements MemberBankCardService {
         PojoQuickpayCust pojo = BeanCopyUtil.copyBean(PojoQuickpayCust.class, bean);
         pojo.setStatus("00");
         pojo = quickpayCustDAO.merge(pojo);
+        pojo = quickpayCustDAO.getQuickPayCard(bean.getRelatememberno(), bean.getCardno());
         return pojo.getId();
     }
 
@@ -170,17 +172,22 @@ public class MemberBankCardServiceImpl  implements MemberBankCardService {
      */
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
-    public PagedResult<QuickpayCustBean> queryMemberBankCard(String memberId, String cardType,int page,  int pageSize) {
+    public PagedResult<QuickpayCustBean> queryMemberBankCard(String memberId, String cardType,String devId,int page,  int pageSize) {
         if (log.isDebugEnabled()) {
             log.debug("查询签约银行卡信息（会员）");
             log.debug(memberId);
             log.debug(cardType);
             log.debug(page);
             log.debug(pageSize);
+            log.debug(devId);
         }
         QuickpayCustBean queryBean = new QuickpayCustBean();
         queryBean.setCardtype(cardType);
         queryBean.setRelatememberno(memberId);
+        if(StringUtil.isNotEmpty(devId)){
+        	queryBean.setDevId(devId);
+        }
+        
         int offset = (page) * pageSize;
         List<PojoQuickpayCust> pojoList = quickpayCustDAO.getListByQuery(offset, pageSize, queryBean);
         List<QuickpayCustBean> beanList = pojoToBean(pojoList);
