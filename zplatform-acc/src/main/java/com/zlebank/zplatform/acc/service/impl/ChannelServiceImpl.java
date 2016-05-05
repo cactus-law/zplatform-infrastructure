@@ -128,9 +128,10 @@ public class ChannelServiceImpl implements ChannelService {
     }
 
     /**
-     * 通道数据校验
+     * 通道数据校验<br/>
+     * test channel is legal,return null if channel is check pass.
      * @param channel
-     * @return
+     * @return null if channel is legal,else return a string 
      */
     private String check(ChannelBean channel) {
         String rtn = null;

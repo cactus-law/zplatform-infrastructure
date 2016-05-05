@@ -127,7 +127,18 @@ public class BusiAcctServiceImpl implements BusiAcctService {
         }
         return account.getAcctCode();
     }
-
+    
+    /**
+     * <p>
+     * businessActorTypePrefix(2)+usage(3)+businessActorType(2)+memberId(15).</p>
+     * <p>For example,suppose a enterprise member (memberId:100000000000100). The busiAcctCode of the basic fund busiAccount of the member is:
+     * 9010102100000000000100</p>
+     * @param member
+     * @param busiAcct
+     * @param parentSubjectCode
+     * @param productNo
+     * @return
+     */
     private String gengrateBusiAcctCode(BusinessActor member,
             BusiAcct busiAcct,
             String parentSubjectCode,

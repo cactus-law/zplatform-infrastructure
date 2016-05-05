@@ -100,6 +100,7 @@ public class PojoMerchDeta {
     private String notes;
     /**备注**/
     private String remarks;
+    private String activeStatus;
  
     @GenericGenerator(name = "id_gen", strategy = "enhanced-table", parameters = {
             @Parameter(name = "table_name", value = "T_C_PRIMAY_KEY"),
@@ -326,6 +327,13 @@ public class PojoMerchDeta {
     }
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+    @Column(name = "ACTIVATE_STATUS")
+    public String getActiveStatus() {
+        return activeStatus;
+    }
+    public void setActiveStatus(String activeStatus) {
+        this.activeStatus = activeStatus;
     }
 
 }

@@ -169,7 +169,14 @@ public class AccountServiceImpl implements AccountService {
         account.setUpUser(userId);
         return account;
     }
-
+    
+    /**
+     * Leaf account code rule:parentSubjectCode+businessActorType(2)+memberId(15)
+     * @param member
+     * @param account
+     * @param parentSubjectCode
+     * @return
+     */
     private String gengrateAcctCode(BusinessActor member,
             Account account,
             String parentSubjectCode) {
