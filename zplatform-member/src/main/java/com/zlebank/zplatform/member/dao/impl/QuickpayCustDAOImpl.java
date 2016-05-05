@@ -59,6 +59,9 @@ public class QuickpayCustDAOImpl extends AbstractPagedQueryDAOImpl<PojoQuickpayC
         if (StringUtil.isNotEmpty(e.getCardtype()) && !"0".equals(e.getCardtype()) ) {
             crite .add(Restrictions.eq("cardtype", e.getCardtype()));
         }
+        if (StringUtil.isNotEmpty(e.getDevId()) ) {
+            crite .add(Restrictions.eq("devId", e.getDevId()));
+        }
         crite .add(Restrictions.eq("status", "00"));
         return crite;
     }

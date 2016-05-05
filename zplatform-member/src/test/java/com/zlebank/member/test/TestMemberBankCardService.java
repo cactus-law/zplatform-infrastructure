@@ -138,7 +138,7 @@ public class TestMemberBankCardService {
 //            bean.setIdnum("131122198701021456");
 //            bean.setCvv2("801");
             bean.setRelatememberno("100000000000564");
-            PagedResult<QuickpayCustBean> rtn = memberBankCardService.queryMemberBankCard("100000000000564","0",2,5);
+            PagedResult<QuickpayCustBean> rtn = memberBankCardService.queryMemberBankCard("100000000000564","0","",2,5);
             System.out.println(rtn.getTotal());
             List<QuickpayCustBean> rtnList = rtn.getPagedResult();
             for (QuickpayCustBean str : rtnList) {

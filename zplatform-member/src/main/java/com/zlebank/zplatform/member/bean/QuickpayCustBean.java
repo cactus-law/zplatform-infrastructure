@@ -57,6 +57,8 @@ public class QuickpayCustBean implements Bean{
     private String bankcode;
     /**银行名称**/
     private String bankname;
+    /**设备标示**/
+    private String devId;
     public Long getId() {
         return id;
     }
@@ -165,4 +167,17 @@ public class QuickpayCustBean implements Bean{
     public void setBankname(String bankname) {
         this.bankname = bankname;
     }
+	/**
+	 * @return the devId
+	 */
+	public String getDevId() {
+		return devId;
+	}
+	/**
+	 * @param devId the devId to set
+	 */
+	public void setDevId(String devId) {
+		this.devId = devId;
+	}
+    
 }

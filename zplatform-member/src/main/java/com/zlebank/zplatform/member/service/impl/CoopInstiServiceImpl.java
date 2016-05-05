@@ -32,7 +32,7 @@ import com.zlebank.zplatform.member.service.CoopInstiService;
 import com.zlebank.zplatform.member.service.MemberService;
 import com.zlebank.zplatform.member.service.PrimayKeyService;
 
-@Service
+@Service("coopInstiService")
 public class CoopInstiServiceImpl implements CoopInstiService {
 
 	@Autowired

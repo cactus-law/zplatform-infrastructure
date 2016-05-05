@@ -32,7 +32,7 @@ import com.zlebank.zplatform.member.service.MerchMKService;
  * @date 2015年9月17日 上午9:42:03
  * @since
  */
-@Service
+@Service("merchMKService")
 public class MerchMKServiceImpl implements MerchMKService {
     private final static Log log = LogFactory.getLog(MerchMKService.class);
     @Autowired
