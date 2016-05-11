@@ -18,6 +18,7 @@ import com.zlebank.zplatform.acc.bean.TradeInfo;
 import com.zlebank.zplatform.acc.bean.enums.RuleStatusType;
 import com.zlebank.zplatform.acc.exception.AccBussinessException;
 import com.zlebank.zplatform.acc.pojo.PojoSubjectRuleConfigure;
+import com.zlebank.zplatform.acc.service.entry.EntryEvent;
 import com.zlebank.zplatform.commons.dao.BaseDAO;
 
 /**
@@ -89,4 +90,11 @@ public interface SubjectRuleConfigureDAO extends BaseDAO<PojoSubjectRuleConfigur
      * @return
      */
     public List<PojoSubjectRuleConfigure> getRulesByBusiCode(String busiCode);
+    /**
+     * 根据交易类型代码和分录事件获取分录规则
+     * @param busiCode
+     * @param entryEvent
+     * @return
+     */
+    public List<PojoSubjectRuleConfigure> getRulesByTradeAndEvent(String busiCode,EntryEvent entryEvent);
 }

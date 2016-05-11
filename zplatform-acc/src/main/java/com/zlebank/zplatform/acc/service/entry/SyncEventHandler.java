@@ -28,9 +28,9 @@ import com.zlebank.zplatform.acc.pojo.PojoAccount;
 import com.zlebank.zplatform.acc.pojo.PojoSubjectRuleConfigure;
 
 @Service
-public class InitEventHandler extends AbstractEventHandler {
+public class SyncEventHandler extends AbstractEventHandler {
 
-    private final static Log log = LogFactory.getLog(InitEventHandler.class);
+    private final static Log log = LogFactory.getLog(SyncEventHandler.class);
 
     private static final String LITERAL_PAYER = "F";
     private static final String LITERAL_RECEIVER = "S";
@@ -51,14 +51,13 @@ public class InitEventHandler extends AbstractEventHandler {
 
         /* 根据交易类型获取分录规则 */
         List<PojoSubjectRuleConfigure> entryRuleList = subjectRuleConfigureDAO
-                .getRulesByBusiCode(tradeInfo.getBusiCode());
+                .getRulesByTradeAndEvent(tradeInfo.getBusiCode(), entryEvent);
         if (entryRuleList == null || entryRuleList.isEmpty())
             throw new AccBussinessException("E000012");
 
         /* 循环分录规则，插入分录流水 。插入中同时处理同步记账 */
         BigDecimal balanceTest = BigDecimal.ZERO;
         for (PojoSubjectRuleConfigure entryRule : entryRuleList) {
-
             String firstChar = String
                     .valueOf(entryRule.getAcctCode().charAt(0)).toUpperCase();
             String busiActorId = getBusiActorByFlag(firstChar, tradeInfo);

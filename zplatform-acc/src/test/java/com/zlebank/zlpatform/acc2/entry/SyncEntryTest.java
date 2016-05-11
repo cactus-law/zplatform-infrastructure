@@ -17,7 +17,7 @@ import com.zlebank.zplatform.acc.pojo.PojoTradeEntryEventMapping;
 import com.zlebank.zplatform.acc.service.AccEntryService;
 import com.zlebank.zplatform.acc.service.entry.EntryEvent;
 
-public class InitEntry {
+public class SyncEntryTest {
     
     private ApplicationContext context = ApplicationContextUtil.get();
     private AccEntryService accEntryService;

@@ -37,13 +37,13 @@ public class ImporttEntryRule extends ApplicationContextAbled {
                 SubjectRule rule = new SubjectRule();
                 int j = 0;
                 rule.setTxntype(str[j]);
-                rule.setAcctCode(str[j++]);
-                rule.setAcctCodeType(AccCodeType.fromValue(str[j++]));
-                rule.setCrdr(CRDRType.fromValue(str[j++]));
-                rule.setEntryAlgorithm(str[j++]);
-                rule.setStatus(RuleStatusType.fromValue(str[j++]));
-                rule.setSyncFlag(str[j++]);
-                rule.setEntryEvent(EntryEvent.fromValue(str[j++]));
+                rule.setAcctCode(str[++j]);
+                rule.setAcctCodeType(AccCodeType.fromValue(str[++j]));
+                rule.setCrdr(CRDRType.fromValue(str[++j]));
+                rule.setEntryAlgorithm(str[++j]);
+                rule.setStatus(RuleStatusType.fromValue(str[++j]));
+                rule.setSyncFlag(str[++j]);
+                rule.setEntryEvent(EntryEvent.fromValue(str[++j]));
                 subjectRuleService.addSubjectRule(rule, 9999999999L);
             }
         } catch (BiffException e) {

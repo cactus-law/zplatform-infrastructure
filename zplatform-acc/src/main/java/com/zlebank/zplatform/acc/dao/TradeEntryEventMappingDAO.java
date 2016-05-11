@@ -20,4 +20,9 @@ public interface TradeEntryEventMappingDAO extends BaseDAO<PojoTradeEntryEventMa
      * @return
      */
     List<PojoTradeEntryEventMapping> queryAll();
+    /**
+     * 
+     * @return
+     */
+    public List<PojoTradeEntryEventMapping> queryAllSorted();
 }

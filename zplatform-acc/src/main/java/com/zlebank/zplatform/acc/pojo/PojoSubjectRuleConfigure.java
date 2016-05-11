@@ -24,6 +24,7 @@ import org.hibernate.annotations.Type;
 import com.zlebank.zplatform.acc.bean.enums.AccCodeType;
 import com.zlebank.zplatform.acc.bean.enums.CRDRType;
 import com.zlebank.zplatform.acc.bean.enums.RuleStatusType;
+import com.zlebank.zplatform.acc.service.entry.EntryEvent;
 import com.zlebank.zplatform.commons.dao.pojo.Pojo;
 
 /**
@@ -59,6 +60,8 @@ public class PojoSubjectRuleConfigure extends Pojo {
     private String acctCode;
     //业务代码占位符类型
     private AccCodeType acctCodeType;
+    //分录事件
+    private EntryEvent entryEvent;
     // 余额方向
     private CRDRType crdr;
     // 产品代码
@@ -85,6 +88,7 @@ public class PojoSubjectRuleConfigure extends Pojo {
     private String notes;
     // 备注
     private String remarks;
+    
     @Type(type = "com.zlebank.zplatform.acc.pojo.usertype.RuleStatusSqlType")
     @Column(name = "STATUS")
     public RuleStatusType getStatus() {
@@ -208,5 +212,13 @@ public class PojoSubjectRuleConfigure extends Pojo {
     }
     public void setAcctCodeType(AccCodeType acctCodeType) {
         this.acctCodeType = acctCodeType;
+    }
+    @Type(type = "com.zlebank.zplatform.acc.pojo.usertype.EntryEventSqlType")
+    @Column(name = "ENTRY_EVENT")
+    public EntryEvent getEntryEvent() {
+        return entryEvent;
+    }
+    public void setEntryEvent(EntryEvent entryEvent) {
+        this.entryEvent = entryEvent;
     }
 }

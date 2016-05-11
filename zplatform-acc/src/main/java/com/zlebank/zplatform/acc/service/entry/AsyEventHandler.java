@@ -2,7 +2,7 @@ package com.zlebank.zplatform.acc.service.entry;
 
 import com.zlebank.zplatform.acc.bean.TradeInfo;
 
-public class NormalEventHandler extends AbstractEventHandler {
+public class AsyEventHandler extends AbstractEventHandler {
 
     @Override
     final protected void realHandle(TradeInfo tradeInfo,EntryEvent entryEvent) {

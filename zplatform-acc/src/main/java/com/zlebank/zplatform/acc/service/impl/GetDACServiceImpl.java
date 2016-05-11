@@ -68,6 +68,6 @@ public class GetDACServiceImpl implements GetDACService{
      */
     private void run() {
         dacKey = "12345678"; 
-        System.out.println(generteDAC("224101020102200000000000593",Money.valueOf(new BigDecimal(200000)),Money.valueOf(new BigDecimal(0)),Money.valueOf(new BigDecimal(200000))));
+        System.out.println(generteDAC("224801",Money.valueOf(new BigDecimal(0)),Money.valueOf(new BigDecimal(0)),Money.valueOf(new BigDecimal(0))));
     }
 }
