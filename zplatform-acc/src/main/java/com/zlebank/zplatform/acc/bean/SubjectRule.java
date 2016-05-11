@@ -10,8 +10,10 @@
  */
 package com.zlebank.zplatform.acc.bean;
 
+import com.zlebank.zplatform.acc.bean.enums.AccCodeType;
 import com.zlebank.zplatform.acc.bean.enums.CRDRType;
 import com.zlebank.zplatform.acc.bean.enums.RuleStatusType;
+import com.zlebank.zplatform.acc.service.entry.EntryEvent;
 import com.zlebank.zplatform.commons.bean.Bean;
 
 /**
@@ -20,30 +22,32 @@ import com.zlebank.zplatform.commons.bean.Bean;
  * @author yangpeng
  * @version
  * @date 2015年8月25日 下午8:08:26
- * @since 
+ * @since
  */
 
-public class SubjectRule implements Bean{
-    //id
+public class SubjectRule implements Bean {
+    // id
     public long id;
-    //交易类型
-    private String txntype;  
-    //科目标记 （付款方资产科目/付款方产品/收款方资产/收款方产品/父级或者顶级商户/普通科目）
-    private String flag;
-    //余额方向
+    // 交易类型
+    private String txntype;
+    // 科目标记 （付款方资产科目/付款方产品/收款方资产/收款方产品/父级或者顶级商户/普通科目）
+    private String acctCode;
+    // 业务代码占位符类型
+    private AccCodeType acctCodeType;
+    // 余额方向
     private CRDRType crdr;
-    //产品代码
-    private String  prodductCode;
-    //渠道代码
+    // 产品代码
+    private String prodductCode;
+    // 渠道代码
     private String channelCode;
-    //是否同步记账
-    private String  syncFlag;
-    //分录金额计算 ：A本金  ：B佣金 ：C手续费 计算符号+-*/
-    private    String entryAlgorithm;
-    //是否显示
+    // 是否同步记账
+    private String syncFlag;
+    // 分录金额计算 ：A本金 ：B佣金 ：C手续费 计算符号+-*/
+    private String entryAlgorithm;
+    // 是否显示
     private String isShow;
-    //分录顺序
-    private Long  ruleOder;
+    // 分录顺序
+    private Long ruleOder;
     // 状态
     public RuleStatusType status;
 
@@ -51,16 +55,14 @@ public class SubjectRule implements Bean{
     private String notes;
     // 备注
     private String remarks;
-    //借贷方向(页面显示)
+    // 借贷方向(页面显示)
     private String crdrType;
-    //状态    (页面显示)
+    // 状态 (页面显示)
     private String actionStatus;
-    //页面其他科目种类
+    // 页面其他科目种类
     private String flags;
-    
-    
-  
-    
+    private EntryEvent entryEvent;
+
     public String getFlags() {
         return flags;
     }
@@ -97,11 +99,11 @@ public class SubjectRule implements Bean{
     public void setTxntype(String txntype) {
         this.txntype = txntype;
     }
-    public String getFlag() {
-        return flag;
+    public String getAcctCode() {
+        return acctCode;
     }
-    public void setFlag(String flag) {
-        this.flag = flag;
+    public void setAcctCode(String acctCode) {
+        this.acctCode = acctCode;
     }
     public CRDRType getCrdr() {
         return crdr;
@@ -157,7 +159,16 @@ public class SubjectRule implements Bean{
     public void setRemarks(String remarks) {
         this.remarks = remarks;
     }
-
-    
-    
+    public AccCodeType getAcctCodeType() {
+        return acctCodeType;
+    }
+    public void setAcctCodeType(AccCodeType acctCodeType) {
+        this.acctCodeType = acctCodeType;
+    }
+    public EntryEvent getEntryEvent() {
+        return entryEvent;
+    }
+    public void setEntryEvent(EntryEvent entryEvent) {
+        this.entryEvent = entryEvent;
+    }
 }

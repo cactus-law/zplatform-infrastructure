@@ -12,7 +12,7 @@ package com.zlebank.zplatform.specification;
 
 import org.springframework.stereotype.Service;
 
-import com.zlebank.zplatform.specification.service.impl.SpringApplicationObjectSupport;
+import com.zlebank.zplatform.acc.util.SpringApplicationObjectSupport;
 
 /**
  * Class Description

@@ -25,6 +25,7 @@ import org.hibernate.annotations.Type;
 import com.zlebank.zplatform.acc.bean.enums.AccEntryStatus;
 import com.zlebank.zplatform.acc.bean.enums.CRDRType;
 import com.zlebank.zplatform.acc.bean.enums.LockStatusType;
+import com.zlebank.zplatform.acc.service.entry.EntryEvent;
 
 /**
  * Class Description
@@ -51,6 +52,8 @@ public class PojoAccEntry {
     private String text;
     /**交易流水号**/
     private String txnseqno;
+    /**分录事件*/
+    private EntryEvent entryEvent;
     /**支付订单号**/
     private String payordno;
     /**状态:00-已记账，01-未记账 02-待记账**/
@@ -183,5 +186,13 @@ public class PojoAccEntry {
     }
     public void setIsLock(LockStatusType isLock) {
         this.isLock = isLock;
+    }
+    @Type(type = "com.zlebank.zplatform.acc.pojo.usertype.EntryEventSqlType")
+    @Column(name = "ENTRY_EVENT")
+    public EntryEvent getEntryEvent() {
+        return entryEvent;
+    }
+    public void setEntryEvent(EntryEvent entryEvent) {
+        this.entryEvent = entryEvent;
     }
 }

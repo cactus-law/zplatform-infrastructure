@@ -28,7 +28,6 @@ public class AddChannelTest {
     @Before
     public void init() {
         context = new ClassPathXmlApplicationContext("AccountContextTest.xml");
- 
         channelService = (ChannelService) context.getBean("channelServiceImpl");
     }  
     

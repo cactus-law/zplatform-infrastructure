@@ -8,7 +8,7 @@
  * Copyright (c) 2015,zlebank.All rights reserved.
  * 
  */
-package com.zlebank.zplatform.specification.service.impl;
+package com.zlebank.zplatform.acc.util;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationObjectSupport;

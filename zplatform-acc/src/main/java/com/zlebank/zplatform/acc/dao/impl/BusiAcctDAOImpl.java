@@ -13,12 +13,14 @@ package com.zlebank.zplatform.acc.dao.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.zlebank.zplatform.acc.bean.enums.Usage;
 import com.zlebank.zplatform.acc.dao.BusiAcctDAO;
 import com.zlebank.zplatform.acc.exception.BusiAcctNotExistException;
+import com.zlebank.zplatform.acc.pojo.PojoAccount;
 import com.zlebank.zplatform.acc.pojo.PojoBusiAcct;
 import com.zlebank.zplatform.commons.dao.impl.HibernateBaseDAOImpl;
 
@@ -41,9 +43,9 @@ public class BusiAcctDAOImpl extends HibernateBaseDAOImpl<PojoBusiAcct>
         return pojoBusiAcct;
     }
     
-    public long getAccount(Usage usage,String memberId)throws BusiAcctNotExistException{
+    public long getAccount(Usage usage,String businessActorId)throws BusiAcctNotExistException{
         Criteria criteria = getSession().createCriteria(PojoBusiAcct.class);
-        criteria.add(Restrictions.eq("usage", usage)).add(Restrictions.eq("businessActorId", memberId));
+        criteria.add(Restrictions.eq("usage", usage)).add(Restrictions.eq("businessActorId", businessActorId));
         PojoBusiAcct pojoBusiAcct = (PojoBusiAcct)criteria.uniqueResult();
         if(pojoBusiAcct == null){
             throw new BusiAcctNotExistException();
@@ -73,5 +75,11 @@ public class BusiAcctDAOImpl extends HibernateBaseDAOImpl<PojoBusiAcct>
             throw new BusiAcctNotExistException();
         }
         return pojoBusiAcct;
+    }
+    
+    public PojoAccount getAccountEntiy(Usage usage,String businessActorId){
+        String querySql = "select PojoAccount from PojoAccount account, PojoBusiAcct busiAcct where account.id = busiAcct.accountId";
+        Query query = getSession().createQuery(querySql);
+        return (PojoAccount)query.uniqueResult();
     }
 }

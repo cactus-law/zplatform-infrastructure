@@ -36,7 +36,6 @@ public class SubjectRuleTest {
     
     public static void getSubject() {
         subjectRuleService=(SubjectRuleService)ApplicationContextUtil.get().getBean("subjectRuleServiceImpl");
-           
     }
     
     @Test

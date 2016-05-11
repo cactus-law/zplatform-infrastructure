@@ -89,9 +89,4 @@ public interface SubjectRuleConfigureDAO extends BaseDAO<PojoSubjectRuleConfigur
      * @return
      */
     public List<PojoSubjectRuleConfigure> getRulesByBusiCode(String busiCode);
-
-
-
-
-
 }

@@ -23,6 +23,7 @@ import com.zlebank.zplatform.acc.bean.enums.TradeType;
 import com.zlebank.zplatform.acc.exception.AbstractBusiAcctException;
 import com.zlebank.zplatform.acc.exception.AccBussinessException;
 import com.zlebank.zplatform.acc.service.AccEntryService;
+import com.zlebank.zplatform.acc.service.entry.EntryEvent;
 
 /**
  * Class Description
@@ -61,7 +62,7 @@ public class AccEntryServiceTest {
         
         boolean success = true;
         try {
-            service.accEntryProcess(entry);
+            service.accEntryProcess(entry,EntryEvent.TRADE_SUCCESS);
         } catch (Exception e) {
             e.printStackTrace();
             success = false;
@@ -89,7 +90,7 @@ public class AccEntryServiceTest {
         
         boolean success = true;
         try {
-            service.accEntryProcess(entry);
+            service.accEntryProcess(entry,EntryEvent.TRADE_SUCCESS);
         } catch (Exception e) {
             e.printStackTrace();
             success = false;
@@ -115,7 +116,7 @@ public class AccEntryServiceTest {
 
         boolean success = true;
         try {
-            service.accEntryProcess(entry);
+            service.accEntryProcess(entry,EntryEvent.TRADE_SUCCESS);
         } catch (Exception e) {
             e.printStackTrace();
             success = false;

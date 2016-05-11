@@ -20,6 +20,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
+
+import com.zlebank.zplatform.acc.bean.enums.AccCodeType;
 import com.zlebank.zplatform.acc.bean.enums.CRDRType;
 import com.zlebank.zplatform.acc.bean.enums.RuleStatusType;
 import com.zlebank.zplatform.commons.dao.pojo.Pojo;
@@ -53,8 +55,10 @@ public class PojoSubjectRuleConfigure extends Pojo {
     public RuleStatusType status;
     // 交易类型
     private String txntype;
-    // 科目标记 (付款人资金，付款人产品，收款人资金，收款人产品，父级资金，父级产品)
-    private String flag;
+    // 科目标记 ，当ACC_CODE_TYPE=01时，本字段由4位组成一位业务方（F:付款方S:收款方Y:佣金方T:通道手续费方）+3位用途
+    private String acctCode;
+    //业务代码占位符类型
+    private AccCodeType acctCodeType;
     // 余额方向
     private CRDRType crdr;
     // 产品代码
@@ -91,14 +95,18 @@ public class PojoSubjectRuleConfigure extends Pojo {
         return txntype;
     }
     @Column(name = "ACCT_CODE")
-    public String getFlag() {
-        return flag;
+    public String getAcctCode() {
+        return acctCode;
+    }
+    public void setAcctCode(String acctCode) {
+        this.acctCode = acctCode;
     }
     @Type(type = "com.zlebank.zplatform.acc.pojo.usertype.CRDRSqlType")
     @Column(name = "CRDR")
     public CRDRType getCrdr() {
         return crdr;
     }
+    
     @Column(name = "PRDTCODE")
     public String getProdductCode() {
         return prodductCode;
@@ -187,14 +195,18 @@ public class PojoSubjectRuleConfigure extends Pojo {
     public void setRemarks(String remarks) {
         this.remarks = remarks;
     }
-    public void setFlag(String flag) {
-        this.flag = flag;
-    }
     public void setTxntype(String txntype) {
         this.txntype = txntype;
     }
     public void setStatus(RuleStatusType status) {
         this.status = status;
     }
-
+    @Type(type = "com.zlebank.zplatform.acc.pojo.usertype.AccCodePlacehoderTypeSqlType")
+    @Column(name = "ACCT_CODE_TYPE")
+    public AccCodeType getAcctCodeType() {
+        return acctCodeType;
+    }
+    public void setAcctCodeType(AccCodeType acctCodeType) {
+        this.acctCodeType = acctCodeType;
+    }
 }
