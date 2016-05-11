@@ -122,14 +122,14 @@ public class MemberBankCardServiceImpl  implements MemberBankCardService {
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
     public long saveQuickPayCust(QuickpayCustBean bean) {
-        PojoQuickpayCust oldPojo = quickpayCustDAO.getQuickPayCard(bean.getRelatememberno(), bean.getCardno());
+        PojoQuickpayCust oldPojo = quickpayCustDAO.getQuickPayCard(bean.getRelatememberno(), bean.getCardno(),bean.getIdnum(),bean.getAccname(),bean.getPhone());
         if (oldPojo != null) {
             return oldPojo.getId();
         }
         PojoQuickpayCust pojo = BeanCopyUtil.copyBean(PojoQuickpayCust.class, bean);
         pojo.setStatus("00");
         pojo = quickpayCustDAO.merge(pojo);
-        pojo = quickpayCustDAO.getQuickPayCard(bean.getRelatememberno(), bean.getCardno());
+        pojo = quickpayCustDAO.getQuickPayCard(bean.getRelatememberno(), bean.getCardno(),bean.getIdnum(),bean.getAccname(),bean.getPhone());
         return pojo.getId();
     }
 
