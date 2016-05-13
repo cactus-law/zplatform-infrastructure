@@ -14,7 +14,6 @@ import java.util.List;
 
 import com.zlebank.zplatform.acc.bean.enums.Usage;
 import com.zlebank.zplatform.acc.exception.BusiAcctNotExistException;
-import com.zlebank.zplatform.acc.pojo.PojoAccount;
 import com.zlebank.zplatform.acc.pojo.PojoBusiAcct;
 import com.zlebank.zplatform.commons.dao.BaseDAO;
 
@@ -53,10 +52,10 @@ public interface BusiAcctDAO extends BaseDAO<PojoBusiAcct>{
      */
     public PojoBusiAcct getBusiCode(Usage usage, String memberId) throws BusiAcctNotExistException;
     /**
-     * 通过 用途和参与方id得到会计账户实体
+     * 通过 用途和参与方id得到会计账户号
      * @param usage
      * @param businessActorId
      * @return
      */
-    public PojoAccount getAccountEntiy(Usage usage,String businessActorId);
+    public String getAccCodeByUsageAndBusiActorId(Usage usage,String businessActorId);
     }

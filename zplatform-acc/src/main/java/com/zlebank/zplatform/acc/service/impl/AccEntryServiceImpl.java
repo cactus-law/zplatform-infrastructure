@@ -217,6 +217,11 @@ public class AccEntryServiceImpl
         TradeType tradeType = TradeType.fromValue(tradeInfo.getBusiCode());
         EntryEventHandler eventHandler = entryEventHandlerFactory.getEvnetHandler(tradeType, entryEvent);
         
+        if(eventHandler == null){
+            log.warn("Not supported trade type and entry event mapping.Trade type:"+tradeType+",entry event:"+entryEvent);
+            throw new RuntimeException("Not supported trade type and entry event association.Trade type:"+tradeType+",entry event:"+entryEvent);
+        }
+        
         eventHandler.handle(tradeInfo,entryEvent);
         if (log.isDebugEnabled()) {
             log.debug("********账务系统处理结束********");

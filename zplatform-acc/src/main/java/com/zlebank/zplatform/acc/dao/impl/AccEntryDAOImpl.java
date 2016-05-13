@@ -128,23 +128,10 @@ public class AccEntryDAOImpl  extends AbstractPagedQueryDAOImpl<PojoAccEntry,Acc
     
     @SuppressWarnings("unchecked")
     @Override
-    public List<PojoAccEntry> getByTxnNo(String txnseqno, String busiCode) {
+    public List<PojoAccEntry> getByTxnNo(String txnseqno, String busiCode,EntryEvent entryEvent) {
         Criteria criteria = getSession().createCriteria(PojoAccEntry.class);
         criteria.add(Restrictions.eq("txnseqno", txnseqno));
         criteria.add(Restrictions.eq("busiCode", busiCode));
-        return criteria.list();
-    }
-    /**
-     * 根据交易流水号，分录事件得到分录流水
-     * @param txnseqno
-     * @param busiCode
-     * @return
-     */
-    @SuppressWarnings("unchecked")
-    @Override
-    public List<PojoAccEntry> getByTxnNo(String txnseqno, EntryEvent entryEvent){
-        Criteria criteria = getSession().createCriteria(PojoAccEntry.class);
-        criteria.add(Restrictions.eq("txnseqno", txnseqno));
         criteria.add(Restrictions.eq("entryEvent", entryEvent));
         return criteria.list();
     }

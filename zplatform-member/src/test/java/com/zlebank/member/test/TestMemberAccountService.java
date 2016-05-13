@@ -16,6 +16,7 @@ import net.sf.json.JSONObject;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 
@@ -38,7 +39,7 @@ import com.zlebank.zplatform.member.service.MemberAccountService;
  * @date 2016年1月18日 下午3:29:03
  * @since 
  */
-class TestMemberAccountService {
+public class TestMemberAccountService {
     private ApplicationContext ac;
     private MemberAccountService memberAccountService;
     @Before
@@ -50,6 +51,7 @@ class TestMemberAccountService {
      * 账户余额
      */
     @Test
+    @Ignore
     public void queryBalanceTest() {
         MemberBean member = new Person();
         member.setMemberId("100000000000494");

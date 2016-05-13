@@ -11,7 +11,6 @@
 package com.zlebank.member.test;
 
 import org.junit.Before;
-import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.util.Assert;
 
@@ -36,7 +35,6 @@ public class EnterpriseServiceTest {
         enterpriseService = (EnterpriseService)context.getBean(EnterpriseService.class);
     }
     
-    @Test
     public void testGetEnterprise() {
         EnterpriseBean memberId = enterpriseService.getEnterpriseByMemberId("200000000000597");
         System.out.println(memberId.getEnterpriseName());

@@ -16,11 +16,11 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.zlebank.zplatform.acc.bean.enums.Usage;
 import com.zlebank.zplatform.acc.dao.BusiAcctDAO;
 import com.zlebank.zplatform.acc.exception.BusiAcctNotExistException;
-import com.zlebank.zplatform.acc.pojo.PojoAccount;
 import com.zlebank.zplatform.acc.pojo.PojoBusiAcct;
 import com.zlebank.zplatform.commons.dao.impl.HibernateBaseDAOImpl;
 
@@ -77,9 +77,13 @@ public class BusiAcctDAOImpl extends HibernateBaseDAOImpl<PojoBusiAcct>
         return pojoBusiAcct;
     }
     
-    public PojoAccount getAccountEntiy(Usage usage,String businessActorId){
-        String querySql = "select PojoAccount from PojoAccount account, PojoBusiAcct busiAcct where account.id = busiAcct.accountId";
-        Query query = getSession().createQuery(querySql);
-        return (PojoAccount)query.uniqueResult();
+    @Override
+    @Transactional
+    public String getAccCodeByUsageAndBusiActorId(Usage usage,String businessActorId){
+        String querySql = "select acct_code from T_ACC_ACCT A, T_ACC_BUSIACCT B where A.id = B.acct_id and B.usage=? and b.BUSINESS_ACTOR_ID=?";
+        Query query = getSession().createSQLQuery(querySql);
+        query.setParameter(0, usage.getCode());
+        query.setParameter(1, businessActorId);
+        return (String)query.uniqueResult();
     }
 }

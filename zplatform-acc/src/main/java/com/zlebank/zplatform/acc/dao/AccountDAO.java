@@ -67,5 +67,4 @@ public interface AccountDAO extends BaseDAO<PojoAccount>{
      * @return
      */
     public long getSequence(String sequences);
-    
 }

@@ -12,7 +12,6 @@ package com.zlebank.member.test;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 
 import com.zlebank.zplatform.commons.test.RandomUtil;
@@ -34,7 +33,7 @@ import com.zlebank.zplatform.member.service.MemberOperationService;
  * @date 2016年1月15日 下午5:45:34
  * @since 
  */
-class TestMemberOperationService {
+public class TestMemberOperationService {
     private ApplicationContext ac;
     private MemberOperationService memberOperationService;
     @Before
@@ -42,7 +41,7 @@ class TestMemberOperationService {
         ac = ApplicationContextUtil.get();
         memberOperationService =  (MemberOperationService) ac.getBean("memberOperationServiceImpl");
     }
-    @Test
+    
     public void registMemberTest() {
         MemberBean member = new Person();
         member.setMemberName(RandomUtil.randomAlphabet("anonymity", 4));

@@ -45,19 +45,12 @@ public interface AccEntryDAO  extends BasePagedQueryDAO<PojoAccEntry,AccEntryQue
 	 */
 	public PojoAccEntry getByIdForUpdate(long voucherCode);
 
-    /**
-     * 根据交易流水号得到分录流水
-     * @param txnseqno
-     * @param busiCode
-     * @return
-     */
-    public List<PojoAccEntry> getByTxnNo(String txnseqno, String busiCode);
-    
-    /**
-     * 根据交易流水号,分录事件得到分录流水
-     * @param txnseqno
-     * @param busiCode
-     * @return
-     */
-    public List<PojoAccEntry> getByTxnNo(String txnseqno, EntryEvent entryEvent);
+   /**
+    * 根据交易流水号,交易类型,分录事件得到分录流水
+    * @param txnseqno
+    * @param busiCode
+    * @param entryEvent
+    * @return
+    */
+    public List<PojoAccEntry> getByTxnNo(String txnseqno, String busiCode, EntryEvent entryEvent);
 }

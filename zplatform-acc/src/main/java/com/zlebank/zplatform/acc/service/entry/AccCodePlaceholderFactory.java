@@ -3,6 +3,7 @@ package com.zlebank.zplatform.acc.service.entry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zlebank.zplatform.acc.bean.TradeInfo;
 import com.zlebank.zplatform.acc.bean.enums.AccCodeType;
 import com.zlebank.zplatform.acc.bean.enums.Usage;
 import com.zlebank.zplatform.acc.dao.BusiAcctDAO;
@@ -14,25 +15,29 @@ public class AccCodePlaceholderFactory {
     @Autowired
     private BusiAcctDAO busiAcctDAO;
     
-    private AcctCodePlaceHolder newPlaceholder(final String placeHolderValue,final String businessActorId){
+    private static final String LITERAL_PAYER = "F";
+    private static final String LITERAL_RECEIVER = "S";
+    private static final String LITERAL_CHANNEL = "T";
+    private static final String LITERAL_COMMISSION_RECE = "Y";
+    private static final String LITERAL_COOP_INST = "C";
+    
+    private AcctCodePlaceHolder newPlaceholder(final String placeHolderValue,final TradeInfo tradeInfo){
         return new AcctCodePlaceHolder() {
-            
             @Override
             public String getAccCode() throws BusiAcctNotExistException {
                 Usage usage = Usage.fromValue(placeHolderValue.substring(1));
-                
+                String businessActorId = getBusiActorByFlag(String.valueOf(placeHolderValue.charAt(0)).toUpperCase(), tradeInfo);
                 if(usage==Usage.UNKNOW){
                     // TODO
                     //throw new UnknowusageException();
                 }
-                return busiAcctDAO.getAccountEntiy(usage, businessActorId).getAcctCode();
+                return busiAcctDAO.getAccCodeByUsageAndBusiActorId(usage, businessActorId);
             }
         };
     }
     
-    private AcctCodePlaceHolder newParentSubject(final String placeHolderValue){
+    private AcctCodePlaceHolder newAccount(final String placeHolderValue){
         return new AcctCodePlaceHolder() {
-            
             @Override
             public String getAccCode() {
                 return placeHolderValue;
@@ -47,18 +52,35 @@ public class AccCodePlaceholderFactory {
      * @param businessActorId
      * @return
      */
-    public AcctCodePlaceHolder getAcctCodePlaceholder(AccCodeType accCodeType,String placeHolderValue,String businessActorId){
+    public AcctCodePlaceHolder getAcctCodePlaceholder(AccCodeType accCodeType,String placeHolderValue,TradeInfo tradeInfo){
         switch (accCodeType) {
             case PLACEHODER :
-                return newPlaceholder(placeHolderValue,businessActorId);
+                return newPlaceholder(placeHolderValue,tradeInfo);
             case PARENTSUBJECT:
                 //TODO
                 return null;
             case ACCOUNT:
-                return newParentSubject(placeHolderValue);
+                return newAccount(placeHolderValue);
             default :
                 //TODO
                 //throw new UnknowPlaceholderException();
+                return null;
+        }
+    }
+    
+    private String getBusiActorByFlag(String flag, TradeInfo tradeInfo) {
+        switch (flag) {
+            case LITERAL_CHANNEL :
+                return tradeInfo.getChannelId();
+            case LITERAL_COMMISSION_RECE :
+                return tradeInfo.getPayToParentMemberId();
+            case LITERAL_PAYER :
+                return tradeInfo.getPayMemberId();
+            case LITERAL_RECEIVER :
+                return tradeInfo.getPayToMemberId();
+            case LITERAL_COOP_INST:
+                return tradeInfo.getCoopInstCode();
+            default :
                 return null;
         }
     }

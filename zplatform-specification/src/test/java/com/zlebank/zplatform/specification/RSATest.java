@@ -10,6 +10,7 @@
  */
 package com.zlebank.zplatform.specification;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -23,6 +24,7 @@ import org.junit.Test;
 public class RSATest {
     
     @Test
+    @Ignore
     public void test(){ 
     }
     

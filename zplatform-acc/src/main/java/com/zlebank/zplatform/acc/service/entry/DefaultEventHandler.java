@@ -1,6 +1,7 @@
 package com.zlebank.zplatform.acc.service.entry;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 import java.util.List;
 
@@ -8,12 +9,7 @@ import net.sf.json.JSONObject;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.cheffo.jeplite.JEP;
-import org.cheffo.jeplite.ParseException;
-import org.cheffo.jeplite.util.DoubleStack;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.zlebank.zplatform.acc.bean.TradeInfo;
 import com.zlebank.zplatform.acc.bean.enums.AccEntryStatus;
@@ -27,24 +23,13 @@ import com.zlebank.zplatform.acc.pojo.PojoAccEntry;
 import com.zlebank.zplatform.acc.pojo.PojoAccount;
 import com.zlebank.zplatform.acc.pojo.PojoSubjectRuleConfigure;
 
-@Service
-public class SyncEventHandler extends AbstractEventHandler {
+@Service("defaultEventHandler")
+public class DefaultEventHandler extends AbstractEventHandler {
 
-    private final static Log log = LogFactory.getLog(SyncEventHandler.class);
+    private final static Log log = LogFactory.getLog(DefaultEventHandler.class);
 
-    private static final String LITERAL_PAYER = "F";
-    private static final String LITERAL_RECEIVER = "S";
-    private static final String LITERAL_CHANNEL = "T";
-    private static final String LITERAL_COMMISSION_RECE = "Y";
-
-    private static final String LITERAL_COMPUTE_FACTOR_PRINCIPAL = "A";// 本金
-    private static final String LITERAL_COMPUTE_FACTOR_COMMISSION = "B";// 佣金
-    private static final String LITERAL_COMPUTE_FACTOR_FEE = "C";// 商户手续费
-    private static final String LITERAL_COMPUTE_FACTOR_D = "D";// 商户手续费
-    private static final String LITERAL_COMPUTE_FACTOR_E = "E";// 商户手续费
 
     @Override
-    @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Throwable.class)
     final protected void realHandle(TradeInfo tradeInfo, EntryEvent entryEvent)
             throws AccBussinessException, AbstractBusiAcctException,
             NumberFormatException {
@@ -57,59 +42,40 @@ public class SyncEventHandler extends AbstractEventHandler {
 
         /* 循环分录规则，插入分录流水 。插入中同时处理同步记账 */
         BigDecimal balanceTest = BigDecimal.ZERO;
-        for (PojoSubjectRuleConfigure entryRule : entryRuleList) {
-            String firstChar = String
-                    .valueOf(entryRule.getAcctCode().charAt(0)).toUpperCase();
-            String busiActorId = getBusiActorByFlag(firstChar, tradeInfo);
-            if (busiActorId == null) {
-                // TODO throw new Exception;
-            }
+        for (PojoSubjectRuleConfigure entryRule : entryRuleList) { 
             AcctCodePlaceHolder acctCodePlaceHolder = accCodePlaceholderFactory
                     .getAcctCodePlaceholder(entryRule.getAcctCodeType(),
-                            entryRule.getAcctCode(), busiActorId);
+                            entryRule.getAcctCode(), tradeInfo);
 
             String accCode = acctCodePlaceHolder.getAccCode();
-
+            
             BigDecimal accrual = getAccEntryAmount(
                     entryRule.getEntryAlgorithm(), tradeInfo);
-
+            
             balanceTest = insertEntry(accCode, accrual, tradeInfo, entryRule,
                     entryEvent, balanceTest);
         }
         /* 试算平衡校验 */
-        if (BigDecimal.ZERO.compareTo(balanceTest) != 0) {
+        if (BigDecimal.ZERO.compareTo(balanceTest.setScale(0, RoundingMode.HALF_UP)) != 0) {
             throw new AccBussinessException("E000011");
         }
     }
     @Override
-    final protected boolean isConditionStatified(TradeInfo tradeInfo) {
+    final protected boolean isConditionStatified(TradeInfo tradeInfo,
+            EntryEvent entryEvent) {
         /* 检查交易流水号是否有关联的分录流水 */
         List<PojoAccEntry> list = accEntryDAO.getByTxnNo(
-                tradeInfo.getTxnseqno(), tradeInfo.getBusiCode());
-        if (list.isEmpty()) {
+                tradeInfo.getTxnseqno(), tradeInfo.getBusiCode(), entryEvent);
+        if (!list.isEmpty()) {
             return false;
         }
 
         if (tradeInfo.isSplit()) {// 如果有分账
             // TODO 暂时先不支持分账
             // throw new NotsupportSplitException();
+            return false;
         }
         return true;
-    }
-
-    private String getBusiActorByFlag(String flag, TradeInfo tradeInfo) {
-        switch (flag) {
-            case LITERAL_CHANNEL :
-                return tradeInfo.getChannelId();
-            case LITERAL_COMMISSION_RECE :
-                return tradeInfo.getPayToParentMemberId();
-            case LITERAL_PAYER :
-                return tradeInfo.getPayMemberId();
-            case LITERAL_RECEIVER :
-                return tradeInfo.getPayToMemberId();
-            default :
-                return null;
-        }
     }
 
     /**
@@ -145,7 +111,7 @@ public class SyncEventHandler extends AbstractEventHandler {
         if ("1".equals(rule.getSyncFlag())) {// 同步记账
             handleSynAccount(entry);
         } else {// 非同步记账,设置状态为未记账
-            entry.setStatus(AccEntryStatus.NOT_ACCOUNTED);
+            entry.setStatus(AccEntryStatus.WAIT_ACCOUNTED);
         }
         accEntryDAO.merge(entry);
         // 试算平衡
@@ -207,48 +173,7 @@ public class SyncEventHandler extends AbstractEventHandler {
         entry.setStatus(AccEntryStatus.ACCOUNTED);// 已记账
     }
 
-    /**
-     * 分录金额计算
-     * 
-     * @param ordform
-     *            分录金额计算规则 例：（A+B）
-     * @param tradeInfo
-     *            交易流水
-     * @return
-     * @throws AccBussinessException
-     */
-    private BigDecimal getAccEntryAmount(String ordform, TradeInfo tradeInfo)
-            throws AccBussinessException {
-        ordform = ordform.toUpperCase();
-        // 通道手续费未记账时为0，对账完成后更新值。
-        if (ordform.startsWith("T")) {
-            return BigDecimal.ZERO;
-        }
-        JEP jep = new JEP();
-        if (ordform.contains(LITERAL_COMPUTE_FACTOR_PRINCIPAL))
-            jep.addVariable(LITERAL_COMPUTE_FACTOR_PRINCIPAL, tradeInfo
-                    .getAmount().doubleValue());// 本金
-        if (ordform.contains(LITERAL_COMPUTE_FACTOR_COMMISSION))
-            jep.addVariable(LITERAL_COMPUTE_FACTOR_COMMISSION, tradeInfo
-                    .getCommission().doubleValue());// 佣金
-        if (ordform.contains(LITERAL_COMPUTE_FACTOR_FEE))
-            jep.addVariable(LITERAL_COMPUTE_FACTOR_FEE, tradeInfo.getCharge()
-                    .doubleValue());// 手续费
-        if (ordform.contains(LITERAL_COMPUTE_FACTOR_D))
-            jep.addVariable(LITERAL_COMPUTE_FACTOR_D, tradeInfo.getCharge()
-                    .doubleValue());// 金额D
-        if (ordform.contains(LITERAL_COMPUTE_FACTOR_E))
-            jep.addVariable(LITERAL_COMPUTE_FACTOR_E, tradeInfo.getCharge()
-                    .doubleValue());// 金额E
-        jep.parseExpression(ordform);
-        DoubleStack stack = new DoubleStack();
-        try {
-            return new BigDecimal(jep.getValue(stack));
-        } catch (ParseException e) {
-            e.printStackTrace();
-            throw new AccBussinessException("E000010", new Object[]{ordform});
-        }
-    }
+    
     /**
      * <p>
      * 得到记账所需要更新的金额
@@ -257,6 +182,7 @@ public class SyncEventHandler extends AbstractEventHandler {
      * 如果分录规则的CRDR和详细科目的CRDR一致的话，则余额为增加<br/>
      * 如果分录规则的CRDR和详细科目的CRDR不一致的话，则余额为减少
      * <p/>
+     * 
      * @param amount
      * @param entry
      * @param account

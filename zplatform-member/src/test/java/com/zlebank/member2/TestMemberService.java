@@ -8,16 +8,15 @@
  * Copyright (c) 2015,zlebank.All rights reserved.
  * 
  */
-package com.zlebank.member.test;
+package com.zlebank.member2;
 
+import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 
-import com.zlebank.zplatform.acc.exception.AbstractBusiAcctException;
+import com.zlebank.member.test.ApplicationContextUtil;
 import com.zlebank.zplatform.commons.test.RandomUtil;
-import com.zlebank.zplatform.member.exception.MemberBussinessException;
 import com.zlebank.zplatform.member.exception.PrimaykeyGeneratedException;
 import com.zlebank.zplatform.member.service.MemberService;
 import com.zlebank.zplatform.member.service.PrimayKeyService;
@@ -49,7 +48,6 @@ public class TestMemberService {
      * 开通个人会员账户
      */
     @Test
-    @Ignore
     public void openIndiBusiAcct() {
         long userId = 99;
         String memberId = "";
@@ -63,12 +61,9 @@ public class TestMemberService {
         String name = RandomUtil.randomAlphabet("Indiv-test-", 7);
         try {
             memberService.openBusiAcct(name, memberId, userId);
-        } catch (MemberBussinessException e) {
+        }  catch (Exception e) {
             e.printStackTrace();
-        } catch (AbstractBusiAcctException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+            Assert.fail();
         }
     }
 
@@ -88,12 +83,9 @@ public class TestMemberService {
         String name = RandomUtil.randomAlphabet("Enterprise-test-", 7);
         try {
             memberService.openBusiAcct(name, memberId, userId);
-        } catch (MemberBussinessException e) {
-            e.printStackTrace();
-        } catch (AbstractBusiAcctException e) {
-            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+            Assert.fail();
         }
     }
 }

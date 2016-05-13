@@ -294,7 +294,7 @@ public class SubjectRuleConfigureDAOImpl
         Criteria criteria = this.getSession().createCriteria(
                 PojoSubjectRuleConfigure.class);
         criteria.add(Restrictions.eq("txntype", busiCode));
-        criteria.add(Restrictions.eq("entryEvent", entryEvent.getCode()));
+        criteria.add(Restrictions.eq("entryEvent", entryEvent));
         criteria.add(Restrictions.eq("status", RuleStatusType.NORMAL));
         criteria.addOrder(Order.asc("ruleOder"));
         return criteria.list();

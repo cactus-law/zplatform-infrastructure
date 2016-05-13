@@ -22,6 +22,7 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.type.StandardBasicTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.zlebank.zplatform.acc.bean.enums.AcctStatusType;
 import com.zlebank.zplatform.acc.dao.AccountDAO;
@@ -60,6 +61,8 @@ public class AccountDAOImpl extends HibernateBaseDAOImpl<PojoAccount> implements
         subject.setDac(dacUtil.generteDAC(subject.getAcctCode(), subject.getBalance(), subject.getFrozenBalance(), subject.getTotalBanance()));
         return (PojoAccount) merge(subject);
     }
+    
+    @Override
     public PojoAccount update(PojoAccount subject) {
         subject.setDac(dacUtil.generteDAC(subject.getAcctCode(), subject.getBalance(), subject.getFrozenBalance(), subject.getTotalBanance()));
         return super.update(subject);
@@ -70,6 +73,7 @@ public class AccountDAOImpl extends HibernateBaseDAOImpl<PojoAccount> implements
      * @return
      */
     @Override
+    @Transactional
     public PojoAccount getByAcctCode(String accCode) {
         if (log.isDebugEnabled()) {
             log.debug("【DAO】根据会计账户号得到账户："+accCode);
@@ -119,5 +123,5 @@ public class AccountDAOImpl extends HibernateBaseDAOImpl<PojoAccount> implements
         SQLQuery query = this.getSession().createSQLQuery(sql);
         long maxId = (long)(query.addScalar("nextvalue", StandardBasicTypes.LONG) ).uniqueResult();
          return  maxId;
-       }
+       } 
 }

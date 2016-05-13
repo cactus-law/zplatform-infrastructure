@@ -9,6 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.zlebank.zplatform.acc.bean.enums.TradeType;
 import com.zlebank.zplatform.acc.dao.TradeEntryEventMappingDAO;
@@ -38,6 +39,7 @@ public class EntryEventHandlerFactory extends SpringApplicationObjectSupport{
     /**
      * TODO
      */
+    @Transactional
     public EntryEventHandler getEvnetHandler(TradeType tradeType,
             EntryEvent entryEvent) {
         synchronized (this) {
@@ -54,7 +56,7 @@ public class EntryEventHandlerFactory extends SpringApplicationObjectSupport{
         }
         return hanlderImplCachedMap.get(compositKey);
     }
-
+    
     private void refresh() {
         fetchApplicationContext();
         List<PojoTradeEntryEventMapping> tradeEntryEventMappingList = tradeEntryEventMappingDAO
@@ -68,7 +70,7 @@ public class EntryEventHandlerFactory extends SpringApplicationObjectSupport{
             try {
                 eventHandlerClassName = tradeEntryEventMapping
                         .getImplClassName();
-                eventHandler = (EntryEventHandler) applicationContext.getBean(Class.forName(eventHandlerClassName));
+                eventHandler = (EntryEventHandler) applicationContext.getBean(eventHandlerClassName);
             } catch (Exception e) {
                 StringBuilder sb = new StringBuilder();
                 sb.append("实例化分录事件处理器发生错误[compositKey:");

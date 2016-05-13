@@ -11,8 +11,6 @@
 package com.zlebank.zplatform.acc;
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
-
 import com.zlebank.zplatform.acc.bean.SubjectRule;
 import com.zlebank.zplatform.acc.bean.enums.CRDRType;
 import com.zlebank.zplatform.acc.bean.enums.RuleStatusType;
@@ -38,7 +36,7 @@ public class SubjectRuleTest {
         subjectRuleService=(SubjectRuleService)ApplicationContextUtil.get().getBean("subjectRuleServiceImpl");
     }
     
-    @Test
+
     public void testQueryPaged() {
 //        fail("Not yet implemented");
     }

@@ -2,6 +2,7 @@ package com.zlebank.zlpatform.acc2.openAcct;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -31,7 +32,7 @@ public class AddChannelTest {
         channelService = (ChannelService) context.getBean("channelServiceImpl");
     }  
     
-    
+     @Test
     public void addChannelTest() {
         ChannelBean channel = new ChannelBean();
         String chnlcode = RandomUtil.randomNumber(8);

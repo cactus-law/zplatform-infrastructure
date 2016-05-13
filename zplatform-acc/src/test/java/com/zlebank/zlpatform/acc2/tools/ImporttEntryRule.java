@@ -6,7 +6,6 @@ import java.util.List;
 import jxl.read.biff.BiffException;
 
 import org.junit.Before;
-import org.junit.Test;
 
 import com.zlebank.zlpatform.acc2.util.ApplicationContextAbled;
 import com.zlebank.zplatform.acc.bean.SubjectRule;
@@ -27,7 +26,7 @@ public class ImporttEntryRule extends ApplicationContextAbled {
         subjectRuleService = context.getBean(SubjectRuleService.class);
     }
 
-    @Test
+     
     public void importt() {
         try {
             List<String[]> list = excelReader.readExcle("新增规则");

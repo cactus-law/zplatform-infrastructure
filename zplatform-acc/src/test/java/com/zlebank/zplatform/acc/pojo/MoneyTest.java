@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 /**
  * Class Description
@@ -27,7 +26,7 @@ import org.junit.Test;
  */
 public class MoneyTest {
 
-    @Test
+     
     public void test() {
         List<Money> testMoneys = new ArrayList<Money>();
 

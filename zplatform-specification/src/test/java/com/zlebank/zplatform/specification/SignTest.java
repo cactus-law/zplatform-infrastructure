@@ -13,6 +13,7 @@ package com.zlebank.zplatform.specification;
 import net.sf.json.JSONObject;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -40,6 +41,7 @@ public class SignTest {
         springContext = new ClassPathXmlApplicationContext("SpecificationContextTest.xml");
     }
     @Test
+    @Ignore
     public void testEntranceAPILog() throws Exception, ClassNotFoundException, InstantiationException, IllegalAccessException{
 //        ApplicationContext springContext = new ClassPathXmlApplicationContext("SpecificationContextTest.xml"); 
         SpecificationParser parser = (SpecificationParser) springContext

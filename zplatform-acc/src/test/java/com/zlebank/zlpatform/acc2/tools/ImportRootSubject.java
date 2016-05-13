@@ -15,13 +15,14 @@ import java.util.List;
 
 import jxl.read.biff.BiffException;
 
-import org.junit.Test;
-
 import com.zlebank.zplatform.acc.ApplicationContextUtil;
 import com.zlebank.zplatform.acc.bean.Subject;
+import com.zlebank.zplatform.acc.bean.SubjectQuery;
 import com.zlebank.zplatform.acc.bean.enums.AcctElementType;
 import com.zlebank.zplatform.acc.bean.enums.CRDRType;
 import com.zlebank.zplatform.acc.exception.AbstractAccException;
+import com.zlebank.zplatform.acc.exception.AccBussinessException;
+import com.zlebank.zplatform.acc.service.AccountService;
 import com.zlebank.zplatform.acc.service.SubjectService;
 import com.zlebank.zplatform.commons.utils.StringUtil;
 
@@ -33,20 +34,19 @@ import com.zlebank.zplatform.commons.utils.StringUtil;
  * @date 2015年9月1日 上午11:25:31
  * @since
  */
-class AddRootSubject extends ExcelReader{
-    private static SubjectService subjectservice; 
-
+public class ImportRootSubject extends ExcelReader {
+    private static SubjectService subjectservice;
+    private static AccountService accountService;
     public static void getSubject() {
         subjectservice = (SubjectService) ApplicationContextUtil.get().getBean(
                 "subjectServiceImpl");
+        accountService = (AccountService)ApplicationContextUtil.get().getBean(
+                "accountServiceImpl");
     }
-
-    
 
     /**
      * 新增科目
      */
-    @Test
     public void testAddSubject() {
         try {
             getSubject();
@@ -59,7 +59,7 @@ class AddRootSubject extends ExcelReader{
             e.printStackTrace();
         }
     }
-     
+
     /**
      * 新增科目
      * 
@@ -69,7 +69,6 @@ class AddRootSubject extends ExcelReader{
     private void addSubject() throws BiffException, IOException {
         List<String[]> list = this.readExcle("新增科目");
         // 会计要素（1:资产 2:负债 3:共同 4:所有权益 5:成本 6:损益）
-
         for (int i = 0; i < list.size(); i++) {
             String[] str = (String[]) list.get(i);
             Subject sub = new Subject();
@@ -106,6 +105,25 @@ class AddRootSubject extends ExcelReader{
             } catch (AbstractAccException e) {
                 System.out.println(e);
             }
+        }
+        try {
+            SubjectQuery middleSubject = subjectservice.subjectByCode("2248");
+             
+            Subject parentSubject = new Subject();
+            parentSubject.setId(middleSubject.getId());
+            parentSubject.setAcctCode(middleSubject.getAcctCode());
+            Subject middleAccount = new Subject();
+            middleAccount.setAcctCode(middleSubject.getAcctCode()+"01");
+            middleAccount.setAcctCodeName("平账账户");
+            middleAccount.setParentSubject(parentSubject);
+
+            accountService.addAcct(middleSubject.getId(), middleSubject.getAcctCode()+"01", "平账账户", 110L);
+        } catch (AccBussinessException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (AbstractAccException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
 }

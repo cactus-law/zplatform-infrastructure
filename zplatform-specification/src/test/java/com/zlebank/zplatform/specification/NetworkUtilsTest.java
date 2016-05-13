@@ -10,6 +10,7 @@
  */
 package com.zlebank.zplatform.specification;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.zlebank.zplatform.specification.utils.NetWorkUtils;
@@ -25,6 +26,7 @@ import com.zlebank.zplatform.specification.utils.NetWorkUtils;
 public class NetworkUtilsTest {
     
     @Test
+    @Ignore
     public void test(){
         System.out.println(NetWorkUtils.getMac());
     }
