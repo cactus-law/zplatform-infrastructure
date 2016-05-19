@@ -46,4 +46,10 @@ public interface CoopInstiService {
      * @return
      */
     CoopInsti getInstiByInstiCode(String instiCode);
+    /**
+     * 
+     * @param instiCode
+     * @return
+     */
+    CoopInsti getInstiByInstiID(long instiId);
 }

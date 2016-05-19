@@ -211,4 +211,22 @@ public class CoopInstiServiceImpl implements CoopInstiService {
         BeanUtils.copyProperties(pojoCoopInsit, copyTo, ignoreProperties);
         return copyTo;
     }
+
+    @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
+    public CoopInsti getInstiByInstiID(long instiID) {
+        PojoCoopInsti pojoCoopInsit = null;
+        try {
+            pojoCoopInsit = coopInstiDAO.get(instiID);
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            return null;
+        }
+        if (pojoCoopInsit == null) {
+            return null;
+        }
+        CoopInsti copyTo = new CoopInsti();
+        String[] ignoreProperties = new String[]{"instisMKs"};
+        BeanUtils.copyProperties(pojoCoopInsit, copyTo, ignoreProperties);
+        return copyTo;
+    }
 }
