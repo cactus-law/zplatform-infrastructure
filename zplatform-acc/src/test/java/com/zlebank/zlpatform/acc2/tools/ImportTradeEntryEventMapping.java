@@ -1,10 +1,8 @@
 package com.zlebank.zlpatform.acc2.tools;
 
-import java.io.IOException;
 import java.util.List;
 
-import jxl.read.biff.BiffException;
-
+import org.junit.Assert;
 import org.junit.Before;
 
 import com.zlebank.zlpatform.acc2.util.ApplicationContextAbled;
@@ -24,7 +22,6 @@ public class ImportTradeEntryEventMapping extends ApplicationContextAbled{
         tradeEntryEventMappingDAO = context.getBean(TradeEntryEventMappingDAO.class);
     }
     
-    
     public void importt() {
         try {
             List<String[]> list = excelReader.readExcle("交易类型事件映射");
@@ -38,12 +35,9 @@ public class ImportTradeEntryEventMapping extends ApplicationContextAbled{
                 tradeEntryEventMapping.setImplClassName(str[++j]);
                 tradeEntryEventMappingDAO.save(tradeEntryEventMapping);
             }
-        } catch (BiffException e) {
-            // TODO Auto-generated catch block
+        } catch(Exception e){
+            Assert.fail();
             e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }  
+        }
     }
 }

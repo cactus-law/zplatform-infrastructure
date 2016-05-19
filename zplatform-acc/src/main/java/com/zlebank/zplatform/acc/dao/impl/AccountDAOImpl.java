@@ -22,7 +22,6 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.type.StandardBasicTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.zlebank.zplatform.acc.bean.enums.AcctStatusType;
 import com.zlebank.zplatform.acc.dao.AccountDAO;
@@ -73,7 +72,6 @@ public class AccountDAOImpl extends HibernateBaseDAOImpl<PojoAccount> implements
      * @return
      */
     @Override
-    @Transactional
     public PojoAccount getByAcctCode(String accCode) {
         if (log.isDebugEnabled()) {
             log.debug("【DAO】根据会计账户号得到账户："+accCode);

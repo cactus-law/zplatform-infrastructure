@@ -39,6 +39,10 @@ public enum TradeType {
     BAIL("60000001"),
     /**代付*/
     INSTEADPAY("70000001"),
+    /**手工提现*/
+    RECHANGE_MANUAL ("90000001"),
+    /** 实名认证*/
+    REAL_NAME_AUTH("80000001"),
     /**未知类型**/
     UNKNOW("999");
 

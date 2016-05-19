@@ -84,6 +84,7 @@ public class BusiAcctDAOImpl extends HibernateBaseDAOImpl<PojoBusiAcct>
         Query query = getSession().createSQLQuery(querySql);
         query.setParameter(0, usage.getCode());
         query.setParameter(1, businessActorId);
-        return (String)query.uniqueResult();
+        String s = (String)query.uniqueResult();
+        return s;
     }
 }

@@ -31,7 +31,11 @@ public class AccCodePlaceholderFactory {
                     // TODO
                     //throw new UnknowusageException();
                 }
-                return busiAcctDAO.getAccCodeByUsageAndBusiActorId(usage, businessActorId);
+                 String accCode = busiAcctDAO.getAccCodeByUsageAndBusiActorId(usage, businessActorId);
+                 if(accCode==null||accCode.equals("")){                    
+                     throw new RuntimeException("获取的账户号为空.占位符:"+placeHolderValue+",参与者编号:"+businessActorId);
+                 }
+                 return accCode;
             }
         };
     }

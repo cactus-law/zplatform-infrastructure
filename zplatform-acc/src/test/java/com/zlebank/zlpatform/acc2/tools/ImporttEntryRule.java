@@ -1,10 +1,8 @@
 package com.zlebank.zlpatform.acc2.tools;
 
-import java.io.IOException;
 import java.util.List;
 
-import jxl.read.biff.BiffException;
-
+import org.junit.Assert;
 import org.junit.Before;
 
 import com.zlebank.zlpatform.acc2.util.ApplicationContextAbled;
@@ -12,7 +10,6 @@ import com.zlebank.zplatform.acc.bean.SubjectRule;
 import com.zlebank.zplatform.acc.bean.enums.AccCodeType;
 import com.zlebank.zplatform.acc.bean.enums.CRDRType;
 import com.zlebank.zplatform.acc.bean.enums.RuleStatusType;
-import com.zlebank.zplatform.acc.exception.AccBussinessException;
 import com.zlebank.zplatform.acc.service.SubjectRuleService;
 import com.zlebank.zplatform.acc.service.entry.EntryEvent;
 
@@ -26,7 +23,6 @@ public class ImporttEntryRule extends ApplicationContextAbled {
         subjectRuleService = context.getBean(SubjectRuleService.class);
     }
 
-     
     public void importt() {
         try {
             List<String[]> list = excelReader.readExcle("新增规则");
@@ -42,17 +38,13 @@ public class ImporttEntryRule extends ApplicationContextAbled {
                 rule.setEntryAlgorithm(str[++j]);
                 rule.setStatus(RuleStatusType.fromValue(str[++j]));
                 rule.setSyncFlag(str[++j]);
+                rule.setRuleOder(Long.valueOf(str[++j]));
                 rule.setEntryEvent(EntryEvent.fromValue(str[++j]));
+                
                 subjectRuleService.addSubjectRule(rule, 9999999999L);
             }
-        } catch (BiffException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (AccBussinessException e) {
-            // TODO Auto-generated catch block
+        } catch(Exception e){
+            Assert.fail();
             e.printStackTrace();
         }
     }

@@ -57,7 +57,7 @@ public class TestMemberService {
         } catch (PrimaykeyGeneratedException e1) {
             e1.printStackTrace();
         }
-
+        
         String name = RandomUtil.randomAlphabet("Indiv-test-", 7);
         try {
             memberService.openBusiAcct(name, memberId, userId);
@@ -70,7 +70,7 @@ public class TestMemberService {
     /**
      * 开通企业会员账户
      */
-    @Test
+    
     public void openEnterpriseAcctTest() {
         long userId = 99;
         String memberId = "";

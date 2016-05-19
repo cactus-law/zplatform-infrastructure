@@ -52,7 +52,7 @@ public class ChannelServiceImpl implements ChannelService {
     private ChannelDAO channelDAO;
     @Autowired
     private SubjectSelector subjectSelector;
-
+    
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
     public long addChannel(ChannelBean channel) throws InvalidChannelData,

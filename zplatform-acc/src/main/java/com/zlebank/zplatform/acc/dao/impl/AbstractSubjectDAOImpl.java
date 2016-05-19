@@ -98,6 +98,7 @@ public class AbstractSubjectDAOImpl extends HibernateBaseDAOImpl<PojoAbstractSub
         query.setParameter("dacKey", dacKey);
         query.setParameter("status", status);
 
-        return query.executeUpdate();
+        int i= query.executeUpdate();
+        return i;
     }
 }

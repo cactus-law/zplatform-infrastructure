@@ -52,7 +52,7 @@ public abstract class AbstractEventHandler implements EntryEventHandler {
 
         if (!isConditionStatified(tradeInfo,entryEvent)) {
             // TODO throw new exception
-            throw new RuntimeException("记账条件不满足,见检查交易信息和分录事件.交易序列号:"+tradeInfo.getTxnseqno()+",分录事件:"+entryEvent);
+            throw new RuntimeException("记账条件不满足,请检查交易信息和分录事件.交易序列号:"+tradeInfo.getTxnseqno()+",分录事件:"+entryEvent);
         }
 
         realHandle(tradeInfo, entryEvent);
