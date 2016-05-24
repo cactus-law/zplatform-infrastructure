@@ -5,10 +5,14 @@ import java.math.RoundingMode;
 import java.util.Date;
 import java.util.List;
 
+import net.sf.json.JSONObject;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.zlebank.zplatform.acc.bean.TradeInfo;
 import com.zlebank.zplatform.acc.bean.enums.AccEntryStatus;
@@ -18,7 +22,6 @@ import com.zlebank.zplatform.acc.bean.enums.LockStatusType;
 import com.zlebank.zplatform.acc.exception.AbstractBusiAcctException;
 import com.zlebank.zplatform.acc.exception.AccBussinessException;
 import com.zlebank.zplatform.acc.pojo.Money;
-import com.zlebank.zplatform.acc.pojo.PojoAbstractSubject;
 import com.zlebank.zplatform.acc.pojo.PojoAccEntry;
 import com.zlebank.zplatform.acc.pojo.PojoAccount;
 import com.zlebank.zplatform.acc.pojo.PojoSubjectRuleConfigure;
@@ -27,12 +30,12 @@ import com.zlebank.zplatform.acc.service.GetDACService;
 @Service("defaultEventHandler")
 public class DefaultEventHandler extends AbstractEventHandler {
 
-    @SuppressWarnings("unused")
     private final static Log log = LogFactory.getLog(DefaultEventHandler.class);
     @Autowired
     private GetDACService dacUtil;
 
     @Override
+    @Transactional(isolation=Isolation.READ_COMMITTED)
     final protected void realHandle(TradeInfo tradeInfo, EntryEvent entryEvent)
             throws AccBussinessException, AbstractBusiAcctException,
             NumberFormatException {
@@ -139,7 +142,6 @@ public class DefaultEventHandler extends AbstractEventHandler {
                     new Object[]{entry.getAcctCode()});
         }
         accountService.checkDAC(account);
-
         Money actualAmount = Money.valueOf(getUpdateAmount(entry.getAmount()
                 .getAmount(), entry, account));// 实际发生额
 
@@ -151,14 +153,15 @@ public class DefaultEventHandler extends AbstractEventHandler {
         }
         checkAccountStatus(account.getStatus(), actualAmount,
                 entry.getAcctCode());
-        entry.setBefBalance(account.getBalance());  
+        /*entry.setBefBalance(account.getBalance());  
         account.setBalance(Money.valueOf(calcAmount));
         account.setTotalBanance(account.getTotalBanance().plus(actualAmount));
         account.setDac(dacUtil.generteDAC(account.getAcctCode(), account.getBalance(), account.getFrozenBalance(), account.getTotalBanance()));
-        abstractSubjectDAO.merge(account);
+        abstractSubjectDAO.update(account);
         entry.setAftBalance(account.getBalance());
-        entry.setBalanceTime(new Date());
-        /*// 更新账户
+        entry.setBalanceTime(new Date());*/
+        // 更新账户
+        entry.setBefBalance(account.getBalance()); 
         PojoAccount updateAccount = new PojoAccount();
         updateAccount.setAcctCode(account.getAcctCode());
         updateAccount.setBalance(actualAmount);
@@ -173,19 +176,21 @@ public class DefaultEventHandler extends AbstractEventHandler {
             }
             throw new AccBussinessException("E000018");
         }
-*/
+        account = accountDAO.getByAcctCode(entry.getAcctCode());
+        entry.setAftBalance(account.getBalance());
+        entry.setBalanceTime(new Date());
         // 更新总账
-        PojoAbstractSubject parentSubject = account.getParentSubject();
+       /* PojoAbstractSubject parentSubject = account.getParentSubject();
         parentSubject.setBalance(parentSubject.getBalance().plus(actualAmount));
         parentSubject.setTotalBanance(parentSubject.getTotalBanance().plus(actualAmount));
         parentSubject.setDac(dacUtil.generteDAC(parentSubject.getAcctCode(), parentSubject.getBalance(), parentSubject.getFrozenBalance(), parentSubject.getTotalBanance()));
-        abstractSubjectDAO.merge(parentSubject);
-       /* PojoAccount total = new PojoAccount();
+        abstractSubjectDAO.update(parentSubject);*/
+        PojoAccount total = new PojoAccount();
         total.setParentSubject(account.getParentSubject());
         total.setBalance(actualAmount);
         total.setTotalBanance(actualAmount);
         processLedgerService.processLedger(total);// 更新总账
-*/     
+    
         entry.setStatus(AccEntryStatus.ACCOUNTED);// 已记账
     }
 

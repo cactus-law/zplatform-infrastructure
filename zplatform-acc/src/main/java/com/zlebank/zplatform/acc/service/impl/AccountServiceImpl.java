@@ -29,6 +29,7 @@ import com.zlebank.zplatform.acc.exception.AccountNotExistException;
 import com.zlebank.zplatform.acc.exception.AcctCodeIllegalException;
 import com.zlebank.zplatform.acc.pojo.Money;
 import com.zlebank.zplatform.acc.pojo.PojoAbstractSubject;
+import com.zlebank.zplatform.acc.pojo.PojoAccEntry;
 import com.zlebank.zplatform.acc.pojo.PojoAccount;
 import com.zlebank.zplatform.acc.pojo.PojoSubject;
 import com.zlebank.zplatform.acc.service.AccountService;
@@ -196,5 +197,9 @@ public class AccountServiceImpl implements AccountService {
         rtn.setTotalBalance(pojoAccount.getTotalBanance());
         rtn.setStatus(pojoAccount.getStatus().getCode());
         return rtn;
+    }
+    
+    public void syncAccountHandle(PojoAccEntry entry){
+        
     }
 }
