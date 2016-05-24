@@ -14,6 +14,7 @@ import com.zlebank.zplatform.acc.bean.Account;
 import com.zlebank.zplatform.acc.exception.AbstractAccException;
 import com.zlebank.zplatform.acc.exception.AccBussinessException;
 import com.zlebank.zplatform.acc.pojo.PojoAbstractSubject;
+import com.zlebank.zplatform.acc.pojo.PojoAccEntry;
 import com.zlebank.zplatform.member.bean.BusinessActor;
 
 /**
@@ -63,4 +64,10 @@ public interface AccountService {
      * @return
      */
     public Account getAccountBalanceById(long accountId) ; 
+    
+    /**
+     * 
+     * @param entry
+     */
+    public void syncAccountHandle(PojoAccEntry entry);
 }

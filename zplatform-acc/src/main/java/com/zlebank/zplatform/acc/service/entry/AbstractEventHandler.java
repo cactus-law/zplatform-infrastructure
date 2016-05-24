@@ -7,6 +7,7 @@ import org.cheffo.jeplite.ParseException;
 import org.cheffo.jeplite.util.DoubleStack;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.zlebank.zplatform.acc.bean.TradeInfo;
@@ -45,13 +46,12 @@ public abstract class AbstractEventHandler implements EntryEventHandler {
     private static final String LITERAL_COMPUTE_FACTOR_CHANNEL_FEE = "T";//通道手续费
 
     @Override
-    @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Throwable.class)
+    @Transactional(isolation = Isolation.DEFAULT, rollbackFor = Throwable.class,propagation=Propagation.REQUIRED)
     public void handle(TradeInfo tradeInfo, EntryEvent entryEvent)
             throws AccBussinessException, AbstractBusiAcctException,
             NumberFormatException {
 
         if (!isConditionStatified(tradeInfo,entryEvent)) {
-            // TODO throw new exception
             throw new RuntimeException("记账条件不满足,请检查交易信息和分录事件.交易序列号:"+tradeInfo.getTxnseqno()+",分录事件:"+entryEvent);
         }
 
