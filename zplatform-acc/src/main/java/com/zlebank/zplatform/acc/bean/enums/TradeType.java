@@ -19,18 +19,30 @@ package com.zlebank.zplatform.acc.bean.enums;
  * @since 
  */
 public enum TradeType {
+    /**银行卡支付**/
+    BANKCARD_PAY("10000001"),
+    /**消费**/
+    ACCOUNT_PAY("10000002"),
     /**消费**/
     BUY("10000001"),
     /**充值**/
     RECHARGE("20000001"),
     /**提现**/
     WITHDRAW("30000001"),
-    /**退款**/
-    REFUND("40000001"),
+    /**退款至银行卡**/
+    REFUND_BANKCARD("40000001"),
+    /**退款至账户**/
+    REFUND_ACCOUNT("40000002"),
     /**转账**/
     TRANSFER("50000001"),
     /**保证金**/
     BAIL("60000001"),
+    /**代付*/
+    INSTEADPAY("70000001"),
+    /**手工提现*/
+    RECHANGE_MANUAL ("90000001"),
+    /** 实名认证*/
+    REAL_NAME_AUTH("80000001"),
     /**未知类型**/
     UNKNOW("999");
 

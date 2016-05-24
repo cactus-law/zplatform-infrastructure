@@ -40,7 +40,8 @@ public class AccountJob {
      */
     public void execute() {
         ResourceBundle RESOURCE = ResourceBundle.getBundle("job-setting");
-        logger.info("asy account entry task start");
+        if (logger.isDebugEnabled())
+            logger.info("asy account entry task start");
         List<Long> asyAccountEntryRecords = null;
         @SuppressWarnings("unused")
         boolean success = true;
@@ -50,7 +51,7 @@ public class AccountJob {
                         .parseInt(RESOURCE.getString("account_process_num")));
                 service.accountBatch(asyAccountEntryRecords);
             } catch (Exception e) {
-                logger.error(e.getMessage(),e); 
+                logger.error(e.getMessage(), e);
                 e.printStackTrace();
                 success = false;
                 continue;
@@ -59,10 +60,11 @@ public class AccountJob {
                     || asyAccountEntryRecords.size() == 0) {
                 break;
             }
-            logger.info("asy account entry task num"
-                    + asyAccountEntryRecords.size());
+            if (logger.isDebugEnabled())
+                logger.info("asy account entry task num"
+                        + asyAccountEntryRecords.size());
         }
-
-        logger.info("asy account entry task end");
+        if (logger.isDebugEnabled())
+            logger.info("asy account entry task end");
     }
 }

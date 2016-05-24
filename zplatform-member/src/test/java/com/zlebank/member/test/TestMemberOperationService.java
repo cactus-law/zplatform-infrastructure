@@ -12,9 +12,9 @@ package com.zlebank.member.test;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 
+import com.zlebank.zplatform.commons.test.RandomUtil;
 import com.zlebank.zplatform.member.bean.MemberBean;
 import com.zlebank.zplatform.member.bean.Person;
 import com.zlebank.zplatform.member.bean.enums.MemberType;
@@ -41,13 +41,13 @@ public class TestMemberOperationService {
         ac = ApplicationContextUtil.get();
         memberOperationService =  (MemberOperationService) ac.getBean("memberOperationServiceImpl");
     }
-    @Test
+    
     public void registMemberTest() {
         MemberBean member = new Person();
-        member.setMemberName("银魂2");
-        member.setLoginName("gintama2");
-        member.setPhone("13000000002");
-        member.setPwd("abc123");
+        member.setMemberName(RandomUtil.randomAlphabet("anonymity", 4));
+        member.setLoginName(member.getMemberName());
+        member.setPhone("99999999999");
+        member.setPwd("null");
         member.setInstiId(25L);
         try {
             memberOperationService.registMember(MemberType.INDIVIDUAL, member);

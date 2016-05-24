@@ -31,12 +31,13 @@
 				<value>com.zlebank.zplatform.acc.pojo.PojoBusiness</value>		
 				<value>com.zlebank.zplatform.acc.pojo.PojoTxnsSplitAccount</value>	
 				<value>com.zlebank.zplatform.commons.dao.pojo.PojoChannel</value>	
+				<value>com.zlebank.zplatform.acc.pojo.PojoTradeEntryEventMapping</value>
 				</list>
 		</property>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="dialect">org.hibernate.dialect.Oracle9Dialect</prop>
-				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.show_sql">false</prop>
 				<prop key="hibernate.format_sql">true</prop>
 				<prop key="hibernate.hbm2ddl.auto">none</prop>
 				<prop key="hibernate.id.new_generator_mappings">true</prop>
@@ -47,9 +48,9 @@
 	<bean id="accDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
 		<property name="driverClass" value="oracle.jdbc.OracleDriver" />
-		<property name="jdbcUrl" value="jdbc:oracle:thin:@192.168.101.178:1521:oradb" />
-		<property name="user" value="payservice" />
-		<property name="password" value="payservice" />
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@192.168.101.178:1521:primary" />
+		<property name="user" value="yy" />
+		<property name="password" value="yy" />
 		<property name="maxPoolSize" value="40" />
 		<property name="minPoolSize" value="1" />
 		<property name="initialPoolSize" value="1" />

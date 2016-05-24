@@ -11,7 +11,7 @@
 package com.zlebank.zplatform.acc.bean.enums;
 
 /**
- * Class Description
+ * Usage
  *
  * @author yangying
  * @version
@@ -19,30 +19,48 @@ package com.zlebank.zplatform.acc.bean.enums;
  * @since
  */
 public enum Usage {
-    /**普通资金账户*/
-    BASICPAY(PrimaryUsage.FUND, PrimaryUsage.FUND.getCode()+"01"),
-//    BAIL(PrimaryUsage.FUND, PrimaryUsage.FUND.getCode()+"02"), 
-    /**未知账户*/
-    UNKNOW(null, "FFF");
-    private PrimaryUsage primaryUsage;
+    /**现金账户*/
+    BASICPAY("basicpay","101"),
+    /**银行存款*/
+    BANKDEPOSIT("bankdeposit","102"),
+    /**应收银行*/
+    RECEIVABLEBANK("receivablebank","103"),
+    /**证联收转存款*/
+    ZLREVTRANDEPOSIT("zlrevtrandeposit","104"),
+    /**应付银行*/
+    BANKPAYABLE("bankpayable","105"), 
+    /**通道手续费支出*/
+    CHANNELFEECOST("channelfeecost","106"),
+    /**企业待结算*/
+    WAITSETTLE("waitsettle","107"),
+    /**应付待分润*/
+    PROFITSPAYABLE("profitspayable","108"),
+    /**保证金*/
+    BAIL("bail","109"),
+    /**手续费收入*/
+    FEEINCOME("feeincome","110"), 
+    
+    /**未知*/
+    UNKNOW("unkonw","FFF");
     private String code;
-    private Usage(PrimaryUsage primaryUsage, String code) {
-        this.primaryUsage = primaryUsage;
+    private String name;
+    private Usage(String name,String code) {
+        this.name = name;
         this.code = code;
     }
     public static Usage fromValue(String value) {
-        for (Usage minorUsage : values()) {
-            if (minorUsage.code.equals(value)) {
-                return minorUsage;
+        for (Usage usage : values()) {
+            if (usage.code.equals(value)) {
+                return usage;
             }
         }
         return UNKNOW;
     }
-
-    public PrimaryUsage getPrimaryUsage() {
-        return primaryUsage;
-    }
-    public String getCode() {
+    
+    public String getCode(){
         return code;
+    }
+    public String getName(){
+        return name;
     }
 }

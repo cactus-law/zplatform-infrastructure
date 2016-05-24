@@ -1,7 +1,6 @@
-package com.zlebank.member.test;
+package com.zlebank.member2;
 
 import java.util.List;
-import java.util.Random;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -9,7 +8,9 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 
+import com.zlebank.member.test.ApplicationContextUtil;
 import com.zlebank.zplatform.commons.dao.pojo.ProductModel;
+import com.zlebank.zplatform.commons.test.RandomUtil;
 import com.zlebank.zplatform.member.bean.CoopInsti;
 import com.zlebank.zplatform.member.bean.CoopInstiMK;
 import com.zlebank.zplatform.member.bean.enums.EncryptAlgorithm;
@@ -27,14 +28,13 @@ public class CoopInstiTest {
 	@Before
 	public void prepare() {
 		context = ApplicationContextUtil.get();
-		instiName = "测试机构" + String.valueOf(new Random().nextInt(100));
+		instiName = "测试机构" + RandomUtil.randomNumber(4);
 	}
 
 	@Test
-	@Ignore
 	public void testCreate() {
 		CoopInstiService coopInstiService = (CoopInstiService) context
-				.getBean("coopInstiServiceImpl");
+				.getBean("coopInstiService");
 		String instiCode;
 		try {
 			// test add a new Coop Insti
@@ -63,10 +63,10 @@ public class CoopInstiTest {
 	}
 
 	@Test
+	@Ignore
 	public void testGetCoopProduct() {
 		CoopInstiProductService coopInstiService = (CoopInstiProductService) context
 				.getBean("coopInstiProductServiceImpl");
-
 		try {
 			// test there is no product related to coop insti
 			instiId = 27;
@@ -84,6 +84,7 @@ public class CoopInstiTest {
 	}
 
 	@Test
+	@Ignore
 	public void testGetAllCoopInsti() {
 		CoopInstiService coopInstiService = (CoopInstiService) context
 				.getBean("coopInstiServiceImpl");
@@ -92,6 +93,7 @@ public class CoopInstiTest {
 	}
 
 	@Test
+	@Ignore
 	public void testGetCoopInstiByInstiCode() {
 		CoopInstiService coopInstiService = (CoopInstiService) context
 				.getBean("coopInstiServiceImpl");

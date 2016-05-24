@@ -2,6 +2,7 @@ package com.zlebank.zplatform.acc.service;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -34,6 +35,7 @@ public class ChannelServiceTest {
     }  
     
     @Test
+    @Ignore
     public void addChannelTest() {
         ChannelBean channel = new ChannelBean();
         channel.setChnlcode("99000002");

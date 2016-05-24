@@ -36,7 +36,6 @@ import com.zlebank.zplatform.acc.service.BusiAcctService;
 import com.zlebank.zplatform.acc.service.SubjectSelector;
 import com.zlebank.zplatform.commons.utils.BeanCopyUtil;
 import com.zlebank.zplatform.member.bean.BusinessActor;
-import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 
 /**
  * Class Description
@@ -61,12 +60,12 @@ public class BusiAcctServiceImpl implements BusiAcctService {
  
 
     /**
-     * 开通业务账户和会计账户
+     * 根据业务参与者，用途开通一个业务账户和会计账户
      *
      * @param businessActor
      * @param busiAcct
      * @param userId
-     * @return
+     * @return busiAcctCode
      * @throws AbstractBusiAcctException
      */
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
@@ -86,7 +85,8 @@ public class BusiAcctServiceImpl implements BusiAcctService {
             // 已经存在的话抛出异常
             throw new BusiAcctRepeatException();
         }
-        // 新建父级会计账户
+        
+        // 初始化会计账户
         Account account = new Account();
         account.setParentSubject(parentSubject);
         account.setAcctCodeName(busiAcct.getBusiAcctName());
@@ -130,7 +130,7 @@ public class BusiAcctServiceImpl implements BusiAcctService {
     
     /**
      * <p>
-     * businessActorTypePrefix(2)+usage(3)+businessActorType(2)+memberId(15).</p>
+     * businessActorTypePrefix(2)+usage(3)+businessActorType(2)+businessActorId(<8,15>).</p>
      * <p>For example,suppose a enterprise member (memberId:100000000000100). The busiAcctCode of the basic fund busiAccount of the member is:
      * 9010102100000000000100</p>
      * @param member
@@ -139,45 +139,32 @@ public class BusiAcctServiceImpl implements BusiAcctService {
      * @param productNo
      * @return
      */
-    private String gengrateBusiAcctCode(BusinessActor member,
+    private String gengrateBusiAcctCode(BusinessActor businessActor,
             BusiAcct busiAcct,
             String parentSubjectCode,
             String productNo) {
         StringBuilder sb = new StringBuilder();
-        if(BusinessActorType.INDIVIDUAL == member.getBusinessActorType()){
-            sb.append(BuisAcctCodePrefix.INDIVIDUAL.getCode());
-        }else if(BusinessActorType.ENTERPRISE == member.getBusinessActorType()){
-            sb.append(BuisAcctCodePrefix.ENTERPRISE.getCode());
-        }else if(BusinessActorType.COOPINSTI == member.getBusinessActorType()){
-            sb.append(BuisAcctCodePrefix.COOPINSTI.getCode());
-        }else{
-            sb.append(BuisAcctCodePrefix.ENTERPRISE.getCode());
-        }
-        switch (busiAcct.getUsage().getPrimaryUsage()) {
-            case FUND :
-                // do noting
+        switch (businessActor.getBusinessActorType()) {
+            case INDIVIDUAL :
+                sb.append(BuisAcctCodePrefix.PRIVATE.getCode());
                 break;
-            case PRODUCT :
-                // TODO
-                // there is no product business ,so throw exception now,will add
-                // when it has.
-                throw new RuntimeException() {
-                    /**
-                     * serialVersionUID
-                     */
-                    private static final long serialVersionUID = 757505037670410404L;
-
-                    public String getMessage() {
-                        return "product business account is not support yet.";
-                    }
-                };
-                // break;
+            case ENTERPRISE :
+                sb.append(BuisAcctCodePrefix.PUBLIC.getCode());
+                break;
+            case COOPINSTI :
+                sb.append(BuisAcctCodePrefix.PUBLIC.getCode());
+                break;
+            case CHANNEL :
+                sb.append(BuisAcctCodePrefix.PUBLIC.getCode());
+                break;
             default :
+                //TODO throw new exception 
                 break;
-        } 
+        }
+         
         sb.append(busiAcct.getUsage().getCode());
-        sb.append(member.getBusinessActorType().getCode());
-        sb.append(member.getBusinessActorId());
+        sb.append(businessActor.getBusinessActorType().getCode());
+        sb.append(businessActor.getBusinessActorId());
 
         return sb.toString();
     }

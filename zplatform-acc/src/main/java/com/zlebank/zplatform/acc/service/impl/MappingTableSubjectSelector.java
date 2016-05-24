@@ -10,6 +10,8 @@
  */
 package com.zlebank.zplatform.acc.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -24,6 +26,7 @@ import com.zlebank.zplatform.acc.pojo.PojoSubject;
 import com.zlebank.zplatform.acc.service.SubjectSelector;
 import com.zlebank.zplatform.commons.utils.BeanCopyUtil;
 import com.zlebank.zplatform.member.bean.BusinessActor;
+import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 
 /**
  * Class Description
@@ -52,6 +55,14 @@ public class MappingTableSubjectSelector implements SubjectSelector {
         }
         return BeanCopyUtil.copyBean(Subject.class, pojoSubject);
     }
-    
-    
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public List<PojoBusiAcctSubjectMapping> getDefaultList(BusinessActorType businessActorType) throws BusiAcctToSubjectMappingNullException{ 
+        List<PojoBusiAcctSubjectMapping> pojoBusiAcctSubjectMappings = busiToAcctSubjectMappingDAO.getDefaultOpenList(businessActorType);
+        if(pojoBusiAcctSubjectMappings == null){
+            throw new BusiAcctToSubjectMappingNullException();
+        }
+         
+        return pojoBusiAcctSubjectMappings;
+    }
 }

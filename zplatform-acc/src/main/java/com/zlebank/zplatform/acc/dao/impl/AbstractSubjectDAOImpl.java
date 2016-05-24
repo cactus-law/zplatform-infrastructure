@@ -89,15 +89,16 @@ public class AbstractSubjectDAOImpl extends HibernateBaseDAOImpl<PojoAbstractSub
         } else {
             status = " '01' , '11', '99' ";
         }
+        
         String updateSql = "update t_acc_acct t set t.balance = t.balance + :balance, t.frozen_balance = t.frozen_balance + :frozenBalance, t.total_balance = t.total_balance + :totalBalance, t.dac = md5('#'||t.acct_code||'#'||(t.balance + :balance)||'#'||(t.frozen_balance + :frozenBalance)||'#'||(t.total_balance + :totalBalance)||'#'||:dacKey) where t.acct_code = :acctCode and t.status not in (:status) and t.balance + :balance>=0";
-        SQLQuery query= this.getSession().createSQLQuery(updateSql);
+        SQLQuery query= getSession().createSQLQuery(updateSql);
         query.setParameter("acctCode", account.getAcctCode());
         query.setParameter("balance", account.getBalance().getAmount().toPlainString());
         query.setParameter("frozenBalance", account.getFrozenBalance().getAmount().toPlainString());
         query.setParameter("totalBalance", account.getTotalBanance().getAmount().toPlainString());
         query.setParameter("dacKey", dacKey);
         query.setParameter("status", status);
-
-        return query.executeUpdate();
+        int i= query.executeUpdate();
+        return i;
     }
 }

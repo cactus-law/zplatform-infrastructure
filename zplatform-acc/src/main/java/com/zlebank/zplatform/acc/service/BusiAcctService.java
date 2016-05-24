@@ -24,10 +24,10 @@ import com.zlebank.zplatform.member.bean.BusinessActor;
  * @date 2015年8月31日 下午1:53:54
  * @since
  */
-public interface BusiAcctService {
+public interface BusiAcctService { 
     /**
      * 开通业务账户
-     * @param member
+     * @param busiActor
      * @param busiAcct
      * @param userId
      * @return
@@ -37,7 +37,7 @@ public interface BusiAcctService {
     String openBusiAcct(BusinessActor busiActor, BusiAcct busiAcct, long userId)
             throws AbstractBusiAcctException;
     /**
-     * 通过业务的账户号得到
+     * 通过业务的账户号得到业务账号
      * @param acctCode
      * @return
      * @throws AbstractBusiAcctException
@@ -46,7 +46,7 @@ public interface BusiAcctService {
     BusiAcct getByBusiAcctCode(String BusiAcctCode)
             throws AbstractBusiAcctException;
     /**
-     * 通过 会员ID 标示得到科目代码
+     * 通过 会员ID 标识得到科目代码
      * @param usage
      * @param memberId
      * @return account code
@@ -56,7 +56,7 @@ public interface BusiAcctService {
     String getAccount(Usage usage, String memberId)
             throws AbstractBusiAcctException;
     /**
-     * 通过 会员ID 标示得到科目代码的ID
+     * 通过 会员ID 标识得到科目代码的ID
      * @param usage
      * @param memberId
      * @return account code

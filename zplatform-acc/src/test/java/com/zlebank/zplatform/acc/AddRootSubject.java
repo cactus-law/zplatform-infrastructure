@@ -15,10 +15,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
+
 import com.zlebank.zplatform.acc.bean.BusiAcct;
 import com.zlebank.zplatform.acc.bean.Subject;
 import com.zlebank.zplatform.acc.bean.SubjectRule;
@@ -358,7 +360,7 @@ public class AddRootSubject {
          String[] str = (String[])list.get(i);
         SubjectRule rule=new SubjectRule();
         rule.setTxntype(str[0]);
-        rule.setFlag(str[1]);
+        rule.setAcctCode(str[1]);
         rule.setCrdr(CRDRType.fromValue(str[2]));
         rule.setChannelCode(str[3]);
         rule.setProdductCode(str[4]);
@@ -384,7 +386,7 @@ public class AddRootSubject {
         SubjectRule rule=new SubjectRule();
         rule.setId(Long.valueOf(str[0]));
         rule.setTxntype(str[1]);
-        rule.setFlag(str[2]);
+        rule.setAcctCode(str[2]);
         rule.setCrdr(CRDRType.fromValue(str[3]));
         rule.setChannelCode(str[4]);
         rule.setProdductCode(str[5]);

@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.zlebank.zplatform</groupId>
 	<artifactId>zplatform-infranstructure-deploy</artifactId>
-	<version>1.4.1</version>
+	<version>1.5.0</version>
 	<packaging>pom</packaging>
 	<name>zplatform-infranstructure-deploy</name>
 	<url>http://www.zlebank.com/</url>
@@ -16,7 +16,7 @@
 		<project.gitserver>192.168.101.11</project.gitserver>
 		<project.remoteArtifactRepositories>${project.nexus}/nexus/content/groups/public</project.remoteArtifactRepositories>
 		<sonar.language>java</sonar.language>
-		<skipTests>true</skipTests>
+		<skipTests>false</skipTests>
 		<skipJavaDoc>true</skipJavaDoc>
 		<compiler.debug>true</compiler.debug>
 		<compiler.optimize>true</compiler.optimize>
@@ -115,6 +115,12 @@
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 				<version>4.11</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.zlebank.zplatform</groupId>
+				<artifactId>zplatform-commons-test</artifactId>
+				<version>1.0.0</version>
 				<scope>test</scope>
 			</dependency>
 		</dependencies>

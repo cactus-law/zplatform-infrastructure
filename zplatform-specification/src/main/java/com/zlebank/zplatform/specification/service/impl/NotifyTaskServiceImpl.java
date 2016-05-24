@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zlebank.zplatform.acc.util.SpringApplicationObjectSupport;
 import com.zlebank.zplatform.specification.Notify;
 import com.zlebank.zplatform.specification.NotifyFactory;
 import com.zlebank.zplatform.specification.RequestType;

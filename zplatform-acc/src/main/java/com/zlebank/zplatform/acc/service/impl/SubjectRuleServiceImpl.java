@@ -42,10 +42,6 @@ public class SubjectRuleServiceImpl implements SubjectRuleService {
     @Autowired
     private SubjectRuleConfigureDAO subRule;
     
-    
-    
-
-
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
     public long addSubjectRule(SubjectRule SubjectRule,long userId) throws AccBussinessException {

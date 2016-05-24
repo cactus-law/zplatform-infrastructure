@@ -16,7 +16,6 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.BeforeClass;
-import org.junit.Test;
 
 import com.zlebank.zplatform.acc.pojo.PojoAbstractSubject;
 import com.zlebank.zplatform.acc.service.impl.GetDACServiceImpl;
@@ -41,7 +40,7 @@ public class TestGetDACServiceImpl {
 
     }
 
-    @Test
+    
     public void test() {
 
         SessionFactory sessionFactory = (SessionFactory) ApplicationContextUtil

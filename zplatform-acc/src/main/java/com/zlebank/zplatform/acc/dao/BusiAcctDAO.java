@@ -33,13 +33,13 @@ public interface BusiAcctDAO extends BaseDAO<PojoBusiAcct>{
      */
     public PojoBusiAcct getByBusiAcctCode(String busiAcctCode);
     /**
-     * 
+     * 通过 用途和参与方id得到会计账户id
      * @param usage
      * @param memberId
      * @return account id
      * @throws BusiAcctNotExistException If not exist
      */
-    public long getAccount(Usage usage,String memberId)throws BusiAcctNotExistException;
+    public long getAccount(Usage usage,String businessActorId)throws BusiAcctNotExistException;
     
     public List<PojoBusiAcct> getAllbusiByMid(String memberId);
     
@@ -51,4 +51,11 @@ public interface BusiAcctDAO extends BaseDAO<PojoBusiAcct>{
      * @throws BusiAcctNotExistException 
      */
     public PojoBusiAcct getBusiCode(Usage usage, String memberId) throws BusiAcctNotExistException;
+    /**
+     * 通过 用途和参与方id得到会计账户号
+     * @param usage
+     * @param businessActorId
+     * @return
+     */
+    public String getAccCodeByUsageAndBusiActorId(Usage usage,String businessActorId);
     }

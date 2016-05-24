@@ -13,6 +13,7 @@ package com.zlebank.zplatform.specification;
 import net.sf.json.JSONObject;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -48,6 +49,7 @@ public class MerchSynchorQueryTest {
     
     
     @Test
+    @Ignore
     public void testRealProcess() throws SpecificationException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         RequestType requestType = RequestType.formatValue(data.getJSONObject("head").getString(FILED_REQUEST_TYPE));
         Message request =parser.parse(data,requestType,true); 

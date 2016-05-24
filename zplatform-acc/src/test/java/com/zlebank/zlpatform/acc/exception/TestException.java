@@ -10,6 +10,7 @@
  */
 package com.zlebank.zlpatform.acc.exception;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.zlebank.zplatform.acc.exception.AbstractAccException;
@@ -40,6 +41,7 @@ public class TestException extends AbstractAccException{
 	}
 	
 	@Test
+	@Ignore
 	public void test(){
 		TestException testException = new TestException();
 		testException.setParams(20);

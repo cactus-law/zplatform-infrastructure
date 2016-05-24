@@ -13,8 +13,10 @@ package com.zlebank.zplatform.acc.dao.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.zlebank.zplatform.acc.bean.enums.Usage;
 import com.zlebank.zplatform.acc.dao.BusiAcctDAO;
@@ -41,9 +43,9 @@ public class BusiAcctDAOImpl extends HibernateBaseDAOImpl<PojoBusiAcct>
         return pojoBusiAcct;
     }
     
-    public long getAccount(Usage usage,String memberId)throws BusiAcctNotExistException{
+    public long getAccount(Usage usage,String businessActorId)throws BusiAcctNotExistException{
         Criteria criteria = getSession().createCriteria(PojoBusiAcct.class);
-        criteria.add(Restrictions.eq("usage", usage)).add(Restrictions.eq("businessActorId", memberId));
+        criteria.add(Restrictions.eq("usage", usage)).add(Restrictions.eq("businessActorId", businessActorId));
         PojoBusiAcct pojoBusiAcct = (PojoBusiAcct)criteria.uniqueResult();
         if(pojoBusiAcct == null){
             throw new BusiAcctNotExistException();
@@ -73,5 +75,16 @@ public class BusiAcctDAOImpl extends HibernateBaseDAOImpl<PojoBusiAcct>
             throw new BusiAcctNotExistException();
         }
         return pojoBusiAcct;
+    }
+    
+    @Override
+    @Transactional
+    public String getAccCodeByUsageAndBusiActorId(Usage usage,String businessActorId){
+        String querySql = "select acct_code from T_ACC_ACCT A, T_ACC_BUSIACCT B where A.id = B.acct_id and B.usage=? and b.BUSINESS_ACTOR_ID=?";
+        Query query = getSession().createSQLQuery(querySql);
+        query.setParameter(0, usage.getCode());
+        query.setParameter(1, businessActorId);
+        String s = (String)query.uniqueResult();
+        return s;
     }
 }

@@ -15,6 +15,7 @@ import java.io.FilenameFilter;
 import java.net.URL;
 
 import org.dom4j.DocumentException;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.zlebank.zplatform.specification.metadata.ComplexField;
@@ -35,6 +36,7 @@ import com.zlebank.zplatform.specification.resolver.XMLConfigurationResolver;
 public class ResolverTest {
     private final static String FILE_SUFFIX = ".xml";
     @Test
+    @Ignore
     public void test() {
         File[] files = fetchFiles("/specification");
         XMLConfigurationResolver resolver = new XMLConfigurationResolver();

@@ -23,6 +23,7 @@ import com.zlebank.zplatform.acc.bean.enums.AccEntryStatus;
 import com.zlebank.zplatform.acc.bean.enums.LockStatusType;
 import com.zlebank.zplatform.acc.dao.AccEntryDAO;
 import com.zlebank.zplatform.acc.pojo.PojoAccEntry;
+import com.zlebank.zplatform.acc.service.entry.EntryEvent;
 import com.zlebank.zplatform.commons.dao.impl.AbstractPagedQueryDAOImpl;
 import com.zlebank.zplatform.commons.utils.StringUtil;
 
@@ -124,19 +125,14 @@ public class AccEntryDAOImpl  extends AbstractPagedQueryDAOImpl<PojoAccEntry,Acc
         return (PojoAccEntry) criteria.uniqueResult();
 		
 	}
-    /**
-     * 根据交易流水号得到分录流水
-     * @param txnseqno
-     * @param busiCode
-     * @return
-     */
+    
     @SuppressWarnings("unchecked")
     @Override
-    public List<PojoAccEntry> getByTxnNo(String txnseqno, String busiCode) {
+    public List<PojoAccEntry> getByTxnNo(String txnseqno, String busiCode,EntryEvent entryEvent) {
         Criteria criteria = getSession().createCriteria(PojoAccEntry.class);
         criteria.add(Restrictions.eq("txnseqno", txnseqno));
         criteria.add(Restrictions.eq("busiCode", busiCode));
+        criteria.add(Restrictions.eq("entryEvent", entryEvent));
         return criteria.list();
     }
-    
 }

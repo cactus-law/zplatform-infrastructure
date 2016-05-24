@@ -37,6 +37,7 @@ import com.zlebank.zplatform.acc.pojo.Money;
 import com.zlebank.zplatform.acc.service.AccEntryService;
 import com.zlebank.zplatform.acc.service.FreezeAcctService;
 import com.zlebank.zplatform.acc.service.FreezeAmountService;
+import com.zlebank.zplatform.acc.service.entry.EntryEvent;
 import com.zlebank.zplatform.commons.utils.StringUtil;
 
 /**
@@ -184,7 +185,7 @@ public class Main {
         }
         
         try {
-            service.accEntryProcess(entry);
+            service.accEntryProcess(entry,EntryEvent.TRADE_SUCCESS);
         } catch (AccBussinessException e) {
             System.out.println(e.getMessage());
         } catch (AbstractBusiAcctException e) {

@@ -16,6 +16,7 @@ import net.sf.json.JSONObject;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 
@@ -50,6 +51,7 @@ public class TestMemberAccountService {
      * 账户余额
      */
     @Test
+    @Ignore
     public void queryBalanceTest() {
         MemberBean member = new Person();
         member.setMemberId("100000000000494");

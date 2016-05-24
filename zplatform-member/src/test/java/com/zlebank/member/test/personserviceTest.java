@@ -60,7 +60,7 @@ public class personserviceTest {
     @Test
     @Ignore
      public void tests() throws MemberBussinessException{
-        primay.getNexId("PERSONBIN");
+        primay.getNexId("INDIBIN");
          
      }
     @Test

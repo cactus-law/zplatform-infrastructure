@@ -12,14 +12,6 @@ package com.zlebank.zplatform.acc.dao.impl;
 
 import java.util.List;
 
-
-
-
-
-
-
-
-
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;

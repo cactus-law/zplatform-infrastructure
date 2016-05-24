@@ -49,6 +49,10 @@ public class TradeInfo {
     private BigDecimal amountE;
     /**分账FLG**/
     private boolean isSplit;
+    
+    private String coopInstCode;
+    
+    private BigDecimal channelFee;
 
     public String getTxnseqno() {
         return txnseqno;
@@ -159,6 +163,16 @@ public class TradeInfo {
         super();
         // TODO Auto-generated constructor stub
     }
-    
-    
+    public String getCoopInstCode() {
+        return coopInstCode;
+    }
+    public void setCoopInstCode(String coopInstCode) {
+        this.coopInstCode = coopInstCode;
+    }
+    public BigDecimal getChannelFee() {
+        return channelFee;
+    }
+    public void setChannelFee(BigDecimal channelFee) {
+        this.channelFee = channelFee;
+    }
 }

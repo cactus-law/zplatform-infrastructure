@@ -60,6 +60,8 @@ public class AccountDAOImpl extends HibernateBaseDAOImpl<PojoAccount> implements
         subject.setDac(dacUtil.generteDAC(subject.getAcctCode(), subject.getBalance(), subject.getFrozenBalance(), subject.getTotalBanance()));
         return (PojoAccount) merge(subject);
     }
+    
+    @Override
     public PojoAccount update(PojoAccount subject) {
         subject.setDac(dacUtil.generteDAC(subject.getAcctCode(), subject.getBalance(), subject.getFrozenBalance(), subject.getTotalBanance()));
         return super.update(subject);
@@ -74,9 +76,13 @@ public class AccountDAOImpl extends HibernateBaseDAOImpl<PojoAccount> implements
         if (log.isDebugEnabled()) {
             log.debug("【DAO】根据会计账户号得到账户："+accCode);
         }
+        
         Criteria criteria = getSession().createCriteria(PojoAccount.class);
         criteria.add(Restrictions.eq("acctCode", accCode));
-        return (PojoAccount) criteria.uniqueResult();
+        
+        PojoAccount pojoAccount = (PojoAccount) criteria.uniqueResult();
+        getSession().refresh(pojoAccount);
+        return pojoAccount;
     }
     /**
      *根据memberId得到账户
@@ -119,5 +125,6 @@ public class AccountDAOImpl extends HibernateBaseDAOImpl<PojoAccount> implements
         SQLQuery query = this.getSession().createSQLQuery(sql);
         long maxId = (long)(query.addScalar("nextvalue", StandardBasicTypes.LONG) ).uniqueResult();
          return  maxId;
-       }
+       } 
+    
 }

@@ -12,7 +12,10 @@ package com.zlebank.zplatform.acc.pojo;
 
 import java.util.Date;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -25,6 +28,7 @@ import org.hibernate.annotations.Type;
 import com.zlebank.zplatform.acc.bean.enums.AccEntryStatus;
 import com.zlebank.zplatform.acc.bean.enums.CRDRType;
 import com.zlebank.zplatform.acc.bean.enums.LockStatusType;
+import com.zlebank.zplatform.acc.service.entry.EntryEvent;
 
 /**
  * Class Description
@@ -51,6 +55,8 @@ public class PojoAccEntry {
     private String text;
     /**交易流水号**/
     private String txnseqno;
+    /**分录事件*/
+    private EntryEvent entryEvent;
     /**支付订单号**/
     private String payordno;
     /**状态:00-已记账，01-未记账 02-待记账**/
@@ -67,6 +73,13 @@ public class PojoAccEntry {
     private String procCode;
     /** 0:记录未被锁定1:记录被锁定 **/
     private LockStatusType isLock;
+    /**记账前金额*/
+    private Money befBalance;
+    /**记账后金额*/
+    private Money aftBalance;
+    /**记账时间*/
+    private Date balanceTime;
+    
     @GenericGenerator(name = "id_gen", strategy = "enhanced-table", parameters = {
             @Parameter(name = "table_name", value = "T_C_PRIMAY_KEY"),
             @Parameter(name = "value_column_name", value = "NEXT_ID"),
@@ -98,7 +111,8 @@ public class PojoAccEntry {
     public void setCrdr(CRDRType crdr) {
         this.crdr = crdr;
     }
-    @Column(name = "AMOUNT")
+    @Embedded
+    @AttributeOverrides({@AttributeOverride(name="amount",column=@Column(name="AMOUNT"))})
     public Money getAmount() {
         return amount;
     }
@@ -184,4 +198,36 @@ public class PojoAccEntry {
     public void setIsLock(LockStatusType isLock) {
         this.isLock = isLock;
     }
+    @Type(type = "com.zlebank.zplatform.acc.pojo.usertype.EntryEventSqlType")
+    @Column(name = "ENTRY_EVENT")
+    public EntryEvent getEntryEvent() {
+        return entryEvent;
+    }
+    public void setEntryEvent(EntryEvent entryEvent) {
+        this.entryEvent = entryEvent;
+    }
+    @Embedded
+    @AttributeOverrides({@AttributeOverride(name="amount",column=@Column(name="BEFBALANCE"))})
+    public Money getBefBalance() {
+        return befBalance;
+    }
+    public void setBefBalance(Money befBalance) {
+        this.befBalance = befBalance;
+    }
+    @Embedded
+    @AttributeOverrides({@AttributeOverride(name="amount",column=@Column(name="AFTBALANCE"))})
+    public Money getAftBalance() {
+        return aftBalance;
+    }
+    public void setAftBalance(Money aftBalance) {
+        this.aftBalance = aftBalance;
+    }
+    @Column(name="BALANCETIME")
+    public Date getBalanceTime() {
+        return balanceTime;
+    }
+    public void setBalanceTime(Date balanceTime) {
+        this.balanceTime = balanceTime;
+    }
+    
 }
