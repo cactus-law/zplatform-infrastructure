@@ -141,7 +141,7 @@ public class DefaultEventHandler extends AbstractEventHandler {
             throw new AccBussinessException("E000014",
                     new Object[]{entry.getAcctCode()});
         }
-        accountService.checkDAC(account);
+        //accountService.checkDAC(account);
         Money actualAmount = Money.valueOf(getUpdateAmount(entry.getAmount()
                 .getAmount(), entry, account));// 实际发生额
 
@@ -161,7 +161,7 @@ public class DefaultEventHandler extends AbstractEventHandler {
         entry.setAftBalance(account.getBalance());
         entry.setBalanceTime(new Date());*/
         // 更新账户
-        entry.setBefBalance(account.getBalance()); 
+       // entry.setBefBalance(account.getBalance()); 
         PojoAccount updateAccount = new PojoAccount();
         updateAccount.setAcctCode(account.getAcctCode());
         updateAccount.setBalance(actualAmount);
@@ -177,8 +177,8 @@ public class DefaultEventHandler extends AbstractEventHandler {
             throw new AccBussinessException("E000018");
         }
         account = accountDAO.getByAcctCode(entry.getAcctCode());
-        entry.setAftBalance(account.getBalance());
-        entry.setBalanceTime(new Date());
+       // entry.setAftBalance(account.getBalance());
+       // entry.setBalanceTime(new Date());
         // 更新总账
        /* PojoAbstractSubject parentSubject = account.getParentSubject();
         parentSubject.setBalance(parentSubject.getBalance().plus(actualAmount));

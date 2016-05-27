@@ -90,7 +90,8 @@ public class AbstractSubjectDAOImpl extends HibernateBaseDAOImpl<PojoAbstractSub
             status = " '01' , '11', '99' ";
         }
         
-        String updateSql = "update t_acc_acct t set t.balance = t.balance + :balance, t.frozen_balance = t.frozen_balance + :frozenBalance, t.total_balance = t.total_balance + :totalBalance, t.dac = md5('#'||t.acct_code||'#'||(t.balance + :balance)||'#'||(t.frozen_balance + :frozenBalance)||'#'||(t.total_balance + :totalBalance)||'#'||:dacKey) where t.acct_code = :acctCode and t.status not in (:status) and t.balance + :balance>=0";
+        String updateSql = "update t_acc_acct t set t.balance = t.balance + :balance, t.frozen_balance = t.frozen_balance + :frozenBalance, t.total_balance = t.total_balance + :totalBalance, t.dac = md5('#'||t.acct_code||'#'||(t.balance + :balance)||'#'||(t.frozen_balance + :frozenBalance)||'#'||(t.total_balance + :totalBalance)||'#'||:dacKey) where t.acct_code = :acctCode and t.status not in (:status) and t.balance + :balance>=0"
+                + " and t.dac=md5('#' || t.acct_code || '#' ||t.balance|| '#' ||t.frozen_balance|| '#' ||t.total_balance||'#'||:dacKey)";
         SQLQuery query= getSession().createSQLQuery(updateSql);
         query.setParameter("acctCode", account.getAcctCode());
         query.setParameter("balance", account.getBalance().getAmount().toPlainString());
