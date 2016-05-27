@@ -81,7 +81,7 @@ public class AccountDAOImpl extends HibernateBaseDAOImpl<PojoAccount> implements
         criteria.add(Restrictions.eq("acctCode", accCode));
         
         PojoAccount pojoAccount = (PojoAccount) criteria.uniqueResult();
-        getSession().refresh(pojoAccount);
+        //getSession().refresh(pojoAccount);
         return pojoAccount;
     }
     /**

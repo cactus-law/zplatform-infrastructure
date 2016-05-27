@@ -48,7 +48,7 @@ public class TestDefaultEntry {
 
     @Test
     public void test() {
-        int repeatTimes = 1;
+        int repeatTimes = 300;
         int producerTaskNum = repeatTimes;
         int consumerTaskNum = 0;
         for(Map<TradeType, EntryEvent[]> map:mapList){
@@ -250,8 +250,8 @@ public class TestDefaultEntry {
         Map<TradeType, EntryEvent[]> bankCardPayMap_1 = new LinkedHashMap<TradeType, EntryEvent[]>();
         bankCardPayMap_1.put(TradeType.BANKCARD_PAY,
                 new EntryEvent[]{EntryEvent.TRADE_SUCCESS,EntryEvent.RECON_SUCCESS,EntryEvent.SETTED});
-        mapList.add(bankCardPayMap_1);*/
-        /*
+        mapList.add(bankCardPayMap_1);
+        
         Map<TradeType, EntryEvent[]> accountPayMap_1 = new LinkedHashMap<TradeType, EntryEvent[]>();
         accountPayMap_1.put(TradeType.ACCOUNT_PAY, new EntryEvent[]{
                 EntryEvent.TRADE_SUCCESS, EntryEvent.SETTED});
@@ -269,10 +269,10 @@ public class TestDefaultEntry {
 
         Map<TradeType, EntryEvent[]> refundBankCard_1 = new LinkedHashMap<TradeType, EntryEvent[]>();
         refundBankCard_1.put(TradeType.REFUND_BANKCARD, new EntryEvent[]{
-                EntryEvent.AUDIT_APPLY, EntryEvent.TRADE_SUCCESS,
+                 EntryEvent.TRADE_SUCCESS,
                 EntryEvent.RECON_SUCCESS});
-        mapList.add(refundBankCard_1);
-
+        mapList.add(refundBankCard_1);*/
+        /*
         Map<TradeType, EntryEvent[]> refundBankCard_2 = new LinkedHashMap<TradeType, EntryEvent[]>();
         refundBankCard_2.put(TradeType.REFUND_BANKCARD, new EntryEvent[]{
                 EntryEvent.AUDIT_APPLY, EntryEvent.TRADE_FAIL});
