@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.zlebank.zplatform</groupId>
 		<artifactId>zplatform-infranstructure-deploy</artifactId>
-		<version>1.5.2-SNAPSHOT</version>
+		<version>1.5.2</version>
 		<relativePath>../zplatform-infranstructure-deploy/pom.xml</relativePath>
 	</parent>
 	<artifactId>zplatform-member</artifactId>
@@ -12,7 +12,7 @@
 		<dependency>
 			<groupId>com.zlebank.zplatform</groupId>
 			<artifactId>zplatform-acc</artifactId>
-			<version>1.5.2-SNAPSHOT</version>
+			<version>1.5.2</version>
 		</dependency> 
 		<dependency>
 			<groupId>com.zlebank.zplatform</groupId>
