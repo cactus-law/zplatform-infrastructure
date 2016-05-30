@@ -3,7 +3,6 @@ package com.zlebank.zlpatform.acc2.entry;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -227,12 +226,12 @@ public class TestDefaultEntry {
     }
 
     private void fullFill() {
-        
+        /*
         Map<TradeType, EntryEvent[]> rechargeMap_1 = new LinkedHashMap<TradeType, EntryEvent[]>();
         rechargeMap_1.put(TradeType.RECHARGE,
                 new EntryEvent[]{EntryEvent.TRADE_SUCCESS,EntryEvent.RECON_SUCCESS});
         mapList.add(rechargeMap_1);
-        /*
+        
         Map<TradeType, EntryEvent[]> withdrawMap_1 = new LinkedHashMap<TradeType, EntryEvent[]>();
         withdrawMap_1.put(TradeType.WITHDRAW, new EntryEvent[]{
                 EntryEvent.AUDIT_APPLY, EntryEvent.TRADE_SUCCESS,
@@ -245,8 +244,8 @@ public class TestDefaultEntry {
         Map<TradeType, EntryEvent[]> withdrawMap_3 = new LinkedHashMap<TradeType, EntryEvent[]>();
         withdrawMap_3.put(TradeType.WITHDRAW, new EntryEvent[]{
                 EntryEvent.AUDIT_APPLY, EntryEvent.AUDIT_REJECT});
-        mapList.add(withdrawMap_3);
-        
+        mapList.add(withdrawMap_3);*/
+        /*
         Map<TradeType, EntryEvent[]> bankCardPayMap_1 = new LinkedHashMap<TradeType, EntryEvent[]>();
         bankCardPayMap_1.put(TradeType.BANKCARD_PAY,
                 new EntryEvent[]{EntryEvent.TRADE_SUCCESS,EntryEvent.RECON_SUCCESS,EntryEvent.SETTED});

@@ -81,9 +81,23 @@ public class AccountDAOImpl extends HibernateBaseDAOImpl<PojoAccount> implements
         criteria.add(Restrictions.eq("acctCode", accCode));
         
         PojoAccount pojoAccount = (PojoAccount) criteria.uniqueResult();
-        //getSession().refresh(pojoAccount);
         return pojoAccount;
     }
+     
+    @Override
+    public PojoAccount getByAcctCodeWithRefresh(String accCode) {
+        if (log.isDebugEnabled()) {
+            log.debug("【DAO】根据会计账户号得到账户："+accCode);
+        }
+        
+        Criteria criteria = getSession().createCriteria(PojoAccount.class);
+        criteria.add(Restrictions.eq("acctCode", accCode));
+        
+        PojoAccount pojoAccount = (PojoAccount) criteria.uniqueResult();
+        getSession().refresh(pojoAccount);
+        return pojoAccount;
+    }
+    
     /**
      *根据memberId得到账户
      * @param memberId
