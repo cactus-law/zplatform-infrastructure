@@ -153,15 +153,14 @@ public class DefaultEventHandler extends AbstractEventHandler {
         }
         checkAccountStatus(account.getStatus(), actualAmount,
                 entry.getAcctCode());
-        /*entry.setBefBalance(account.getBalance());  
-        account.setBalance(Money.valueOf(calcAmount));
+        
+        /*account.setBalance(Money.valueOf(calcAmount));
         account.setTotalBanance(account.getTotalBanance().plus(actualAmount));
         account.setDac(dacUtil.generteDAC(account.getAcctCode(), account.getBalance(), account.getFrozenBalance(), account.getTotalBanance()));
-        abstractSubjectDAO.update(account);
-        entry.setAftBalance(account.getBalance());
-        entry.setBalanceTime(new Date());*/
+        abstractSubjectDAO.update(account);*/
+         
         // 更新账户
-       // entry.setBefBalance(account.getBalance()); 
+       
         PojoAccount updateAccount = new PojoAccount();
         updateAccount.setAcctCode(account.getAcctCode());
         updateAccount.setBalance(actualAmount);
@@ -176,9 +175,10 @@ public class DefaultEventHandler extends AbstractEventHandler {
             }
             throw new AccBussinessException("E000018");
         }
-        account = accountDAO.getByAcctCode(entry.getAcctCode());
-       // entry.setAftBalance(account.getBalance());
-       // entry.setBalanceTime(new Date());
+        account = accountDAO.getByAcctCodeWithRefresh(entry.getAcctCode());
+        entry.setBefBalance(account.getBalance().minus(actualAmount));  
+        entry.setAftBalance(account.getBalance());
+        entry.setBalanceTime(new Date());
         // 更新总账
        /* PojoAbstractSubject parentSubject = account.getParentSubject();
         parentSubject.setBalance(parentSubject.getBalance().plus(actualAmount));

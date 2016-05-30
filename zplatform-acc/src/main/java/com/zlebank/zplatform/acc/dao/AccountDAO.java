@@ -67,4 +67,10 @@ public interface AccountDAO extends BaseDAO<PojoAccount>{
      * @return
      */
     public long getSequence(String sequences);
+    /**
+     * 根据账户号得到账户，对已取得的账户进行刷新以保证与数据同步
+     * @param accCode
+     * @return
+     */
+    public PojoAccount getByAcctCodeWithRefresh(String accCode);
 }
