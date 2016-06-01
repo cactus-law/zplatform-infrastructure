@@ -52,7 +52,7 @@ public class AccEntryDAOImpl  extends AbstractPagedQueryDAOImpl<PojoAccEntry,Acc
            crite.add(Restrictions.eq("acctCode", e.getAcctCode()));
        }
        //交易类型代码
-       if(e.getBusiCode()!=null){
+       if(StringUtil.isNotEmpty(e.getBusiCode())){
            crite.add(Restrictions.eq("busiCode", e.getBusiCode()));
        }
        //时间
