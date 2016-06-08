@@ -33,7 +33,7 @@ public abstract class AbstractAccException extends AbstractDescribeException {
      */
     private static final long serialVersionUID = 4901729172010673980L;
     
-    private static final  ResourceBundle RESOURCE = ResourceBundle.getBundle("exception_des");
+    private static final  ResourceBundle RESOURCE = ResourceBundle.getBundle("acc_exception");
     @Override
 	public ResourceBundle getResourceBundle() {
 		return RESOURCE;
