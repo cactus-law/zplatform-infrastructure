@@ -3,6 +3,7 @@ package com.zlebank.zplatform.acc.service.entry;
 import com.zlebank.zplatform.acc.bean.TradeInfo;
 import com.zlebank.zplatform.acc.exception.AbstractBusiAcctException;
 import com.zlebank.zplatform.acc.exception.AccBussinessException;
+import com.zlebank.zplatform.acc.exception.IllegalEntryRequestException;
 
 /**
  * 
@@ -19,5 +20,5 @@ public interface EntryEventHandler {
      */
     void handle(TradeInfo tradeInfo, EntryEvent entryEvent)
             throws AccBussinessException, AbstractBusiAcctException,
-            NumberFormatException;
+            NumberFormatException, IllegalEntryRequestException;
 }

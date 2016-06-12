@@ -21,6 +21,7 @@ import com.zlebank.zplatform.acc.bean.enums.CRDRType;
 import com.zlebank.zplatform.acc.bean.enums.LockStatusType;
 import com.zlebank.zplatform.acc.exception.AbstractBusiAcctException;
 import com.zlebank.zplatform.acc.exception.AccBussinessException;
+import com.zlebank.zplatform.acc.exception.IllegalEntryRequestException;
 import com.zlebank.zplatform.acc.pojo.Money;
 import com.zlebank.zplatform.acc.pojo.PojoAccEntry;
 import com.zlebank.zplatform.acc.pojo.PojoAccount;
@@ -67,21 +68,36 @@ public class DefaultEventHandler extends AbstractEventHandler {
         }
     }
     @Override
-    final protected boolean isConditionStatified(TradeInfo tradeInfo,
-            EntryEvent entryEvent) {
+    final protected void isConditionStatified(TradeInfo tradeInfo,
+            EntryEvent entryEvent) throws IllegalEntryRequestException{
+        
+        String cachedKey = tradeInfo.getTxnseqno()+tradeInfo.getBusiCode()+entryEvent.getCode();
+        Long timeCheck = cachedEntryElementMap.putIfAbsent(cachedKey, System.currentTimeMillis()+cachedTimeout);
+        
+        if(timeCheck!=null){
+            IllegalEntryRequestException iere = new IllegalEntryRequestException();
+            log.error("repeat entry request.txnseqno:"+tradeInfo.getTxnseqno()+",busicode:"+tradeInfo.getBusiCode()+",entryEvent:"+entryEvent);
+            iere.setParams("repeat entry request.txnseqno:"+tradeInfo.getTxnseqno()+",busicode:"+tradeInfo.getBusiCode()+",entryEvent:"+entryEvent);
+            throw iere;
+        }
         /* 检查交易流水号是否有关联的分录流水 */
         List<PojoAccEntry> list = accEntryDAO.getByTxnNo(
                 tradeInfo.getTxnseqno(), tradeInfo.getBusiCode(), entryEvent);
         if (!list.isEmpty()) {
-            return false;
+            IllegalEntryRequestException iere = new IllegalEntryRequestException();
+            log.error("repeat entry request.txnseqno:"+tradeInfo.getTxnseqno()+",busicode:"+tradeInfo.getBusiCode()+",entryEvent:"+entryEvent);
+            iere.setParams("repeat entry request.txnseqno:"+tradeInfo.getTxnseqno()+",busicode:"+tradeInfo.getBusiCode()+",entryEvent:"+entryEvent);
+            throw iere;
         }
-
+        
         if (tradeInfo.isSplit()) {// 如果有分账
             // TODO 暂时先不支持分账
             // throw new NotsupportSplitException();
-            return false;
+            IllegalEntryRequestException iere = new IllegalEntryRequestException();
+            log.error("not support split entry");
+            iere.setParams("not support split entry");
+            throw iere;
         }
-        return true;
     }
 
     /**
