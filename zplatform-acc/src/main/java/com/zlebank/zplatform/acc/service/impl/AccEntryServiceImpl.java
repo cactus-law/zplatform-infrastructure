@@ -35,6 +35,7 @@ import com.zlebank.zplatform.acc.dao.SubjectRuleConfigureDAO;
 import com.zlebank.zplatform.acc.dao.TxnsSplitAccountDAO;
 import com.zlebank.zplatform.acc.exception.AbstractBusiAcctException;
 import com.zlebank.zplatform.acc.exception.AccBussinessException;
+import com.zlebank.zplatform.acc.exception.IllegalEntryRequestException;
 import com.zlebank.zplatform.acc.pojo.Money;
 import com.zlebank.zplatform.acc.pojo.PojoAccEntry;
 import com.zlebank.zplatform.acc.pojo.PojoAccount;
@@ -209,7 +210,7 @@ public class AccEntryServiceImpl
         return accVoLi;
     }
     @Override
-    public void accEntryProcess(TradeInfo tradeInfo,EntryEvent entryEvent) throws AccBussinessException, AbstractBusiAcctException, NumberFormatException{
+    public void accEntryProcess(TradeInfo tradeInfo,EntryEvent entryEvent) throws AccBussinessException, AbstractBusiAcctException, NumberFormatException, IllegalEntryRequestException{
         if (log.isDebugEnabled()) {
             log.debug("********账务系统处理开始********");
             log.debug("【传入参数】：" + JSONObject.fromObject(tradeInfo));

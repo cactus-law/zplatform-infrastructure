@@ -33,6 +33,7 @@ import com.zlebank.zplatform.acc.bean.TradeInfo;
 import com.zlebank.zplatform.acc.exception.AbstractAccException;
 import com.zlebank.zplatform.acc.exception.AbstractBusiAcctException;
 import com.zlebank.zplatform.acc.exception.AccBussinessException;
+import com.zlebank.zplatform.acc.exception.IllegalEntryRequestException;
 import com.zlebank.zplatform.acc.pojo.Money;
 import com.zlebank.zplatform.acc.service.AccEntryService;
 import com.zlebank.zplatform.acc.service.FreezeAcctService;
@@ -192,6 +193,9 @@ public class Main {
             System.out.println(e.getMessage());
         } catch (NumberFormatException e) {
             System.out.println(e.getMessage());
+        } catch (IllegalEntryRequestException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
     /**

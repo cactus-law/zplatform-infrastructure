@@ -1,6 +1,7 @@
 package com.zlebank.zplatform.acc.service.entry;
 
 import java.math.BigDecimal;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.cheffo.jeplite.JEP;
 import org.cheffo.jeplite.ParseException;
@@ -17,6 +18,7 @@ import com.zlebank.zplatform.acc.dao.AccountDAO;
 import com.zlebank.zplatform.acc.dao.SubjectRuleConfigureDAO;
 import com.zlebank.zplatform.acc.exception.AbstractBusiAcctException;
 import com.zlebank.zplatform.acc.exception.AccBussinessException;
+import com.zlebank.zplatform.acc.exception.IllegalEntryRequestException;
 import com.zlebank.zplatform.acc.service.AccountService;
 import com.zlebank.zplatform.acc.service.ProcessLedgerService;
 
@@ -44,17 +46,17 @@ public abstract class AbstractEventHandler implements EntryEventHandler {
     private static final String LITERAL_COMPUTE_FACTOR_D = "D";// 商户手续费
     private static final String LITERAL_COMPUTE_FACTOR_E = "E";// 商户手续费
     private static final String LITERAL_COMPUTE_FACTOR_CHANNEL_FEE = "T";//通道手续费
+    protected final ConcurrentHashMap<String, Long> cachedEntryElementMap = new ConcurrentHashMap<String, Long>();
+    protected final long cachedTimeout = 3000;
 
     @Override
     @Transactional(isolation = Isolation.DEFAULT, rollbackFor = Throwable.class,propagation=Propagation.REQUIRED)
     public void handle(TradeInfo tradeInfo, EntryEvent entryEvent)
             throws AccBussinessException, AbstractBusiAcctException,
-            NumberFormatException {
-
-        if (!isConditionStatified(tradeInfo,entryEvent)) {
-            throw new RuntimeException("记账条件不满足,请检查交易信息和分录事件.交易序列号:"+tradeInfo.getTxnseqno()+",分录事件:"+entryEvent);
-        }
-
+            NumberFormatException, IllegalEntryRequestException {
+        refreshCached();
+        isConditionStatified(tradeInfo,entryEvent);
+        
         realHandle(tradeInfo, entryEvent);
     }
 
@@ -62,7 +64,15 @@ public abstract class AbstractEventHandler implements EntryEventHandler {
             EntryEvent entryEvent) throws AccBussinessException,
             AbstractBusiAcctException, NumberFormatException;
 
-    protected abstract boolean isConditionStatified(TradeInfo tradeInfo,EntryEvent entryEvent);
+    protected abstract void isConditionStatified(TradeInfo tradeInfo,EntryEvent entryEvent)throws IllegalEntryRequestException;
+    
+    private void refreshCached(){
+        for(String key:cachedEntryElementMap.keySet()){
+            if(System.currentTimeMillis()>cachedEntryElementMap.get(key)){
+                cachedEntryElementMap.remove(key);
+            }
+        }
+    }
     
     /**
      * 分录金额计算
