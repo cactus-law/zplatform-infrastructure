@@ -104,7 +104,11 @@ public class FreezeAmountServiceImpl extends AbstractBasePageService<AccountAmou
                 : account.getFrozenSTime());// 冻结开始时间（当前系统时间或传入时间）
         task.setFrozenTime(account.getFrozenTime());//冻结时间范围
         task.setTxnseqno(account.getTxnseqno());//交易流水号
-        task.setUnfrozenTime(DateUtil.addMin(currentDate, account.getFrozenTime()));// 解冻时间
+        if(account.getUnfrozenTime()==null){
+            task.setUnfrozenTime(DateUtil.addMin(task.getFrozenSTime(), account.getFrozenTime()));// 解冻时间
+        }else{
+            task.setUnfrozenTime(account.getUnfrozenTime());
+        }
         task.setIntime(currentDate);
         task.setUptime(currentDate);
         task.setInuser(account.getInuser());
