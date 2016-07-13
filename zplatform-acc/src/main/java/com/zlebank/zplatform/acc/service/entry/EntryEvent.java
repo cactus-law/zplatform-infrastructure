@@ -44,6 +44,10 @@ public enum EntryEvent {
      */
     SETTED("0500"),
     /**
+     * 退汇
+     */
+    REFUND_EXCHANGE("0600"),
+    /**
      * 未知
      */
     UNKNOW("FFFF");
