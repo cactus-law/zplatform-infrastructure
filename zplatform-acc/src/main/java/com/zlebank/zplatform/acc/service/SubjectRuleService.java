@@ -18,8 +18,11 @@ import java.util.Map;
 
 import com.zlebank.zplatform.acc.bean.SubjectAccountRule;
 import com.zlebank.zplatform.acc.bean.SubjectRule;
+import com.zlebank.zplatform.acc.bean.TradeInfo;
 import com.zlebank.zplatform.acc.bean.enums.RuleStatusType;
 import com.zlebank.zplatform.acc.exception.AccBussinessException;
+import com.zlebank.zplatform.acc.pojo.PojoSubjectRuleConfigure;
+import com.zlebank.zplatform.acc.service.entry.EntryEvent;
 
 /**
  * Class Description
@@ -90,6 +93,8 @@ public List<Map<String, Object>> getRuleBySar(SubjectAccountRule sar,Integer pag
  */
 public  Long getcount(SubjectAccountRule sar);
     
-    
+public List<PojoSubjectRuleConfigure> getRuleByBusiAndEvent(TradeInfo tradeInfo,EntryEvent entryEvent);
     
     }
+
+
