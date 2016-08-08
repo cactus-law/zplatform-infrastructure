@@ -157,6 +157,9 @@ public class BusiAcctServiceImpl implements BusiAcctService {
             case CHANNEL :
                 sb.append(BuisAcctCodePrefix.PUBLIC.getCode());
                 break;
+            case PRODUCT :
+                sb.append(BuisAcctCodePrefix.PRODUCT.getCode());
+                break;
             default :
                 //TODO throw new exception 
                 break;
