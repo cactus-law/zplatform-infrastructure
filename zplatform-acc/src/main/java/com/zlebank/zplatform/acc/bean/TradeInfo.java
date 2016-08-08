@@ -41,7 +41,7 @@ public class TradeInfo {
     private BigDecimal amount;
     /**佣金**/
     private BigDecimal commission;
-    /**手续费**/
+    /**交易手续费**/
     private BigDecimal charge;
     /**金额D**/
     private BigDecimal amountD;
@@ -50,10 +50,25 @@ public class TradeInfo {
     /**分账FLG**/
     private boolean isSplit;
     
+    /** 机构 */
     private String coopInstCode;
-    
+    /** 接入机构 */
+    private String access_coopInstCode;
+    /** 通道手续费*/
     private BigDecimal channelFee;
-
+    
+    /**
+     * @return the access_coopInstCode
+     */
+    public String getAccess_coopInstCode() {
+        return access_coopInstCode;
+    }
+    /**
+     * @param access_coopInstCode the access_coopInstCode to set
+     */
+    public void setAccess_coopInstCode(String access_coopInstCode) {
+        this.access_coopInstCode = access_coopInstCode;
+    }
     public String getTxnseqno() {
         return txnseqno;
     }
