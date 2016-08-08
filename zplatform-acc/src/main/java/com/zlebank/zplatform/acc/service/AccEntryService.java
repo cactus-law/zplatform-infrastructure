@@ -17,7 +17,6 @@ import com.zlebank.zplatform.acc.bean.TradeInfo;
 import com.zlebank.zplatform.acc.exception.AbstractBusiAcctException;
 import com.zlebank.zplatform.acc.exception.AccBussinessException;
 import com.zlebank.zplatform.acc.exception.IllegalEntryRequestException;
-import com.zlebank.zplatform.acc.mock.AccEntryTest;
 import com.zlebank.zplatform.acc.service.entry.EntryEvent;
 import com.zlebank.zplatform.commons.service.IBasePageService;
 
@@ -65,13 +64,4 @@ public interface AccEntryService
     public void accEntryProcess(TradeInfo tradeInfo, EntryEvent entryEvent)
             throws AccBussinessException, AbstractBusiAcctException,
             NumberFormatException, IllegalEntryRequestException;
-    /**
-     * @param offset
-     * @param pageSize
-     * @param example
-     * @return
-     */
-    List<AccEntryTest> getTestItem(int offset,
-            int pageSize,
-            AccEntryQuery example);
 }

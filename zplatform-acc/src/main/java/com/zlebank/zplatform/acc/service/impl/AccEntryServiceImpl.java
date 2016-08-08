@@ -36,7 +36,6 @@ import com.zlebank.zplatform.acc.dao.TxnsSplitAccountDAO;
 import com.zlebank.zplatform.acc.exception.AbstractBusiAcctException;
 import com.zlebank.zplatform.acc.exception.AccBussinessException;
 import com.zlebank.zplatform.acc.exception.IllegalEntryRequestException;
-import com.zlebank.zplatform.acc.mock.AccEntryTest;
 import com.zlebank.zplatform.acc.pojo.Money;
 import com.zlebank.zplatform.acc.pojo.PojoAccEntry;
 import com.zlebank.zplatform.acc.pojo.PojoAccount;
@@ -211,26 +210,6 @@ public class AccEntryServiceImpl
         return accVoLi;
     }
     
-    /**
-    *
-    * @param offset
-    * @param pageSize
-    * @param example
-    * @return
-    */
-   @Override
-    public List<AccEntryTest> getTestItem(int offset,
-           int pageSize,
-           AccEntryQuery example) {
-       List<AccEntryTest> accVoLi = new ArrayList<AccEntryTest>();
-       List<PojoAccEntry> list = accEntryDAO.getListByQuery(offset, pageSize,
-               example);
-       for (PojoAccEntry acc : list) {
-           AccEntryTest accVo = BeanCopyUtil.copyBean(AccEntryTest.class, acc);
-           accVoLi.add(accVo);
-       }
-       return accVoLi;
-   }
     
     @Override
     public void accEntryProcess(TradeInfo tradeInfo,EntryEvent entryEvent) throws AccBussinessException, AbstractBusiAcctException, NumberFormatException, IllegalEntryRequestException{

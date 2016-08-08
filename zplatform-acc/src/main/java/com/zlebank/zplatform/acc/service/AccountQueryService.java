@@ -19,7 +19,6 @@ import com.zlebank.zplatform.acc.bean.Account;
 import com.zlebank.zplatform.acc.bean.BusiAcct;
 import com.zlebank.zplatform.acc.bean.BusiAcctQuery;
 import com.zlebank.zplatform.acc.bean.QueryAccount;
-import com.zlebank.zplatform.acc.mock.AccEntryTest;
 import com.zlebank.zplatform.commons.bean.PagedResult;
 import com.zlebank.zplatform.commons.service.IBasePageService;
 
@@ -96,13 +95,5 @@ public interface AccountQueryService extends IBasePageService<QueryAccount, Busi
      * @return
      */
     List<BusiAcctQuery> getTestAccountInfoByMidAndUsage(QueryAccount account);
-    
-        /**
-         * 根据父级memID和业务账户CODE
-         * @param memberId
-         * @param busiAcctCode
-         * @return
-         */
-    public List<AccEntryTest>  getTestItem(int page,int pageSize,AccEntryQuery eQuery);
         
 }

@@ -33,7 +33,6 @@ import com.zlebank.zplatform.acc.dao.AccountDAO;
 import com.zlebank.zplatform.acc.dao.AccountQueryDAO;
 import com.zlebank.zplatform.acc.dao.BusiAcctDAO;
 import com.zlebank.zplatform.acc.exception.AccBussinessException;
-import com.zlebank.zplatform.acc.mock.AccEntryTest;
 import com.zlebank.zplatform.acc.pojo.Money;
 import com.zlebank.zplatform.acc.pojo.PojoAccount;
 import com.zlebank.zplatform.acc.pojo.PojoBusiAcct;
@@ -313,10 +312,5 @@ public class AccountQueryServiceImpl extends AbstractBasePageService<QueryAccoun
              listMem.add(mq);
         }*/
         return listMem;
-    }
-    
-    @Transactional
-    public List<AccEntryTest> getTestItem(int page,int pageSize,AccEntryQuery eQuery){
-        return entry.getTestItem(page, pageSize, eQuery);
     }
 }
