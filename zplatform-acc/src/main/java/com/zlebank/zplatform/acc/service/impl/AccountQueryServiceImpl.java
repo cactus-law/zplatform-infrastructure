@@ -33,6 +33,7 @@ import com.zlebank.zplatform.acc.dao.AccountDAO;
 import com.zlebank.zplatform.acc.dao.AccountQueryDAO;
 import com.zlebank.zplatform.acc.dao.BusiAcctDAO;
 import com.zlebank.zplatform.acc.exception.AccBussinessException;
+import com.zlebank.zplatform.acc.mock.AccEntryTest;
 import com.zlebank.zplatform.acc.pojo.Money;
 import com.zlebank.zplatform.acc.pojo.PojoAccount;
 import com.zlebank.zplatform.acc.pojo.PojoBusiAcct;
@@ -147,7 +148,7 @@ public class AccountQueryServiceImpl extends AbstractBasePageService<QueryAccoun
         PagedResult<AccEntry> entrys= entry.queryPaged(page, pageSize, eQuery);
         return entrys;
     }
-
+   
     /**
      *
      * @param memberid
@@ -271,5 +272,51 @@ public class AccountQueryServiceImpl extends AbstractBasePageService<QueryAccoun
         }
          
         return listMem;
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /**
+     * -----------------------------------------------------------Following is test-----------
+     */
+    /**
+     *
+     * @param account
+     * @return
+     */
+    @Override
+    @Transactional(propagation=Propagation.REQUIRED)
+    public List<BusiAcctQuery> getTestAccountInfoByMidAndUsage(QueryAccount account) {
+        List<Map<String, Object>>li=   accountQueryDAO.TestAccountInfoByMidAndUsage(account);
+        List<BusiAcctQuery> listMem=new ArrayList<BusiAcctQuery>();
+        for(Map<String, Object> map:li){
+            BusiAcctQuery mq=new BusiAcctQuery();
+            mq.setAcctCode(map.get("ACCT_CODE")+"");
+            mq.setStatus(AcctStatusType.fromValue(map.get("STATUS")+""));   
+            mq.setAcctType(AcctType.fromValue(map.get("ACCT_TYPE")+"")); 
+            mq.setBalance(Money.valueOf( Double.valueOf((map.get("BALANCE")==null?0.0:map.get("BALANCE"))+"")));
+            mq.setFronzenBalance(Money.valueOf(Double.valueOf((map.get("FROZEN_BALANCE")==null?0.0:map.get("FROZEN_BALANCE"))+"")));
+            mq.setTotalBalance(Money.valueOf( Double.valueOf((map.get("TOTAL_BALANCE")==null?0.0:map.get("TOTAL_BALANCE"))+"")));
+            mq.setAcctId( map.get("ACCT_ID")+"");
+             mq.setBusiAcctCode(map.get("BUSIACCT_CODE")+"");
+             mq.setBusiAcctName(map.get("BUSIACCT_NAME")+"");
+             mq.setUsage(Usage.fromValue(map.get("USAGE")+""));
+             mq.setMemberID(map.get("BUSINESS_ACTOR_ID")+"");
+             listMem.add(mq);
+        }
+        return listMem;
+    }
+    
+    @Transactional
+    public List<AccEntryTest> getTestItem(int page,int pageSize,AccEntryQuery eQuery){
+        return entry.getTestItem(page, pageSize, eQuery);
     }
 }

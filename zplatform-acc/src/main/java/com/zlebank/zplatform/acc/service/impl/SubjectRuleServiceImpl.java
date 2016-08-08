@@ -21,11 +21,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.zlebank.zplatform.acc.bean.SubjectAccountRule;
 import com.zlebank.zplatform.acc.bean.SubjectRule;
+import com.zlebank.zplatform.acc.bean.TradeInfo;
 import com.zlebank.zplatform.acc.bean.enums.RuleStatusType;
 import com.zlebank.zplatform.acc.dao.SubjectRuleConfigureDAO;
 import com.zlebank.zplatform.acc.exception.AccBussinessException;
 import com.zlebank.zplatform.acc.pojo.PojoSubjectRuleConfigure;
 import com.zlebank.zplatform.acc.service.SubjectRuleService;
+import com.zlebank.zplatform.acc.service.entry.EntryEvent;
 import com.zlebank.zplatform.commons.utils.BeanCopyUtil;
 
 /**
@@ -230,5 +232,11 @@ public class SubjectRuleServiceImpl implements SubjectRuleService {
         }
         return page;
     }
-
+    @Transactional
+    public List<PojoSubjectRuleConfigure> getRuleByBusiAndEvent(TradeInfo tradeInfo,EntryEvent entryEvent){
+         List<PojoSubjectRuleConfigure> entryRuleList = subRule
+                .getRulesByTradeAndEvent(tradeInfo.getBusiCode(), entryEvent);
+         return entryRuleList;
+    }
+   
 }
