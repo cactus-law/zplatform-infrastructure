@@ -63,4 +63,40 @@ public class QuickpayCustDAOImpl extends AbstractPagedQueryDAOImpl<PojoQuickpayC
         return (PojoQuickpayCust) getSession().get(PojoQuickpayCust.class, id);
     }
 
+    /**
+     *
+     * @param bean
+     * @return
+     */
+    @Override
+    public PojoQuickpayCust getQuickPayCard(QuickpayCustBean bean) {
+        Criteria crite=   this.getSession().createCriteria(PojoQuickpayCust.class);
+        if(bean!=null){
+            if(StringUtil.isNotEmpty(bean.getRelatememberno())){
+                crite .add(Restrictions.eq("relatememberno",bean.getRelatememberno() ));
+            }
+            if(StringUtil.isNotEmpty(bean.getCardno())){
+                crite .add(Restrictions.eq("cardno", bean.getCardno()));
+            }
+            if(StringUtil.isNotEmpty(bean.getIdnum())){
+                crite.add(Restrictions.eq("idnum", bean.getIdnum())); 
+            }
+            
+            if(StringUtil.isNotEmpty(bean.getAccname())){
+                crite.add(Restrictions.eq("accname", bean.getAccname()));
+            }
+           
+            if(StringUtil.isNotEmpty(bean.getPhone())){
+                crite.add(Restrictions.eq("phone", bean.getPhone()));
+            }
+            
+            if(StringUtil.isNotEmpty(bean.getDevId())){
+                crite.add(Restrictions.eq("devId", bean.getDevId()));
+            }
+        }
+        crite .add(Restrictions.eq("status", "00"));
+        PojoQuickpayCust card = (PojoQuickpayCust) crite.uniqueResult();
+        return card;
+    }
+
 }

@@ -208,4 +208,22 @@ public class MemberBankCardServiceImpl  implements MemberBankCardService {
         return rtnList;
     }
 
+    /**
+     *
+     * @param bean
+     * @return
+     */
+    @Override
+    public long saveQuickPayCustExt(QuickpayCustBean bean) {
+        PojoQuickpayCust oldPojo = quickpayCustDAO.getQuickPayCard(bean);
+        if (oldPojo != null) {
+            return oldPojo.getId();
+        }
+        PojoQuickpayCust pojo = BeanCopyUtil.copyBean(PojoQuickpayCust.class, bean);
+        pojo.setStatus("00");
+        pojo = quickpayCustDAO.merge(pojo);
+        pojo = quickpayCustDAO.getQuickPayCard(bean);
+        return pojo.getId();
+    }
+
 }
