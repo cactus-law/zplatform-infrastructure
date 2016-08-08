@@ -63,15 +63,27 @@ public enum TradeType {
     /**
      * 产品-提现
      */
-    
+    PRODUCT_WITHDRAW("13000001"),
     /**
      * 产品资金赎回
      */
-    PRODUCT_CAPITAL_RANSOM("12000001"),
+    PRODUCT_CAPITAL_RANSOM("14000001"),
     /**
-     * 产品资金划拨
+     * 产品资金退款
      */
-    PRODUCT_CAPITAL_TRANSFER("13000001"),
+    PRODUCT_CAPITAL_REFUND("14000002"),
+    /**
+     * 日终结算
+     */
+    PRODUCT_ENDDAY_SETTEL("15000001"),
+    /**
+     * 融资人还款
+     */
+    PRODUCT_FINANCIERS_REFUND("16000001"),
+    /**
+     * 产品资金划转
+     */
+    PRODUCT_CAPITAL_TRANSFER("17000001"),
     /**未知类型**/
     UNKNOW("999");
 
