@@ -295,9 +295,9 @@ public class AccountQueryServiceImpl extends AbstractBasePageService<QueryAccoun
     @Override
     @Transactional(propagation=Propagation.REQUIRED)
     public List<BusiAcctQuery> getTestAccountInfoByMidAndUsage(QueryAccount account) {
-        List<Map<String, Object>>li=   accountQueryDAO.TestAccountInfoByMidAndUsage(account);
+       /* List<Map<String, Object>>li=   accountQueryDAO.TestAccountInfoByMidAndUsage(account);*/
         List<BusiAcctQuery> listMem=new ArrayList<BusiAcctQuery>();
-        for(Map<String, Object> map:li){
+       /* for(Map<String, Object> map:li){
             BusiAcctQuery mq=new BusiAcctQuery();
             mq.setAcctCode(map.get("ACCT_CODE")+"");
             mq.setStatus(AcctStatusType.fromValue(map.get("STATUS")+""));   
@@ -311,7 +311,7 @@ public class AccountQueryServiceImpl extends AbstractBasePageService<QueryAccoun
              mq.setUsage(Usage.fromValue(map.get("USAGE")+""));
              mq.setMemberID(map.get("BUSINESS_ACTOR_ID")+"");
              listMem.add(mq);
-        }
+        }*/
         return listMem;
     }
     
