@@ -20,6 +20,8 @@ public class AccCodePlaceholderFactory {
     private static final String LITERAL_CHANNEL = "T";
     private static final String LITERAL_COMMISSION_RECE = "Y";
     private static final String LITERAL_COOP_INST = "C";
+    private static final String LITERAL_PRODUCT="P";
+    private static final String LITERAL_ACCESS_COOP_INST="AC";
     
     private AcctCodePlaceHolder newPlaceholder(final String placeHolderValue,final TradeInfo tradeInfo){
         return new AcctCodePlaceHolder() {
@@ -84,6 +86,10 @@ public class AccCodePlaceholderFactory {
                 return tradeInfo.getPayToMemberId();
             case LITERAL_COOP_INST:
                 return tradeInfo.getCoopInstCode();
+            case LITERAL_PRODUCT:
+                return tradeInfo.getProductId();
+            case LITERAL_ACCESS_COOP_INST:
+                return tradeInfo.getAccess_coopInstCode();
             default :
                 return null;
         }
