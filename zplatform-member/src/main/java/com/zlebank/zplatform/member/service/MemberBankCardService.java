@@ -62,4 +62,11 @@ public interface MemberBankCardService {
      * @return
      */
     public PagedResult<QuickpayCustBean> queryMemberBankCard(String memberId, String cardType, String devId,int offset,  int pageSize);
+    
+    /**
+     * 保存银行卡绑卡信息
+     * @param bean
+     * @ Return long 绑卡ID
+     */
+    public long saveQuickPayCustExt(QuickpayCustBean bean);
 }
