@@ -42,7 +42,5 @@ public interface QuickpayCustDAO  extends BasePagedQueryDAO<PojoQuickpayCust,Qui
      */
     public PojoQuickpayCust getById(long id);
     
-    
-    
     public PojoQuickpayCust getQuickPayCard(QuickpayCustBean bean);
 }
