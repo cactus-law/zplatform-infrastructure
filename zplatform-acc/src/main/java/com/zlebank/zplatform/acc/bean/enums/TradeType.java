@@ -43,6 +43,35 @@ public enum TradeType {
     RECHANGE_MANUAL ("90000001"),
     /** 实名认证*/
     REAL_NAME_AUTH("80000001"),
+    /**
+     * 余额购买产品
+     */
+    PRODUCT_PURCHASE_BACLANCE("11000002"),
+    /**
+     * 购买产品-网关、快捷支付
+     */
+    PRODUCT_PURCHASE_CHARGE("11000001"),
+    /**
+     * 产品-充值
+     */
+    PRODUCT_CHARGE_ONLINE("12000001"),
+    /**
+     * 产品-线下充值
+     */
+    PRODUCT_CHARGE("12000002"),
+    
+    /**
+     * 产品-提现
+     */
+    
+    /**
+     * 产品资金赎回
+     */
+    PRODUCT_CAPITAL_RANSOM("12000001"),
+    /**
+     * 产品资金划拨
+     */
+    PRODUCT_CAPITAL_TRANSFER("13000001"),
     /**未知类型**/
     UNKNOW("999");
 
