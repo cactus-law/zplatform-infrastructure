@@ -214,6 +214,7 @@ public class MemberBankCardServiceImpl  implements MemberBankCardService {
      * @return
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
     public long saveQuickPayCustExt(QuickpayCustBean bean) {
         PojoQuickpayCust oldPojo = quickpayCustDAO.getQuickPayCard(bean);
         if (oldPojo != null) {
