@@ -95,8 +95,13 @@ public class QuickpayCustDAOImpl extends AbstractPagedQueryDAOImpl<PojoQuickpayC
             }
         }
         crite .add(Restrictions.eq("status", "00"));
-        PojoQuickpayCust card = (PojoQuickpayCust) crite.uniqueResult();
+        
+        PojoQuickpayCust card=null;
+        if (crite.uniqueResult()!=null) {
+             card = (PojoQuickpayCust) crite.uniqueResult();
+        }
         return card;
+       
     }
 
 }
