@@ -303,5 +303,6 @@
 		<module>../zplatform-member</module>
 		<module>../zplatform-member-api</module>
 		<module>../zplatform-specification</module>
+		<module>../zplatform-acc-service</module>
 	</modules>
 </project>
