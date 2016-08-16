@@ -22,6 +22,10 @@ import java.io.Serializable;
  * @since 
  */
 public class MemberBean implements Serializable{
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = -132351934062623689L;
     /**"主键，标示**/
     private String memid;
     /**会员ID**/
