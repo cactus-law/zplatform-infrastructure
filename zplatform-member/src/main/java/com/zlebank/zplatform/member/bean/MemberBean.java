@@ -10,6 +10,8 @@
  */
 package com.zlebank.zplatform.member.bean;
 
+import java.io.Serializable;
+
 
 /**
  * 会员共通bean
@@ -19,7 +21,7 @@ package com.zlebank.zplatform.member.bean;
  * @date 2016年1月15日 上午10:44:22
  * @since 
  */
-public class MemberBean {
+public class MemberBean implements Serializable{
     /**"主键，标示**/
     private String memid;
     /**会员ID**/
