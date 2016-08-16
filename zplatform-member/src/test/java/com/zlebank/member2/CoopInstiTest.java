@@ -31,7 +31,7 @@ public class CoopInstiTest {
 		instiName = "测试机构" + RandomUtil.randomNumber(4);
 	}
 
-	@Test
+	//@Test
 	public void testCreate() {
 		CoopInstiService coopInstiService = (CoopInstiService) context
 				.getBean("coopInstiService");

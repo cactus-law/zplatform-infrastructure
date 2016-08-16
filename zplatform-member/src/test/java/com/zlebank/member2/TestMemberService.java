@@ -47,7 +47,7 @@ public class TestMemberService {
     /**
      * 开通个人会员账户
      */
-    @Test
+    //@Test
     public void openIndiBusiAcct() {
         long userId = 99;
         String memberId = "";
