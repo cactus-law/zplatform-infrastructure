@@ -10,6 +10,8 @@
  */
 package com.zlebank.zplatform.member.bean;
 
+import java.io.Serializable;
+
 import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 
 /**
@@ -20,8 +22,12 @@ import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
  * @date 2016年1月13日 下午7:54:01
  * @since 
  */
-public class CoopInstiBusi implements BusinessActor {
+public class CoopInstiBusi implements BusinessActor,Serializable {
 
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = -6341821408552519295L;
     private String businessActorId;
 
 

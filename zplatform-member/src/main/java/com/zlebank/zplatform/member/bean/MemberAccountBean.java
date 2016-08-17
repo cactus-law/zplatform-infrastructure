@@ -10,6 +10,7 @@
  */
 package com.zlebank.zplatform.member.bean;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import com.zlebank.zplatform.acc.bean.enums.Usage;
@@ -22,7 +23,11 @@ import com.zlebank.zplatform.acc.bean.enums.Usage;
  * @date 2016年1月18日 上午11:58:46
  * @since 
  */
-public class MemberAccountBean {
+public class MemberAccountBean implements Serializable{
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = 4034159287672312169L;
     /** 业务号 */
     private String busiCode;
     /** 余额 **/

@@ -10,6 +10,8 @@
  */
 package com.zlebank.zplatform.acc.bean;
 
+import java.io.Serializable;
+
 /**
  * Class Description
  *
@@ -18,8 +20,14 @@ package com.zlebank.zplatform.acc.bean;
  * @date 2016年7月20日 下午4:21:56
  * @since 
  */
-public class FinanceProductBean {
-       private String productName;
+public class FinanceProductBean implements Serializable{
+    
+       /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = 8811815001691358450L;
+
+    private String productName;
        
        private String productCode;
 

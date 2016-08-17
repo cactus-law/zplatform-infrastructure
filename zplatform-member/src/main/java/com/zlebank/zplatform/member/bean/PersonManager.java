@@ -10,6 +10,7 @@
  */
 package com.zlebank.zplatform.member.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -20,7 +21,11 @@ import java.util.Date;
  * @date 2015年11月6日 下午5:13:35
  * @since 
  */
-public class PersonManager {
+public class PersonManager implements Serializable{
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = -5050281551367925110L;
     /**会员ID**/
     private String pMemberid;
     /**支付密码**/

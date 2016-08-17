@@ -10,6 +10,8 @@
  */
 package com.zlebank.zplatform.member.bean;
 
+import java.io.Serializable;
+
 /**
  * 企业 Bean
  * (如果需要更多信息，可以自行添加)
@@ -19,7 +21,11 @@ package com.zlebank.zplatform.member.bean;
  * @date 2016年3月21日 下午2:08:04
  * @since 
  */
-public class EnterpriseBean {
+public class EnterpriseBean implements Serializable{
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = -2640101753501197219L;
     /**企业名称**/
     private String enterpriseName;
 

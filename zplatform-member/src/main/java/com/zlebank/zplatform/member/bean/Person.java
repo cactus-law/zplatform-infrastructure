@@ -10,6 +10,7 @@
  */
 package com.zlebank.zplatform.member.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.zlebank.zplatform.member.bean.enums.SexType;
@@ -23,8 +24,12 @@ import com.zlebank.zplatform.member.bean.enums.SexType;
  * @since 
  */
 
-public class Person  extends MemberBean{
+public class Person  extends MemberBean implements Serializable{
 
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = 2046207752338633914L;
     /**会员ID**/
     private String parentMemberId;
     /**性别**/

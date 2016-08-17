@@ -1,5 +1,6 @@
 package com.zlebank.zplatform.member.bean;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -9,9 +10,13 @@ import com.zlebank.zplatform.commons.dao.pojo.ProductModel;
  * @author yangying
  *
  */
-public class CoopInsti {
+public class CoopInsti implements Serializable{
 	
-	private long id;
+	/**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = 5698426751690977215L;
+    private long id;
 	private String instiCode;
 	private String instiName;
 	private List<ProductModel> products;

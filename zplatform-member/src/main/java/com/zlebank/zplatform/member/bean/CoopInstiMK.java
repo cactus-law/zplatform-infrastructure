@@ -1,5 +1,7 @@
 package com.zlebank.zplatform.member.bean;
 
+import java.io.Serializable;
+
 import com.zlebank.zplatform.member.bean.enums.EncryptAlgorithm;
 import com.zlebank.zplatform.member.bean.enums.TerminalAccessType;
 
@@ -12,8 +14,12 @@ import com.zlebank.zplatform.member.bean.enums.TerminalAccessType;
  * @date 2016年1月13日 下午4:43:12
  * @since
  */
-public class CoopInstiMK {
+public class CoopInstiMK implements Serializable{
 
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = -7532675218623895174L;
     private String coopInstiCode;
     private EncryptAlgorithm encryptAlgorithm;
     private TerminalAccessType terminalAccessType;

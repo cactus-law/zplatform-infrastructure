@@ -10,6 +10,8 @@
  */
 package com.zlebank.zplatform.member.bean;
 
+import java.io.Serializable;
+
 import com.zlebank.zplatform.commons.bean.Bean;
 
 /**
@@ -20,7 +22,11 @@ import com.zlebank.zplatform.commons.bean.Bean;
  * @date 2016年1月18日 下午7:02:27
  * @since 
  */
-public class QuickpayCustBean implements Bean{
+public class QuickpayCustBean implements Bean, Serializable{
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = -3781605657626514654L;
     /**标识**/
     private Long id;
     /**绑卡标示**/
