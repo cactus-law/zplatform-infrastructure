@@ -10,6 +10,8 @@
  */
 package com.zlebank.zplatform.member.bean;
 
+import java.io.Serializable;
+
 
 /**
  * 企业会员
@@ -19,8 +21,13 @@ package com.zlebank.zplatform.member.bean;
  * @date 2015年9月11日 下午12:02:26
  * @since 
  */
-public class EnterpriseBusi extends Enterprise  {
+public class EnterpriseBusi extends Enterprise implements Serializable  {
 
+
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = 7071622217571550809L;
 
     private String businessActorId;
     

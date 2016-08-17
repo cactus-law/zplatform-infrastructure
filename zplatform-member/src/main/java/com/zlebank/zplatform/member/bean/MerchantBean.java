@@ -10,6 +10,7 @@
  */
 package com.zlebank.zplatform.member.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.zlebank.zplatform.acc.pojo.Money;
@@ -25,7 +26,11 @@ import com.zlebank.zplatform.member.bean.enums.MerchType;
  * @date 2015年9月11日 上午9:44:22
  * @since 
  */
-public class MerchantBean {
+public class MerchantBean implements Serializable{
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = 3572436993137918257L;
     /**商户名称**/
     private String merchname;
     /**商户简称**/

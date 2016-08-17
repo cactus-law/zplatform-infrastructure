@@ -10,6 +10,8 @@
  */
 package com.zlebank.zplatform.member.bean;
 
+import java.io.Serializable;
+
 /**
  * Class Description
  *
@@ -18,7 +20,11 @@ package com.zlebank.zplatform.member.bean;
  * @date 2015年9月17日 上午9:40:57
  * @since
  */
-public class MerchMK {
+public class MerchMK implements Serializable{
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = -7668942559338279248L;
     private String memberId;
     private String safeSeq;
     private String safeType;

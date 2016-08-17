@@ -10,6 +10,8 @@
  */
 package com.zlebank.zplatform.member.bean;
 
+import java.io.Serializable;
+
 
 /**
  * 实名认证信息
@@ -19,7 +21,11 @@ package com.zlebank.zplatform.member.bean;
  * @date 2016年1月18日 下午4:57:49
  * @since 
  */
-public class RealNameBean {
+public class RealNameBean implements Serializable{
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = 8172954291929782442L;
     /**会员号**/
     private String memberId;
     /**真实姓名**/

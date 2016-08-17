@@ -10,6 +10,7 @@
  */
 package com.zlebank.zplatform.member.bean;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import com.zlebank.zplatform.commons.bean.Bean;
@@ -22,7 +23,11 @@ import com.zlebank.zplatform.commons.bean.Bean;
  * @date 2016年1月18日 下午12:02:58
  * @since 
  */
-public class MemberBalanceDetailBean implements Bean{
+public class MemberBalanceDetailBean implements Bean, Serializable{
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = 904576437009401473L;
     /**收支类型  00：收入； 01：支出 **/
     private String budgetType;
     /** 金额 **/
