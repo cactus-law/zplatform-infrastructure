@@ -10,6 +10,7 @@
  */
 package com.zlebank.zplatform.acc.bean;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -20,7 +21,11 @@ import java.math.BigDecimal;
  * @date 2015年8月31日 下午3:35:06
  * @since 
  */
-public class TradeInfo {
+public class TradeInfo implements Serializable{
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = 9166156838263051281L;
     /**交易流水号**/
     private String txnseqno;
     /**支付订单号**/

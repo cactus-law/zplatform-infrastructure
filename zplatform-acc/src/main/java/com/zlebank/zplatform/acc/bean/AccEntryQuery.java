@@ -10,6 +10,7 @@
  */
 package com.zlebank.zplatform.acc.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.zlebank.zplatform.acc.bean.enums.AccEntryStatus;
@@ -23,7 +24,11 @@ import com.zlebank.zplatform.commons.bean.Bean;
  * @date 2015年9月7日 下午8:23:25
  * @since 
  */
-public class AccEntryQuery implements Bean{
+public class AccEntryQuery implements Bean,Serializable{
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = 4210224347710191192L;
     /**支付订单号**/
     private String payordno;
     /**交易流水号**/
