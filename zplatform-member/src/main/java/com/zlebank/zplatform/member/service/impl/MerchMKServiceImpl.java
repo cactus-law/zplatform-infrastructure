@@ -104,4 +104,14 @@ public class MerchMKServiceImpl implements MerchMKService {
         }
         return null;
     }
+    
+    @Transactional(propagation = Propagation.REQUIRED,rollbackFor=Throwable.class)
+    public void updateMerchMK(MerchMK merchMK){
+    	PojoMerchMK pojoMerchMK = null;
+    	if (merchMK != null) {
+    		pojoMerchMK = BeanCopyUtil.copyBean(PojoMerchMK.class, merchMK);
+        }
+    	merchMKDAOImpl.update(pojoMerchMK);
+    	
+    }
 }

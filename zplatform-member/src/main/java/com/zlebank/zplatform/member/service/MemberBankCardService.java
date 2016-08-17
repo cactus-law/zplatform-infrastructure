@@ -68,4 +68,23 @@ public interface MemberBankCardService {
      * @ Return long 绑卡ID
      */
     public long saveQuickPayCustExt(QuickpayCustBean bean);
+    
+    /**
+     * 根据主键取得银行卡绑卡信息
+     * @param id
+     * @return
+     */
+    public QuickpayCustBean getMemberBankCardById(Long id);
+    
+    /**
+     * 通过会员ID，卡号，身份证号，账户名，手机号得到绑卡对象
+     * @param memberId
+     * @param cardNo
+     * @param idnum
+     * @param accname
+     * @param phone
+     * @return
+     */
+    public QuickpayCustBean getCardList(String cardNo, String accName,String phone, String cerId, String memberId);
+    
 }

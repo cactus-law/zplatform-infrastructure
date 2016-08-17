@@ -226,5 +226,21 @@ public class MemberBankCardServiceImpl  implements MemberBankCardService {
         pojo = quickpayCustDAO.getQuickPayCard(bean);
         return pojo.getId();
     }
+    @Transactional(readOnly=true)
+    public QuickpayCustBean getMemberBankCardById(Long id){
+    	PojoQuickpayCust pojoQuickpayCust = quickpayCustDAO.getById(id);
+    	if(pojoQuickpayCust==null){
+    		return null;
+    	}
+    	return BeanCopyUtil.copyBean(QuickpayCustBean.class, pojoQuickpayCust);
+    }
+    @Transactional(readOnly=true)
+    public QuickpayCustBean getCardList(String cardNo, String accName,String phone, String cerId, String memberId){
+    	PojoQuickpayCust quickPayCard = quickpayCustDAO.getQuickPayCard(memberId, cardNo, cerId, accName, phone);
+    	if(quickPayCard==null){
+    		return null;
+    	}
+    	return BeanCopyUtil.copyBean(QuickpayCustBean.class, quickPayCard);
+    }
 
 }

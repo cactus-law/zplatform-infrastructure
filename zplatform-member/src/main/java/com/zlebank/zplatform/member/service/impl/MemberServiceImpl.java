@@ -286,4 +286,29 @@ public class MemberServiceImpl implements MemberService {
         return aqs.queryPaged(page, pageSize, qa);
     }
 
+	/**
+	 *
+	 * @param loginName
+	 * @param instiCode
+	 * @return
+	 */
+	@Override
+	public PojoMember getMemberByLoginNameAndCoopInsti(String loginName,
+			long instiCode) {
+		// TODO Auto-generated method stub
+		return memberDAOImpl.getMemberByLoginNameAndCoopInsti(loginName, instiCode);
+	}
+
+	/**
+	 *
+	 * @param phone
+	 * @param instiCode
+	 * @return
+	 */
+	@Override
+	public PojoMember getMemberByPhoneAndCoopInsti(String phone, long instiCode) {
+		// TODO Auto-generated method stub
+		return memberDAOImpl.getMemberByPhoneAndCoopInsti(phone, instiCode);
+	}
+
 }

@@ -229,4 +229,6 @@ public class CoopInstiServiceImpl implements CoopInstiService {
         BeanUtils.copyProperties(pojoCoopInsit, copyTo, ignoreProperties);
         return copyTo;
     }
+    
+   
 }
