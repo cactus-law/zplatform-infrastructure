@@ -88,12 +88,4 @@ public interface AccountQueryService extends IBasePageService<QueryAccount, Busi
      * @return List<MemberQuery>
      */
     public BusiAcctQuery getBusiQueryBybCode(String busiAcctCode);
-
-    /**
-     * @param memberId
-     * @param useage
-     * @return
-     */
-    List<BusiAcctQuery> getTestAccountInfoByMidAndUsage(QueryAccount account);
-        
 }

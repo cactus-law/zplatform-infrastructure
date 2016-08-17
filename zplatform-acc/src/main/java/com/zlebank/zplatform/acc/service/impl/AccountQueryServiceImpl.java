@@ -272,45 +272,4 @@ public class AccountQueryServiceImpl extends AbstractBasePageService<QueryAccoun
          
         return listMem;
     }
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /**
-     * -----------------------------------------------------------Following is test-----------
-     */
-    /**
-     *
-     * @param account
-     * @return
-     */
-    @Override
-    @Transactional(propagation=Propagation.REQUIRED)
-    public List<BusiAcctQuery> getTestAccountInfoByMidAndUsage(QueryAccount account) {
-       /* List<Map<String, Object>>li=   accountQueryDAO.TestAccountInfoByMidAndUsage(account);*/
-        List<BusiAcctQuery> listMem=new ArrayList<BusiAcctQuery>();
-       /* for(Map<String, Object> map:li){
-            BusiAcctQuery mq=new BusiAcctQuery();
-            mq.setAcctCode(map.get("ACCT_CODE")+"");
-            mq.setStatus(AcctStatusType.fromValue(map.get("STATUS")+""));   
-            mq.setAcctType(AcctType.fromValue(map.get("ACCT_TYPE")+"")); 
-            mq.setBalance(Money.valueOf( Double.valueOf((map.get("BALANCE")==null?0.0:map.get("BALANCE"))+"")));
-            mq.setFronzenBalance(Money.valueOf(Double.valueOf((map.get("FROZEN_BALANCE")==null?0.0:map.get("FROZEN_BALANCE"))+"")));
-            mq.setTotalBalance(Money.valueOf( Double.valueOf((map.get("TOTAL_BALANCE")==null?0.0:map.get("TOTAL_BALANCE"))+"")));
-            mq.setAcctId( map.get("ACCT_ID")+"");
-             mq.setBusiAcctCode(map.get("BUSIACCT_CODE")+"");
-             mq.setBusiAcctName(map.get("BUSIACCT_NAME")+"");
-             mq.setUsage(Usage.fromValue(map.get("USAGE")+""));
-             mq.setMemberID(map.get("BUSINESS_ACTOR_ID")+"");
-             listMem.add(mq);
-        }*/
-        return listMem;
-    }
 }
