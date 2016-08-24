@@ -22,7 +22,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.zlebank.zplatform.acc.bean.BusiAcct;
 import com.zlebank.zplatform.acc.bean.FinanceProductBean;
+import com.zlebank.zplatform.acc.dao.FinanceProductDAO;
 import com.zlebank.zplatform.acc.pojo.PojoBusiAcctSubjectMapping;
+import com.zlebank.zplatform.acc.pojo.PojoFinanceProduct;
 import com.zlebank.zplatform.acc.service.BusiAcctService;
 import com.zlebank.zplatform.acc.service.FinanceProductService;
 import com.zlebank.zplatform.acc.service.SubjectSelector;
@@ -44,6 +46,8 @@ public class FinanceProductServiceImpl implements FinanceProductService {
     private SubjectSelector subjectSelector;
     @Autowired
     private BusiAcctService busiAcctService;
+    @Autowired
+    private FinanceProductDAO financeProductDao;
     /**
      *
      * @param bean
@@ -65,8 +69,12 @@ public class FinanceProductServiceImpl implements FinanceProductService {
      * @param userId
      */
     private void saveProduct(FinanceProductBean bean, long userId) {
-        // TODO Auto-generated method stub
-        
+            PojoFinanceProduct pojoFinanceProduct=new PojoFinanceProduct();
+            pojoFinanceProduct.setFinancier(bean.getFinancier());
+            pojoFinanceProduct.setFundManager(bean.getFundManager());
+            pojoFinanceProduct.setProductCode(bean.getProductCode());
+            pojoFinanceProduct.setProductName(bean.getProductName());
+            financeProductDao.saveA(pojoFinanceProduct);
     }
     private void openProductAccout(FinanceProductBean bean,long userId) throws Exception{
         BusinessActor prouductActor = new FinanceProductActor(bean);
