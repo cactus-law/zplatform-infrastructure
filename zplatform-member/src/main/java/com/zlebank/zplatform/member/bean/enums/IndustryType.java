@@ -20,26 +20,28 @@ package com.zlebank.zplatform.member.bean.enums;
  */
 public enum IndustryType {
     /**餐饮**/
-	FOOD (0),
+	FOOD (0,"7011"),
     /**酒店连锁**/
-	HOTEL (1),
+	HOTEL (1,"7011"),
     /**其他**/
-    OTHER (2),
+    OTHER (2,"5611"),
     /**大型商场连锁**/
-    MALL(3),
+    MALL(3,"9703"),
     /**娱乐**/
-    PLAY (4),
+    PLAY (4,"7011"),
     /**金融**/
-    FINANCE (5),
+    FINANCE (5,"5611"),
     /**物流**/
-    LOGISTICS(6),
+    LOGISTICS(6,"5541"),
     /**未知状态**/
-    UNKNOW(9);
+    UNKNOW(9,"9999");
 
  private Integer code;
+ private String mcc;
     
-    private IndustryType(Integer code){
+    private IndustryType(Integer code,String mcc){
         this.code = code;
+        this.mcc = mcc;
     }
     
     public static IndustryType fromValue(Integer value) {
@@ -53,5 +55,9 @@ public enum IndustryType {
     
     public Integer getCode(){
         return code;
+    }
+    
+    public String getMcc(){
+    	return mcc;
     }
 }

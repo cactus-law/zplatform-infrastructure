@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.zlebank.zplatform</groupId>
 	<artifactId>zplatform-infranstructure-deploy</artifactId>
-	<version>1.6.1-SNAPSHOT</version>
+	<version>1.6.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>zplatform-infranstructure-deploy</name>
 	<url>http://www.zlebank.com/</url>
@@ -109,7 +109,7 @@
 			<dependency>
 				<groupId>com.zlebank.zplatform</groupId>
 				<artifactId>zplatform-commons</artifactId>
-				<version>1.4.0</version>
+				<version>1.4.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>junit</groupId>

@@ -104,4 +104,29 @@ public class QuickpayCustDAOImpl extends AbstractPagedQueryDAOImpl<PojoQuickpayC
        
     }
 
+	/**
+	 *
+	 * @param memberId
+	 * @param cardNo
+	 * @param idnum
+	 * @param accname
+	 * @param phone
+	 * @param devId
+	 * @return
+	 */
+	@Override
+	public PojoQuickpayCust getQuickPayCard(String memberId, String cardNo,
+			String idnum, String accname, String phone, String devId) {
+		Criteria crite=   this.getSession().createCriteria(PojoQuickpayCust.class);
+        crite .add(Restrictions.eq("relatememberno", memberId));
+        crite .add(Restrictions.eq("cardno", cardNo));
+        crite.add(Restrictions.eq("idnum", idnum));
+        crite.add(Restrictions.eq("accname", accname));
+        crite.add(Restrictions.eq("phone", phone));
+        crite.add(Restrictions.eq("devId", devId));
+        crite .add(Restrictions.eq("status", "00"));
+        PojoQuickpayCust card = (PojoQuickpayCust) crite.uniqueResult();
+        return card;
+	}
+
 }

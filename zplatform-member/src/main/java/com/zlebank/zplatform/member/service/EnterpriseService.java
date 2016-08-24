@@ -10,7 +10,13 @@
  */
 package com.zlebank.zplatform.member.service;
 
+import com.zlebank.zplatform.member.bean.EnterpriseBankAccountBean;
 import com.zlebank.zplatform.member.bean.EnterpriseBean;
+import com.zlebank.zplatform.member.bean.EnterpriseRealNameBean;
+import com.zlebank.zplatform.member.bean.EnterpriseRealNameConfirmBean;
+import com.zlebank.zplatform.member.exception.CreateMemberFailedException;
+import com.zlebank.zplatform.member.exception.DataCheckFailedException;
+import com.zlebank.zplatform.member.exception.InvalidMemberDataException;
 
 /**
  * 
@@ -29,5 +35,38 @@ public interface EnterpriseService {
      * @param memberId
      * @return
      */
-   public  EnterpriseBean  getEnterpriseByMemberId(String memberId); 
+   public EnterpriseBean getEnterpriseByMemberId(String memberId); 
+   
+   /**
+    * 企业注册申请
+    * @param enterpriseDeta
+    */
+   public void registerApply(EnterpriseBean enterpriseDeta) throws CreateMemberFailedException,InvalidMemberDataException;
+   
+   /**
+    * 创建企业实名认证bean并提交实名认证申请
+    * @param enterpriseRealNameBean
+    */
+   public void realNameApply(EnterpriseRealNameBean enterpriseRealNameBean) throws InvalidMemberDataException;
+   
+   
+   
+   /**
+    * 企业实名认证确认
+    * @param enterpriseRealNameConfirmBean
+    * @throws InvalidMemberDataException
+    */
+   public void realNameConfirm(EnterpriseRealNameConfirmBean enterpriseRealNameConfirmBean) throws InvalidMemberDataException, DataCheckFailedException;
+   
+   /**
+    * 企业会员绑定银行卡
+    * @param enterpriseBankAccountBean
+    */
+   public void bindingBankAccount(EnterpriseBankAccountBean enterpriseBankAccountBean)throws InvalidMemberDataException;
+   
+   /**
+    * 完成绑定银行账户
+    * @param tid
+    */
+   public void bindingBankAccountFinish(Long tid);
 }
