@@ -12,6 +12,7 @@ package com.zlebank.zplatform.acc;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 
 import org.junit.Ignore;
@@ -22,6 +23,7 @@ import com.zlebank.zplatform.acc.bean.TradeInfo;
 import com.zlebank.zplatform.acc.bean.enums.TradeType;
 import com.zlebank.zplatform.acc.exception.AbstractBusiAcctException;
 import com.zlebank.zplatform.acc.exception.AccBussinessException;
+import com.zlebank.zplatform.acc.exception.IllegalEntryRequestException;
 import com.zlebank.zplatform.acc.service.AccEntryService;
 import com.zlebank.zplatform.acc.service.entry.EntryEvent;
 
@@ -47,6 +49,34 @@ public class AccEntryServiceTest {
      * @throws NumberFormatException
      */
      
+    @Test
+    public void test_acc(){
+    	
+    	TradeInfo entry = new TradeInfo();
+        entry.setPayMemberId("200000000001399");
+        entry.setPayordno("M2016082513487124");
+        entry.setCoopInstCode("300000000000004");
+        entry.setPayToMemberId("200000000001399");
+       entry.setChannelId("95000001");
+        entry.setTxnseqno("1608259900066723");
+        entry.setBusiCode(TradeType.RECHARGE.getCode());
+        entry.setAmount(new BigDecimal(1011));
+        entry.setCommission(new BigDecimal(0));
+        entry.setCharge(new BigDecimal(0));
+        System.out.println("start");
+        try {
+			service.accEntryProcess(entry,EntryEvent.TRADE_SUCCESS);
+		} catch (AccBussinessException | IllegalEntryRequestException
+				| AbstractBusiAcctException | NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+        
+    }
+    
     public void accEntryProcessTest() throws AccBussinessException, AbstractBusiAcctException, NumberFormatException{
         TradeInfo entry = new TradeInfo();
         entry.setPayMemberId("10000000224");
@@ -138,6 +168,6 @@ public class AccEntryServiceTest {
         catch (Exception e)   
        {     
            e.printStackTrace();     
-        }     
+        }
     }
 }
