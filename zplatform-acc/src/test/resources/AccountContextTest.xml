@@ -32,6 +32,7 @@
 				<value>com.zlebank.zplatform.acc.pojo.PojoTxnsSplitAccount</value>	
 				<value>com.zlebank.zplatform.commons.dao.pojo.PojoChannel</value>	
 				<value>com.zlebank.zplatform.acc.pojo.PojoTradeEntryEventMapping</value>
+				<value>com.zlebank.zplatform.acc.pojo.PojoFinanceProduct</value>
 				</list>
 		</property>
 		<property name="hibernateProperties">
