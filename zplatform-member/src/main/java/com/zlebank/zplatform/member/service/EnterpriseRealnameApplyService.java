@@ -10,6 +10,9 @@
  */
 package com.zlebank.zplatform.member.service;
 
+import com.zlebank.zplatform.commons.service.IBasePageService;
+import com.zlebank.zplatform.member.bean.EnterpriseRealNameBean;
+import com.zlebank.zplatform.member.bean.EnterpriseRealNameQueryBean;
 import com.zlebank.zplatform.member.pojo.PojoEnterpriseRealnameApply;
 
 /**
@@ -20,7 +23,7 @@ import com.zlebank.zplatform.member.pojo.PojoEnterpriseRealnameApply;
  * @date 2016年8月22日 上午10:46:34
  * @since 
  */
-public interface EnterpriseRealnameApplyService{
+public interface EnterpriseRealnameApplyService extends IBasePageService<EnterpriseRealNameQueryBean, EnterpriseRealNameBean>{
 
 	/**
 	 * 保存实名认证申请
