@@ -33,7 +33,11 @@ import com.zlebank.zplatform.member.bean.enums.CardType;
 @PrimaryKeyJoinColumn(name="ENTERPRISE_ID") 
 @Table(name="T_ENTERPRISE_DETA")
 public class PojoEnterpriseDeta extends PojoMember{
-    /**会员号**/
+    /**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = -6099736990878032685L;
+	/**会员号**/
     private String enterpriseMemberId;
     /** 企业名称 **/
     private String enterpriseName;

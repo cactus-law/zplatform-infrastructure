@@ -10,6 +10,7 @@
  */
 package com.zlebank.zplatform.member.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -39,9 +40,12 @@ import com.zlebank.zplatform.member.bean.enums.RealNameLvType;
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
 @Table(name="T_MEMBER")
-    
-public  class PojoMember {
-    /**"主键，标示**/
+public  class PojoMember implements Serializable {
+    /**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 3499837494030845044L;
+	/**"主键，标示**/
     private long memId;
     /**会员ID**/
     private String memberId;

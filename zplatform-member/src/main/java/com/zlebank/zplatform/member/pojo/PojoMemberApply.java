@@ -217,7 +217,7 @@ public class PojoMemberApply implements java.io.Serializable {
 		this.registerIdent = registerIdent;
 	}
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "LOCK_TIME", length = 7)
 	public Date getLockTime() {
 		return this.lockTime;
@@ -227,7 +227,7 @@ public class PojoMemberApply implements java.io.Serializable {
 		this.lockTime = lockTime;
 	}
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "IN_TIME", length = 7)
 	public Date getInTime() {
 		return this.inTime;
@@ -237,7 +237,7 @@ public class PojoMemberApply implements java.io.Serializable {
 		this.inTime = inTime;
 	}
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "UP_TIME", length = 7)
 	public Date getUpTime() {
 		return this.upTime;

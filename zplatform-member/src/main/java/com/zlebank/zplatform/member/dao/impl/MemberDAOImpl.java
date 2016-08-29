@@ -110,7 +110,7 @@ public class MemberDAOImpl extends HibernateBaseDAOImpl<PojoMember>
             long instiCode) {
         Criteria crite=   this.getSession().createCriteria(PojoMember.class);
         crite .add(Restrictions.eq("phone", phone));
-        crite .add(Restrictions.eq("instiCode", instiCode));
+        crite .add(Restrictions.eq("instiId", instiCode));
         PojoMember member = (PojoMember) crite.uniqueResult();
         return member;
     }
