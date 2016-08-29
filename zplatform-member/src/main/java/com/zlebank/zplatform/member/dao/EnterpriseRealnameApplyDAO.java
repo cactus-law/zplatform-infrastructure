@@ -10,8 +10,12 @@
  */
 package com.zlebank.zplatform.member.dao;
 
+import java.util.List;
+
 import com.zlebank.zplatform.commons.dao.BaseDAO;
 import com.zlebank.zplatform.commons.dao.pojo.Pojo;
+import com.zlebank.zplatform.member.bean.EnterpriseRealNameBean;
+import com.zlebank.zplatform.member.bean.EnterpriseRealNameQueryBean;
 import com.zlebank.zplatform.member.pojo.PojoEnterpriseDetaApply;
 import com.zlebank.zplatform.member.pojo.PojoEnterpriseRealnameApply;
 
@@ -38,4 +42,18 @@ public interface EnterpriseRealnameApplyDAO extends BaseDAO<PojoEnterpriseRealna
 	 * @return
 	 */
 	public PojoEnterpriseRealnameApply getById(Long tid);
+
+    /**
+     * @param example
+     */
+    public long count(EnterpriseRealNameQueryBean example);
+
+    /**
+     * @param offset
+     * @param pageSize
+     * @param example
+     */
+    public List<PojoEnterpriseRealnameApply> getItem(int offset,
+            int pageSize,
+            EnterpriseRealNameQueryBean example);
 }

@@ -49,7 +49,7 @@ public class AccEntryServiceTest {
      * @throws NumberFormatException
      */
      
-    @Test
+    //@Test
     public void test_acc(){
     	
     	TradeInfo entry = new TradeInfo();

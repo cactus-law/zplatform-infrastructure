@@ -10,11 +10,16 @@
  */
 package com.zlebank.zplatform.member.dao.impl;
 
+import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.zlebank.zplatform.commons.dao.impl.HibernateBaseDAOImpl;
+import com.zlebank.zplatform.commons.utils.StringUtil;
+import com.zlebank.zplatform.member.bean.EnterpriseRealNameBean;
+import com.zlebank.zplatform.member.bean.EnterpriseRealNameQueryBean;
 import com.zlebank.zplatform.member.dao.EnterpriseRealnameApplyDAO;
 import com.zlebank.zplatform.member.pojo.PojoEnterpriseDeta;
 import com.zlebank.zplatform.member.pojo.PojoEnterpriseDetaApply;
@@ -62,4 +67,45 @@ public class EnterpriseRealnameApplyDAOImpl extends
 				.uniqueResult();
 		return apply;
 	}
+
+    /**
+     *
+     * @param example
+     * @return 
+     */
+    @Override
+    public long count(EnterpriseRealNameQueryBean example) {
+        Criteria crite=buildCrite(example);
+        return crite.list().size();
+    }
+
+    private Criteria buildCrite(EnterpriseRealNameQueryBean example){
+        Criteria crite=this.getSession().createCriteria(PojoEnterpriseRealnameApply.class);
+        if (StringUtil.isNotEmpty(example.getStatus())) {
+            crite.add(Restrictions.eq("status", example.getStatus()));
+        }
+        if (StringUtil.isNotEmpty(example.getMemberId())) {
+            crite.add(Restrictions.eq("memberId", example.getMemberId()));
+        }
+        if (StringUtil.isNotEmpty(example.getEnterpriseName())) {
+            crite.add(Restrictions.eq("enterpriseName", example.getEnterpriseName()));
+        }
+        return crite;
+    }
+    /**
+     *
+     * @param offset
+     * @param pageSize
+     * @param example
+     * @return 
+     */
+    @Override
+    public List<PojoEnterpriseRealnameApply> getItem(int offset,
+            int pageSize,
+            EnterpriseRealNameQueryBean example) {
+        Criteria crite=buildCrite(example);
+        crite.setFirstResult(offset);
+        crite.setMaxResults(pageSize);
+        return crite.list();
+    }
 }
