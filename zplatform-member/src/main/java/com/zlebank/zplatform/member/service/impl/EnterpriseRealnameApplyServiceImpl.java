@@ -95,8 +95,7 @@ public class EnterpriseRealnameApplyServiceImpl extends AbstractBasePageService<
     @Override
     @Transactional(propagation=Propagation.REQUIRED)
     protected long getTotal(EnterpriseRealNameQueryBean example) {
-        enterpriseRealnameApplyDAO.count(example);
-        return 0;
+        return enterpriseRealnameApplyDAO.count(example);
     }
 
     /**
