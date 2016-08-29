@@ -18,6 +18,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zlebank.zplatform.commons.bean.DefaultPageResult;
+import com.zlebank.zplatform.commons.bean.PagedResult;
 import com.zlebank.zplatform.commons.service.impl.AbstractBasePageService;
 import com.zlebank.zplatform.commons.utils.BeanCopyUtil;
 import com.zlebank.zplatform.member.bean.EnterpriseRealNameBean;
@@ -35,7 +37,7 @@ import com.zlebank.zplatform.member.service.EnterpriseRealnameApplyService;
  * @since 
  */
 @Service
-public class EnterpriseRealnameApplyServiceImpl extends AbstractBasePageService<EnterpriseRealNameQueryBean, EnterpriseRealNameBean> implements EnterpriseRealnameApplyService{
+public class EnterpriseRealnameApplyServiceImpl implements EnterpriseRealnameApplyService{
 
 	@Autowired
 	private EnterpriseRealnameApplyDAO enterpriseRealnameApplyDAO;
@@ -92,9 +94,7 @@ public class EnterpriseRealnameApplyServiceImpl extends AbstractBasePageService<
      * @param example
      * @return
      */
-    @Override
-    @Transactional(propagation=Propagation.REQUIRED)
-    protected long getTotal(EnterpriseRealNameQueryBean example) {
+    private long getTotal(EnterpriseRealNameQueryBean example) {
         return enterpriseRealnameApplyDAO.count(example);
     }
 
@@ -105,9 +105,7 @@ public class EnterpriseRealnameApplyServiceImpl extends AbstractBasePageService<
      * @param example
      * @return
      */
-    @Override
-    @Transactional(propagation=Propagation.REQUIRED)
-    protected List<EnterpriseRealNameBean> getItem(int offset,
+    private List<EnterpriseRealNameBean> getItem(int offset,
             int pageSize,
             EnterpriseRealNameQueryBean example) {
         List<PojoEnterpriseRealnameApply> pojoRealNames= enterpriseRealnameApplyDAO.getItem(offset,pageSize,example);
@@ -120,5 +118,33 @@ public class EnterpriseRealnameApplyServiceImpl extends AbstractBasePageService<
         return realNameBeans;
     }
 
+    /**
+     *
+     * @param page
+     * @param pageSize
+     * @param example
+     * @return
+     */
+    @Override
+    @Transactional(propagation=Propagation.REQUIRED)
+    public PagedResult<EnterpriseRealNameBean> queryPaged(int page,
+            int pageSize,
+            EnterpriseRealNameQueryBean queryBean) {
+        long total = getTotal(queryBean);
+
+        page = currentPage(total, page, pageSize);
+        int offset = (page - 1) * pageSize;
+        List<EnterpriseRealNameBean> items = getItem(offset, pageSize, queryBean);
+
+        return new DefaultPageResult<EnterpriseRealNameBean>(items, total);
+    }
+    private int currentPage(long total, int page, int pageSize) {
+        long maxPage = (total % pageSize == 0) ? (total / pageSize) : (total
+                / pageSize + 1);
+        if (page > maxPage) {
+            return Long.valueOf(maxPage).intValue();
+        }
+        return page;
+    }
 	
 }

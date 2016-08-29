@@ -52,7 +52,23 @@ public class EnterpriseRealNameBean  implements Bean, Serializable {
 	
 	private String tn;
 	
+	private long tid;
+	
+	
+	
 	/**
+     * @return the tid
+     */
+    public long getTid() {
+        return tid;
+    }
+    /**
+     * @param tid the tid to set
+     */
+    public void setTid(long tid) {
+        this.tid = tid;
+    }
+    /**
 	 * @return the txnType
 	 */
 	public String getTxnType() {
