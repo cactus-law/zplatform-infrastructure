@@ -44,7 +44,7 @@ public class EnterpriseServiceTest {
         System.out.println(memberId.getEnterpriseName());
         Assert.notNull(memberId);
     }
-    @Test
+    //@Test
     public void testQueryRealName(){
         EnterpriseRealNameQueryBean queryBean=new EnterpriseRealNameQueryBean();
         realNameService.queryPaged(1, 10, queryBean);
