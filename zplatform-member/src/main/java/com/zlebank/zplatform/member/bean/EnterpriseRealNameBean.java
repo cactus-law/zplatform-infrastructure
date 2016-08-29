@@ -12,6 +12,8 @@ package com.zlebank.zplatform.member.bean;
 
 import java.io.Serializable;
 
+import com.zlebank.zplatform.commons.bean.Bean;
+
 /**
  * 企业实名认证bean
  *
@@ -20,7 +22,7 @@ import java.io.Serializable;
  * @date 2016年8月22日 上午9:28:10
  * @since
  */
-public class EnterpriseRealNameBean implements Serializable {
+public class EnterpriseRealNameBean  implements Bean, Serializable {
 	/**
 	 * serialVersionUID
 	 */

@@ -47,4 +47,6 @@ public interface EnterpriseRealnameApplyService{
 	 * @return
 	 */
 	public PojoEnterpriseRealnameApply get(Long tid);
+	
+	//public PagedResult<EnterpriseRealNameBean> queryEnterpriseRealNameApply(int pageSize,int page,EnterpriseRealNameQueryBean queryBean);
 }
