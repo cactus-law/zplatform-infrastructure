@@ -10,11 +10,15 @@
  */
 package com.zlebank.zplatform.acc.pojo;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -42,6 +46,12 @@ public class PojoFinanceProduct extends Pojo {
     private String fundManager;
     /**融资人*/
     private String financier;
+    /**写入时间*/
+    private Date inTime;
+    /**备注1*/
+    private String notes;
+    /**备注2*/
+    private String remarks;
     /**
      *
      * @return
@@ -118,6 +128,46 @@ public class PojoFinanceProduct extends Pojo {
      */
     public void setFinancier(String financier) {
         this.financier = financier;
+    }
+    /**
+     * @return the notes
+     */
+    @Column(name="NOTES")
+    public String getNotes() {
+        return notes;
+    }
+    /**
+     * @param notes the notes to set
+     */
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+    /**
+     * @return the remarks
+     */
+    @Column(name="REMARKS")
+    public String getRemarks() {
+        return remarks;
+    }
+    /**
+     * @param remarks the remarks to set
+     */
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+    /**
+     * @return the inTime
+     */
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="INTIME")
+    public Date getInTime() {
+        return inTime;
+    }
+    /**
+     * @param inTime the inTime to set
+     */
+    public void setInTime(Date inTime) {
+        this.inTime = inTime;
     }
     
     

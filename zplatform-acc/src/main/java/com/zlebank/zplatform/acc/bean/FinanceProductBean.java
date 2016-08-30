@@ -11,6 +11,7 @@
 package com.zlebank.zplatform.acc.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Class Description
@@ -39,6 +40,13 @@ public class FinanceProductBean implements Serializable{
     private String fundManager;
     /**融资人*/
     private String financier;
+    
+    /**写入时间*/
+    private Date inTime;
+    /**备注1*/
+    private String notes;
+    /**备注2*/
+    private String remarks;
 
     /**
      * @param productName
@@ -102,6 +110,42 @@ public class FinanceProductBean implements Serializable{
      */
     public void setFinancier(String financier) {
         this.financier = financier;
+    }
+    /**
+     * @return the inTime
+     */
+    public Date getInTime() {
+        return inTime;
+    }
+    /**
+     * @param inTime the inTime to set
+     */
+    public void setInTime(Date inTime) {
+        this.inTime = inTime;
+    }
+    /**
+     * @return the notes
+     */
+    public String getNotes() {
+        return notes;
+    }
+    /**
+     * @param notes the notes to set
+     */
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+    /**
+     * @return the remarks
+     */
+    public String getRemarks() {
+        return remarks;
+    }
+    /**
+     * @param remarks the remarks to set
+     */
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
        
 }
