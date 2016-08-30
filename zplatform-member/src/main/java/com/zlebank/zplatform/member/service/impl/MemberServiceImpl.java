@@ -13,8 +13,10 @@ package com.zlebank.zplatform.member.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.type.TrueFalseType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,10 +41,12 @@ import com.zlebank.zplatform.member.bean.MemberQuery;
 import com.zlebank.zplatform.member.bean.PersonBusi;
 import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 import com.zlebank.zplatform.member.bean.enums.MemberType;
+import com.zlebank.zplatform.member.dao.MemberApplyDAO;
 import com.zlebank.zplatform.member.dao.MemberDAO;
 import com.zlebank.zplatform.member.dao.MerchDAO;
 import com.zlebank.zplatform.member.exception.MemberBussinessException;
 import com.zlebank.zplatform.member.pojo.PojoMember;
+import com.zlebank.zplatform.member.pojo.PojoMemberApply;
 import com.zlebank.zplatform.member.service.MemberService;
 
 /**
@@ -70,6 +74,8 @@ public class MemberServiceImpl implements MemberService {
     private MerchDAO merchDAO;
     @Autowired
     private SubjectSelector subjectSelector;
+    @Autowired
+    private MemberApplyDAO memberApplyDAO;
 
     /**
      *
@@ -234,6 +240,7 @@ public class MemberServiceImpl implements MemberService {
      * @return
      */
     @Override
+    @Transactional(readOnly=true)
     public PojoMember getMbmberByMemberId(String memberId, MemberType type) {
         return memberDAOImpl.getMemberByMemberId(memberId, type);
     }
@@ -244,6 +251,7 @@ public class MemberServiceImpl implements MemberService {
      * @return
      */
     @Override
+    @Transactional(readOnly=true)
     public PojoMember getMemberByEmail(String email) {
         return memberDAOImpl.getMemberByEmail(email);
     }
@@ -254,6 +262,7 @@ public class MemberServiceImpl implements MemberService {
      * @return
      */
     @Override
+    @Transactional(readOnly=true)
     public PojoMember getMemberByphone(String phone) {
         return memberDAOImpl.getMemberByphone(phone);
     }
@@ -265,6 +274,7 @@ public class MemberServiceImpl implements MemberService {
      * @return
      */
     @Override
+    @Transactional(readOnly=true)
     public String getMemberIdByBusiCode(String busiCode) {
         String memberId = "";
         PojoBusiAcct busiPojo = busiAcctDAO.getByBusiAcctCode(busiCode);
@@ -280,6 +290,7 @@ public class MemberServiceImpl implements MemberService {
      * @return
      */
     @Override
+    @Transactional(readOnly=true)
     public PagedResult<BusiAcctQuery> getBusiAccount(QueryAccount qa,
             Integer page,
             Integer pageSize) {
@@ -306,9 +317,16 @@ public class MemberServiceImpl implements MemberService {
 	 * @return
 	 */
 	@Override
+	@Transactional(readOnly=true)
 	public PojoMember getMemberByPhoneAndCoopInsti(String phone, long instiCode) {
 		// TODO Auto-generated method stub
 		return memberDAOImpl.getMemberByPhoneAndCoopInsti(phone, instiCode);
+	}
+	
+	@Transactional(readOnly=true,isolation=Isolation.READ_COMMITTED)
+	public PojoMemberApply getMemberApply(String memberId){
+		PojoMemberApply memberApply = memberApplyDAO.getMemberApply(memberId);
+		return memberApply;
 	}
 
 }

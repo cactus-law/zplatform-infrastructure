@@ -271,7 +271,7 @@ public class PojoEnterpriseRealnameApply implements java.io.Serializable {
 		this.stexaUser = stexaUser;
 	}
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "STEXA_TIME", length = 7)
 	public Date getStexaTime() {
 		return this.stexaTime;
@@ -299,7 +299,7 @@ public class PojoEnterpriseRealnameApply implements java.io.Serializable {
 		this.cvlexaUser = cvlexaUser;
 	}
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CVLEXA_TIME", length = 7)
 	public Date getCvlexaTime() {
 		return this.cvlexaTime;

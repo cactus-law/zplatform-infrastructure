@@ -11,7 +11,6 @@
 package com.zlebank.zplatform.member.dao;
 
 import com.zlebank.zplatform.commons.dao.BaseDAO;
-import com.zlebank.zplatform.member.pojo.PojoMember;
 import com.zlebank.zplatform.member.pojo.PojoMemberApply;
 
 /**
@@ -24,4 +23,9 @@ import com.zlebank.zplatform.member.pojo.PojoMemberApply;
  */
 public interface MemberApplyDAO extends BaseDAO<PojoMemberApply>{
 
+	/**
+	 * 获取审核表中的会员信息
+	 * @param memberId
+	 */
+	public PojoMemberApply getMemberApply(String memberId);
 }

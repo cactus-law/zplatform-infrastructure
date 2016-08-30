@@ -134,6 +134,12 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 		if (StringUtil.isEmpty(memberId)) {
 		    throw new CreateMemberFailedException("生成会员号时发生错误");
 		}
+		//通过手机号查询是否绑定过会员
+		PojoMember member = memberService.getMemberByphone(enterpriseDeta.getCellPhoneNo());
+		if(member!=null){
+			 throw new CreateMemberFailedException("企业手机号已绑定会员");
+		}
+		
 		PojoMemberApply pojo = new PojoMemberApply();
 		pojo.setMemberId(memberId);// 会员ID
 		setMemberComm(pojo, enterpriseDeta); // T_member 属性设定
@@ -174,11 +180,11 @@ public class EnterpriseServiceImpl implements EnterpriseService {
         pojo.setPhone(bean.getCellPhoneNo());// 手机
         pojo.setEmail(bean.getEmail());// 邮箱
         pojo.setMemberType(MemberType.ENTERPRISE.getCode());// 会员类型，01-个人，02-企业
-        pojo.setStatus(MemberStatusType.NORMAL.getCode());// 会员状态，00-正常，02-冻结，99-注销
-        pojo.setRegisterIdent("01");// 注册认证，01-手机认证，02-邮箱认证，03-Both
+        pojo.setStatus(MemberStatusType.CHECKING.getCode());// 会员状态，00-正常，02-冻结，99-注销
+        pojo.setRegisterIdent("03");// 注册认证，01-手机认证，02-邮箱认证，03-Both
         Date current = new Date();
         pojo.setInTime(current);// 会员注册时间
-        pojo.setUpTime(current);// 修改时间
+        //pojo.setUpTime(current);// 修改时间
     }
 	
 	private void checkData(EnterpriseBean enterpriseDeta) throws InvalidMemberDataException{
