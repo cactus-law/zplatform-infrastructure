@@ -41,7 +41,7 @@ public interface EnterpriseService {
     * 企业注册申请
     * @param enterpriseDeta
     */
-   public void registerApply(EnterpriseBean enterpriseDeta) throws CreateMemberFailedException,InvalidMemberDataException;
+   public String registerApply(EnterpriseBean enterpriseDeta) throws CreateMemberFailedException,InvalidMemberDataException;
    
    /**
     * 创建企业实名认证bean并提交实名认证申请

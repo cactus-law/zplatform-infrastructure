@@ -122,7 +122,7 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 	 */
 	@Override
 	@Transactional(propagation=Propagation.REQUIRED,rollbackFor=Throwable.class)
-	public void registerApply(EnterpriseBean enterpriseDeta) throws CreateMemberFailedException, InvalidMemberDataException {
+	public String registerApply(EnterpriseBean enterpriseDeta) throws CreateMemberFailedException, InvalidMemberDataException {
 		String memberId = null;
 		checkData(enterpriseDeta);
 		try {
@@ -160,9 +160,11 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 		}else {
 			throw new CreateMemberFailedException("省份代码错误");
 		}
+		enterpriseDetaApply.setStatus("10");
 		pojo.setInstiCode(coopInsti.getId()+"");
 		memberApplyDAO.saveA(pojo);
 		enterpriseDetaApplyDAO.saveA(enterpriseDetaApply);
+		return memberId;
 	}
 	
 	/**
@@ -358,7 +360,8 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 		enterpriseRealnameApply.setInTime(new Date());
 		enterpriseRealnameApply.setInUser(0L);
 		enterpriseRealnameApply.setStatus("01");
-		PojoBankInfo bankInfo = bankInfoDAO.getByBankNode(enterpriseRealnameApply.getBankNode());
+		PojoBankInfo bankInfo = bankInfoDAO.getByBankNode(enterpriseBankAccountBean.getBankNode());
+		enterpriseRealnameApply.setBankNode(enterpriseBankAccountBean.getBankNode());
 		enterpriseRealnameApply.setBankCode(bankInfo.getBankCode());
 		enterpriseRealnameApply.setBankName(bankInfo.getMainBankSname());
 		enterpriseRealnameApply.setBusiType("02");//01 企业绑定银行账户
