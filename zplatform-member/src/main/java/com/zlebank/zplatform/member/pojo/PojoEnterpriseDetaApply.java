@@ -163,16 +163,9 @@ public class PojoEnterpriseDetaApply implements java.io.Serializable {
 
 	
 	
-	@GenericGenerator(name = "id_gen", strategy = "enhanced-table", parameters = {
-            @Parameter(name = "table_name", value = "T_C_PRIMAY_KEY"),
-            @Parameter(name = "value_column_name", value = "NEXT_ID"),
-            @Parameter(name = "segment_column_name", value = "KEY_NAME"),
-            @Parameter(name = "segment_value", value = "FOR_APPLY_ID"),
-            @Parameter(name = "increment_size", value = "1"),
-            @Parameter(name = "optimizer", value = "pooled-lo") })
+	
     
 	@Id
-	@GeneratedValue(generator = "id_gen")
 	@Column(name = "SELF_ID", unique = true, nullable = false, precision = 15, scale = 0)
 	public long getSelfId() {
 		return this.selfId;

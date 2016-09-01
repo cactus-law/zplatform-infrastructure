@@ -81,4 +81,12 @@ public interface MemberOperationService {
      * @throws DataCheckFailedException
      */
     boolean resetPayPwd(MemberType memberType, MemberBean member, String newPayPwd, boolean isCheckOldPassword) throws DataCheckFailedException;
+    
+    /**
+     * 更新会员绑定手机号
+     * @param memberId
+     * @param phone
+     * @return
+     */
+    public boolean modifyPhone(String memberId,String phone);
 }

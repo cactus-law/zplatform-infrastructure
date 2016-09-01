@@ -161,8 +161,10 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 			throw new CreateMemberFailedException("省份代码错误");
 		}
 		enterpriseDetaApply.setStatus("10");
+		enterpriseDetaApply.setInUser(0L);
 		pojo.setInstiCode(coopInsti.getId()+"");
-		memberApplyDAO.saveA(pojo);
+		pojo=memberApplyDAO.merge(pojo);
+		enterpriseDetaApply.setSelfId(pojo.getSelfId());
 		enterpriseDetaApplyDAO.saveA(enterpriseDetaApply);
 		return memberId;
 	}

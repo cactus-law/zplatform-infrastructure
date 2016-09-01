@@ -431,4 +431,18 @@ public class MemberOperationServiceImpl implements MemberOperationService {
             throw new DataCheckFailedException("旧密码输入错误");
         }
     }
+    
+    @Transactional(propagation=Propagation.REQUIRED,rollbackFor=Throwable.class)
+    public boolean modifyPhone(String memberId,String phone){
+    	try {
+			PojoMember member = memberDAO.getMemberByMemberId(memberId, null);
+			member.setPhone(phone);
+			memberDAO.update(member);
+			return true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+    }
 }
