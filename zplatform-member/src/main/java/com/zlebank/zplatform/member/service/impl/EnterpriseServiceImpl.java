@@ -165,6 +165,7 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 		pojo.setInstiCode(coopInsti.getId()+"");
 		pojo=memberApplyDAO.merge(pojo);
 		enterpriseDetaApply.setSelfId(pojo.getSelfId());
+		enterpriseDetaApply.setEnterpriseId(pojo.getMemId());
 		enterpriseDetaApplyDAO.saveA(enterpriseDetaApply);
 		return memberId;
 	}

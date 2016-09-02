@@ -99,7 +99,16 @@ public class PojoMemberApply implements java.io.Serializable {
 	public void setSelfId(long selfId) {
 		this.selfId = selfId;
 	}
-
+	
+	@GenericGenerator(name = "id_gen2", strategy = "enhanced-table", parameters = {
+            @Parameter(name = "table_name", value = "T_C_PRIMAY_KEY"),
+            @Parameter(name = "value_column_name", value = "NEXT_ID"),
+            @Parameter(name = "segment_column_name", value = "KEY_NAME"),
+            @Parameter(name = "segment_value", value = "MEMBER_ID"),
+            @Parameter(name = "increment_size", value = "1"),
+            @Parameter(name = "optimizer", value = "pooled-lo") })
+	@GeneratedValue(generator = "id_gen2")
+	@Id
 	@Column(name = "MEM_ID", nullable = false, precision = 15, scale = 0)
 	public long getMemId() {
 		return this.memId;
