@@ -21,7 +21,7 @@ public class AccCodePlaceholderFactory {
     private static final String LITERAL_COMMISSION_RECE = "Y";
     private static final String LITERAL_COOP_INST = "C";
     private static final String LITERAL_PRODUCT="P";
-    private static final String LITERAL_ACCESS_COOP_INST="AC";
+    private static final String LITERAL_ACCESS_COOP_INST="I";
     
     private AcctCodePlaceHolder newPlaceholder(final String placeHolderValue,final TradeInfo tradeInfo){
         return new AcctCodePlaceHolder() {
