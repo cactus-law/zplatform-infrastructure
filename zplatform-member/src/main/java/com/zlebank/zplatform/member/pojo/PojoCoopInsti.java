@@ -1,5 +1,6 @@
 package com.zlebank.zplatform.member.pojo;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -31,7 +32,7 @@ import com.zlebank.zplatform.commons.dao.pojo.ProductModel;
  */
 @Entity
 @Table(name = "T_COOP_INSTI")
-public class PojoCoopInsti {
+public class PojoCoopInsti implements Serializable{
     private long id;
     private String instiCode;
     private String instiName;
@@ -73,7 +74,7 @@ public class PojoCoopInsti {
         this.instiName = instiName;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "TL_COOPINSTI_PRODUCT", joinColumns = {@JoinColumn(name = "COOP_INSTI_ID")}, inverseJoinColumns = {@JoinColumn(name = "PROUCT_ID")})
     public List<ProductModel> getProducts() {
         return products;
