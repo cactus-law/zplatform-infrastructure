@@ -10,6 +10,8 @@
  */
 package com.zlebank.zplatform.member.pojo;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -25,7 +27,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="T_MERCH_MK")
-public class PojoMerchMK {
+public class PojoMerchMK implements Serializable{
     private String memberId;
     private String safeSeq;
     private String safeType;

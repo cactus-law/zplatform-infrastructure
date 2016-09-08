@@ -10,6 +10,7 @@
  */
 package com.zlebank.zplatform.member.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -31,7 +32,7 @@ import org.hibernate.annotations.Parameter;
  */
 @Entity
 @Table(name="T_AUTONYM_IDENTI")
-public class PojoAutonymIdenti {
+public class PojoAutonymIdenti implements Serializable{
     /**主键，标识**/
     private Long id;
     /**会员号**/

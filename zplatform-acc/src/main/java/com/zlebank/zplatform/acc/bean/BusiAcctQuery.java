@@ -10,6 +10,8 @@
  */
 package com.zlebank.zplatform.acc.bean;
 
+import java.io.Serializable;
+
 import com.zlebank.zplatform.acc.bean.enums.AcctStatusType;
 import com.zlebank.zplatform.acc.bean.enums.AcctType;
 import com.zlebank.zplatform.acc.bean.enums.Usage;
@@ -24,7 +26,7 @@ import com.zlebank.zplatform.commons.bean.Bean;
  * @date 2015年9月7日 下午7:58:59
  * @since 
  */
-public class BusiAcctQuery  implements Bean{
+public class BusiAcctQuery  implements Bean,Serializable{
     private AcctType AcctType;
     private Money balance;
     private Money fronzenBalance;
