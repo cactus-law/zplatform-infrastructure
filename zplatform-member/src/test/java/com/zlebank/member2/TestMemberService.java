@@ -70,7 +70,7 @@ public class TestMemberService {
     /**
      * 开通企业会员账户
      */
-    
+    //@Test
     public void openEnterpriseAcctTest() {
         long userId = 99;
         String memberId = "";

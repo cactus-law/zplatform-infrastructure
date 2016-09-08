@@ -51,10 +51,10 @@ public class TestMemberAccountService {
      * 账户余额
      */
     @Test
-    @Ignore
+    //@Ignore
     public void queryBalanceTest() {
         MemberBean member = new Person();
-        member.setMemberId("100000000000494");
+        member.setMemberId("100000000000576");
         MemberAccountBean queryBalance = null;
         try {
             queryBalance = memberAccountService.queryBalance(MemberType.INDIVIDUAL, member, Usage.BASICPAY);
