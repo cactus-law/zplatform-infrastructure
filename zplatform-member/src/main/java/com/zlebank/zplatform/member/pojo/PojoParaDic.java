@@ -10,6 +10,8 @@
  */
 package com.zlebank.zplatform.member.pojo;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -27,7 +29,7 @@ import javax.persistence.Table;
  */
 @Entity
     @Table(name="T_PARA_DIC")
-    public class PojoParaDic {
+    public class PojoParaDic implements Serializable{
     private Long tId;
     private String paraCode;
     private Long parentId;

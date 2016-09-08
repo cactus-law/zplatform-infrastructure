@@ -1,5 +1,7 @@
 package com.zlebank.zplatform.member.pojo;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +27,7 @@ import com.zlebank.zplatform.member.bean.enums.TerminalAccessType;
  */
 @Entity
 @Table(name="T_COOP_INSTI_MK")
-public class PojoInstiMK {
+public class PojoInstiMK implements Serializable{
     private long id;
     private PojoCoopInsti coopInsti;
     private TerminalAccessType terminalAccessType;

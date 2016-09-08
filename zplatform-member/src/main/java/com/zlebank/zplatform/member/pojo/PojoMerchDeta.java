@@ -10,6 +10,7 @@
  */
 package com.zlebank.zplatform.member.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.AttributeOverride;
@@ -38,7 +39,7 @@ import com.zlebank.zplatform.member.bean.enums.MerchStatusType;
  */
 @Entity
 @Table(name="T_MERCH_DETA")
-public class PojoMerchDeta {
+public class PojoMerchDeta implements Serializable{
   
     /**主键**/
     private Long merchId;

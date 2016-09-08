@@ -1,5 +1,6 @@
 package com.zlebank.zplatform.member.pojo;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -31,8 +33,13 @@ import com.zlebank.zplatform.commons.dao.pojo.ProductModel;
  */
 @Entity
 @Table(name = "T_COOP_INSTI")
-public class PojoCoopInsti {
-    private long id;
+public class PojoCoopInsti implements Serializable{
+	
+    /**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 3004836918021024563L;
+	private long id;
     private String instiCode;
     private String instiName;
     private List<ProductModel> products;
@@ -73,8 +80,9 @@ public class PojoCoopInsti {
         this.instiName = instiName;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "TL_COOPINSTI_PRODUCT", joinColumns = {@JoinColumn(name = "COOP_INSTI_ID")}, inverseJoinColumns = {@JoinColumn(name = "PROUCT_ID")})
+    //@ManyToMany(fetch = FetchType.LAZY)
+    //@JoinTable(name = "TL_COOPINSTI_PRODUCT", joinColumns = {@JoinColumn(name = "COOP_INSTI_ID")}, inverseJoinColumns = {@JoinColumn(name = "PROUCT_ID")})
+    @Transient
     public List<ProductModel> getProducts() {
         return products;
     }

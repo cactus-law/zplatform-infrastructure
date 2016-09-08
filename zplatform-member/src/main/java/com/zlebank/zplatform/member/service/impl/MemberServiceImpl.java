@@ -304,6 +304,7 @@ public class MemberServiceImpl implements MemberService {
 	 * @return
 	 */
 	@Override
+	@Transactional(readOnly=true)
 	public PojoMember getMemberByLoginNameAndCoopInsti(String loginName,
 			long instiCode) {
 		// TODO Auto-generated method stub
