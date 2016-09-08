@@ -12,7 +12,7 @@ import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
 public class ExcelReader {
-    private final static String CONFIG_FILE_PATH = "D:\\project\\证联资本\\新支付平台\\版本控制\\1.5\\subjectVo.xls";
+    private final static String CONFIG_FILE_PATH = "C:\\Users\\houyong\\Desktop\\log\\devDoc\\account\\subjectVo_0729.xls";
     /**
      * 读取excel
      * 
