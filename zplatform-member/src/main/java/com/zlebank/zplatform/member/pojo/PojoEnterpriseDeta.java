@@ -139,6 +139,8 @@ public class PojoEnterpriseDeta extends PojoMember{
     private String notes;
     /**备注**/
     private String remarks;
+    /**企业联系手机号**/
+    private String cellPhoneNo;
 
     @Column(name = "MEMBER_ID")
     public String getEnterpriseMemberId() {
@@ -503,60 +505,17 @@ public class PojoEnterpriseDeta extends PojoMember{
     public void setEnterpriseName(String enterpriseName) {
         this.enterpriseName = enterpriseName;
     }
- /*   
-  * 设值时Copy用
-    pojo.setEnterpriseId(bean.getEnterpriseId());// 主键
-    pojo.setMemberId(bean.getMemberId());// 会员号
-    pojo.setCoopInstiId(bean.getCoopInstiId());// 合作机构id
-    pojo.setMcc(bean.getMcc());// 所属行业
-    pojo.setMcclist(bean.getMcclist());// 所属行业子类别
-    pojo.setMerchinsti(bean.getMerchinsti());// 企业所属机构
-    pojo.setProvince(bean.getProvince());// 企业所属省
-    pojo.setCity(bean.getCity());// 企业所属市
-    pojo.setStreet(bean.getStreet());// 企业所属县
-    pojo.setZonecode(bean.getZonecode());// 企业行政地区代码（由商户所属县得到）
-    pojo.setPostcode(bean.getPostcode());// 企业邮编
-    pojo.setAddress(bean.getAddress());// 企业地址
-    pojo.setEmail(bean.getEmail());// 企业邮箱
-    pojo.setWebsite(bean.getWebsite());// 企业网址
-    pojo.setCardtype(bean.getCardtype());// 企业证件类型
-    pojo.setTaxno(bean.getTaxno());// 税务登记证号
-    pojo.setLicenceno(bean.getLicenceno());// 营业执照号
-    pojo.setOrgcode(bean.getOrgcode());// 组织机构代码证
-    pojo.setCorporation(bean.getCorporation());// 法人
-    pojo.setCorpno(bean.getCorpno());// 法人证件号码
-    pojo.setCorpfile(bean.getCorpfile());// 法人身份证正面路径
-    pojo.setCorpfileopp(bean.getCorpfileopp());// 法人身份证背面路径
-    pojo.setTaxfile(bean.getTaxfile());// 税务登记证文件路径
-    pojo.setLicencefile(bean.getLicencefile());// 营业执照文件路径
-    pojo.setOrgcodefile(bean.getOrgcodefile());// 组织机构文件路径
-    pojo.setContact(bean.getContact());// 联系人
-    pojo.setContphone(bean.getContphone());// 联系人电话
-    pojo.setConttitle(bean.getConttitle());// 联系人职位
-    pojo.setContemail(bean.getContemail());// 联系人邮箱
-    pojo.setContaddress(bean.getContaddress());// 联系人地址
-    pojo.setContpost(bean.getContpost());// 联系人邮编
-    pojo.setCustfrom(bean.getCustfrom());// 客户来源
-    pojo.setCustmgr(bean.getCustmgr());// 客户经理
-    pojo.setCustmgrdept(bean.getCustmgrdept());// 客户经理部门
-    pojo.setIsdelegation(bean.getIsdelegation());// 是否授权人办理1-是0-否
-    pojo.setSignatory(bean.getSignatory());// 委托人
-    pojo.setSigncertno(bean.getSigncertno());// 委托人身份证
-    pojo.setSigncertfile(bean.getSigncertfile());// 委托人证件照正面路径
-    pojo.setSigncertfileopp(bean.getSigncertfileopp());// 委托人证件照背面路径
-    pojo.setStatus(bean.getStatus());// 状态
-    pojo.setFirsttime(bean.getFirsttime());// 初次业务时间
-    pojo.setInuser(bean.getInuser());// 写入人
-    pojo.setIntime(bean.getIntime());// 写入时间
-    pojo.setStexauser(bean.getStexauser());// 初审人
-    pojo.setStexatime(bean.getStexatime());// 初审时间
-    pojo.setStexaopt(bean.getStexaopt());// 初审意见
-    pojo.setCvlexauser(bean.getCvlexauser());// 复核人
-    pojo.setCvlexatime(bean.getCvlexatime());// 复核时间
-    pojo.setCvlexaopt(bean.getCvlexaopt());// 复核意见
-    pojo.setNotes(bean.getNotes());// 备注
-    pojo.setRemarks(bean.getRemarks());// 备注
-    */
-
-
+	/**
+	 * @return the cellPhoneNo
+	 */
+    @Column(name = "CELL_PHONE_NO")
+	public String getCellPhoneNo() {
+		return cellPhoneNo;
+	}
+	/**
+	 * @param cellPhoneNo the cellPhoneNo to set
+	 */
+	public void setCellPhoneNo(String cellPhoneNo) {
+		this.cellPhoneNo = cellPhoneNo;
+	}
 }
