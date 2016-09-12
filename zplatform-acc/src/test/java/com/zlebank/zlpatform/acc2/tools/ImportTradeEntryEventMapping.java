@@ -27,7 +27,7 @@ public class ImportTradeEntryEventMapping extends ApplicationContextAbled{
         try {
             List<String[]> list = excelReader.readExcle("交易类型事件映射");
 
-            for (int i = 33; i < list.size(); i++) {
+            for (int i = 52; i < list.size(); i++) {
                 String[] str = (String[]) list.get(i);
                 PojoTradeEntryEventMapping tradeEntryEventMapping = new PojoTradeEntryEventMapping();
                 int j = 0;

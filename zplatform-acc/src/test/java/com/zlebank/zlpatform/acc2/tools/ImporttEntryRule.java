@@ -28,7 +28,7 @@ public class ImporttEntryRule extends ApplicationContextAbled {
         try {
             List<String[]> list = excelReader.readExcle("新增规则");
 
-            for (int i = 114; i < list.size(); i++) {
+            for (int i = 169; i < list.size(); i++) {
                 String[] str = (String[]) list.get(i);
                 SubjectRule rule = new SubjectRule();
                 int j = 0;
