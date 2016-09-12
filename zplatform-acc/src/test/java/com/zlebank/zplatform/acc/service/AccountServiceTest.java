@@ -54,7 +54,7 @@ public class AccountServiceTest {
     }
     //@Test
     public void testgenDac() { 
-        String dac = dacUtil.generteDAC("2250", Money.ZERO, Money.ZERO, Money.ZERO);
+        String dac = dacUtil.generteDAC("2244", Money.valueOf(101369), Money.ZERO, Money.valueOf(101369));
         System.out.println(dacUtil);
        // System.out.println(dacUtil.getDacKey());
         System.out.println(dac);
