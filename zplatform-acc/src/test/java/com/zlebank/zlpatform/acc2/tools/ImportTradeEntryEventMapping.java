@@ -22,7 +22,7 @@ public class ImportTradeEntryEventMapping extends ApplicationContextAbled{
     public void init() {
         tradeEntryEventMappingDAO = context.getBean(TradeEntryEventMappingDAO.class);
     }
-    @Test
+    //@Test
     public void importt() {
         try {
             List<String[]> list = excelReader.readExcle("交易类型事件映射");

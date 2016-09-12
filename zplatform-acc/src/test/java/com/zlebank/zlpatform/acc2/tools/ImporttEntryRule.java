@@ -23,7 +23,7 @@ public class ImporttEntryRule extends ApplicationContextAbled {
     public void init() {
         subjectRuleService = context.getBean(SubjectRuleService.class);
     }
-    @Test
+    //@Test
     public void importt() {
         try {
             List<String[]> list = excelReader.readExcle("新增规则");
