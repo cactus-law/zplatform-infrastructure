@@ -11,6 +11,8 @@
 package com.zlebank.zplatform.acc.service;
 
 import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -30,11 +32,11 @@ public class AccountServiceTest {
     private ApplicationContext context;
     AccountService accountService;
     private GetDACService dacUtil;
-     
+     @Before
     public void init() {
         context = new ClassPathXmlApplicationContext("AccountContextTest.xml");
         accountService = (AccountService) context.getBean("accountServiceImpl");
-        dacUtil = (GetDACServiceImpl) context.getBean("getDACService");
+        dacUtil = (GetDACServiceImpl) context.getBean("getDACServiceImpl");
     }  
     public void testAddAcct() {
 
@@ -50,9 +52,9 @@ public class AccountServiceTest {
             Assert.fail();
         }
     }
-    
+    //@Test
     public void testgenDac() { 
-        String dac = dacUtil.generteDAC("20010101", Money.valueOf(180000), Money.ZERO, Money.valueOf(180000));
+        String dac = dacUtil.generteDAC("2244", Money.valueOf(101369), Money.ZERO, Money.valueOf(101369));
         System.out.println(dacUtil);
        // System.out.println(dacUtil.getDacKey());
         System.out.println(dac);

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 
 import com.zlebank.zlpatform.acc2.util.ApplicationContextAbled;
 import com.zlebank.zplatform.acc.bean.enums.TradeType;
@@ -21,12 +22,12 @@ public class ImportTradeEntryEventMapping extends ApplicationContextAbled{
     public void init() {
         tradeEntryEventMappingDAO = context.getBean(TradeEntryEventMappingDAO.class);
     }
-    
+    //@Test
     public void importt() {
         try {
             List<String[]> list = excelReader.readExcle("交易类型事件映射");
 
-            for (int i = 0; i < list.size(); i++) {
+            for (int i = 52; i < list.size(); i++) {
                 String[] str = (String[]) list.get(i);
                 PojoTradeEntryEventMapping tradeEntryEventMapping = new PojoTradeEntryEventMapping();
                 int j = 0;

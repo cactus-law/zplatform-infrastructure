@@ -35,10 +35,9 @@ public class CoopInstiTest {
 	@Before
 	public void prepare() {
 		context = ApplicationContextUtil.get();
-		instiName = "测试机构" + RandomUtil.randomNumber(4);
+		instiName = "互金平台" + RandomUtil.randomNumber(4);
 	}
 	
-
 	//@Test
 	public void testCreate() {
 		CoopInstiService coopInstiService = (CoopInstiService) context
