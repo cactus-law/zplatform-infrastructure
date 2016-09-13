@@ -30,7 +30,7 @@ public class CoopInstiProductServiceImpl implements CoopInstiProductService {
 		if (coopInsti == null) {
 			throw new CoopInstiNotExistException(coopInstiId);
 		}
-		List<ProductModel> productSourceList = coopInsti.getProducts();
+		List<ProductModel> productSourceList = coopInstiDAO.getCoopProductList(coopInstiId);
 		List<ProductModel> productTargetList = new ArrayList<ProductModel>();
 		for(ProductModel copyFrom:productSourceList){
 			ProductModel copyTo = new ProductModel();

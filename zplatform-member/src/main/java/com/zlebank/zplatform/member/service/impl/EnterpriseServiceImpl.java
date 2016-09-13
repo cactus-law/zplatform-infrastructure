@@ -110,6 +110,9 @@ public class EnterpriseServiceImpl implements EnterpriseService {
     @Transactional(propagation=Propagation.REQUIRED,rollbackFor=Throwable.class)
     public EnterpriseBean getEnterpriseByMemberId(String memberId) {
         PojoEnterpriseDeta pojo = enterpriseDAO.getEnterpriseByMemberId(memberId);
+        if(pojo==null){
+        	return null;
+        }
         EnterpriseBean bean = BeanCopyUtil.copyBean(EnterpriseBean.class, pojo);
         return bean;
     }

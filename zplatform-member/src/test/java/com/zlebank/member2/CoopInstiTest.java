@@ -2,6 +2,11 @@ package com.zlebank.member2;
 
 import java.util.List;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import net.sf.json.util.JSONStringer;
+import net.sf.json.util.JSONUtils;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -15,6 +20,8 @@ import com.zlebank.zplatform.member.bean.CoopInsti;
 import com.zlebank.zplatform.member.bean.CoopInstiMK;
 import com.zlebank.zplatform.member.bean.enums.EncryptAlgorithm;
 import com.zlebank.zplatform.member.bean.enums.TerminalAccessType;
+import com.zlebank.zplatform.member.dao.CoopInstiDAO;
+import com.zlebank.zplatform.member.dao.impl.CoopInstiDAOImpl;
 import com.zlebank.zplatform.member.exception.AbstractCoopInstiException;
 import com.zlebank.zplatform.member.service.CoopInstiProductService;
 import com.zlebank.zplatform.member.service.CoopInstiService;
@@ -30,6 +37,7 @@ public class CoopInstiTest {
 		context = ApplicationContextUtil.get();
 		instiName = "测试机构" + RandomUtil.randomNumber(4);
 	}
+	
 
 	//@Test
 	public void testCreate() {
@@ -93,7 +101,7 @@ public class CoopInstiTest {
 	}
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void testGetCoopInstiByInstiCode() {
 		CoopInstiService coopInstiService = (CoopInstiService) context
 				.getBean("coopInstiServiceImpl");

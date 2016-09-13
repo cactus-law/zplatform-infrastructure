@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.zlebank.zplatform.commons.dao.BaseDAO;
+import com.zlebank.zplatform.commons.dao.pojo.ProductModel;
 import com.zlebank.zplatform.member.bean.enums.TerminalAccessType;
 import com.zlebank.zplatform.member.pojo.PojoCoopInsti;
 import com.zlebank.zplatform.member.pojo.PojoInstiMK;
@@ -48,4 +49,6 @@ public interface CoopInstiDAO extends BaseDAO<PojoCoopInsti>{
      * @return
      */
     PojoCoopInsti getEager(long id);
+    
+    public List<ProductModel> getCoopProductList(long id);
 }
