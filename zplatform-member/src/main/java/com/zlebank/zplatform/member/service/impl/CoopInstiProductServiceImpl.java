@@ -39,4 +39,8 @@ public class CoopInstiProductServiceImpl implements CoopInstiProductService {
 		}
 		return productTargetList;
 	}
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
+	public String getDefaultVerInfo(String instiCode, String busicode,int verType) {
+		return coopInstiDAO.getDefaultVerInfo(instiCode, busicode, verType);
+	}
 }

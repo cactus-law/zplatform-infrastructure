@@ -27,7 +27,11 @@ import com.zlebank.zplatform.commons.bean.Bean;
  * @since 
  */
 public class BusiAcctQuery  implements Bean,Serializable{
-    private AcctType AcctType;
+    /**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 9147349294212972555L;
+	private AcctType AcctType;
     private Money balance;
     private Money fronzenBalance;
     private Money totalBalance;
