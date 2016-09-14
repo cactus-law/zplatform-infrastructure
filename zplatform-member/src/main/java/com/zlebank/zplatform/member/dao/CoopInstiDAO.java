@@ -50,5 +50,18 @@ public interface CoopInstiDAO extends BaseDAO<PojoCoopInsti>{
      */
     PojoCoopInsti getEager(long id);
     
+    /**
+     * 取得合作机构产品列表
+     * @param id
+     * @return
+     */
     public List<ProductModel> getCoopProductList(long id);
+    /**
+     * 取得合作机构默认版本
+     * @param instiCode
+     * @param busicode
+     * @param verType
+     * @return
+     */
+    public String getDefaultVerInfo(String instiCode, String busicode,int verType) ;
 }

@@ -1,6 +1,7 @@
 package com.zlebank.zplatform.member.dao.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
@@ -97,4 +98,18 @@ public class CoopInstiDAOImpl extends HibernateBaseDAOImpl<PojoCoopInsti>
         }
     	return resultList;
     }
+    
+    
+    public String getDefaultVerInfo(String instiCode, String busicode,int verType)  {
+		 Session session = getSession();
+		 SQLQuery query = (SQLQuery) getSession().createSQLQuery("select COOP_INSTI_CODE,BUSI_CODE,VER_TYPE,VER_VALUE from T_NONMER_DEFAULT_CONFIG where COOP_INSTI_CODE=? and BUSI_CODE=? and VER_TYPE=?").setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+		 query.setParameter(0, instiCode);
+		 query.setParameter(1, busicode);
+		 query.setParameter(2, verType+"");
+		 Map<String, Object> valueMap = (Map<String, Object>) query.uniqueResult();
+		 if(valueMap==null){
+			 return null;
+		 }
+		 return valueMap.get("VER_VALUE").toString();
+	}
 }
