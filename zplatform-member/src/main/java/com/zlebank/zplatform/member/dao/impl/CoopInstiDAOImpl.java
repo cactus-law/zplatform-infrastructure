@@ -4,11 +4,17 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.zlebank.zplatform.commons.dao.impl.HibernateBaseDAOImpl;
+import com.zlebank.zplatform.commons.dao.pojo.ProductModel;
 import com.zlebank.zplatform.member.bean.enums.TerminalAccessType;
 import com.zlebank.zplatform.member.dao.CoopInstiDAO;
 import com.zlebank.zplatform.member.pojo.PojoCoopInsti;
@@ -56,6 +62,7 @@ public class CoopInstiDAOImpl extends HibernateBaseDAOImpl<PojoCoopInsti>
     
     @SuppressWarnings("unchecked")
 	@Override
+	@Transactional(readOnly=true)
     public List<PojoCoopInsti> getCoopInstiList(){
     	 Session session = getSession();
          Criteria criteria = session.createCriteria(PojoCoopInsti.class);
@@ -74,5 +81,20 @@ public class CoopInstiDAOImpl extends HibernateBaseDAOImpl<PojoCoopInsti>
     	 Criteria criteria =  session.createCriteria(PojoCoopInsti.class).setFetchMode("products", FetchMode.JOIN);
     	 criteria.add(Restrictions.eq("id", id));
          return (PojoCoopInsti)criteria.uniqueResult();
+    }
+    @Override
+    @Transactional(readOnly=true)
+    public List<ProductModel> getCoopProductList(long id){
+    	List<ProductModel> resultList = null;
+        try {
+            Session session = getSession();
+            SQLQuery query = (SQLQuery) session.createSQLQuery("select tp.* from tl_coopinsti_product t inner join t_product tp on t.prouct_id=tp.prdtver where t.coop_insti_id=?");
+            query.setLong(0, id);
+            resultList = query.addEntity(ProductModel.class).list();
+        } catch (HibernateException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    	return resultList;
     }
 }
