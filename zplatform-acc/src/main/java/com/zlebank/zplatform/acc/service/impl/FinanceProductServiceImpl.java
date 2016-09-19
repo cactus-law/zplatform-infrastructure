@@ -10,6 +10,7 @@
  */
 package com.zlebank.zplatform.acc.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
@@ -75,6 +76,9 @@ public class FinanceProductServiceImpl implements FinanceProductService {
             pojoFinanceProduct.setFundManager(bean.getFundManager());
             pojoFinanceProduct.setProductCode(bean.getProductCode());
             pojoFinanceProduct.setProductName(bean.getProductName());
+            pojoFinanceProduct.setInTime(new Date());
+            pojoFinanceProduct.setRemarks(bean.getRemarks());
+            pojoFinanceProduct.setNotes(bean.getNotes());
             financeProductDao.saveA(pojoFinanceProduct);
     }
     private void openProductAccout(FinanceProductBean bean,long userId) throws Exception{

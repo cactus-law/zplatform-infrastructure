@@ -16,7 +16,7 @@
 		<project.gitserver>192.168.101.11</project.gitserver>
 		<project.remoteArtifactRepositories>${project.nexus}/nexus/content/groups/public</project.remoteArtifactRepositories>
 		<sonar.language>java</sonar.language>
-		<skipTests>false</skipTests>
+		<skipTests>true</skipTests>
 		<skipJavaDoc>true</skipJavaDoc>
 		<compiler.debug>true</compiler.debug>
 		<compiler.optimize>true</compiler.optimize>
