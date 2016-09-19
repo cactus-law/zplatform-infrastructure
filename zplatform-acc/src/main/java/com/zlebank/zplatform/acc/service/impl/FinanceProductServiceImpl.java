@@ -29,6 +29,7 @@ import com.zlebank.zplatform.acc.pojo.PojoFinanceProduct;
 import com.zlebank.zplatform.acc.service.BusiAcctService;
 import com.zlebank.zplatform.acc.service.FinanceProductService;
 import com.zlebank.zplatform.acc.service.SubjectSelector;
+import com.zlebank.zplatform.commons.utils.BeanCopyUtil;
 import com.zlebank.zplatform.member.bean.BusinessActor;
 import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 
@@ -91,5 +92,15 @@ public class FinanceProductServiceImpl implements FinanceProductService {
             busiAcct.setUsage(busiAcctSubjectMappin.getUsage());
             busiAcctService.openBusiAcct(prouductActor, busiAcct,userId);
         }
+    }
+    
+    @Override
+    @Transactional(propagation=Propagation.REQUIRED,rollbackFor=Throwable.class)
+    public FinanceProductBean getProductByCode(String productCode){
+    	PojoFinanceProduct produc = financeProductDao.getProductByCode(productCode);
+    	if(produc!=null){
+    		return BeanCopyUtil.copyBean(FinanceProductBean.class, produc);
+    	}
+    	return null;
     }
 }

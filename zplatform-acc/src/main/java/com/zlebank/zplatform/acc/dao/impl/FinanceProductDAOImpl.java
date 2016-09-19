@@ -10,6 +10,10 @@
  */
 package com.zlebank.zplatform.acc.dao.impl;
 
+import javax.persistence.Transient;
+
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.zlebank.zplatform.acc.dao.FinanceProductDAO;
@@ -28,4 +32,18 @@ import com.zlebank.zplatform.commons.dao.impl.HibernateBaseDAOImpl;
 public class FinanceProductDAOImpl extends HibernateBaseDAOImpl<PojoFinanceProduct> 
             implements FinanceProductDAO {
 
+	/**
+	 *
+	 * @param productCode
+	 * @return
+	 */
+	@Override
+	public PojoFinanceProduct getProductByCode(String productCode) {
+		Criteria criteria = getSession().createCriteria(PojoFinanceProduct.class);
+		criteria.add(Restrictions.eq("productCode", productCode));
+		
+		return (PojoFinanceProduct) criteria.uniqueResult();
+	}
+
+	
 }
