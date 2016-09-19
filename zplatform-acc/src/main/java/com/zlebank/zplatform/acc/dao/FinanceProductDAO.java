@@ -22,5 +22,5 @@ import com.zlebank.zplatform.commons.dao.BaseDAO;
  * @since 
  */
 public interface FinanceProductDAO extends BaseDAO<PojoFinanceProduct> {
-       
+	public PojoFinanceProduct getProductByCode(String productCode);
 }

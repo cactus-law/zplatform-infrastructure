@@ -284,7 +284,7 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 		}else{
 			RealNameLvType realnameLv = enterpriseMember.getRealnameLv();
 			if(realnameLv!=RealNameLvType.LV1){
-				throw new InvalidMemberDataException("企业会员已经实名认证");
+				throw new InvalidMemberDataException("企业会员已经实名认证,请不要重复认证");
 			}
 		}
 		PojoEnterpriseRealnameApply enterpriseRealnameApply = BeanCopyUtil.copyBean(PojoEnterpriseRealnameApply.class, enterpriseRealNameBean);
