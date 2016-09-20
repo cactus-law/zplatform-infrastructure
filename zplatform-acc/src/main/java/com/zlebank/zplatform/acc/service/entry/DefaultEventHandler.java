@@ -167,8 +167,8 @@ public class DefaultEventHandler extends AbstractEventHandler {
         if (calcAmount.compareTo(BigDecimal.ZERO) < 0) {
             throw new AccBussinessException("E000019");
         }
-        checkAccountStatus(account.getStatus(), actualAmount,
-                entry.getAcctCode());
+        checkAccountStatus(account, actualAmount,
+                entry);
         
         /*account.setBalance(Money.valueOf(calcAmount));
         account.setTotalBanance(account.getTotalBanance().plus(actualAmount));
@@ -210,7 +210,6 @@ public class DefaultEventHandler extends AbstractEventHandler {
         entry.setStatus(AccEntryStatus.ACCOUNTED);// 已记账
     }
 
-    
     /**
      * <p>
      * 得到记账所需要更新的金额
@@ -238,19 +237,44 @@ public class DefaultEventHandler extends AbstractEventHandler {
      * @param acctCode
      * @throws AccBussinessException
      */
-    private void checkAccountStatus(AcctStatusType accStatus,
+   /* private void checkAccountStatus(AcctStatusType accStatus,
             Money actualAmount,
             String acctCode) throws AccBussinessException {
-        /* 金额增加时，判断是否止入或冻结 */
+         金额增加时，判断是否止入或冻结 
         if (actualAmount.compareTo(Money.ZERO) >= 0
                 && (accStatus == AcctStatusType.STOP_IN || accStatus == AcctStatusType.FREEZE)) {
             throw new AccBussinessException("E000015", new Object[]{acctCode});
         }
 
-        /* 金额增加时，判断是否止入或冻结 */
+         金额增加时，判断是否止出或冻结 
         if (actualAmount.compareTo(Money.ZERO) < 0
                 && (accStatus == AcctStatusType.STOP_OUT || accStatus == AcctStatusType.FREEZE)) {
             throw new AccBussinessException("E000016", new Object[]{acctCode});
+        }
+    }*/
+
+    /**
+     * @author houyong
+     * @param account
+     * @param actualAmount
+     * @param entry
+     * @throws AccBussinessException 
+     * @updateTime 2016-9-20 10:13:19
+     */
+    private void checkAccountStatus(PojoAccount account,
+            Money actualAmount,
+            PojoAccEntry entry) throws AccBussinessException {
+        // TODO Auto-generated method stub
+        /* 金额增加时，判断是否止入或冻结 */
+        if (account.getCrdr().equals(entry.getCrdr())
+                && (account.getStatus() == AcctStatusType.STOP_IN || account.getStatus() == AcctStatusType.FREEZE)) {
+            throw new AccBussinessException("E000015", new Object[]{entry.getAcctCode()});
+        }
+
+        /* 金额增加时，判断是否止出或冻结 */
+        if (!account.getCrdr().equals(entry.getCrdr())
+                && (account.getStatus() == AcctStatusType.STOP_OUT || account.getStatus() == AcctStatusType.FREEZE)) {
+            throw new AccBussinessException("E000016", new Object[]{entry.getAcctCode()});
         }
     }
 }
