@@ -10,9 +10,12 @@
  */
 package com.zlebank.zplatform.member.dao.impl;
 
+import javax.persistence.Transient;
+
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.zlebank.zplatform.commons.dao.impl.AbstractPagedQueryDAOImpl;
 import com.zlebank.zplatform.commons.utils.StringUtil;
@@ -59,6 +62,7 @@ public class QuickpayCustDAOImpl extends AbstractPagedQueryDAOImpl<PojoQuickpayC
     }
  
     @Override
+    @Transactional(readOnly=true)
     public PojoQuickpayCust getById(long id) {
         return (PojoQuickpayCust) getSession().get(PojoQuickpayCust.class, id);
     }

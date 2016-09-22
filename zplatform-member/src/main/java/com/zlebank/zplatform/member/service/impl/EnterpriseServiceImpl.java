@@ -137,10 +137,12 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 		if (StringUtil.isEmpty(memberId)) {
 		    throw new CreateMemberFailedException("生成会员号时发生错误");
 		}
+		//合作机构代码 to 合作机构id
+		CoopInsti coopInsti = coopInstiService.getInstiByInstiCode(enterpriseDeta.getCoopInstiCode());
 		//通过手机号查询是否绑定过会员
-		PojoMember member = memberService.getMemberByphone(enterpriseDeta.getCellPhoneNo());
+		PojoMember member = memberService.getMemberByPhoneAndCoopInsti(enterpriseDeta.getCellPhoneNo(), coopInsti.getId());//getMemberByphone(enterpriseDeta.getCellPhoneNo());
 		if(member!=null){
-			 throw new CreateMemberFailedException("企业手机号已绑定会员");
+			 throw new CreateMemberFailedException("企业手机号已被注册");
 		}
 		
 		PojoMemberApply pojo = new PojoMemberApply();
@@ -152,8 +154,7 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 		//主营业务 to MCC 大类MCC 和 小类mcc一致
 		enterpriseDetaApply.setMcc(enterpriseDeta.getPrimaryBusiness().getMcc());
 		enterpriseDetaApply.setMccList(enterpriseDeta.getPrimaryBusiness().getMcc());
-		//合作机构代码 to 合作机构id
-		CoopInsti coopInsti = coopInstiService.getInstiByInstiCode(enterpriseDeta.getCoopInstiCode());
+		
 		enterpriseDetaApply.setCoopInstiId(coopInsti.getId());
 		enterpriseDetaApply.setInTime(new Date());
 		//行政地区代码
