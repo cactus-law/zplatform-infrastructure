@@ -10,6 +10,10 @@
  */
 package com.zlebank.zplatform.acc.service;
 
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 
 /**
  * Class Description
@@ -19,8 +23,8 @@ package com.zlebank.zplatform.acc.service;
  * @date 2016年8月16日 下午6:18:46
  * @since 
  */
-//@RunWith(SpringJUnit4ClassRunner.class)  
-//@ContextConfiguration("/AccountContextTest.xml")  
+@RunWith(SpringJUnit4ClassRunner.class)  
+@ContextConfiguration("/AccountContextTest.xml")  
 public class BaseTest {
         
 }

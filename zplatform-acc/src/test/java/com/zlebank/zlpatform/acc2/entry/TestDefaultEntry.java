@@ -300,7 +300,7 @@ public class TestDefaultEntry {
                 EntryEvent.AUDIT_APPLY, EntryEvent.AUDIT_REJECT});
         mapList.add(insteadPay_3);*/
     }
-
+    @Test
     public void testAounyPay() {
         TradeInfo tradeInfo = new TradeInfo();
         String seqTxnNo = String.format("%1$ty%1$tm%1$td%1$tH%1$tM%1$tS",
@@ -310,15 +310,19 @@ public class TestDefaultEntry {
         BigDecimal channelFee = new BigDecimal(0);
         BigDecimal amount = new BigDecimal(250);
         tradeInfo.setAmount(amount);
-        tradeInfo.setPayMemberId("999999999999999");
+        //100000000000576 测试个人会员
+        //999999999999999
+        //200000000000626测试商户
+        //95000001测试渠道
+        tradeInfo.setPayMemberId("200000000000626");
         tradeInfo.setPayToMemberId("200000000000626");
-        tradeInfo.setBusiCode(TradeType.BANKCARD_PAY.getCode());
-        tradeInfo.setChannelId("35852693");
+        tradeInfo.setBusiCode(TradeType.BAIL_DRAW.getCode());
+        tradeInfo.setChannelId("95000001");
         tradeInfo.setTxnseqno(seqTxnNo);
         tradeInfo.setChannelFee(channelFee);
 
         tradeInfo.setCharge(fee);
-        tradeInfo.setCoopInstCode("300000000000037");
+         tradeInfo.setCoopInstCode("300000000000037");
         try {
             accEntryService
                     .accEntryProcess(tradeInfo, EntryEvent.TRADE_SUCCESS);
@@ -333,6 +337,9 @@ public class TestDefaultEntry {
             e.printStackTrace();
         } catch (IllegalEntryRequestException e) {
             // TODO Auto-generated catch block
+            e.printStackTrace();
+        }catch (Exception e) {
+            // TODO: handle exception
             e.printStackTrace();
         }
     }
