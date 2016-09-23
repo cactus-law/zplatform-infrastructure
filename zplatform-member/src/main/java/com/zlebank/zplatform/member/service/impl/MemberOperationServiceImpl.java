@@ -93,6 +93,14 @@ public class MemberOperationServiceImpl implements MemberOperationService {
         }
         // 数据校验
         dataCheck(memberType, member);
+        //手机号校验，同一合作机构下的注册的手机号不能重复
+        if(StringUtil.isNotEmpty(member.getPhone())){
+        	PojoMember member_exist = memberDAO.getMemberByPhoneAndCoopInsti(member.getPhone(), member.getInstiId());
+        	if(member_exist!=null){
+        		throw new InvalidMemberDataException("手机号已经注册");
+        	}
+        }
+        
         String memberId=null;
         try {
             // 保存会员数据
