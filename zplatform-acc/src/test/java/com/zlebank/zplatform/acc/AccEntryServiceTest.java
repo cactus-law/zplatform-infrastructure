@@ -53,19 +53,19 @@ public class AccEntryServiceTest {
     public void test_acc(){
     	
     	TradeInfo entry = new TradeInfo();
-        entry.setPayMemberId("200000000001399");
+        entry.setPayMemberId("100000000001460");
         entry.setPayordno("M2016082513487124");
-        entry.setCoopInstCode("300000000000004");
-        entry.setPayToMemberId("200000000001399");
+        entry.setCoopInstCode("300000000000006");
+        entry.setPayToMemberId("100000000001460");
        entry.setChannelId("95000001");
-        entry.setTxnseqno("1608259900066723");
-        entry.setBusiCode(TradeType.RECHARGE.getCode());
-        entry.setAmount(new BigDecimal(1011));
+        entry.setTxnseqno("1609209900069041");
+        entry.setBusiCode(TradeType.WITHDRAW.getCode());
+        entry.setAmount(new BigDecimal(30));
         entry.setCommission(new BigDecimal(0));
         entry.setCharge(new BigDecimal(0));
         System.out.println("start");
         try {
-			service.accEntryProcess(entry,EntryEvent.TRADE_SUCCESS);
+			service.accEntryProcess(entry,EntryEvent.AUDIT_APPLY);
 		} catch (AccBussinessException | IllegalEntryRequestException
 				| AbstractBusiAcctException | NumberFormatException e) {
 			// TODO Auto-generated catch block
