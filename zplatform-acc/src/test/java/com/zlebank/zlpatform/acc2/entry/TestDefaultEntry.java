@@ -316,7 +316,7 @@ public class TestDefaultEntry {
         //95000001测试渠道
         tradeInfo.setPayMemberId("200000000000626");
         tradeInfo.setPayToMemberId("200000000000626");
-        tradeInfo.setBusiCode(TradeType.BAIL_DRAW.getCode());
+        tradeInfo.setBusiCode(TradeType.RECHARGE.getCode());
         tradeInfo.setChannelId("95000001");
         tradeInfo.setTxnseqno(seqTxnNo);
         tradeInfo.setChannelFee(channelFee);
