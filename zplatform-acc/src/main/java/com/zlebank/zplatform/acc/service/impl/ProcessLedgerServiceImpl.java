@@ -79,7 +79,7 @@ public class ProcessLedgerServiceImpl  implements ProcessLedgerService {
             updateAccount.setAcctCode(pojo.getAcctCode());
             updateAccount.setBalance(account.getBalance());
             updateAccount.setTotalBanance(account.getTotalBanance());
-            updateAccount.setFrozenBalance(Money.ZERO);
+            updateAccount.setFrozenBalance(account.getFrozenBalance());
             updateAccount.setCreditBalance(Money.ZERO);
             updateAccount.setDebitBalance(Money.ZERO);
 
