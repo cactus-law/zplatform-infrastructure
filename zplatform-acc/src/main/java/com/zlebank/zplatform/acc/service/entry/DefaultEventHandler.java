@@ -205,6 +205,7 @@ public class DefaultEventHandler extends AbstractEventHandler {
         total.setParentSubject(account.getParentSubject());
         total.setBalance(actualAmount);
         total.setTotalBanance(actualAmount);
+        total.setFrozenBalance(Money.ZERO);
         processLedgerService.processLedger(total);// 更新总账
     
         entry.setStatus(AccEntryStatus.ACCOUNTED);// 已记账
