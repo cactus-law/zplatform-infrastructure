@@ -139,10 +139,17 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 		}
 		//合作机构代码 to 合作机构id
 		CoopInsti coopInsti = coopInstiService.getInstiByInstiCode(enterpriseDeta.getCoopInstiCode());
-		//通过手机号查询是否绑定过会员
-		PojoMember member = memberService.getMemberByPhoneAndCoopInsti(enterpriseDeta.getCellPhoneNo(), coopInsti.getId());//getMemberByphone(enterpriseDeta.getCellPhoneNo());
-		if(member!=null){
-			 throw new CreateMemberFailedException("企业手机号已被注册");
+		try {
+			//通过手机号查询是否绑定过会员
+			PojoMember member = memberService.getMemberByPhoneAndCoopInsti(enterpriseDeta.getCellPhoneNo(), coopInsti.getId());//getMemberByphone(enterpriseDeta.getCellPhoneNo());
+			if(member!=null){
+				 throw new CreateMemberFailedException("企业手机号已被注册");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			log.error(e);
+			throw new CreateMemberFailedException("企业注册失败");
 		}
 		
 		PojoMemberApply pojo = new PojoMemberApply();
