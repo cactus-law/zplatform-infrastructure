@@ -38,7 +38,9 @@ public enum Usage {
     /**保证金*/
     BAIL("bail","109"),
     /**手续费收入*/
-    FEEINCOME("feeincome","110"), 
+    FEEINCOME("feeincome","110"),
+    /**授信金额*/
+    GRANTCREDIT("grantcredit","111"), 
     
     /**未知*/
     UNKNOW("unkonw","FFF");

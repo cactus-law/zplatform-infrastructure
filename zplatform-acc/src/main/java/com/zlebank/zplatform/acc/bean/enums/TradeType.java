@@ -31,16 +31,22 @@ public enum TradeType {
     BAIL("20000002"),
     /**保证金线下充值**/
     BAIL_OFFLINE("20000003"),
+    /**授信账户充值*/
+    GRANTCREDIT_RECHANGE("20000004"),
     /**提现**/
     WITHDRAW("30000001"),
     /**退款至银行卡**/
     REFUND_BANKCARD("40000001"),
     /**退款至账户**/
     REFUND_ACCOUNT("40000002"),
+    /**授信账户退款*/
+    GRANTCREDIT_REFUND("40000003"),
     /**转账**/
     TRANSFER("50000001"),
     /**保证金提取-转账**/
     BAIL_DRAW("50000002"),
+    /**授信账户提取*/
+    GRANTCREDIT_DRAW("50000003"),
     /**代付*/
     INSTEADPAY("70000001"),
     /**手工充值*/
