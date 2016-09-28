@@ -29,6 +29,8 @@ public enum BusinessActorType {
     CHANNEL("04"),
     /**产品*/
     PRODUCT("05"),
+    /**行业应用*/
+    INDUSTRY("06"),
     /**未知*/
 	UNKNOW("99");
 	private String code; 
