@@ -23,6 +23,8 @@ public enum TradeType {
     BANKCARD_PAY("10000001"),
     /**消费**/
     ACCOUNT_PAY("10000002"),
+    /**授信消费*/
+    GRANTCREDIT_PAY("10000006"),
     /**消费**/
     BUY("10000001"),
     /**充值**/
@@ -40,7 +42,7 @@ public enum TradeType {
     /**退款至账户**/
     REFUND_ACCOUNT("40000002"),
     /**授信账户退款*/
-    GRANTCREDIT_REFUND("40000003"),
+    GRANTCREDIT_REFUND("40000004"),
     /**转账**/
     TRANSFER("50000001"),
     /**保证金提取-转账**/
