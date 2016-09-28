@@ -23,6 +23,8 @@ public enum TradeType {
     BANKCARD_PAY("10000001"),
     /**消费**/
     ACCOUNT_PAY("10000002"),
+    /**行业消费*/
+    INDUSTRY_PAY("10000005"),
     /**授信消费*/
     GRANTCREDIT_PAY("10000006"),
     /**消费**/
@@ -35,6 +37,8 @@ public enum TradeType {
     BAIL_OFFLINE("20000003"),
     /**授信账户充值*/
     GRANTCREDIT_RECHANGE("20000004"),
+    /**行业充值*/
+    INDUSTRY_RECHANGE("20000005"),
     /**提现**/
     WITHDRAW("30000001"),
     /**退款至银行卡**/
@@ -47,8 +51,10 @@ public enum TradeType {
     TRANSFER("50000001"),
     /**保证金提取-转账**/
     BAIL_DRAW("50000002"),
-    /**授信账户提取*/
-    GRANTCREDIT_DRAW("50000003"),
+    /**行业-转账**/
+    INDUSTRY_TRANSFER("50000003"),
+    /**行业-提取**/
+    INDUSTRY_DRAW("50000004"),
     /**代付*/
     INSTEADPAY("70000001"),
     /**手工充值*/

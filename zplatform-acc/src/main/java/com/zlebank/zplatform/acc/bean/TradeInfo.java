@@ -59,9 +59,27 @@ public class TradeInfo implements Serializable{
     private String coopInstCode;
     /** 接入机构 */
     private String access_coopInstCode;
+    
+    /** 行业应用群组关联账户 */
+    private String industry_group;
+    
     /** 通道手续费*/
     private BigDecimal channelFee;
     
+    
+    
+    /**
+     * @return the industry_group
+     */
+    public String getIndustry_group() {
+        return industry_group;
+    }
+    /**
+     * @param industry_group the industry_group to set
+     */
+    public void setIndustry_group(String industry_group) {
+        this.industry_group = industry_group;
+    }
     /**
      * @return the access_coopInstCode
      */
