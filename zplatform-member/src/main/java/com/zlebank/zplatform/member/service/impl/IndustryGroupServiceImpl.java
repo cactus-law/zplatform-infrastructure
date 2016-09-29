@@ -25,7 +25,9 @@ import com.zlebank.zplatform.acc.exception.AbstractBusiAcctException;
 import com.zlebank.zplatform.commons.service.impl.AbstractBasePageService;
 import com.zlebank.zplatform.commons.utils.BeanCopyUtil;
 import com.zlebank.zplatform.member.bean.InduGroupMemberBean;
+import com.zlebank.zplatform.member.bean.InduGroupMemberCreateBean;
 import com.zlebank.zplatform.member.bean.IndustryGroupBean;
+import com.zlebank.zplatform.member.bean.IndustryGroupCreatBean;
 import com.zlebank.zplatform.member.bean.IndustryGroupQuery;
 import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 import com.zlebank.zplatform.member.dao.IndustryGroupDAO;
@@ -89,24 +91,23 @@ public class IndustryGroupServiceImpl extends AbstractBasePageService<IndustryGr
      */
     @Override
     @Transactional(propagation=Propagation.REQUIRED)
-    public String addGroup(IndustryGroupBean groupBean) throws AbstractBusiAcctException {
+    public String addGroup(IndustryGroupCreatBean groupBean) throws AbstractBusiAcctException {
         PojoIndustryGroup pojoInduGroup=new PojoIndustryGroup();
         pojoInduGroup=BeanCopyUtil.copyBean(PojoIndustryGroup.class, groupBean);
         pojoInduGroup.setInTime(new Date());
         pojoInduGroup.setStatus(CommonStatus.NORMAL);
         pojoInduGroup.setGroupCode(generateGroupCode(groupBean));
         pojoInduGroup=industryGroupDao.merge(pojoInduGroup);
-        InduGroupMemberBean induGroupMemberBean=new InduGroupMemberBean();
-        induGroupMemberBean.setGroupCode(pojoInduGroup.getGroupCode());
-        induGroupMemberBean.setGroupId(pojoInduGroup.getId());
-        induGroupMemberBean.setMemberId(pojoInduGroup.getMemberId());
-        induGroupMemberBean.setUsage(Usage.WAITSETTLE);
-        induGroupMemberBean.setBusiActorType(BusinessActorType.ENTERPRISE);
-        induGroupMemServiceImp.addMemberToGroup(induGroupMemberBean,false);
+        InduGroupMemberCreateBean induGroupMemberCreateBean=new InduGroupMemberCreateBean();
+        induGroupMemberCreateBean.setGroupCode(pojoInduGroup.getGroupCode());
+        induGroupMemberCreateBean.setGroupId(pojoInduGroup.getId());
+        induGroupMemberCreateBean.setMemberId(pojoInduGroup.getMemberId());
+        induGroupMemberCreateBean.setUsage(Usage.WAITSETTLE);
+        induGroupMemServiceImp.addMemberToGroup(induGroupMemberCreateBean,false,BusinessActorType.ENTERPRISE);
         return pojoInduGroup.getGroupCode();
     }
     
-    private String generateGroupCode(IndustryGroupBean groupBean){
+    private String generateGroupCode(IndustryGroupCreatBean groupBean){
         String codePrefix=groupBean.getMemberId().substring(5);
         return codePrefix;
     }

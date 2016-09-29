@@ -30,6 +30,7 @@ import com.zlebank.zplatform.commons.utils.DateUtil;
 import com.zlebank.zplatform.member.bean.BusinessActor;
 import com.zlebank.zplatform.member.bean.Individual;
 import com.zlebank.zplatform.member.bean.InduGroupMemberBean;
+import com.zlebank.zplatform.member.bean.InduGroupMemberCreateBean;
 import com.zlebank.zplatform.member.bean.InduGroupMemberQuery;
 import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 import com.zlebank.zplatform.member.dao.IndustryGroupMemberDAO;
@@ -90,7 +91,7 @@ public class IndustryGroupMemberServiceImpl extends AbstractBasePageService<Indu
      */
     @Override
     @Transactional(propagation=Propagation.REQUIRED)
-    public String addMemberToGroup(final InduGroupMemberBean bean,boolean openAcct) throws AbstractBusiAcctException {
+    public String addMemberToGroup(InduGroupMemberCreateBean bean,boolean openAcct,final BusinessActorType busiActorType) throws AbstractBusiAcctException {
         PojoIndustryGroupMember pojoInduMember=new PojoIndustryGroupMember();
         pojoInduMember=BeanCopyUtil.copyBean(PojoIndustryGroupMember.class, bean);
         pojoInduMember.setInTime(new Date());
@@ -103,7 +104,7 @@ public class IndustryGroupMemberServiceImpl extends AbstractBasePageService<Indu
                 @Override
                 public BusinessActorType getBusinessActorType() {
                     // TODO Auto-generated method stub
-                    return bean.getBusiActorType();
+                    return busiActorType;
                 }
                 
                 @Override
@@ -120,7 +121,7 @@ public class IndustryGroupMemberServiceImpl extends AbstractBasePageService<Indu
         return pojoInduMember.getUniqueTag();
     }
     
-    private String generateUniqueTag(InduGroupMemberBean bean){
+    private String generateUniqueTag(InduGroupMemberCreateBean bean){
         String uniqueTag=null;
         if (bean.getUsage()==Usage.BASICPAY) {
             uniqueTag=bean.getMemberId();

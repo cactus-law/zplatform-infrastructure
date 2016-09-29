@@ -15,6 +15,7 @@ import java.util.List;
 import com.zlebank.zplatform.acc.exception.AbstractBusiAcctException;
 import com.zlebank.zplatform.commons.service.IBasePageService;
 import com.zlebank.zplatform.member.bean.IndustryGroupBean;
+import com.zlebank.zplatform.member.bean.IndustryGroupCreatBean;
 import com.zlebank.zplatform.member.bean.IndustryGroupQuery;
 
 /**
@@ -31,7 +32,7 @@ public interface IndustryGroupService extends IBasePageService<IndustryGroupQuer
         * @param groupBean
      * @throws AbstractBusiAcctException 
         */
-       public String addGroup(IndustryGroupBean groupBean) throws AbstractBusiAcctException;
+       public String addGroup(IndustryGroupCreatBean groupBean) throws AbstractBusiAcctException;
        /**
         * 修改行业群组
         * @param groupBean

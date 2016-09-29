@@ -15,7 +15,9 @@ import java.util.List;
 import com.zlebank.zplatform.acc.exception.AbstractBusiAcctException;
 import com.zlebank.zplatform.commons.service.IBasePageService;
 import com.zlebank.zplatform.member.bean.InduGroupMemberBean;
+import com.zlebank.zplatform.member.bean.InduGroupMemberCreateBean;
 import com.zlebank.zplatform.member.bean.InduGroupMemberQuery;
+import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 
 /**
  * 行业群组<>会员关系Service
@@ -30,10 +32,11 @@ public interface IndustryGroupMemberService extends IBasePageService<InduGroupMe
         * 将会员加入行业群组
         * @param bean
         * @param openAcct 是否开户
+        * @param busiActorType 会员类型
         * @return uniqueTag
      * @throws AbstractBusiAcctException 
         */
-       public String addMemberToGroup(InduGroupMemberBean bean,boolean openAcct) throws AbstractBusiAcctException;
+       public String addMemberToGroup(InduGroupMemberCreateBean bean,boolean openAcct,BusinessActorType busiActorType) throws AbstractBusiAcctException;
        /**
         * 查询组成员
         * @param queryBean
