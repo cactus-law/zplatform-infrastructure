@@ -10,6 +10,8 @@
  */
 package com.zlebank.zplatform.member.dao;
 
+import org.springframework.stereotype.Repository;
+
 import com.zlebank.zplatform.commons.dao.BaseDAO;
 import com.zlebank.zplatform.member.pojo.PojoIndustryGroupMember;
 

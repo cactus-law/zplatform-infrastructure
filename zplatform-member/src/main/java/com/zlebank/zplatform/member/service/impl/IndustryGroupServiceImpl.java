@@ -10,6 +10,7 @@
  */
 package com.zlebank.zplatform.member.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,12 +23,12 @@ import com.zlebank.zplatform.acc.bean.enums.CommonStatus;
 import com.zlebank.zplatform.acc.bean.enums.Usage;
 import com.zlebank.zplatform.commons.service.impl.AbstractBasePageService;
 import com.zlebank.zplatform.commons.utils.BeanCopyUtil;
-import com.zlebank.zplatform.commons.utils.DateUtil;
 import com.zlebank.zplatform.member.bean.InduGroupMemberBean;
 import com.zlebank.zplatform.member.bean.IndustryGroupBean;
 import com.zlebank.zplatform.member.bean.IndustryGroupQuery;
 import com.zlebank.zplatform.member.dao.IndustryGroupDAO;
 import com.zlebank.zplatform.member.pojo.PojoIndustryGroup;
+import com.zlebank.zplatform.member.service.IndustryGroupMemberService;
 import com.zlebank.zplatform.member.service.IndustryGroupService;
 
 /**
@@ -43,7 +44,7 @@ public class IndustryGroupServiceImpl extends AbstractBasePageService<IndustryGr
     @Autowired
     private IndustryGroupDAO industryGroupDao;
     @Autowired
-    private IndustryGroupMemberServiceImpl induGroupMemServiceImp;
+    private IndustryGroupMemberService induGroupMemServiceImp;
     /**
      *
      * @param example
@@ -111,5 +112,22 @@ public class IndustryGroupServiceImpl extends AbstractBasePageService<IndustryGr
         pojoInduGroup.setUpTime(new Date());
         pojoInduGroup.setRemarks(groupBean.getRemarks());
         industryGroupDao.update(pojoInduGroup);
+    }
+
+    /**
+     *
+     * @param queryBean
+     * @return
+     */
+    @Override
+    public List<IndustryGroupBean> queryGroup(IndustryGroupQuery queryBean) {
+        List<IndustryGroupBean> result=new ArrayList<IndustryGroupBean>();
+        List<PojoIndustryGroup> industryGroups=  industryGroupDao.queryGroup(queryBean);
+        for (PojoIndustryGroup pojoIndustryGroup : industryGroups) {
+            IndustryGroupBean beanTemp=new IndustryGroupBean();
+            beanTemp=BeanCopyUtil.copyBean(IndustryGroupBean.class, pojoIndustryGroup);
+            result.add(beanTemp);
+        }
+        return result;
     }
 }
