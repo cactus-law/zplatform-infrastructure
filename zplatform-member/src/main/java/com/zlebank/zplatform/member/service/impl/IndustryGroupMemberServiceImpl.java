@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.zlebank.zplatform.acc.bean.BusiAcct;
+import com.zlebank.zplatform.acc.bean.enums.CommonStatus;
 import com.zlebank.zplatform.acc.bean.enums.Usage;
 import com.zlebank.zplatform.acc.exception.AbstractBusiAcctException;
 import com.zlebank.zplatform.acc.service.BusiAcctService;
@@ -95,6 +96,7 @@ public class IndustryGroupMemberServiceImpl extends AbstractBasePageService<Indu
         pojoInduMember.setInTime(new Date());
         final String uniqueTag=generateUniqueTag(bean);
         pojoInduMember.setUniqueTag(uniqueTag);
+        pojoInduMember.setStatus(CommonStatus.NORMAL);
         pojoInduMember=induGroupMemberDao.merge(pojoInduMember);
         if (openAcct==true) {
             BusinessActor busiActor=new BusinessActor() {
@@ -124,7 +126,7 @@ public class IndustryGroupMemberServiceImpl extends AbstractBasePageService<Indu
             uniqueTag=bean.getMemberId();
         }else{
             int result=(int)(Math.random()*900)+100;
-            uniqueTag=DateUtil.getCurrentDateTime()+result;
+            uniqueTag=DateUtil.getCurrentDateTime().substring(0,12)+result;
         }
         return uniqueTag;
     }
