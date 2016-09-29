@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.zlebank.zplatform.commons.service.impl.AbstractBasePageService;
 import com.zlebank.zplatform.commons.utils.BeanCopyUtil;
 import com.zlebank.zplatform.commons.utils.DateUtil;
+import com.zlebank.zplatform.member.bean.InduGroupMemberBean;
 import com.zlebank.zplatform.member.bean.IndustryGroupBean;
 import com.zlebank.zplatform.member.bean.IndustryGroupQuery;
 import com.zlebank.zplatform.member.dao.IndustryGroupDAO;
@@ -39,6 +40,8 @@ import com.zlebank.zplatform.member.service.IndustryGroupService;
 public class IndustryGroupServiceImpl extends AbstractBasePageService<IndustryGroupQuery,IndustryGroupBean> implements IndustryGroupService{
     @Autowired
     private IndustryGroupDAO industryGroupDao;
+    @Autowired
+    private IndustryGroupMemberServiceImpl induGroupMemServiceImp;
     /**
      *
      * @param example
@@ -79,6 +82,11 @@ public class IndustryGroupServiceImpl extends AbstractBasePageService<IndustryGr
         pojoInduGroup.setUseable("0");
         pojoInduGroup.setGroupCode(generateGroupCode(groupBean));
         pojoInduGroup=industryGroupDao.merge(pojoInduGroup);
+        InduGroupMemberBean induGroupMemberBean=new InduGroupMemberBean();
+        induGroupMemberBean.setGroupCode(pojoInduGroup.getGroupCode());
+        induGroupMemberBean.setGroupId(pojoInduGroup.getId());
+        induGroupMemberBean.setMemberId(pojoInduGroup.getMemberId());
+        induGroupMemServiceImp.addMemberToGroup(induGroupMemberBean);
         return pojoInduGroup.getGroupCode();
     }
     
