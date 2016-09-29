@@ -68,9 +68,38 @@ public class IndustryGroupDAOImpl extends HibernateBaseDAOImpl<PojoIndustryGroup
      * @return
      */
     @Override
-    public List<PojoIndustryGroup> queryGroup(IndustryGroupQuery queryBean) {
+    public PojoIndustryGroup queryGroup(IndustryGroupQuery queryBean) {
         Criteria cri=builedCri(queryBean);
-        return cri.list();
+        if (cri.uniqueResult()!=null) {
+            return (PojoIndustryGroup) cri.uniqueResult();
+        }
+        return null;
+    }
+    /**
+     *
+     * @param example
+     * @return
+     */
+    @Override
+    public long count(IndustryGroupQuery queryBean) {
+        Criteria cri=builedCri(queryBean);
+        
+        return cri.list().size();
+    }
+    /**
+     *
+     * @param offset
+     * @param pageSize
+     * @param queryBean
+     * @return
+     */
+    @Override
+    public List<PojoIndustryGroup> getItem(int offset,
+            int pageSize,
+            IndustryGroupQuery queryBean) {
+        Criteria criteria=builedCri(queryBean);
+        criteria.setFirstResult(offset).setMaxResults(pageSize);
+        return criteria.list();
     }
 
    

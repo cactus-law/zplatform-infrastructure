@@ -10,9 +10,9 @@
  */
 package com.zlebank.zplatform.member.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,9 +46,8 @@ public class IndustryGroupMemberServiceImpl extends AbstractBasePageService<Indu
      * @return
      */
     @Override
-    protected long getTotal(InduGroupMemberQuery example) {
-        // TODO Auto-generated method stub
-        return 0;
+    protected long getTotal(InduGroupMemberQuery queryBean) {
+        return induGroupMemberDao.count(queryBean);
     }
 
     /**
@@ -61,9 +60,15 @@ public class IndustryGroupMemberServiceImpl extends AbstractBasePageService<Indu
     @Override
     protected List<InduGroupMemberBean> getItem(int offset,
             int pageSize,
-            InduGroupMemberQuery example) {
-        // TODO Auto-generated method stub
-        return null;
+            InduGroupMemberQuery queryBean) {
+        List<PojoIndustryGroupMember> pojoInduGroupMembers= induGroupMemberDao.getItem(offset,pageSize,queryBean);
+        List<InduGroupMemberBean> result=new ArrayList<InduGroupMemberBean>();
+        for (PojoIndustryGroupMember pojoIndustryGroupMember : pojoInduGroupMembers) {
+            InduGroupMemberBean beanTemp=BeanCopyUtil.copyBean(InduGroupMemberBean.class, pojoIndustryGroupMember);
+            result.add(beanTemp);
+        }
+        pojoInduGroupMembers=null;
+        return result;
     }
 
     /**
@@ -85,5 +90,22 @@ public class IndustryGroupMemberServiceImpl extends AbstractBasePageService<Indu
         int result=(int)(Math.random()*900)+100;
         String uniqueTag=DateUtil.getCurrentDateTime()+result;
         return uniqueTag;
+    }
+
+    /**
+     *
+     * @param queryBean
+     * @return
+     */
+    @Override
+    public List<InduGroupMemberBean> queryGroupMember(InduGroupMemberQuery queryBean) {
+        List<PojoIndustryGroupMember> groupMembers= induGroupMemberDao.queryGroupMember(queryBean);
+        List<InduGroupMemberBean> result=new ArrayList<InduGroupMemberBean>();
+        for (PojoIndustryGroupMember pojoIndustryGroupMember : groupMembers) {
+            InduGroupMemberBean beanTemp=BeanCopyUtil.copyBean(InduGroupMemberBean.class, pojoIndustryGroupMember);
+            result.add(beanTemp);
+        }
+        groupMembers=null;
+        return result;
     }
 }

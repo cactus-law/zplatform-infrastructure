@@ -40,5 +40,5 @@ public interface IndustryGroupService extends IBasePageService<IndustryGroupQuer
         * @param queryBean
         * @return
         */
-       public List<IndustryGroupBean> queryGroup(IndustryGroupQuery queryBean);
+       public IndustryGroupBean queryGroup(IndustryGroupQuery queryBean);
 }

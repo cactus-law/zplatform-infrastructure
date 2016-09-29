@@ -52,8 +52,7 @@ public class IndustryGroupServiceImpl extends AbstractBasePageService<IndustryGr
      */
     @Override
     protected long getTotal(IndustryGroupQuery example) {
-        // TODO Auto-generated method stub
-        return 0;
+        return industryGroupDao.count(example);
     }
 
     /**
@@ -66,9 +65,16 @@ public class IndustryGroupServiceImpl extends AbstractBasePageService<IndustryGr
     @Override
     protected List<IndustryGroupBean> getItem(int offset,
             int pageSize,
-            IndustryGroupQuery example) {
-        // TODO Auto-generated method stub
-        return null;
+            IndustryGroupQuery queryBean) {
+        List<PojoIndustryGroup> industryGroups=industryGroupDao.getItem(offset,pageSize,queryBean);
+        List<IndustryGroupBean> result= new ArrayList<IndustryGroupBean>();
+        for (PojoIndustryGroup pojoIndustryGroup : industryGroups) {
+            IndustryGroupBean beanTemp=new IndustryGroupBean();
+            beanTemp=BeanCopyUtil.copyBean(IndustryGroupBean.class, pojoIndustryGroup);
+            result.add(beanTemp);
+        }
+        industryGroups=null;
+        return result;
     }
 
     /**
@@ -120,14 +126,13 @@ public class IndustryGroupServiceImpl extends AbstractBasePageService<IndustryGr
      * @return
      */
     @Override
-    public List<IndustryGroupBean> queryGroup(IndustryGroupQuery queryBean) {
-        List<IndustryGroupBean> result=new ArrayList<IndustryGroupBean>();
-        List<PojoIndustryGroup> industryGroups=  industryGroupDao.queryGroup(queryBean);
-        for (PojoIndustryGroup pojoIndustryGroup : industryGroups) {
-            IndustryGroupBean beanTemp=new IndustryGroupBean();
-            beanTemp=BeanCopyUtil.copyBean(IndustryGroupBean.class, pojoIndustryGroup);
-            result.add(beanTemp);
+    public IndustryGroupBean queryGroup(IndustryGroupQuery queryBean) {
+        PojoIndustryGroup pojoIndustryGroup=  industryGroupDao.queryGroup(queryBean);
+        if (pojoIndustryGroup==null) {
+            return null;
         }
-        return result;
+        IndustryGroupBean beanTemp=new IndustryGroupBean();
+        beanTemp=BeanCopyUtil.copyBean(IndustryGroupBean.class, pojoIndustryGroup);
+        return beanTemp;
     }
 }

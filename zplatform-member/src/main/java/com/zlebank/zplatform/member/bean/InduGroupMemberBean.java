@@ -13,6 +13,7 @@ package com.zlebank.zplatform.member.bean;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.zlebank.zplatform.acc.bean.enums.CommonStatus;
 import com.zlebank.zplatform.acc.bean.enums.Usage;
 import com.zlebank.zplatform.commons.bean.Bean;
 
@@ -62,7 +63,7 @@ public class InduGroupMemberBean implements Serializable,Bean {
     /**
      * 可用状态
      */
-    private String status;
+    private CommonStatus status;
     
     /**
      * 加入群组账户标记
@@ -172,14 +173,14 @@ public class InduGroupMemberBean implements Serializable,Bean {
     /**
      * @return the status
      */
-    public String getStatus() {
+    public CommonStatus getStatus() {
         return status;
     }
 
     /**
      * @param status the status to set
      */
-    public void setStatus(String status) {
+    public void setStatus(CommonStatus status) {
         this.status = status;
     }
 

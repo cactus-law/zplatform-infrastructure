@@ -10,6 +10,8 @@
  */
 package com.zlebank.zplatform.member.service;
 
+import java.util.List;
+
 import com.zlebank.zplatform.commons.service.IBasePageService;
 import com.zlebank.zplatform.member.bean.InduGroupMemberBean;
 import com.zlebank.zplatform.member.bean.InduGroupMemberQuery;
@@ -29,4 +31,10 @@ public interface IndustryGroupMemberService extends IBasePageService<InduGroupMe
         * @return uniqueTag
         */
        public String addMemberToGroup(InduGroupMemberBean bean);
+       /**
+        * 查询组成员
+        * @param queryBean
+        * @return
+        */
+       public List<InduGroupMemberBean> queryGroupMember(InduGroupMemberQuery queryBean);
 }
