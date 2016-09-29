@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.zlebank.zplatform.member.bean.IndustryGroupBean;
+import com.zlebank.zplatform.member.bean.IndustryGroupCreatBean;
 import com.zlebank.zplatform.member.service.IndustryGroupService;
 
 /**
@@ -31,7 +32,7 @@ public class IndustryGroupTest extends BaseTest{
     private IndustryGroupService industryGroupService;
     @Test
     public void addGroup(){
-        IndustryGroupBean groupBean=new IndustryGroupBean();
+        IndustryGroupCreatBean groupBean=new IndustryGroupCreatBean();
         groupBean.setGroupName("测试名称");
         groupBean.setInstiCode("300000000000027");
         groupBean.setMemberId("200000000000626");
