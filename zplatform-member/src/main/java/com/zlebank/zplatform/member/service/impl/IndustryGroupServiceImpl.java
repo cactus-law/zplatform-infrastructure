@@ -21,11 +21,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.zlebank.zplatform.acc.bean.enums.CommonStatus;
 import com.zlebank.zplatform.acc.bean.enums.Usage;
+import com.zlebank.zplatform.acc.exception.AbstractBusiAcctException;
 import com.zlebank.zplatform.commons.service.impl.AbstractBasePageService;
 import com.zlebank.zplatform.commons.utils.BeanCopyUtil;
 import com.zlebank.zplatform.member.bean.InduGroupMemberBean;
 import com.zlebank.zplatform.member.bean.IndustryGroupBean;
 import com.zlebank.zplatform.member.bean.IndustryGroupQuery;
+import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 import com.zlebank.zplatform.member.dao.IndustryGroupDAO;
 import com.zlebank.zplatform.member.pojo.PojoIndustryGroup;
 import com.zlebank.zplatform.member.service.IndustryGroupMemberService;
@@ -81,10 +83,11 @@ public class IndustryGroupServiceImpl extends AbstractBasePageService<IndustryGr
      *
      * @param groupBean
      * @return 
+     * @throws AbstractBusiAcctException 
      */
     @Override
     @Transactional(propagation=Propagation.REQUIRED)
-    public String addGroup(IndustryGroupBean groupBean) {
+    public String addGroup(IndustryGroupBean groupBean) throws AbstractBusiAcctException {
         PojoIndustryGroup pojoInduGroup=new PojoIndustryGroup();
         pojoInduGroup=BeanCopyUtil.copyBean(PojoIndustryGroup.class, groupBean);
         pojoInduGroup.setInTime(new Date());
@@ -96,7 +99,8 @@ public class IndustryGroupServiceImpl extends AbstractBasePageService<IndustryGr
         induGroupMemberBean.setGroupId(pojoInduGroup.getId());
         induGroupMemberBean.setMemberId(pojoInduGroup.getMemberId());
         induGroupMemberBean.setUsage(Usage.WAITSETTLE);
-        induGroupMemServiceImp.addMemberToGroup(induGroupMemberBean);
+        induGroupMemberBean.setBusiActorType(BusinessActorType.ENTERPRISE);
+        induGroupMemServiceImp.addMemberToGroup(induGroupMemberBean,false);
         return pojoInduGroup.getGroupCode();
     }
     

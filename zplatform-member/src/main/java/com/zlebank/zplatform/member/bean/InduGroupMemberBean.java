@@ -16,6 +16,7 @@ import java.util.Date;
 import com.zlebank.zplatform.acc.bean.enums.CommonStatus;
 import com.zlebank.zplatform.acc.bean.enums.Usage;
 import com.zlebank.zplatform.commons.bean.Bean;
+import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 
 /**
  * Class Description
@@ -70,8 +71,9 @@ public class InduGroupMemberBean implements Serializable,Bean {
      */
     private Usage usage;
     
+    private BusinessActorType busiActorType;
     
-
+    private long inuser;
     /**
      * @return the id
      */
@@ -196,6 +198,34 @@ public class InduGroupMemberBean implements Serializable,Bean {
      */
     public void setUsage(Usage usage) {
         this.usage = usage;
+    }
+
+    /**
+     * @return the busiActorType
+     */
+    public BusinessActorType getBusiActorType() {
+        return busiActorType;
+    }
+
+    /**
+     * @param busiActorType the busiActorType to set
+     */
+    public void setBusiActorType(BusinessActorType busiActorType) {
+        this.busiActorType = busiActorType;
+    }
+
+    /**
+     * @return the inuser
+     */
+    public long getInuser() {
+        return inuser;
+    }
+
+    /**
+     * @param inuser the inuser to set
+     */
+    public void setInuser(long inuser) {
+        this.inuser = inuser;
     }
     
     
