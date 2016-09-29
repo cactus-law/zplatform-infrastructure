@@ -55,6 +55,7 @@ public class IndustryGroupMemberServiceImpl extends AbstractBasePageService<Indu
      * @return
      */
     @Override
+    @Transactional(readOnly=true)
     protected long getTotal(InduGroupMemberQuery queryBean) {
         return induGroupMemberDao.count(queryBean);
     }
@@ -67,6 +68,7 @@ public class IndustryGroupMemberServiceImpl extends AbstractBasePageService<Indu
      * @return
      */
     @Override
+    @Transactional(readOnly=true)
     protected List<InduGroupMemberBean> getItem(int offset,
             int pageSize,
             InduGroupMemberQuery queryBean) {
@@ -133,6 +135,7 @@ public class IndustryGroupMemberServiceImpl extends AbstractBasePageService<Indu
      * @return
      */
     @Override
+    @Transactional(readOnly=true)
     public List<InduGroupMemberBean> queryGroupMember(InduGroupMemberQuery queryBean) {
         List<PojoIndustryGroupMember> groupMembers= induGroupMemberDao.queryGroupMember(queryBean);
         List<InduGroupMemberBean> result=new ArrayList<InduGroupMemberBean>();

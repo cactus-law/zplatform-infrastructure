@@ -53,6 +53,7 @@ public class IndustryGroupServiceImpl extends AbstractBasePageService<IndustryGr
      * @return
      */
     @Override
+    @Transactional(readOnly=true)
     protected long getTotal(IndustryGroupQuery example) {
         return industryGroupDao.count(example);
     }
@@ -65,6 +66,7 @@ public class IndustryGroupServiceImpl extends AbstractBasePageService<IndustryGr
      * @return
      */
     @Override
+    @Transactional(readOnly=true)
     protected List<IndustryGroupBean> getItem(int offset,
             int pageSize,
             IndustryGroupQuery queryBean) {
@@ -105,7 +107,7 @@ public class IndustryGroupServiceImpl extends AbstractBasePageService<IndustryGr
     }
     
     private String generateGroupCode(IndustryGroupBean groupBean){
-        String codePrefix=groupBean.getMemberId().substring(4);
+        String codePrefix=groupBean.getMemberId().substring(5);
         return codePrefix;
     }
     /**
@@ -130,6 +132,7 @@ public class IndustryGroupServiceImpl extends AbstractBasePageService<IndustryGr
      * @return
      */
     @Override
+    @Transactional(readOnly=true)
     public IndustryGroupBean queryGroup(IndustryGroupQuery queryBean) {
         PojoIndustryGroup pojoIndustryGroup=  industryGroupDao.queryGroup(queryBean);
         if (pojoIndustryGroup==null) {
