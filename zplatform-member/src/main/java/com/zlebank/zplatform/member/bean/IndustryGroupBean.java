@@ -30,7 +30,6 @@ public class IndustryGroupBean implements Serializable,Bean {
      */
     private static final long serialVersionUID = -8092262869089912780L;
 
-    
     /**
      * 主键
      */
@@ -48,18 +47,10 @@ public class IndustryGroupBean implements Serializable,Bean {
      */
     private String memberId;
     /**
-     * 群主名称
-     */
-    private String memberName;
-    /**
      * 群主所在机构号
      */
     private String instiCode;
     
-    /**
-     * 群主所在机构名称
-     */
-    private String instiName;
     /**
      * 是否可提现到基本账户 0，1
      */
@@ -67,7 +58,7 @@ public class IndustryGroupBean implements Serializable,Bean {
     /**
      * 是否可用0，1
      */
-    private String useable;
+    private String status;
     /**
      * 创建人主键
      */
@@ -76,6 +67,10 @@ public class IndustryGroupBean implements Serializable,Bean {
      * 备注
      */
     private String note;
+    /**
+     * 备注2
+     */
+    private String remarks;
     /**
      * 创建时间
      */
@@ -133,18 +128,6 @@ public class IndustryGroupBean implements Serializable,Bean {
         this.memberId = memberId;
     }
     /**
-     * @return the memberName
-     */
-    public String getMemberName() {
-        return memberName;
-    }
-    /**
-     * @param memberName the memberName to set
-     */
-    public void setMemberName(String memberName) {
-        this.memberName = memberName;
-    }
-    /**
      * @return the instiCode
      */
     public String getInstiCode() {
@@ -155,19 +138,6 @@ public class IndustryGroupBean implements Serializable,Bean {
      */
     public void setInstiCode(String instiCode) {
         this.instiCode = instiCode;
-    }
-    
-    /**
-     * @return the instiName
-     */
-    public String getInstiName() {
-        return instiName;
-    }
-    /**
-     * @param instiName the instiName to set
-     */
-    public void setInstiName(String instiName) {
-        this.instiName = instiName;
     }
     /**
      * @return the drawable
@@ -182,16 +152,16 @@ public class IndustryGroupBean implements Serializable,Bean {
         this.drawable = drawable;
     }
     /**
-     * @return the useable
+     * @return the status
      */
-    public String getUseable() {
-        return useable;
+    public String getStatus() {
+        return status;
     }
     /**
-     * @param useable the useable to set
+     * @param status the status to set
      */
-    public void setUseable(String useable) {
-        this.useable = useable;
+    public void setStatus(String status) {
+        this.status = status;
     }
     /**
      * @return the inuser
@@ -216,6 +186,18 @@ public class IndustryGroupBean implements Serializable,Bean {
      */
     public void setNote(String note) {
         this.note = note;
+    }
+    /**
+     * @return the remarks
+     */
+    public String getRemarks() {
+        return remarks;
+    }
+    /**
+     * @param remarks the remarks to set
+     */
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
     /**
      * @return the inTime

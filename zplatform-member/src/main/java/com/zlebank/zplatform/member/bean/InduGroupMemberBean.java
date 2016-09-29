@@ -13,6 +13,7 @@ package com.zlebank.zplatform.member.bean;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.zlebank.zplatform.acc.bean.enums.Usage;
 import com.zlebank.zplatform.commons.bean.Bean;
 
 /**
@@ -53,81 +54,149 @@ public class InduGroupMemberBean implements Serializable,Bean {
      */
     private Date inTime;
     
+    /**
+     * 修改时间
+     */
+    private Date upTime;
     
+    /**
+     * 可用状态
+     */
+    private String status;
+    
+    /**
+     * 加入群组账户标记
+     */
+    private Usage usage;
+    
+    
+
     /**
      * @return the id
      */
     public long getId() {
         return id;
     }
+
     /**
      * @param id the id to set
      */
     public void setId(long id) {
         this.id = id;
     }
+
     /**
      * @return the uniqueTag
      */
     public String getUniqueTag() {
         return uniqueTag;
     }
+
     /**
      * @param uniqueTag the uniqueTag to set
      */
     public void setUniqueTag(String uniqueTag) {
         this.uniqueTag = uniqueTag;
     }
+
     /**
      * @return the memberId
      */
     public String getMemberId() {
         return memberId;
     }
+
     /**
      * @param memberId the memberId to set
      */
     public void setMemberId(String memberId) {
         this.memberId = memberId;
     }
+
     /**
      * @return the groupCode
      */
     public String getGroupCode() {
         return groupCode;
     }
+
     /**
      * @param groupCode the groupCode to set
      */
     public void setGroupCode(String groupCode) {
         this.groupCode = groupCode;
     }
-    
-    
+
     /**
      * @return the groupId
      */
     public long getGroupId() {
         return groupId;
     }
+
     /**
      * @param groupId the groupId to set
      */
     public void setGroupId(long groupId) {
         this.groupId = groupId;
     }
+
     /**
      * @return the inTime
      */
     public Date getInTime() {
         return inTime;
     }
+
     /**
      * @param inTime the inTime to set
      */
     public void setInTime(Date inTime) {
         this.inTime = inTime;
     }
+
+    /**
+     * @return the upTime
+     */
+    public Date getUpTime() {
+        return upTime;
+    }
+
+    /**
+     * @param upTime the upTime to set
+     */
+    public void setUpTime(Date upTime) {
+        this.upTime = upTime;
+    }
+
+    /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    /**
+     * @return the usage
+     */
+    public Usage getUsage() {
+        return usage;
+    }
+
+    /**
+     * @param usage the usage to set
+     */
+    public void setUsage(Usage usage) {
+        this.usage = usage;
+    }
     
     
+   
 }

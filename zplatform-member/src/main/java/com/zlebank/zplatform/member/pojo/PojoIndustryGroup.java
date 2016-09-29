@@ -14,13 +14,18 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+import org.hibernate.annotations.Type;
+
+import com.zlebank.zplatform.acc.bean.enums.CommonStatus;
 
 /**
  * 行业群组
@@ -30,6 +35,8 @@ import org.hibernate.annotations.Parameter;
  * @date 2016年9月27日 下午5:39:40
  * @since 
  */
+@Entity
+@Table(name="T_INDUSTRY_GROUP")
 public class PojoIndustryGroup implements Serializable {
 
     /**
@@ -53,18 +60,10 @@ public class PojoIndustryGroup implements Serializable {
      */
     private String memberId;
     /**
-     * 群主名称
-     */
-    private String memberName;
-    /**
      * 群主所在机构号
      */
     private String instiCode;
     
-    /**
-     * 群主所在机构名称
-     */
-    private String instiName;
     /**
      * 是否可提现到基本账户 0，1
      */
@@ -72,7 +71,7 @@ public class PojoIndustryGroup implements Serializable {
     /**
      * 是否可用0，1
      */
-    private String useable;
+    private CommonStatus status;
     /**
      * 创建人主键
      */
@@ -81,6 +80,10 @@ public class PojoIndustryGroup implements Serializable {
      * 备注
      */
     private String note;
+    /**
+     * 备注2
+     */
+    private String remarks;
     /**
      * 创建时间
      */
@@ -154,19 +157,6 @@ public class PojoIndustryGroup implements Serializable {
         this.memberId = memberId;
     }
     /**
-     * @return the memberName
-     */
-    @Column(name="member_name")
-    public String getMemberName() {
-        return memberName;
-    }
-    /**
-     * @param memberName the memberName to set
-     */
-    public void setMemberName(String memberName) {
-        this.memberName = memberName;
-    }
-    /**
      * @return the instiCode
      */
     @Column(name="insti_code")
@@ -180,20 +170,6 @@ public class PojoIndustryGroup implements Serializable {
         this.instiCode = instiCode;
     }
     
-    
-    /**
-     * @return the instiName
-     */
-    @Column(name="insti_name")
-    public String getInstiName() {
-        return instiName;
-    }
-    /**
-     * @param instiName the instiName to set
-     */
-    public void setInstiName(String instiName) {
-        this.instiName = instiName;
-    }
     /**
      * @return the drawable
      */
@@ -207,20 +183,6 @@ public class PojoIndustryGroup implements Serializable {
     public void setDrawable(String drawable) {
         this.drawable = drawable;
     }
-    /**
-     * @return the useable
-     */
-    @Column(name="useable")
-    public String getUseable() {
-        return useable;
-    }
-    /**
-     * @param useable the useable to set
-     */
-    public void setUseable(String useable) {
-        this.useable = useable;
-    }
-    
     /**
      * @return the inuser
      */
@@ -274,6 +236,33 @@ public class PojoIndustryGroup implements Serializable {
      */
     public void setUpTime(Date upTime) {
         this.upTime = upTime;
+    }
+    /**
+     * @return the status
+     */
+    @Column(name="status")
+    @Type(type = "com.zlebank.zplatform.acc.pojo.usertype.CommonStatusSqlType")
+    public CommonStatus getStatus() {
+        return status;
+    }
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(CommonStatus status) {
+        this.status = status;
+    }
+    /**
+     * @return the remarks
+     */
+    @Column(name="remarks")
+    public String getRemarks() {
+        return remarks;
+    }
+    /**
+     * @param remarks the remarks to set
+     */
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
     
     

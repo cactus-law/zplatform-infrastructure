@@ -18,6 +18,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zlebank.zplatform.acc.bean.enums.CommonStatus;
+import com.zlebank.zplatform.acc.bean.enums.Usage;
 import com.zlebank.zplatform.commons.service.impl.AbstractBasePageService;
 import com.zlebank.zplatform.commons.utils.BeanCopyUtil;
 import com.zlebank.zplatform.commons.utils.DateUtil;
@@ -79,13 +81,14 @@ public class IndustryGroupServiceImpl extends AbstractBasePageService<IndustryGr
         PojoIndustryGroup pojoInduGroup=new PojoIndustryGroup();
         pojoInduGroup=BeanCopyUtil.copyBean(PojoIndustryGroup.class, groupBean);
         pojoInduGroup.setInTime(new Date());
-        pojoInduGroup.setUseable("0");
+        pojoInduGroup.setStatus(CommonStatus.NORMAL);
         pojoInduGroup.setGroupCode(generateGroupCode(groupBean));
         pojoInduGroup=industryGroupDao.merge(pojoInduGroup);
         InduGroupMemberBean induGroupMemberBean=new InduGroupMemberBean();
         induGroupMemberBean.setGroupCode(pojoInduGroup.getGroupCode());
         induGroupMemberBean.setGroupId(pojoInduGroup.getId());
         induGroupMemberBean.setMemberId(pojoInduGroup.getMemberId());
+        induGroupMemberBean.setUsage(Usage.WAITSETTLE);
         induGroupMemServiceImp.addMemberToGroup(induGroupMemberBean);
         return pojoInduGroup.getGroupCode();
     }
@@ -94,7 +97,6 @@ public class IndustryGroupServiceImpl extends AbstractBasePageService<IndustryGr
         String codePrefix=groupBean.getMemberId().substring(4);
         return codePrefix;
     }
-
     /**
      *
      * @param groupBean
@@ -107,6 +109,7 @@ public class IndustryGroupServiceImpl extends AbstractBasePageService<IndustryGr
         pojoInduGroup.setNote(groupBean.getNote());
         pojoInduGroup.setGroupName(groupBean.getGroupName());
         pojoInduGroup.setUpTime(new Date());
+        pojoInduGroup.setRemarks(groupBean.getRemarks());
         industryGroupDao.update(pojoInduGroup);
     }
 }

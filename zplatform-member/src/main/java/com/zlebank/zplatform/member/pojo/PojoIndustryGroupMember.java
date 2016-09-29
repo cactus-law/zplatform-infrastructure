@@ -23,6 +23,10 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+import org.hibernate.annotations.Type;
+
+import com.zlebank.zplatform.acc.bean.enums.CommonStatus;
+import com.zlebank.zplatform.acc.bean.enums.Usage;
 
 /**
  * 行业群组<>会员关系
@@ -33,7 +37,7 @@ import org.hibernate.annotations.Parameter;
  * @since 
  */
 @Entity
-@Table(name="t_industry_group_member")
+@Table(name="T_INDUSTRY_GROUP_MEMBER")
 public class PojoIndustryGroupMember implements Serializable {
 
     /**
@@ -63,8 +67,20 @@ public class PojoIndustryGroupMember implements Serializable {
      */
     private Date inTime;
     
+    /**
+     * 修改时间
+     */
+    private Date upTime;
     
+    /**
+     * 可用状态
+     */
+    private CommonStatus status;
     
+    /**
+     * 加入群组账户标记
+     */
+    private Usage usage;
     /**
      * @return the id
      */
@@ -152,6 +168,50 @@ public class PojoIndustryGroupMember implements Serializable {
      */
     public void setInTime(Date inTime) {
         this.inTime = inTime;
+    }
+    
+    /**
+     * @return the upTime
+     */
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="uptime")
+    public Date getUpTime() {
+        return upTime;
+    }
+    /**
+     * @param upTime the upTime to set
+     */
+    public void setUpTime(Date upTime) {
+        this.upTime = upTime;
+    }
+    
+    /**
+     * @return the status
+     */
+    @Column(name="status")
+    @Type(type = "com.zlebank.zplatform.acc.pojo.usertype.CommonStatusSqlType")
+    public CommonStatus getStatus() {
+        return status;
+    }
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(CommonStatus status) {
+        this.status = status;
+    }
+    /**
+     * @return the usage
+     */
+    @Column(name = "usage",nullable=false)
+    @Type(type = "com.zlebank.zplatform.acc.pojo.usertype.UsageSqlType")
+    public Usage getUsage() {
+        return usage;
+    }
+    /**
+     * @param usage the usage to set
+     */
+    public void setUsage(Usage usage) {
+        this.usage = usage;
     }
     
     
