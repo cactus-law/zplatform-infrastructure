@@ -13,6 +13,7 @@ package com.zlebank.zplatform.member.bean;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.zlebank.zplatform.acc.bean.enums.CommonStatus;
 import com.zlebank.zplatform.commons.bean.Bean;
 
 /**
@@ -58,7 +59,7 @@ public class IndustryGroupBean implements Serializable,Bean {
     /**
      * 是否可用0，1
      */
-    private String status;
+    private CommonStatus status;
     /**
      * 创建人主键
      */
@@ -154,13 +155,13 @@ public class IndustryGroupBean implements Serializable,Bean {
     /**
      * @return the status
      */
-    public String getStatus() {
+    public CommonStatus getStatus() {
         return status;
     }
     /**
      * @param status the status to set
      */
-    public void setStatus(String status) {
+    public void setStatus(CommonStatus status) {
         this.status = status;
     }
     /**

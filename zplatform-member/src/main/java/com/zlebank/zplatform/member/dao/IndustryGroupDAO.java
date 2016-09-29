@@ -10,8 +10,11 @@
  */
 package com.zlebank.zplatform.member.dao;
 
+import java.util.List;
+
 import com.zlebank.zplatform.commons.dao.BaseDAO;
 import com.zlebank.zplatform.member.bean.IndustryGroupBean;
+import com.zlebank.zplatform.member.bean.IndustryGroupQuery;
 import com.zlebank.zplatform.member.pojo.PojoIndustryGroup;
 
 /**
@@ -29,5 +32,29 @@ public interface IndustryGroupDAO extends BaseDAO<PojoIndustryGroup> {
      * @return
      */
     PojoIndustryGroup getByCode(IndustryGroupBean groupBean);
+
+    /**
+     * 查询群组
+     * @param queryBean
+     * @return
+     */
+    PojoIndustryGroup queryGroup(IndustryGroupQuery queryBean);
+
+    /**
+     * 分页查询-total
+     * @param example
+     * @return
+     */
+    long count(IndustryGroupQuery example);
+
+    /**分页查询-data
+     * @param offset
+     * @param pageSize
+     * @param queryBean
+     * @return
+     */
+    List<PojoIndustryGroup> getItem(int offset,
+            int pageSize,
+            IndustryGroupQuery queryBean);
         
 }
