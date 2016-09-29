@@ -35,7 +35,7 @@ public class IndustryGroupTest extends BaseTest{
         IndustryGroupCreatBean groupBean=new IndustryGroupCreatBean();
         groupBean.setGroupName("测试名称");
         groupBean.setInstiCode("300000000000027");
-        groupBean.setMemberId("200000000000626");
+        groupBean.setMemberId("200000000000968");
         groupBean.setInuser(45);
         groupBean.setDrawable("0");
         try {
@@ -44,5 +44,15 @@ public class IndustryGroupTest extends BaseTest{
           e.printStackTrace();
           Assert.fail();
         }
+    }
+    @Test
+    public void updateGroup(){
+        IndustryGroupBean bean=new IndustryGroupBean();
+        bean.setGroupName("更新测试一下");
+        bean.setGroupCode("0000000626");
+        bean.setDrawable("0");
+        bean.setNote("cese");
+        bean.setRemarks("修改备注");
+        industryGroupService.updateGroup(bean);
     }
 }
