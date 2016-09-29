@@ -440,7 +440,7 @@ public class MemberOperationServiceImpl implements MemberOperationService {
             return false;
         }
         String requestPwd = StringUtil.isEmpty(member.getPaypwd()) ? null : Md5.getInstance().md5s(member.getPaypwd());
-        if (!isCheckOldPassword || requestPwd.equals(pm.getPayPwd())) {
+        if (!isCheckOldPassword ) {//不校验原支付密码
             // 设置新的支付密码
             String setPwd = Md5.getInstance().md5s(newPayPwd);
             pm.setPayPwd(setPwd);
@@ -448,7 +448,16 @@ public class MemberOperationServiceImpl implements MemberOperationService {
             memberDAO.update(pm);
             return true;
         } else {
-            throw new DataCheckFailedException("旧密码输入错误");
+        	if(requestPwd.equals(pm.getPayPwd())){
+        		throw new DataCheckFailedException("新旧支付密码相同");
+        	}else{
+        		String setPwd = Md5.getInstance().md5s(newPayPwd);
+                pm.setPayPwd(setPwd);
+                pm.setUpTime(new Date());
+                memberDAO.update(pm);
+                return true;
+        	}
+            
         }
     }
     
