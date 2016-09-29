@@ -29,4 +29,12 @@ public interface IndustryGroupMemberService extends IBasePageService<InduGroupMe
         * @return uniqueTag
         */
        public String addMemberToGroup(InduGroupMemberBean bean);
+       
+       /**
+        * 根据会员号和群组代码获取行业群组会员信息
+        * @param memberId 会员号
+        * @param groupCode 群组号
+        * @return
+        */
+       public InduGroupMemberBean getGroupMemberByMemberIdAndGroupCode(String memberId,String groupCode);
 }

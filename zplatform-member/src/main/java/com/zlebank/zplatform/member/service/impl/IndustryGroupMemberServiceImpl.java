@@ -86,4 +86,20 @@ public class IndustryGroupMemberServiceImpl extends AbstractBasePageService<Indu
         String uniqueTag=DateUtil.getCurrentDateTime()+result;
         return uniqueTag;
     }
+
+	/**
+	 *
+	 * @param memberId
+	 * @param groupCode
+	 * @return
+	 */
+	@Override
+	public InduGroupMemberBean getGroupMemberByMemberIdAndGroupCode(
+			String memberId, String groupCode) {
+		PojoIndustryGroupMember groupMember = induGroupMemberDao.getGroupMemberByMemberIdAndGroupCode(memberId, groupCode);
+		if(groupMember==null){
+			return null;
+		}
+		return BeanCopyUtil.copyBean(InduGroupMemberBean.class, groupMember);
+	}
 }

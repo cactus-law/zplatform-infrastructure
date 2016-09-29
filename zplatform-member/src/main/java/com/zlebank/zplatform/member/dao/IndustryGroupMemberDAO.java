@@ -11,6 +11,7 @@
 package com.zlebank.zplatform.member.dao;
 
 import com.zlebank.zplatform.commons.dao.BaseDAO;
+import com.zlebank.zplatform.member.bean.InduGroupMemberBean;
 import com.zlebank.zplatform.member.pojo.PojoIndustryGroupMember;
 
 /**
@@ -23,4 +24,11 @@ import com.zlebank.zplatform.member.pojo.PojoIndustryGroupMember;
  */
 public interface IndustryGroupMemberDAO extends BaseDAO<PojoIndustryGroupMember> {
 
+	/**
+	 * 根据会员号和群组代码获取行业群组会员信息
+	 * @param memberId 会员号
+	 * @param groupCode 群组号
+	 * @return
+	 */
+	 public PojoIndustryGroupMember getGroupMemberByMemberIdAndGroupCode(String memberId,String groupCode);
 }
