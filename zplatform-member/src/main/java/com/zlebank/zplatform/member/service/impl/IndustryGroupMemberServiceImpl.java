@@ -10,15 +10,22 @@
  */
 package com.zlebank.zplatform.member.service.impl;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.zlebank.zplatform.commons.service.impl.AbstractBasePageService;
+import com.zlebank.zplatform.commons.utils.BeanCopyUtil;
+import com.zlebank.zplatform.commons.utils.DateUtil;
 import com.zlebank.zplatform.member.bean.InduGroupMemberBean;
 import com.zlebank.zplatform.member.bean.InduGroupMemberQuery;
 import com.zlebank.zplatform.member.dao.IndustryGroupMemberDAO;
+import com.zlebank.zplatform.member.pojo.PojoIndustryGroupMember;
 import com.zlebank.zplatform.member.service.IndustryGroupMemberService;
 
 /**
@@ -64,9 +71,19 @@ public class IndustryGroupMemberServiceImpl extends AbstractBasePageService<Indu
      * @param bean
      */
     @Override
-    public void addMemberToGroup(InduGroupMemberBean bean) {
-        // TODO Auto-generated method stub
-        
+    @Transactional(propagation=Propagation.REQUIRED)
+    public String addMemberToGroup(InduGroupMemberBean bean) {
+        PojoIndustryGroupMember pojoInduMember=new PojoIndustryGroupMember();
+        pojoInduMember=BeanCopyUtil.copyBean(PojoIndustryGroupMember.class, bean);
+        pojoInduMember.setInTime(new Date());
+        pojoInduMember.setUniqueTag(generateUniqueTag(bean));
+        pojoInduMember=induGroupMemberDao.merge(pojoInduMember);
+        return pojoInduMember.getUniqueTag();
     }
-
+    
+    private String generateUniqueTag(InduGroupMemberBean bean){
+        int result=(int)(Math.random()*900)+100;
+        String uniqueTag=DateUtil.getCurrentDateTime()+result;
+        return uniqueTag;
+    }
 }

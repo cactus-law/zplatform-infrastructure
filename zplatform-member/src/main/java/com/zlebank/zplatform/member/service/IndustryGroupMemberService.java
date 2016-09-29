@@ -23,5 +23,10 @@ import com.zlebank.zplatform.member.bean.InduGroupMemberQuery;
  * @since 
  */
 public interface IndustryGroupMemberService extends IBasePageService<InduGroupMemberQuery, InduGroupMemberBean>{
-       public void addMemberToGroup(InduGroupMemberBean bean);
+       /**
+        * 将会员加入行业群组
+        * @param bean
+        * @return uniqueTag
+        */
+       public String addMemberToGroup(InduGroupMemberBean bean);
 }
