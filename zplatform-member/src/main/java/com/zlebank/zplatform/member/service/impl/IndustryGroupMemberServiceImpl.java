@@ -124,10 +124,10 @@ public class IndustryGroupMemberServiceImpl extends AbstractBasePageService<Indu
     private String generateUniqueTag(InduGroupMemberCreateBean bean){
         String uniqueTag=null;
         if (bean.getUsage()==Usage.BASICPAY) {
-            uniqueTag=bean.getMemberId();
-        }else{
             int result=(int)(Math.random()*900)+100;
             uniqueTag=DateUtil.getCurrentDateTime().substring(0,12)+result;
+        }else{
+            uniqueTag=bean.getMemberId();
         }
         return uniqueTag;
     }
