@@ -57,7 +57,7 @@ public class PojoIndustryGroupMember implements Serializable {
     /**
      * 群组主键
      */
-    private String groupId;
+    private long groupId;
     /**
      * 加入群组时间
      */
@@ -130,13 +130,13 @@ public class PojoIndustryGroupMember implements Serializable {
      * @return the groupId
      */
     @Column(name="group_id")
-    public String getGroupId() {
+    public long getGroupId() {
         return groupId;
     }
     /**
      * @param groupId the groupId to set
      */
-    public void setGroupId(String groupId) {
+    public void setGroupId(long groupId) {
         this.groupId = groupId;
     }
     /**
