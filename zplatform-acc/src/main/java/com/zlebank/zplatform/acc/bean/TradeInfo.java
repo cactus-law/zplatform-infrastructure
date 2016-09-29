@@ -32,9 +32,9 @@ public class TradeInfo implements Serializable{
     private String payordno;
     /**交易类型**/
     private String busiCode;
-    /**付款方会员ID**/
+    /**个人会员--付款方会员ID**/
     private String payMemberId;
-    /**收款方会员ID**/
+    /**商户--收款方会员ID**/
     private String payToMemberId;
     /**收款方父级会员ID**/
     private String payToParentMemberId;
