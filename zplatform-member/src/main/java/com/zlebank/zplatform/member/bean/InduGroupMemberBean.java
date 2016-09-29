@@ -47,7 +47,7 @@ public class InduGroupMemberBean implements Serializable,Bean {
     /**
      * 群组主键
      */
-    private String groupId;
+    private long groupId;
     /**
      * 加入群组时间
      */
@@ -102,16 +102,18 @@ public class InduGroupMemberBean implements Serializable,Bean {
     public void setGroupCode(String groupCode) {
         this.groupCode = groupCode;
     }
+    
+    
     /**
      * @return the groupId
      */
-    public String getGroupId() {
+    public long getGroupId() {
         return groupId;
     }
     /**
      * @param groupId the groupId to set
      */
-    public void setGroupId(String groupId) {
+    public void setGroupId(long groupId) {
         this.groupId = groupId;
     }
     /**
