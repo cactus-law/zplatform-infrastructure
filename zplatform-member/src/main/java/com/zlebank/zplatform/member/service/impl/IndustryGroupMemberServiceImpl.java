@@ -139,7 +139,7 @@ public class IndustryGroupMemberServiceImpl extends AbstractBasePageService<Indu
                 }
             };
             BusiAcct busiAcct=new BusiAcct();
-            busiAcct.setBusiAcctName("授信账户");
+            busiAcct.setBusiAcctName("行业账户");
             busiAcct.setUsage(bean.getUsage());
             busiAcctService.openBusiAcct(busiActor, busiAcct, bean.getInuser());
         }
