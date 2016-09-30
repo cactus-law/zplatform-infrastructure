@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.zlebank.zplatform.member.bean.IndustryGroupBean;
 import com.zlebank.zplatform.member.bean.IndustryGroupCreatBean;
+import com.zlebank.zplatform.member.exception.NotFoundDataException;
 import com.zlebank.zplatform.member.service.IndustryGroupService;
 
 /**
@@ -46,7 +47,7 @@ public class IndustryGroupTest extends BaseTest{
         }
     }
     @Test
-    public void updateGroup(){
+    public void updateGroup() throws NotFoundDataException{
         IndustryGroupBean bean=new IndustryGroupBean();
         bean.setGroupName("更新测试一下");
         bean.setGroupCode("0000000626");

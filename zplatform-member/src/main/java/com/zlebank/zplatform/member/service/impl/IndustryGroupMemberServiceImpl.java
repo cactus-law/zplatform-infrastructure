@@ -26,6 +26,7 @@ import com.zlebank.zplatform.acc.bean.enums.CommonStatus;
 import com.zlebank.zplatform.acc.bean.enums.Usage;
 import com.zlebank.zplatform.acc.exception.AbstractBusiAcctException;
 import com.zlebank.zplatform.acc.service.BusiAcctService;
+import com.zlebank.zplatform.acc.util.LogPrintUtil;
 import com.zlebank.zplatform.commons.service.impl.AbstractBasePageService;
 import com.zlebank.zplatform.commons.utils.BeanCopyUtil;
 import com.zlebank.zplatform.commons.utils.DateUtil;
@@ -33,10 +34,17 @@ import com.zlebank.zplatform.member.bean.BusinessActor;
 import com.zlebank.zplatform.member.bean.InduGroupMemberBean;
 import com.zlebank.zplatform.member.bean.InduGroupMemberCreateBean;
 import com.zlebank.zplatform.member.bean.InduGroupMemberQuery;
+import com.zlebank.zplatform.member.bean.IndustryGroupBean;
 import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 import com.zlebank.zplatform.member.dao.IndustryGroupMemberDAO;
+import com.zlebank.zplatform.member.exception.ExistedDataException;
+import com.zlebank.zplatform.member.exception.NotFoundDataException;
+import com.zlebank.zplatform.member.pojo.PojoIndustryGroup;
 import com.zlebank.zplatform.member.pojo.PojoIndustryGroupMember;
+import com.zlebank.zplatform.member.pojo.PojoMember;
 import com.zlebank.zplatform.member.service.IndustryGroupMemberService;
+import com.zlebank.zplatform.member.service.IndustryGroupService;
+import com.zlebank.zplatform.member.service.MemberService;
 
 /**
  * Class Description
@@ -55,6 +63,10 @@ public class IndustryGroupMemberServiceImpl extends AbstractBasePageService<Indu
     private IndustryGroupMemberDAO induGroupMemberDao;
     @Autowired
     private BusiAcctService busiAcctService;
+    @Autowired
+    private IndustryGroupService industryGroupService;
+    @Autowired
+    private MemberService memberService;
     
     /**
      *
@@ -93,21 +105,34 @@ public class IndustryGroupMemberServiceImpl extends AbstractBasePageService<Indu
      *
      * @param bean
      * @throws AbstractBusiAcctException 
+     * @throws ExistedDataException 
+     * @throws NotFoundDataException 
      */
     @Override
     @Transactional(propagation=Propagation.REQUIRED)
-    public String addMemberToGroup(InduGroupMemberCreateBean bean,boolean openAcct,final String busiActorType) throws AbstractBusiAcctException {
-        PojoIndustryGroupMember pojoInduMember=new PojoIndustryGroupMember();
+    public String addMemberToGroup(InduGroupMemberCreateBean bean,boolean openAcct,final String busiActorType) throws AbstractBusiAcctException, ExistedDataException, NotFoundDataException {
+        PojoMember memberExist= memberService.getMbmberByMemberId(bean.getMemberId(), null);
+        if (memberExist==null) {
+            throw new NotFoundDataException(PojoMember.class,
+                    LogPrintUtil.logErrorPrint(bean.getMemberId()));
+        }
         InduGroupMemberBean groupMemberExist=queryGroupMemberExist(bean.getGroupCode(), bean.getMemberId(), bean.getUsage().getCode());
         if (groupMemberExist!=null) {
-            //throw 
+            throw new ExistedDataException(PojoIndustryGroupMember.class,
+                    LogPrintUtil.logErrorPrint(bean.getGroupCode(),String.valueOf(bean.getGroupId()),bean.getUsage().getCode()));
         }
-        pojoInduMember=BeanCopyUtil.copyBean(PojoIndustryGroupMember.class, bean);
+        IndustryGroupBean groupExistBean=industryGroupService.queryGroupByCodeOrId(bean.getGroupId(), bean.getGroupCode());
+        if (groupExistBean==null) {
+            throw new NotFoundDataException(PojoIndustryGroup.class,
+                    LogPrintUtil.logErrorPrint(String.valueOf(bean.getGroupId()),bean.getGroupCode()));
+        }
+        PojoIndustryGroupMember pojoInduMember=BeanCopyUtil.copyBean(PojoIndustryGroupMember.class, bean);
         pojoInduMember.setInTime(new Date());
         final String uniqueTag=generateUniqueTag(bean);
         pojoInduMember.setUniqueTag(uniqueTag);
         pojoInduMember.setStatus(CommonStatus.NORMAL);
         pojoInduMember=induGroupMemberDao.merge(pojoInduMember);
+        
         if (openAcct==true) {
             BusinessActor busiActor=new BusinessActor() {
                 @Override
@@ -123,7 +148,7 @@ public class IndustryGroupMemberServiceImpl extends AbstractBasePageService<Indu
                 }
             };
             BusiAcct busiAcct=new BusiAcct();
-            busiAcct.setBusiAcctName("授信账户");
+            busiAcct.setBusiAcctName("行业账户");
             busiAcct.setUsage(bean.getUsage());
             busiAcctService.openBusiAcct(busiActor, busiAcct, bean.getInuser());
         }

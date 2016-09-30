@@ -19,6 +19,8 @@ import com.zlebank.zplatform.acc.exception.AbstractBusiAcctException;
 import com.zlebank.zplatform.member.bean.InduGroupMemberBean;
 import com.zlebank.zplatform.member.bean.InduGroupMemberCreateBean;
 import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
+import com.zlebank.zplatform.member.exception.ExistedDataException;
+import com.zlebank.zplatform.member.exception.NotFoundDataException;
 import com.zlebank.zplatform.member.service.IndustryGroupMemberService;
 
 /**
@@ -35,17 +37,35 @@ public class IndustryGroupMemberTest extends BaseTest {
         @Test
         public void addMemberToGroup(){
             InduGroupMemberCreateBean bean=new InduGroupMemberCreateBean();
+           /* bean.setGroupCode("0000000637");
+            bean.setGroupId(19);
+            bean.setInuser(45);
+
+            bean.setMemberId("100000000000961");
+            bean.setUsage(Usage.BASICPAY);
+
+            bean.setMemberId("100000000000640");
+            bean.setUsage(Usage.GRANTCREDIT);*/
+            
             bean.setGroupCode("0000000626");
             bean.setGroupId(19);
             bean.setInuser(45);
-            bean.setMemberId("100000000000961");
+            bean.setMemberId("100000000000576");
             bean.setUsage(Usage.BASICPAY);
+            
+           
             try {
                 industryGroupMemberService.addMemberToGroup(bean, true, BusinessActorType.INDUSTRY.getCode());
             } catch (AbstractBusiAcctException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
                 Assert.fail();
+            } catch (ExistedDataException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (NotFoundDataException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
         }
         

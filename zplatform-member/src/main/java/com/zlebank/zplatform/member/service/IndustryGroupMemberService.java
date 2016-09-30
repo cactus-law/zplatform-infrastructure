@@ -17,6 +17,8 @@ import com.zlebank.zplatform.commons.service.IBasePageService;
 import com.zlebank.zplatform.member.bean.InduGroupMemberBean;
 import com.zlebank.zplatform.member.bean.InduGroupMemberCreateBean;
 import com.zlebank.zplatform.member.bean.InduGroupMemberQuery;
+import com.zlebank.zplatform.member.exception.ExistedDataException;
+import com.zlebank.zplatform.member.exception.NotFoundDataException;
 
 /**
  * 行业群组<>会员关系Service
@@ -43,10 +45,12 @@ public interface IndustryGroupMemberService extends IBasePageService<InduGroupMe
         * @param openAcct 是否开户
         * @param busiActorType 会员类型
         * @return uniqueTag
-        * @throws AbstractBusiAcctException 
+        * @return
+        * @throws AbstractBusiAcctException
+        * @throws ExistedDataException
+        * @throws NotFoundDataException
         */
-       public String addMemberToGroup(InduGroupMemberCreateBean bean,boolean openAcct,String busiActorType) throws AbstractBusiAcctException;
-
+       public String addMemberToGroup(InduGroupMemberCreateBean bean,boolean openAcct,String busiActorType) throws AbstractBusiAcctException, ExistedDataException, NotFoundDataException;
        /**
         * 查询组成员
         * @param queryBean

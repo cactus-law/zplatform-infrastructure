@@ -320,7 +320,7 @@ public class TestDefaultEntry {
         tradeInfo.setChannelId("95000001");
         tradeInfo.setTxnseqno(seqTxnNo);
         tradeInfo.setChannelFee(channelFee);
-
+        tradeInfo.setAccess_coopInstCode("300000000000027");
         tradeInfo.setCharge(fee);
          tradeInfo.setCoopInstCode("300000000000037");
         try {

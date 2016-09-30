@@ -52,9 +52,9 @@ public class AccountServiceTest {
             Assert.fail();
         }
     }
-    //@Test
+    @Test
     public void testgenDac() { 
-        String dac = dacUtil.generteDAC("2244", Money.valueOf(101369), Money.ZERO, Money.valueOf(101369));
+        String dac = dacUtil.generteDAC("2251", Money.valueOf(999999), Money.ZERO, Money.valueOf(999999));
         System.out.println(dacUtil);
        // System.out.println(dacUtil.getDacKey());
         System.out.println(dac);
