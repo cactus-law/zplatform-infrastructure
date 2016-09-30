@@ -133,6 +133,7 @@ public class IndustryGroupServiceImpl extends AbstractBasePageService<IndustryGr
      * @return
      */
     @Override
+    @Transactional(readOnly=true)
     public IndustryGroupBean queryGroupExist(String memberId, String instiCode) {
         IndustryGroupQuery queryBean=new IndustryGroupQuery();
         queryBean.setMemberId(memberId);
@@ -154,6 +155,7 @@ public class IndustryGroupServiceImpl extends AbstractBasePageService<IndustryGr
      * @return
      */
     @Override
+    @Transactional(readOnly=true)
     public IndustryGroupBean queryGroupByCodeOrId(long groupId,
             String groupCode) {
         IndustryGroupQuery queryBean=new IndustryGroupQuery();
