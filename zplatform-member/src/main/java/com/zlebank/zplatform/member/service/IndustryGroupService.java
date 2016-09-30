@@ -16,6 +16,8 @@ import com.zlebank.zplatform.commons.service.IBasePageService;
 import com.zlebank.zplatform.member.bean.IndustryGroupBean;
 import com.zlebank.zplatform.member.bean.IndustryGroupCreatBean;
 import com.zlebank.zplatform.member.bean.IndustryGroupQuery;
+import com.zlebank.zplatform.member.exception.ExistedDataException;
+import com.zlebank.zplatform.member.exception.NotFoundDataException;
 
 /**
  * 行业群组service
@@ -30,8 +32,10 @@ public interface IndustryGroupService extends IBasePageService<IndustryGroupQuer
         * 添加行业群组
         * @param groupBean
         * @throws AbstractBusiAcctException 
+        * @throws NotFoundDataException 
+        * @throws ExistedDataException 
         */
-       public String addGroup(IndustryGroupCreatBean groupBean) throws AbstractBusiAcctException;
+       public String addGroup(IndustryGroupCreatBean groupBean) throws AbstractBusiAcctException, ExistedDataException, NotFoundDataException;
        /**
         * 修改行业群组
         * @param groupBean
