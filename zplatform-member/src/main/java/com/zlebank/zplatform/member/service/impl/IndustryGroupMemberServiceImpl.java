@@ -28,7 +28,6 @@ import com.zlebank.zplatform.commons.service.impl.AbstractBasePageService;
 import com.zlebank.zplatform.commons.utils.BeanCopyUtil;
 import com.zlebank.zplatform.commons.utils.DateUtil;
 import com.zlebank.zplatform.member.bean.BusinessActor;
-import com.zlebank.zplatform.member.bean.Individual;
 import com.zlebank.zplatform.member.bean.InduGroupMemberBean;
 import com.zlebank.zplatform.member.bean.InduGroupMemberCreateBean;
 import com.zlebank.zplatform.member.bean.InduGroupMemberQuery;
@@ -91,7 +90,7 @@ public class IndustryGroupMemberServiceImpl extends AbstractBasePageService<Indu
      */
     @Override
     @Transactional(propagation=Propagation.REQUIRED)
-    public String addMemberToGroup(InduGroupMemberCreateBean bean,boolean openAcct,final BusinessActorType busiActorType) throws AbstractBusiAcctException {
+    public String addMemberToGroup(InduGroupMemberCreateBean bean,boolean openAcct,final String busiActorType) throws AbstractBusiAcctException {
         PojoIndustryGroupMember pojoInduMember=new PojoIndustryGroupMember();
         pojoInduMember=BeanCopyUtil.copyBean(PojoIndustryGroupMember.class, bean);
         pojoInduMember.setInTime(new Date());
@@ -104,7 +103,7 @@ public class IndustryGroupMemberServiceImpl extends AbstractBasePageService<Indu
                 @Override
                 public BusinessActorType getBusinessActorType() {
                     // TODO Auto-generated method stub
-                    return busiActorType;
+                    return BusinessActorType.fromValue(busiActorType);
                 }
                 
                 @Override
@@ -147,6 +146,30 @@ public class IndustryGroupMemberServiceImpl extends AbstractBasePageService<Indu
             result.add(beanTemp);
         }
         groupMembers=null;
+        return result;
+    }
+
+    /**
+     *
+     * @param groupCode
+     * @param memberId
+     * @param usage
+     * @return
+     */
+    @Override
+    public InduGroupMemberBean queryGroupMemberExist(String groupCode,
+            String memberId,
+            String usage) {
+        InduGroupMemberQuery queryBean=new InduGroupMemberQuery();
+        queryBean.setGroupCode(groupCode);
+        queryBean.setMemberId(memberId);
+        queryBean.setStatus(CommonStatus.NORMAL);
+        queryBean.setUsage(Usage.fromValue(usage));
+        List<PojoIndustryGroupMember> pojoInduGroupMembers=induGroupMemberDao.queryGroupMember(queryBean);
+        InduGroupMemberBean result=null;
+        if (!pojoInduGroupMembers.isEmpty()) {
+            result=BeanCopyUtil.copyBean(InduGroupMemberBean.class, pojoInduGroupMembers.get(0));
+        }
         return result;
     }
 }

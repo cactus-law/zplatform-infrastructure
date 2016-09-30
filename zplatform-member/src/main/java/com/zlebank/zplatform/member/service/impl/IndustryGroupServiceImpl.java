@@ -103,7 +103,7 @@ public class IndustryGroupServiceImpl extends AbstractBasePageService<IndustryGr
         induGroupMemberCreateBean.setGroupId(pojoInduGroup.getId());
         induGroupMemberCreateBean.setMemberId(pojoInduGroup.getMemberId());
         induGroupMemberCreateBean.setUsage(Usage.WAITSETTLE);
-        induGroupMemServiceImp.addMemberToGroup(induGroupMemberCreateBean,false,BusinessActorType.ENTERPRISE);
+        induGroupMemServiceImp.addMemberToGroup(induGroupMemberCreateBean,false,BusinessActorType.ENTERPRISE.getCode());
         return pojoInduGroup.getGroupCode();
     }
     
