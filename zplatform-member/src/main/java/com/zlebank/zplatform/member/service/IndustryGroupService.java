@@ -39,8 +39,9 @@ public interface IndustryGroupService extends IBasePageService<IndustryGroupQuer
        /**
         * 修改行业群组
         * @param groupBean
+        * @throws NotFoundDataException 
         */
-       public void updateGroup(IndustryGroupBean groupBean);
+       public void updateGroup(IndustryGroupBean groupBean) throws NotFoundDataException;
        /**
         * 查询会员是否有可用群组
         * @param queryBean

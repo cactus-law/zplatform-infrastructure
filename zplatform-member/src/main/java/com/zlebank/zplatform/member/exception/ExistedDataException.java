@@ -27,7 +27,7 @@ public class ExistedDataException extends BaseException{
      */
     private static final long serialVersionUID = 5687759656879971969L;
 
-    public ExistedDataException(Class<?> clazz){
-        super(clazz.getName());
+    public ExistedDataException(Class<?> clazz,String errorMsg){
+        super(clazz.getName()+":"+errorMsg);
     }
 }

@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -22,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.zlebank.zplatform.acc.bean.enums.CommonStatus;
 import com.zlebank.zplatform.acc.bean.enums.Usage;
 import com.zlebank.zplatform.acc.exception.AbstractBusiAcctException;
+import com.zlebank.zplatform.acc.util.LogPrintUtil;
 import com.zlebank.zplatform.commons.service.impl.AbstractBasePageService;
 import com.zlebank.zplatform.commons.utils.BeanCopyUtil;
 import com.zlebank.zplatform.member.bean.InduGroupMemberCreateBean;
@@ -33,8 +36,10 @@ import com.zlebank.zplatform.member.dao.IndustryGroupDAO;
 import com.zlebank.zplatform.member.exception.ExistedDataException;
 import com.zlebank.zplatform.member.exception.NotFoundDataException;
 import com.zlebank.zplatform.member.pojo.PojoIndustryGroup;
+import com.zlebank.zplatform.member.pojo.PojoMember;
 import com.zlebank.zplatform.member.service.IndustryGroupMemberService;
 import com.zlebank.zplatform.member.service.IndustryGroupService;
+import com.zlebank.zplatform.member.service.MemberService;
 
 /**
  * Class Description
@@ -46,10 +51,16 @@ import com.zlebank.zplatform.member.service.IndustryGroupService;
  */
 @Service
 public class IndustryGroupServiceImpl extends AbstractBasePageService<IndustryGroupQuery,IndustryGroupBean> implements IndustryGroupService{
+    
+    private Log log=LogFactory.getLog(IndustryGroupServiceImpl.class);
+    
     @Autowired
     private IndustryGroupDAO industryGroupDao;
     @Autowired
-    private IndustryGroupMemberService induGroupMemServiceImp;
+    private IndustryGroupMemberService induGroupMemService;
+    @Autowired
+    private MemberService memberService;
+    
     /**
      *
      * @param example
@@ -95,8 +106,22 @@ public class IndustryGroupServiceImpl extends AbstractBasePageService<IndustryGr
     @Override
     @Transactional(propagation=Propagation.REQUIRED)
     public String addGroup(IndustryGroupCreatBean groupBean) throws AbstractBusiAcctException, ExistedDataException, NotFoundDataException {
-        PojoIndustryGroup pojoInduGroup=new PojoIndustryGroup();
-        pojoInduGroup=BeanCopyUtil.copyBean(PojoIndustryGroup.class, groupBean);
+        PojoMember memberExist=memberService.getMbmberByMemberId(groupBean.getMemberId(), null);
+        if (memberExist==null) {
+            throw new NotFoundDataException(PojoMember.class,
+                    LogPrintUtil.logErrorPrint(groupBean.getMemberId()));
+        }
+        PojoIndustryGroup industryGroupNameExist=industryGroupDao.queryGroup(new IndustryGroupQuery(groupBean.getGroupName(),CommonStatus.NORMAL));
+        if (industryGroupNameExist!=null) {
+            throw new ExistedDataException(PojoIndustryGroup.class, 
+                    LogPrintUtil.logErrorPrint(groupBean.getGroupName(),CommonStatus.NORMAL.getCode()));
+        }
+        IndustryGroupBean industryGroupExist=queryGroupExist(groupBean.getMemberId(), groupBean.getInstiCode());
+        if (industryGroupExist!=null) {
+            throw new ExistedDataException(PojoIndustryGroup.class, 
+                    LogPrintUtil.logErrorPrint(groupBean.getMemberId(),groupBean.getInstiCode()));
+        }
+        PojoIndustryGroup pojoInduGroup=BeanCopyUtil.copyBean(PojoIndustryGroup.class, groupBean);
         pojoInduGroup.setInTime(new Date());
         pojoInduGroup.setStatus(CommonStatus.NORMAL);
         pojoInduGroup.setGroupCode(generateGroupCode(groupBean));
@@ -106,7 +131,7 @@ public class IndustryGroupServiceImpl extends AbstractBasePageService<IndustryGr
         induGroupMemberCreateBean.setGroupId(pojoInduGroup.getId());
         induGroupMemberCreateBean.setMemberId(pojoInduGroup.getMemberId());
         induGroupMemberCreateBean.setUsage(Usage.WAITSETTLE);
-        induGroupMemServiceImp.addMemberToGroup(induGroupMemberCreateBean,false,BusinessActorType.ENTERPRISE.getCode());
+        induGroupMemService.addMemberToGroup(induGroupMemberCreateBean,false,BusinessActorType.ENTERPRISE.getCode());
         return pojoInduGroup.getGroupCode();
     }
     
@@ -117,11 +142,15 @@ public class IndustryGroupServiceImpl extends AbstractBasePageService<IndustryGr
     /**
      *
      * @param groupBean
+     * @throws NotFoundDataException 
      */
     @Override
     @Transactional(propagation=Propagation.REQUIRED)
-    public void updateGroup(IndustryGroupBean groupBean) {
+    public void updateGroup(IndustryGroupBean groupBean) throws NotFoundDataException {
         PojoIndustryGroup pojoInduGroup=industryGroupDao.getByCode(groupBean);
+        if (pojoInduGroup==null) {
+            throw new NotFoundDataException(PojoIndustryGroup.class,LogPrintUtil.logErrorPrint(groupBean.getGroupCode()));
+        }
         pojoInduGroup.setDrawable(groupBean.getDrawable());
         pojoInduGroup.setNote(groupBean.getNote());
         pojoInduGroup.setGroupName(groupBean.getGroupName());

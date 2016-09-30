@@ -27,7 +27,7 @@ public class NotFoundDataException extends BaseException{
      */
     private static final long serialVersionUID = 4054049019984063048L;
 
-    public NotFoundDataException(Class<?> clazz){
-        super(clazz.getName());
+    public NotFoundDataException(Class<?> clazz, String errorMsg){
+        super(clazz.getName()+errorMsg);
     }
 }

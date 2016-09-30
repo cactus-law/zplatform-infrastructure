@@ -69,6 +69,21 @@ public class IndustryGroupQuery implements Serializable {
      * 创建时间
      */
     private Date inTime;
+    
+    /**
+     * 
+     */
+    public IndustryGroupQuery() {
+        super();
+    }
+    /**
+     * @param groupName
+     * @param normal
+     */
+    public IndustryGroupQuery(String groupName, CommonStatus normal) {
+        this.groupName=groupName;
+        this.status=normal;
+    }
     /**
      * @return the id
      */
