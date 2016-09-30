@@ -29,15 +29,26 @@ import com.zlebank.zplatform.member.exception.NotFoundDataException;
  * @since 
  */
 public interface IndustryGroupMemberService extends IBasePageService<InduGroupMemberQuery, InduGroupMemberBean>{
+       
+       
+       /**
+        * 根据会员号和群组代码获取行业群组会员信息（只获取群组内行业专户，无法取得授信账户）
+        * @param memberId 会员号
+        * @param groupCode 群组号
+        * @return
+        */
+       public InduGroupMemberBean getGroupMemberByMemberIdAndGroupCode(String memberId,String groupCode);
+      
        /**
         * 将会员账户加入行业群组
         * @param bean
         * @param openAcct 是否开户
         * @param busiActorType 会员类型
         * @return uniqueTag
-        * @throws AbstractBusiAcctException 
-        * @throws ExistedDataException 
-        * @throws NotFoundDataException 
+        * @return
+        * @throws AbstractBusiAcctException
+        * @throws ExistedDataException
+        * @throws NotFoundDataException
         */
        public String addMemberToGroup(InduGroupMemberCreateBean bean,boolean openAcct,String busiActorType) throws AbstractBusiAcctException, ExistedDataException, NotFoundDataException;
        /**

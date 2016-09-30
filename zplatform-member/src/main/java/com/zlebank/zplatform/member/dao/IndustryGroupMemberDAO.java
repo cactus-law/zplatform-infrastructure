@@ -26,6 +26,15 @@ import com.zlebank.zplatform.member.pojo.PojoIndustryGroupMember;
  */
 public interface IndustryGroupMemberDAO extends BaseDAO<PojoIndustryGroupMember> {
 
+
+	/**
+	 * 根据会员号和群组代码获取行业群组会员信息
+	 * @param memberId 会员号
+	 * @param groupCode 群组号
+	 * @return
+	 */
+	 public PojoIndustryGroupMember getGroupMemberByMemberIdAndGroupCode(String memberId,String groupCode);
+
     /**
      * 查询组成员
      * @param queryBean
@@ -48,5 +57,4 @@ public interface IndustryGroupMemberDAO extends BaseDAO<PojoIndustryGroupMember>
      * @return
      */
     long count(InduGroupMemberQuery queryBean);
-
 }

@@ -10,13 +10,14 @@
  */
 package com.zlebank.zplatform.member.dao.impl;
 
-import java.util.List;
 
+import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import com.zlebank.zplatform.acc.bean.enums.Usage;
 import com.zlebank.zplatform.commons.dao.impl.HibernateBaseDAOImpl;
 import com.zlebank.zplatform.commons.utils.StringUtil;
 import com.zlebank.zplatform.member.bean.InduGroupMemberQuery;
@@ -33,6 +34,22 @@ import com.zlebank.zplatform.member.pojo.PojoIndustryGroupMember;
  */
 @Repository
 public class IndustryGroupMemberDAOImpl extends HibernateBaseDAOImpl<PojoIndustryGroupMember> implements  IndustryGroupMemberDAO {
+
+
+	/**
+	 *
+	 * @param memberId
+	 * @param groupCode
+	 * @return
+	 */
+	@Override
+	public PojoIndustryGroupMember getGroupMemberByMemberIdAndGroupCode(String memberId, String groupCode) {
+		Criteria criteria = getSession().createCriteria(PojoIndustryGroupMember.class);
+		criteria.add(Restrictions.eq("memberId", memberId));
+		criteria.add(Restrictions.eq("groupCode", groupCode));
+		criteria.add(Restrictions.eq("usage", Usage.BASICPAY));
+		return (PojoIndustryGroupMember) criteria.uniqueResult();
+	}
 
     private Criteria buildCriteria(InduGroupMemberQuery queryBean){
         Criteria criteria=getSession().createCriteria(PojoIndustryGroupMember.class);
