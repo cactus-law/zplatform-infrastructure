@@ -30,6 +30,8 @@ import com.zlebank.zplatform.member.bean.IndustryGroupCreatBean;
 import com.zlebank.zplatform.member.bean.IndustryGroupQuery;
 import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 import com.zlebank.zplatform.member.dao.IndustryGroupDAO;
+import com.zlebank.zplatform.member.exception.ExistedDataException;
+import com.zlebank.zplatform.member.exception.NotFoundDataException;
 import com.zlebank.zplatform.member.pojo.PojoIndustryGroup;
 import com.zlebank.zplatform.member.service.IndustryGroupMemberService;
 import com.zlebank.zplatform.member.service.IndustryGroupService;
@@ -87,10 +89,12 @@ public class IndustryGroupServiceImpl extends AbstractBasePageService<IndustryGr
      * @param groupBean
      * @return 
      * @throws AbstractBusiAcctException 
+     * @throws NotFoundDataException 
+     * @throws ExistedDataException 
      */
     @Override
     @Transactional(propagation=Propagation.REQUIRED)
-    public String addGroup(IndustryGroupCreatBean groupBean) throws AbstractBusiAcctException {
+    public String addGroup(IndustryGroupCreatBean groupBean) throws AbstractBusiAcctException, ExistedDataException, NotFoundDataException {
         PojoIndustryGroup pojoInduGroup=new PojoIndustryGroup();
         pojoInduGroup=BeanCopyUtil.copyBean(PojoIndustryGroup.class, groupBean);
         pojoInduGroup.setInTime(new Date());
