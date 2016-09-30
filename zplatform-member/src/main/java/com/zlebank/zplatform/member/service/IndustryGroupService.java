@@ -29,7 +29,7 @@ public interface IndustryGroupService extends IBasePageService<IndustryGroupQuer
        /**
         * 添加行业群组
         * @param groupBean
-     * @throws AbstractBusiAcctException 
+        * @throws AbstractBusiAcctException 
         */
        public String addGroup(IndustryGroupCreatBean groupBean) throws AbstractBusiAcctException;
        /**
@@ -43,4 +43,12 @@ public interface IndustryGroupService extends IBasePageService<IndustryGroupQuer
         * @return
         */
        public IndustryGroupBean queryGroupExist(String memberId,String instiCode);
+       
+       /**
+        * 根据id或代码查询群组信息
+        * @param groupId
+        * @param groupCode
+        * @return
+        */
+       public IndustryGroupBean queryGroupByCodeOrId(long groupId,String groupCode);
 }
