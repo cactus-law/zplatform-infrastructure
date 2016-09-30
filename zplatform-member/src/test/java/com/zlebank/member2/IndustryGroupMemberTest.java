@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.zlebank.zplatform.acc.bean.enums.Usage;
 import com.zlebank.zplatform.acc.exception.AbstractBusiAcctException;
+import com.zlebank.zplatform.member.bean.InduGroupMemberBean;
 import com.zlebank.zplatform.member.bean.InduGroupMemberCreateBean;
 import com.zlebank.zplatform.member.bean.enums.BusinessActorType;
 import com.zlebank.zplatform.member.service.IndustryGroupMemberService;
@@ -37,14 +38,21 @@ public class IndustryGroupMemberTest extends BaseTest {
             bean.setGroupCode("0000000626");
             bean.setGroupId(19);
             bean.setInuser(45);
-            bean.setMemberId("100000000000640");
-            bean.setUsage(Usage.GRANTCREDIT);
+            bean.setMemberId("100000000000961");
+            bean.setUsage(Usage.BASICPAY);
             try {
-                industryGroupMemberService.addMemberToGroup(bean, false, BusinessActorType.INDIVIDUAL.getCode());
+                industryGroupMemberService.addMemberToGroup(bean, true, BusinessActorType.INDUSTRY.getCode());
             } catch (AbstractBusiAcctException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
                 Assert.fail();
             }
+        }
+        
+        public void test_query(){
+        	InduGroupMemberBean queryGroupMemberExist = industryGroupMemberService.queryGroupMemberExist("0000000637", "100000000000640", Usage.GRANTCREDIT.getCode());
+        	System.out.println(queryGroupMemberExist.getGroupId());
+        	//InduGroupMemberBean groupMemberByMemberIdAndGroupCode = industryGroupMemberService.getGroupMemberByMemberIdAndGroupCode("100000000000640", "0000000637");
+        	//System.out.println(groupMemberByMemberIdAndGroupCode.getGroupId());
         }
 }

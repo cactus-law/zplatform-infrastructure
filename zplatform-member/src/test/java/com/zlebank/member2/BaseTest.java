@@ -24,7 +24,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @since 
  */
 @RunWith(SpringJUnit4ClassRunner.class)  
-@ContextConfiguration("/MemberContextTest.xml")  
+@ContextConfiguration("/ContextTest.xml")  
 public class BaseTest {
         
 }

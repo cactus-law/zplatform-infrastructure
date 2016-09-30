@@ -185,6 +185,7 @@ public class IndustryGroupMemberServiceImpl extends AbstractBasePageService<Indu
      * @return
      */
     @Override
+    @Transactional(readOnly=true)
     public InduGroupMemberBean queryGroupMemberExist(String groupCode,
             String memberId,
             String usage) {
