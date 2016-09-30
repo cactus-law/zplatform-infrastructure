@@ -30,7 +30,7 @@ public interface IndustryGroupMemberService extends IBasePageService<InduGroupMe
        
        
        /**
-        * 根据会员号和群组代码获取行业群组会员信息（行业专户）
+        * 根据会员号和群组代码获取行业群组会员信息（只获取群组内行业专户，无法取得授信账户）
         * @param memberId 会员号
         * @param groupCode 群组号
         * @return

@@ -149,6 +149,7 @@ public class IndustryGroupMemberServiceImpl extends AbstractBasePageService<Indu
 	 * @return
 	 */
 	@Override
+	@Transactional(readOnly=true)
 	public InduGroupMemberBean getGroupMemberByMemberIdAndGroupCode(
 			String memberId, String groupCode) {
 		PojoIndustryGroupMember groupMember = induGroupMemberDao.getGroupMemberByMemberIdAndGroupCode(memberId, groupCode);
