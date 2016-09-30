@@ -129,12 +129,16 @@ public class IndustryGroupServiceImpl extends AbstractBasePageService<IndustryGr
 
     /**
      *
-     * @param queryBean
+     * @param memberId
+     * @param instiCode
      * @return
      */
     @Override
-    @Transactional(readOnly=true)
-    public IndustryGroupBean queryGroup(IndustryGroupQuery queryBean) {
+    public IndustryGroupBean queryGroupExist(String memberId, String instiCode) {
+        IndustryGroupQuery queryBean=new IndustryGroupQuery();
+        queryBean.setMemberId(memberId);
+        queryBean.setInstiCode(instiCode);
+        queryBean.setStatus(CommonStatus.NORMAL);
         PojoIndustryGroup pojoIndustryGroup=  industryGroupDao.queryGroup(queryBean);
         if (pojoIndustryGroup==null) {
             return null;
@@ -143,4 +147,6 @@ public class IndustryGroupServiceImpl extends AbstractBasePageService<IndustryGr
         beanTemp=BeanCopyUtil.copyBean(IndustryGroupBean.class, pojoIndustryGroup);
         return beanTemp;
     }
+
+    
 }

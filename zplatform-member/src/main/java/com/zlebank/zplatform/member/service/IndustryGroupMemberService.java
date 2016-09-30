@@ -44,6 +44,10 @@ public interface IndustryGroupMemberService extends IBasePageService<InduGroupMe
        public List<InduGroupMemberBean> queryGroupMember(InduGroupMemberQuery queryBean);
        /**
         * 查询会员某一账户是否已加入群组
+        * @param groupCode 
+        * @param memberId
+        * @param usage 用途
+        * @return
         */
        public InduGroupMemberBean queryGroupMemberExist(String groupCode,String memberId,String usage);
 }

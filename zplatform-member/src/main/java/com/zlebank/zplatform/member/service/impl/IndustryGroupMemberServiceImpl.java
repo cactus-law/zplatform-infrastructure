@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -46,10 +48,14 @@ import com.zlebank.zplatform.member.service.IndustryGroupMemberService;
  */
 @Service
 public class IndustryGroupMemberServiceImpl extends AbstractBasePageService<InduGroupMemberQuery, InduGroupMemberBean> implements IndustryGroupMemberService {
+   
+    private Log log = LogFactory.getLog(IndustryGroupMemberServiceImpl.class);
+    
     @Autowired
     private IndustryGroupMemberDAO induGroupMemberDao;
     @Autowired
     private BusiAcctService busiAcctService;
+    
     /**
      *
      * @param example
@@ -92,6 +98,10 @@ public class IndustryGroupMemberServiceImpl extends AbstractBasePageService<Indu
     @Transactional(propagation=Propagation.REQUIRED)
     public String addMemberToGroup(InduGroupMemberCreateBean bean,boolean openAcct,final String busiActorType) throws AbstractBusiAcctException {
         PojoIndustryGroupMember pojoInduMember=new PojoIndustryGroupMember();
+        InduGroupMemberBean groupMemberExist=queryGroupMemberExist(bean.getGroupCode(), bean.getMemberId(), bean.getUsage().getCode());
+        if (groupMemberExist!=null) {
+            //throw 
+        }
         pojoInduMember=BeanCopyUtil.copyBean(PojoIndustryGroupMember.class, bean);
         pojoInduMember.setInTime(new Date());
         final String uniqueTag=generateUniqueTag(bean);

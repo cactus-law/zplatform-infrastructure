@@ -48,6 +48,9 @@ public class IndustryGroupDAOImpl extends HibernateBaseDAOImpl<PojoIndustryGroup
         if (StringUtil.isNotEmpty(queryBean.getInstiCode())) {
             criteria.add(Restrictions.eq("instiCode", queryBean.getInstiCode()));
         }
+        if (queryBean.getStatus()!=null) {
+            criteria.add(Restrictions.eq("status", queryBean.getStatus()));
+        }
         return criteria;
     }
     /**
