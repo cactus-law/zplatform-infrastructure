@@ -40,7 +40,7 @@ public class IndustryGroupMemberTest extends BaseTest {
             bean.setMemberId("100000000000640");
             bean.setUsage(Usage.GRANTCREDIT);
             try {
-                industryGroupMemberService.addMemberToGroup(bean, false, BusinessActorType.INDIVIDUAL);
+                industryGroupMemberService.addMemberToGroup(bean, false, BusinessActorType.INDIVIDUAL.getCode());
             } catch (AbstractBusiAcctException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
