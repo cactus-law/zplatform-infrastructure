@@ -24,7 +24,6 @@ import com.zlebank.zplatform.acc.bean.enums.Usage;
 import com.zlebank.zplatform.acc.exception.AbstractBusiAcctException;
 import com.zlebank.zplatform.commons.service.impl.AbstractBasePageService;
 import com.zlebank.zplatform.commons.utils.BeanCopyUtil;
-import com.zlebank.zplatform.member.bean.InduGroupMemberBean;
 import com.zlebank.zplatform.member.bean.InduGroupMemberCreateBean;
 import com.zlebank.zplatform.member.bean.IndustryGroupBean;
 import com.zlebank.zplatform.member.bean.IndustryGroupCreatBean;
@@ -138,6 +137,28 @@ public class IndustryGroupServiceImpl extends AbstractBasePageService<IndustryGr
         IndustryGroupQuery queryBean=new IndustryGroupQuery();
         queryBean.setMemberId(memberId);
         queryBean.setInstiCode(instiCode);
+        queryBean.setStatus(CommonStatus.NORMAL);
+        PojoIndustryGroup pojoIndustryGroup=  industryGroupDao.queryGroup(queryBean);
+        if (pojoIndustryGroup==null) {
+            return null;
+        }
+        IndustryGroupBean beanTemp=new IndustryGroupBean();
+        beanTemp=BeanCopyUtil.copyBean(IndustryGroupBean.class, pojoIndustryGroup);
+        return beanTemp;
+    }
+
+    /**
+     *
+     * @param groupId
+     * @param groupCode
+     * @return
+     */
+    @Override
+    public IndustryGroupBean queryGroupByCodeOrId(long groupId,
+            String groupCode) {
+        IndustryGroupQuery queryBean=new IndustryGroupQuery();
+        queryBean.setGroupCode(groupCode);
+        queryBean.setId(groupId);
         queryBean.setStatus(CommonStatus.NORMAL);
         PojoIndustryGroup pojoIndustryGroup=  industryGroupDao.queryGroup(queryBean);
         if (pojoIndustryGroup==null) {
