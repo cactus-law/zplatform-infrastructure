@@ -36,6 +36,9 @@ public class IndustryGroupDAOImpl extends HibernateBaseDAOImpl<PojoIndustryGroup
     
     private Criteria builedCri(IndustryGroupQuery queryBean){
         Criteria criteria=getSession().createCriteria(PojoIndustryGroup.class);
+        if (queryBean.getId()>0) {
+            criteria.add(Restrictions.eq("id", queryBean.getId()));
+        }
         if (StringUtil.isNotEmpty(queryBean.getGroupCode())) {
             criteria.add(Restrictions.eq("groupCode", queryBean.getGroupCode()));
         }
