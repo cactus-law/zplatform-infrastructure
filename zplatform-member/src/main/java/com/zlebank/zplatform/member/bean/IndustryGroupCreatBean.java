@@ -1,5 +1,5 @@
 /* 
- * QueryInduGroup.java  
+ * IndustryGroupBean.java  
  * 
  * version TODO
  *
@@ -11,35 +11,23 @@
 package com.zlebank.zplatform.member.bean;
 
 import java.io.Serializable;
-import java.util.Date;
 
-import com.zlebank.zplatform.acc.bean.enums.CommonStatus;
-
+import com.zlebank.zplatform.commons.bean.Bean;
 
 /**
  * Class Description
  *
  * @author houyong
  * @version
- * @date 2016年9月28日 上午10:02:50
+ * @date 2016年9月28日 上午10:04:24
  * @since 
  */
-public class IndustryGroupQuery implements Serializable {
+public class IndustryGroupCreatBean implements Serializable,Bean {
 
     /**
      * serialVersionUID
      */
-    private static final long serialVersionUID = -3906651344300997175L;
-
-    
-    /**
-     * 主键
-     */
-    private long id;
-    /**
-     * 群组代码
-     */
-    private String groupCode;
+    private static final long serialVersionUID = -8092262869089912780L;
     /**
      * 群组名称
      */
@@ -58,41 +46,17 @@ public class IndustryGroupQuery implements Serializable {
      */
     private String drawable;
     /**
-     * 是否可用00，01
-     */
-    private CommonStatus status;
-    /**
      * 创建人主键
      */
     private long inuser;
     /**
-     * 创建时间
+     * 备注
      */
-    private Date inTime;
+    private String note;
     /**
-     * @return the id
+     * 备注2
      */
-    public long getId() {
-        return id;
-    }
-    /**
-     * @param id the id to set
-     */
-    public void setId(long id) {
-        this.id = id;
-    }
-    /**
-     * @return the groupCode
-     */
-    public String getGroupCode() {
-        return groupCode;
-    }
-    /**
-     * @param groupCode the groupCode to set
-     */
-    public void setGroupCode(String groupCode) {
-        this.groupCode = groupCode;
-    }
+    private String remarks;
     /**
      * @return the groupName
      */
@@ -141,18 +105,7 @@ public class IndustryGroupQuery implements Serializable {
     public void setDrawable(String drawable) {
         this.drawable = drawable;
     }
-    /**
-     * @return the status
-     */
-    public CommonStatus getStatus() {
-        return status;
-    }
-    /**
-     * @param status the status to set
-     */
-    public void setStatus(CommonStatus status) {
-        this.status = status;
-    }
+    
     /**
      * @return the inuser
      */
@@ -166,17 +119,28 @@ public class IndustryGroupQuery implements Serializable {
         this.inuser = inuser;
     }
     /**
-     * @return the inTime
+     * @return the note
      */
-    public Date getInTime() {
-        return inTime;
+    public String getNote() {
+        return note;
     }
     /**
-     * @param inTime the inTime to set
+     * @param note the note to set
      */
-    public void setInTime(Date inTime) {
-        this.inTime = inTime;
+    public void setNote(String note) {
+        this.note = note;
     }
-    
+    /**
+     * @return the remarks
+     */
+    public String getRemarks() {
+        return remarks;
+    }
+    /**
+     * @param remarks the remarks to set
+     */
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
     
 }

@@ -11,9 +11,7 @@
 package com.zlebank.zplatform.member.bean;
 
 import java.io.Serializable;
-import java.util.Date;
 
-import com.zlebank.zplatform.acc.bean.enums.CommonStatus;
 import com.zlebank.zplatform.acc.bean.enums.Usage;
 import com.zlebank.zplatform.commons.bean.Bean;
 
@@ -25,7 +23,7 @@ import com.zlebank.zplatform.commons.bean.Bean;
  * @date 2016年9月28日 上午10:04:24
  * @since 
  */
-public class InduGroupMemberBean implements Serializable,Bean {
+public class InduGroupMemberCreateBean implements Serializable,Bean {
 
     /**
      * serialVersionUID
@@ -33,11 +31,6 @@ public class InduGroupMemberBean implements Serializable,Bean {
     private static final long serialVersionUID = -8092262869089912780L;
 
     
-    private long id;
-    /**
-     * 唯一标记-作为业务账户参与方
-     */
-    private String uniqueTag;
     /**
      * 群组会员号
      */
@@ -50,20 +43,6 @@ public class InduGroupMemberBean implements Serializable,Bean {
      * 群组主键
      */
     private long groupId;
-    /**
-     * 加入群组时间
-     */
-    private Date inTime;
-    
-    /**
-     * 修改时间
-     */
-    private Date upTime;
-    
-    /**
-     * 可用状态
-     */
-    private CommonStatus status;
     
     /**
      * 加入群组账户标记
@@ -71,33 +50,7 @@ public class InduGroupMemberBean implements Serializable,Bean {
     private Usage usage;
     
     private long inuser;
-    /**
-     * @return the id
-     */
-    public long getId() {
-        return id;
-    }
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the uniqueTag
-     */
-    public String getUniqueTag() {
-        return uniqueTag;
-    }
-
-    /**
-     * @param uniqueTag the uniqueTag to set
-     */
-    public void setUniqueTag(String uniqueTag) {
-        this.uniqueTag = uniqueTag;
-    }
 
     /**
      * @return the memberId
@@ -139,48 +92,6 @@ public class InduGroupMemberBean implements Serializable,Bean {
      */
     public void setGroupId(long groupId) {
         this.groupId = groupId;
-    }
-
-    /**
-     * @return the inTime
-     */
-    public Date getInTime() {
-        return inTime;
-    }
-
-    /**
-     * @param inTime the inTime to set
-     */
-    public void setInTime(Date inTime) {
-        this.inTime = inTime;
-    }
-
-    /**
-     * @return the upTime
-     */
-    public Date getUpTime() {
-        return upTime;
-    }
-
-    /**
-     * @param upTime the upTime to set
-     */
-    public void setUpTime(Date upTime) {
-        this.upTime = upTime;
-    }
-
-    /**
-     * @return the status
-     */
-    public CommonStatus getStatus() {
-        return status;
-    }
-
-    /**
-     * @param status the status to set
-     */
-    public void setStatus(CommonStatus status) {
-        this.status = status;
     }
 
     /**

@@ -10,11 +10,11 @@
  */
 package com.zlebank.zplatform.member.service;
 
-import java.util.List;
 
 import com.zlebank.zplatform.acc.exception.AbstractBusiAcctException;
 import com.zlebank.zplatform.commons.service.IBasePageService;
 import com.zlebank.zplatform.member.bean.IndustryGroupBean;
+import com.zlebank.zplatform.member.bean.IndustryGroupCreatBean;
 import com.zlebank.zplatform.member.bean.IndustryGroupQuery;
 
 /**
@@ -31,16 +31,16 @@ public interface IndustryGroupService extends IBasePageService<IndustryGroupQuer
         * @param groupBean
      * @throws AbstractBusiAcctException 
         */
-       public String addGroup(IndustryGroupBean groupBean) throws AbstractBusiAcctException;
+       public String addGroup(IndustryGroupCreatBean groupBean) throws AbstractBusiAcctException;
        /**
         * 修改行业群组
         * @param groupBean
         */
        public void updateGroup(IndustryGroupBean groupBean);
        /**
-        * 查询群组
+        * 查询会员是否有可用群组
         * @param queryBean
         * @return
         */
-       public IndustryGroupBean queryGroup(IndustryGroupQuery queryBean);
+       public IndustryGroupBean queryGroupExist(String memberId,String instiCode);
 }

@@ -63,7 +63,7 @@ public class IndustryGroupMemberDAOImpl extends HibernateBaseDAOImpl<PojoIndustr
             criteria.add(Restrictions.eq("usage", queryBean.getUsage()));
         }
         if (queryBean.getStatus()!=null) {
-            criteria.add(Restrictions.eq("usage",queryBean.getStatus()));
+            criteria.add(Restrictions.eq("status",queryBean.getStatus()));
         }
         return criteria;
     }
